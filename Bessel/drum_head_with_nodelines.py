@@ -14,7 +14,7 @@ import matplotlib.pyplot as plt
 from matplotlib import cm
 
 import numpy as np
-from numpy import sin, cos, arctan, arctan2, array, sqrt, pi, linspace
+from numpy import sin, cos, arctan, arctan2, array, sqrt, pi, linspace, meshgrid
 import scipy
 import scipy.special
 from scipy.special import jn, jn_zeros
@@ -39,10 +39,10 @@ def k(m,n):
 
 def generate(X, Y, t, m, n, v):
     theta = arctan2(Y,X)
-    R = np.sqrt(X**2 + Y**2)
+    R = sqrt(X**2 + Y**2)
     # We know z = J_n(k*r)*      cos(n*theta)*cos(k*v*t)
     result =      jn(n,k(m,n)*R)*f1(n*theta)* f2(k(m,n)*v*t)
-    result[R>1] = 0
+    result[R>1] = 0  # we plot points from the square, but physically require this.
     return result
 
 plt.ion()
@@ -67,9 +67,9 @@ if 0:
     axs[2] = {0: (fig.add_subplot(rows,cols,5, projection='3d'), fig.add_subplot(rows,cols,6)),
               1: (fig.add_subplot(rows,cols,7, projection='3d'), fig.add_subplot(rows,cols,8)),}
 
-xs = np.linspace(-1, 1, 100)
-ys = np.linspace(-1, 1, 100)
-X, Y = np.meshgrid(xs, ys)
+xs = linspace(-1, 1, 100)
+ys = linspace(-1, 1, 100)
+X, Y = meshgrid(xs, ys)
 #Z = generate(X, Y, 0.0)
 
 wframes = {}
@@ -93,7 +93,7 @@ periods = 2
 # Note: unlike sin and cos, Jn's zeros are not integer multiples of
 # each other.  Therefore, this loop goes over a defined number of
 # periods of the lowest mode, but others won't fit evenly.
-for (idx,t) in enumerate(np.linspace(0, periods*2*pi/jn_zeros(0,1)[0], periods*frames_per)):
+for (idx,t) in enumerate(linspace(0, periods*2*pi/jn_zeros(0,1)[0], periods*frames_per)):
     if not first:
         for m in ms:
             for n in ns:

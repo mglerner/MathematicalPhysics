@@ -42,8 +42,15 @@ Shapes['saw'][int(subx.shape[0])/2:] = Shapes['negwedge'][int(subx.shape[0])/2:]
 
 Shapes['triangle'] = Shapes['saw'].copy()
 Shapes['triangle'][int(subx.shape[0])/2:] = -Shapes['saw'][int(subx.shape[0])/2:]
-u1 = 'x'
-u2 ='sin(5x)'
+
+from scipy import signal
+Shapes['gaussian'] = signal.gaussian(subx.shape[0],std=int(subx.shape[0]/10))
+Shapes['delta'] = zeros_like(subx)
+Shapes['delta'][int(subx.shape[0]/2)] = 1/dx
+
+
+u1 = 'poswedge'
+u2 = 'x2'
 
 _u1 = Shapes[u1]
 _u2 = Shapes[u2]
@@ -52,11 +59,8 @@ line1, = ax.plot(fullx, yconv, label=u1)
 line2, = ax.plot(fullx, yconv, label=u2)
 line3, = ax.plot(fullx, yconv,'k--',linewidth=2,label=u1+r' $\ast$ ' + u2)
 #overlap = ax.fill_between(fullx, _u1, _u2, color='y',alpha=.3)
-dy1 = abs(_u1).sum()*dx
-dy2 = abs(_u2).sum()*dx
-dy = dy1*dy2/5
-print dy1, dy2, dy
-ax.set_ylim([-1.1*dy,1.1*dy])
+scale = max(abs(signal.fftconvolve(_u1,_u2)).max()*dx, abs(_u1).max(), abs(_u2).max())
+ax.set_ylim([-1.1*scale,1.1*scale])
 ax.legend()
 
 def animate(i):

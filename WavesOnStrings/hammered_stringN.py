@@ -12,7 +12,7 @@ N = int(N)
 l, h, w = 1.0, 0.04, 0.06
 v = 0.01
 fig = plt.figure()
-ax = plt.axes(xlim=(0, l), ylim=(-1.2*h, 1.2*h))
+ax = plt.axes(xlim=(0, l), ylim=(-1.2*h*10, 1.2*h*10))
 plt.grid('on')
 plt.xticks(arange(0,l,w/2))
 line, = ax.plot([], [], lw=2, color='red')
@@ -32,8 +32,8 @@ def animate(t):
         y = y +  pre * (1/n**2) * (sin(n*pi*w/l)*sin(n*pi*x/l)*sin(n*pi*v*t/l))
 
 
-    #y = ( (4*h*l)/(pi*pi*v) ) * y
-    y = ( (4*h*l)/(pi*pi*w) ) * y
+    y = ( (4*h*l)/(pi*pi*v) ) * y
+    #y = ( (4*h*l)/(pi*pi*w) ) * y
 
     line.set_data(x, y)
     return line,

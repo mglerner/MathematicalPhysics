@@ -6,7 +6,7 @@ from matplotlib import animation
 
 # First set up the figure, the axis, and the plot element we want to animate
 outerlim, innerlim = 4, 2
-v1, v2 = 0.01, -0.01
+v1, v2 = 0.01, -0.013453456
 fig = plt.figure()
 ax = plt.axes(xlim=(-outerlim, outerlim), ylim=(-2, 2))
 line1, = ax.plot([], [], lw=2, color='blue', alpha=0.5)
@@ -26,9 +26,9 @@ x = np.linspace(-outerlim, outerlim, 2000)
 x_both = np.linspace(-innerlim, innerlim, 1000)
 
 def animate(t):
-    y1 = np.sin(2 * np.pi * (x - v1 * t))
+    y1 = np.sin(2 * np.pi * (1.1*x - v1 * t))
     y2 = np.sin(2 * np.pi * (x - v2 * t))
-    y3 = np.sin(2 * np.pi * (x_both - v2 * t)) + np.sin(2 * np.pi * (x_both + v2 * t))
+    y3 = np.sin(2 * np.pi * (1.1*x_both - v2 * t)) + np.sin(2 * np.pi * (x_both + v2 * t))
     line1.set_data(x, y1)
     line2.set_data(x, y2)
     line3.set_data(x_both, y3)

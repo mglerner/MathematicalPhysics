@@ -33,3 +33,9 @@ nosetests.xml
 .mr.developer.cfg
 .project
 .pydevproject
+
+#IPython Notebook checkpoints
+.ipynb_checkpoints
+
+# Other packages
+JSAnimation

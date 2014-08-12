@@ -20,15 +20,15 @@ import scipy.special
 from scipy.special import jn, jn_zeros
 import time, sys, os
 
-makeplots = True
+makeplots = False
 
 
 v = 1
 fns = 'cc'
 ms = (1,2)
-ms = (1,2,3)
+#ms = (1,2,3)
 ns = (0,1)
-ns = (0,1,2)
+#ns = (0,1,2)
     
 f1 = {'s':sin,'c':cos}[fns[0]]
 f2 = {'s':sin,'c':cos}[fns[1]]
@@ -93,6 +93,7 @@ periods = 2
 # Note: unlike sin and cos, Jn's zeros are not integer multiples of
 # each other.  Therefore, this loop goes over a defined number of
 # periods of the lowest mode, but others won't fit evenly.
+junk = raw_input('go for barney')
 for (idx,t) in enumerate(linspace(0, periods*2*pi/jn_zeros(0,1)[0], periods*frames_per)):
     if not first:
         for m in ms:

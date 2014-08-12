@@ -6,14 +6,14 @@ Based on the wireframe example script
 from mpl_toolkits.mplot3d import axes3d
 import matplotlib.pyplot as plt
 from matplotlib import cm
-from numpy import sin, cos, arctan, arctan2, array, sqrt, linspace, meshgrid
+from numpy import sin, cos, arctan, arctan2, array, sqrt, linspace, meshgrid, pi
 import scipy
 import scipy.special
 from scipy.special import jn, jn_zeros
 import time, sys, os
 
 v = 1
-n, m = 1, 1
+n, m = 0, 1
 if len(sys.argv) >= 3:
     n,m = [int(i) for i in sys.argv[1:3]]
 if m == 0:
@@ -50,11 +50,17 @@ Z = generate(X, Y, 0.0)
 
 wframe = None
 tstart = time.time()
+<<<<<<< HEAD
 for t in linspace(0, 10, 400):
     print "here",t
+=======
+periods = 2
+frames_per = 50
+for t in linspace(0, periods*2*pi/jn_zeros(n,m)[m-1], periods*frames_per):
+>>>>>>> 465ebad10d8aec98e41a530173f7f94f81438aa1
     oldcol = wframe
     Z = generate(X, Y, t)
-    #wframe = ax.plot_wireframe(X, Y, Z, rstride=2, cstride=2)
+    #wframe = ax.plot_wireframe(X, Y, Z, rstride=4, cstride=4)
     wframe = ax.plot_surface(X, Y, Z, rstride=4, cstride=4, alpha=0.3)
 
     # Remove old line collection before drawing

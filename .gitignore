@@ -1,5 +1,8 @@
 *.py[cod]
 
+# Emacs backup files
+*~
+
 # C extensions
 *.so
 

@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from matplotlib import animation
 
 # First set up the figure, the axis, and the plot element we want to animate
-outerlim, innerlim = 4, 2
+outerlim = 4
 v = 0.01
 fig = plt.figure()
 ax = plt.axes(xlim=(-outerlim, outerlim), ylim=(-2, 2))

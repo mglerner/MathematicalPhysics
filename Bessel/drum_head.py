@@ -39,7 +39,7 @@ def generate(X, Y, t):
     result[R>1] = 0  # we plot points from the square, but physically require this.
     return result
 
-plt.ion()
+#plt.ion()
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
 
@@ -51,6 +51,7 @@ Z = generate(X, Y, 0.0)
 wframe = None
 tstart = time.time()
 for t in linspace(0, 10, 400):
+    print "here",t
     oldcol = wframe
     Z = generate(X, Y, t)
     #wframe = ax.plot_wireframe(X, Y, Z, rstride=2, cstride=2)

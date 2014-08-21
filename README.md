@@ -17,3 +17,7 @@ Course material from my mathematical physics class and related info
 
     * Terry Tao's blog entry from
       [March 2014](http://terrytao.wordpress.com/2014/03/02/noethers-theorem-and-the-conservation-laws-for-the-euler-equations/)
+
+## Normal mode analysis ##
+
+    * Should be able to use some of John's material for a very nice stock project, then ENM models as an extension.

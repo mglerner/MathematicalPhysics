@@ -20,9 +20,12 @@ Course material from my mathematical physics class and related info
   can discuss working independently with the instructor to catch up
   very early on in the semester.
 
+# Convolutions
 
+Our notebook on convolutions may be found [here](http://nbviewer.ipython.org/github/mglerner/MathematicalPhysics/blob/master/Convolutions/Convolution%20Animations.ipynb)
 
 # Resources for Independent Projects #
+
 
 ## Bayesian Estimation ##
 

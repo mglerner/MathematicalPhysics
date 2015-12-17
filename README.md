@@ -43,3 +43,13 @@ Our notebook on convolutions may be found [here](http://nbviewer.ipython.org/git
 ## Normal mode analysis ##
 
     * Should be able to use some of John's material for a very nice stock project, then ENM models as an extension.
+
+## QM/Pi/Wallace
+
+   * [nature](http://www.nature.com/news/paradox-at-the-heart-of-mathematics-makes-physics-problem-unanswerable-1.18983)
+   * [Rochester](http://www.rochester.edu/newscenter/discovery-of-classic-pi-formula-a-cunning-piece-of-magic-128002/)
+   * [AIP](http://scitation.aip.org/content/aip/journal/jmp/56/11/10.1063/1.4930800)
+
+## Frenel
+
+   * [here](http://www.rochester.edu/newscenter/discovery-of-classic-pi-formula-a-cunning-piece-of-magic-128002/)

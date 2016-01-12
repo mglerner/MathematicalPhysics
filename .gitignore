@@ -1,6 +1,10 @@
 # project specific
 ipywidgets
 
+# LaTeX
+*.aux
+*.log
+
 *.py[cod]
 
 # Emacs backup files

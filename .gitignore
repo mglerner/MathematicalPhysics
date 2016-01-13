@@ -5,6 +5,10 @@ ipywidgets
 *.aux
 *.log
 
+# Mac
+.DS_Store
+.DS_Store/
+
 *.py[cod]
 
 # Emacs backup files

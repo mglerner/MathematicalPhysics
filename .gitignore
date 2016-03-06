@@ -1,6 +1,9 @@
 # project specific
 ipywidgets
 
+Private
+Private/
+
 # LaTeX
 *.aux
 *.log

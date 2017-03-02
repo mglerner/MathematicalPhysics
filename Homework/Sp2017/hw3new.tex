@@ -1,0 +1,164 @@
+\documentclass[12pt]{article}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{macros}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pagestyle{empty}
+\begin{document}
+\input{header}
+\noindent\textbf{Assignment 3, Due as specified}
+\vskip.15in
+
+\noindent {\bf For Friday Jan 27}
+
+Using a table like the one in Boas \S 12.2, solve problems 12.1.1
+and 12.1.4
+
+\vskip.3in
+\noindent {\bf For Wednesday Feb 1}
+
+In this assignment, as in many of the future assignments, we will
+investigate a particular topic in depth, rather than solving several
+separate problems. This week, we focus on the Legendre polynomials,
+which have broad applicability in mathematical physics, especially in
+the modeling of spherically symmetric systems.
+
+The text of the following problems is taken (with some small changes)
+from Boyce and DiPrima, Chapter 5, section 3.
+
+The following problems deal with the Legendre equation:
+
+
+\begin{equation}
+  \label{L}
+  (1-x^2)y'' - 2xy' + \alpha(\alpha+1)y = 0
+\end{equation}
+
+Following the convention of choosing a fundamental set of solutions such that
+
+\begin{align*}
+  y_1(x) &= 1 + b_2(x-x_0)^2 + ... \\
+  y_2(x) &= (x-x_0) + c_2 (x-x_0)^3 + ... \\
+  b_2+c_2 &= a_2
+\end{align*}
+
+(Note that these series have already included the fact that one will
+be even and one will be odd, a fact that you'll show below.)
+
+Two solutions of the Legendre equation for $|x| < 1$ are
+
+\begin{align*}
+  y_1(x) &= 1 - \frac{\alpha(\alpha+1)}{2!}x^2 + \frac{\alpha(\alpha-2)(\alpha+1)(\alpha+3)}{4!}x^4 \\
+   &+ \sum_{m=3}^{\infty}(-1)^m\frac{\alpha\cdot\cdot\cdot(\alpha-2m+2)(\alpha+1)\cdot\cdot\cdot(\alpha+2m-1)}{(2m)!}x^{2m}, \\
+  y_2(x) &= x - \frac{(\alpha - 1)(\alpha + 2)}{3!}x^3 + \frac{(\alpha-1)(\alpha-3)(\alpha+2)(\alpha+4)}{5!}x^5 \\
+  &+ \sum_{m=3}^{\infty}\frac{(\alpha-1)\cdot\cdot\cdot(\alpha-2m+1)(\alpha+2)\cdot\cdot\cdot(\alpha+2m)}{(2m+1)!}x^{2m+1}
+\end{align*}
+
+\vskip.1in
+\textbf{Problem 1}
+Write out the first 4 terms for $y_1$ and $y_2$.
+
+\vskip.1in
+\textbf{Problem 2} Show that, if $\alpha$ is zero or a positive even
+integer $2n$, the series solution $y_1$ reduces to a polynomial of
+degree $2n$ containing only even powers of $x$. Find the polynomials
+corresponding to $\alpha=0,2,4$. Similarly, show that if $\alpha$ is a
+positive odd integer $2n+1$, the series solution $y_2$ reduces to a
+polynomial of degree $2n+1$ containing only odd powers of $x$. Find
+the polynomials corresponding to $\alpha=1,3,5$. 
+
+\vskip.1in \textbf{Problem 3} The Legendre polynomial $P_n(x)$ is
+defined as the polynomial solution of the Legendre equation with
+$\alpha=n$ that also satisfies the condition
+$P_n(1)=1$.\\  
+
+\textbf{(a)} Using the results of Problem 2, find the
+first five Legendre polynomials, $P_0(x),...,P_5(x)$. \\  
+
+\textbf{(b)}
+Plot the graphs of $P_0(x),...,P_5(x)$ in the range for which we've
+demonstrated convergence, $|x|\le1$. You may use whatever graphing
+package you'd like, including but not limited to Wolfram alpha
+(e.g. go to wolframalpha.com and type 
+``plot 0.5*(3x\verb|^|2-1) from -1 to
+1'' in the box), Matlab, Mathematica, Python+matplotlib, etc. \\
+
+\textbf{(c)} Find the zeros of $P_0(x),...,P_5(x)$.
+
+
+\vskip.1in
+\textbf{Problem 4} The Legendre polynomials play an important role in
+mathematical physics. For example, solving the potential equation
+(Laplace's equation) in spherical coordinates, we encounter the
+equation 
+
+
+\begin{equation*}
+  \dd{F(\phi)}{\phi} + \cot\phi\fd{F(\phi)}{\phi} + n(n+1)F(\phi) = 0,\qquad 0 < \phi < \pi
+\end{equation*}
+
+Show that the change of variables $x=\cos\phi$ leads to the Legendre
+equation with $\alpha=n$ for $y=f(x)=F(\cos^{-1}(x))$ 
+
+Hint: you may need to use the fact that
+
+
+\begin{equation*}
+  \sin(\arccos(x)) = \sqrt{1-x^2};\qquad \cot(\arccos(x)) = \frac{x}{\sqrt{1-x^2}}
+\end{equation*}
+
+\vskip.3in
+\noindent {\bf For Friday Feb 3}
+\vskip.1in
+\textbf{Problem 5} Show that the Legendre equation can also be written as
+
+\begin{equation*}
+  [(1-x^2)y']' = -\alpha(\alpha+1)y
+\end{equation*}
+
+It then follows that
+
+\begin{equation}
+  \label{e1}
+  [(1-x^2)P_n^{'}(x)]' = -n(n+1)P_n(x)
+\end{equation}
+and
+\begin{equation}
+  \label{e2}
+  [(1-x^2)P_m^{'}(x)]' = -m(m+1)P_m(x).
+\end{equation}
+By multiplying \eqref{e1} by $P_m(x)$ and \eqref{e2} by $P_n(x)$,
+\textbf{integrating by parts}, and then subtracting one equation from the
+other, show that
+
+
+\begin{equation}
+  \label{orth}
+  \int_{-1}^{1}P_n(x)P_m(x)dx = 0 \qquad \mathrm{if} \quad n \ne m
+\end{equation}
+
+This property \eqref{orth} of the Legendre polynomials is known as the
+orthogonality property. If $m=n$, it can be shown that the value of
+the integral in \eqref{orth} is $2/(2n+1)$. 
+
+\vskip.1in
+Given a polynomial $f$ of degree $n$, it is possible to express $f$ as a linear combination of $P_0,P_1,...,P_n$:
+
+\begin{equation}
+  \label{basis}
+  f(x) = \sum_{k=0}^n a_kP_k(x)
+\end{equation}
+
+Note that, since the $n+1$ polynomials $P_0,...,P_n$ are linearly
+independent, and the degree of $P_k$ is $k$, any polynomial of degree
+$n$ can be expressed as \eqref{basis}. \\ Using the result of Problem
+7, you can show that 
+
+
+\begin{equation*}
+  a_k=\frac{2k+1}{2}\int_{-1}^1f(x)P_k(x)dx
+\end{equation*}
+
+\textbf{but you don't have to! You're done!}
+
+\end{document}

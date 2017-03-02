@@ -1,0 +1,83 @@
+\documentclass[12pt]{article}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{macros}
+\usepackage{nth}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagestyle{empty}
+\begin{document}
+\begin{center}
+{\bf Physics 360/Math 360  \ \ MWF 11:00 - 11:50 PM,  Room:  Dennis 231
+}
+\end{center}
+
+\setlength{\unitlength}{1in}
+
+\begin{picture}(6,.1) 
+\put(0,0) {\line(1,0){6.25}}         
+\end{picture}
+
+
+\vskip.15in
+\noindent\textbf{Instructor:} Michael Lerner,  Dennis 221, Phone: 727-LERNERM
+\vskip.15in
+
+\vskip.15in
+\noindent\textbf{Assignment 7, Due Monday April \nth{7}}
+\vskip.15in
+
+\section{The wave equation}
+\subsection{Additional problem} Argue that the wave equation is a
+reasonable physical model for waves. You may make this argument for
+1D, 2D, or 3D waves. Does it seem reasonable for both longitudinal and
+transverse waves? You may use the book, the internet, or whatever
+resources you'd like, but make sure to cite your sources.
+\subsection{Boas \S13.1} Boas 13.1.2
+\section{Diffusion/Heat Flow; Schrodinger}
+\subsection{Boas \S13.2} 13.2.3, 13.2.7
+\subsection{Boas \S13.3} 13.3.1; you must also write down the rest of the answer to Example 1. It's perfectly fine to use the book as a reference *before* you write you answer, but I want you to write it out in your final form without looking at the book.
+\section{Steady State Temp in a Rectangular Plate}
+\subsection{Additional problem} Most of the problems we've been solving involve an infinite number of terms in the solution. With appropriate boundary conditions, this is not required. Solve the semi-infinite rectangular plate problem with one side of the plate held at
+
+\begin{equation}
+  T = \sin\left(\frac{-2\pi x}{L}\right) + \cos\left(\frac{3\pi x}{L}\right)
+\end{equation}
+
+How many terms do you find in your solution, a finite number, or an infinite number? If it's finite, why should that be true conceptually? If it's infinite, why should that be true conceptually?
+
+%also, I think that, as per the next problem, that one actually does have an infinite number of terms. But maybe not. Why not just sin(2x/L) if it's just the sin term? the infinite number must come from the discontinuity.
+
+\section{FRAP (Adapted from ``Physical Biology of the Cell'', Ch. 13)}
+In biology, one often wants to know how quickly various molecules are
+moving. The standard way of performing these experiments under a wide
+variety of experimental settings is with Fluorescence Recovery After
+Photobleaching (FRAP). In the figure below\footnote{C. W. Mulineaux et
+al., J. Baceriol. 188:3442,2006}, an elongated
+\textit{E. coli} cell with TorA-GFP (a protein fused with green
+fluorescent protein) is shown on the far left. A TorA-GPF loses its
+fluorescent properties when you shine a strong laser on it
+(``photobleaching''). In the second frame, you see an image of the
+cell that has been photobleached at the site indicated by the
+arrow. 
+
+\includegraphics[height=50mm]{F5_large.pdf}
+
+As fluorescent proteins from \textit{outside} that area diffuse
+in (frames 1s to 3s), the bleached area becomes more fluorescent. By
+measuring the rate at which the fluorescence returns, you can find out
+how quickly the proteins are diffusing within the cell. The image
+below shows the difference in fluorescence immediately after bleaching
+(dark jagged line) and 4 seconds after (light jagged line), along with
+fits to the data (smooth lines).
+
+\includegraphics[trim = 10mm 300mm 00mm 30mm, clip, height=50mm]{F6_large.pdf}
+
+Your goal is to write down an equation modeling the concentration of
+protein over time. We'll split this problem up into two weeks. This
+week: what PDE will you use to model the system? What are your initial
+conditions? What are your boundary conditions? Will you be expanding
+your solution in terms of $\sin$ or $\cos$ functions?
+
+\section{Boas \S13.4 (waves on a string)} 
+13.4.2, 13.4.12 (Due Wednesday)
+
+\end{document}

@@ -1,0 +1,113 @@
+\documentclass[12pt]{article}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{macros}
+\usepackage{nth}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagestyle{empty}
+\begin{document}
+\begin{center}
+{\bf Physics 360/Math 360
+}
+\end{center}
+
+\setlength{\unitlength}{1in}
+
+\begin{picture}(6,.1) 
+\put(0,0) {\line(1,0){6.25}}         
+\end{picture}
+
+
+\vskip.15in
+\noindent\textbf{Instructor:} Michael Lerner,  Dennis 221, Phone: 727-LERNERM
+\vskip.15in
+
+\vskip.15in
+\noindent\textbf{Assignment 8, Due Friday March \nth{29}, end of day}
+\vskip.15in
+
+\section{Vector calculus}
+\subsection{Line Integrals}
+Boas \S 6.8 (Line integrals) \#
+1, 6, 
+
+Extra credit: \# 8, 15
+
+\subsection{Green's Theorem}
+Problems from \S 6.9 (Green's Theorem) \# 2, 3, 
+
+Extra credit: \# 6
+
+\subsection{Divergence and Divergence Theorem}
+Problems from  \S 6.10 \# 1
+
+Extra credit: \# 12
+
+\subsection{Stokes' Theorem}
+Problems from \S 6.11 \# 1, 2
+
+Extra credit: \# 16
+
+\subsection{Div, grad, curl}
+You're covering a lot of this in your math class, so we won't do a ton
+of problems here.
+\subsubsection{Fields with zero and non-zero divergence and curl}
+Write down a vector field with the following characteristics (a
+different field for each item in the list). In each case, you are not
+allowed to re-use one of the fields from class. In each case, it's
+acceptable if the listed conditions are not met for all point, but you
+must then tell me at least one point where the conditions are met
+(e.g. ``the divergence is zero at the origin, but positive at
+$(2,2)$'')
+\begin{itemize}
+\item non-zero divergence, zero curl
+\item zero divergence, non-zero curl
+\item zero divergence, zero curl
+\item non-zero divergence, non-zero curl
+\end{itemize}
+
+\subsubsection{Murder Mystery}
+One often runs into the following problem: given a field $\vV$, find
+$\vA$ such that $\vV = \grad{\vF}$ or $\vV=\curl{\vA}$.  As explained
+in the section on conservative fields, if you can write $\vV$ as the
+gradient of another field $\vF$, we know that $\vV$ is {\em
+  conservative}, and we call $\vF$ the {\em potential field} for
+$\vV$.  Additionally, is easy to show that, if $vV$ can be written as
+$\curl{\vA}$, then $\div{\vV}=0$. To be clear: you can't always write
+$\vV$ as the curl of some other field; we're trying to figure
+something out about the cases where you {\em can}.
+
+In this problem, you will use the ``murder mystery'' method (used in
+several texts, but I think this name comes from the Oregon Bridge
+Project folks).
+
+First example: say you're given
+
+\begin{equation}
+  \vF = y\uv{i} + (x+2y)\uv{j}
+\end{equation}
+and you want to know if it's conservative. You decide to check by
+determining if it can be written as the gradient of some other field
+$U$. Well, what do we know? 
+
+We know that, if $\vU = \grad{F}$,
+$U_x=\pd{F}{x}$, so we can immediately guess that $F = xy$ (note:
+it could easily be something else, like $xy + \sin(4000e^{\pi y^2})$, but
+our strategy will be to start with the easy guess and make it more
+complicated if it needs to be later on). 
+
+We also know that $\pd{U}{y} = F_y = (x+2y)$ so we can integrate to
+guess that $U = xy + xy^2$. Are these two guesses compatible?
+Yes. Taking the partial of $\pd{U}{x}$ gives us the $y$ we were
+looking for.
+
+Please read http://www.math.oregonstate.edu/BridgeBook/book/math/mmm
+for a bit more in the way of details, complete with some very good
+pictures. The actual homework problem here is the one at the bottom of
+that page: find a potential function for the vector field
+
+\begin{equation}
+  \vG = yz\uv{i} + (xz+z)\uv{j} + (xy+y+2z)\uv{k}
+\end{equation}
+
+
+\end{document}

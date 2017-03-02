@@ -1,0 +1,245 @@
+\documentclass[12pt]{article}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{macros}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\pagestyle{empty}
+\begin{document}
+\title{The method of Frobenius summary; Bessel intro}
+\author{Michael G. Lerner}
+\date{\today}
+\maketitle
+%\begin{abstract}
+%  A quick summary of the method of Frobenius and an introduction to Bessel functions
+%\end{abstract}
+
+\setlength{\unitlength}{1in}
+
+\begin{picture}(6,.1) 
+\put(0,0) {\line(1,0){6.25}}         
+\end{picture}
+
+\section{A couple of definitions}
+
+Given a second-order differential equation 
+
+\begin{equation}
+P(x)y'' + Q(x)y' + R(x)y = 0,
+\end{equation}
+
+we'd like to be able to write
+down a general solution. Sadly, the world is not kind enough to let us do
+so. The method of Frobenius lets us write down solutions for most of
+the points that we find interesting. First off, we can write it as
+
+\begin{equation}
+y'' + p(x)y' + p(x)y = 0
+\end{equation}
+
+where
+
+\begin{equation}
+p(x) \equiv Q(x)/P(x) \qquad q(x) \equiv R(X)\P(x).
+\end{equation}
+
+When doesn't this work? Well, clearly it doesn't work when $P(x)$ is
+$0$. We call those {\bf singular points}. $p(x)$ or $q(x)$ diverge
+there.\footnote{You have to be careful here. We're only in trouble if
+  $p(x)$ or $q(x)$ diverge. So, if someone hands you $xy'' + xy' +
+  x^2y = 9$, you don't call $0$ a singular point: although $P(x) = 0$,
+  $p(x) = 1$ and $q(x) = x$.} 
+We call points where
+$p(x)$  and $q(x)$ do not diverge (i.e. $P(x) \ne 0$) {\bf ordinary points}. Near ordinary points, we can find
+solutions with the power series methods we've used so far for, e.g.,
+Airy's equation. However, when modeling physical systems, we find that
+we often care about singular points. They show up at physical
+boundaries, for instance. So, the reasoning goes, what if things
+didn't blow up ``too quickly''? Could we write down a solution then? 
+
+Consider a singular point $x_0$. This means that $p(x)$ diverges as $x
+\to x_0$. If, however, $(x-x_0)p(x)$ and $(x-x_0)^2q(x)$ remain finite
+as $x \to x_0$, we call $x_0$ a {\bf regular singular
+  point}.\footnote{See the previous footnote. And irregular singular
+  points are significantly more troublesome.}. The Method of Frobenius
+lets us write down solutions near such points.
+
+\newpage
+\section{The main theorem}
+
+(Thm 5.6.1 from Boyce \& DiPrima) Let  $x=0$ be a regular singular point of the differential
+equation 
+\begin{eqnarray}
+  P(x)y'' + Q(x)y' + R(x)y &=& 0 \notag\\
+  \label{fe}
+  x^2y'' + x[x p(x)]y' + [x^2q(x)]y &=& 0
+\end{eqnarray}
+
+\noindent Then $xp(x)$ and $x^2q(x)$
+are analytic at $x=0$ with convergent power series expansions
+
+\begin{equation}
+  xp(x)=\sum_{n=0}^{\infty}p_nx^n,\qquad  x^2q(x)=\sum_{n=0}^{\infty}q_nx^n
+\end{equation}
+
+for $|x|<\rho$ where $\rho>0$ is the minimum of the radii of
+convergence of the power series for $xp(x)$ and $x^2q(x)$. Let $r_1$
+and $r_2$ be the roots of the indicial equation
+
+\begin{equation}
+  \label{ind}
+  F(r) = r(r-1) + p_0r + q_0 = 0
+\end{equation}
+ with $r_1 \ge r_2$ if $r_1$ and $r_2$ are real. Then in either the
+ interval $-\rho < x < 0$ or the interval $0 < x < \rho$, there exists
+ a solution of the form
+
+
+\begin{equation}
+  \label{y1}
+  y_1(x) = |x|^{r_1}\left [ 1 + \sum_{n=1}^{\infty}a_n(r_1)x^n \right ],
+\end{equation}
+
+where the $a_n(r_1)$ are given by the recurrence relation:
+
+\begin{equation}
+  \label{recurrence}
+  F(r+n)a_n + \sum_{k=0}^{n-1}a_k[(r+k)p_{n-k}+q_{n-k}]=0,\qquad n\ge1
+\end{equation}
+
+with $a_0=1$ and $r=r_1$.  If $r_1-r_2$ is neither zero nor a positive
+integer, then in either the interval $-\rho < x < 0$ or the interval
+$0 < x < \rho$, there exists a second solution of the form
+
+\begin{equation}
+  \label{y2bothreal}
+  y_2(x) = |x|^{r_2}\left [ 1 + \sum_{n=1}^{\infty}a_n(r_2)x^n \right ].
+\end{equation}
+
+The $a_n(r_2)$ are also determined by the recurrence relation
+\eqref{recurrence} with $a_0=1$ and $r=r_2$. The power series in
+\eqref{y1} and \eqref{y2bothreal} converge at least for $|x|<\rho$.
+
+If $r_1=r_2$, then the second solution is
+\begin{eqnarray}
+  \label{y2equal}
+  y_2(x) &=& y_1(x)\ln|x|+|x|^{r_1}\left [ 1 + \sum_{n=1}^{\infty}b_n(r_1)x^n \right ] \notag\\
+%  y_2(x) &=& y_1(x)\ln|x|+|x|^{r_1}\left [ 1 + \sum_{n=1}^{\infty}a^{'}_n(r_1)x^n \right ] \qquad a_n^{'} \equiv \d{a_n}{r}\bigg|_{r=r_1}. 
+\end{eqnarray}
+
+If $r_1-r_2 = N \in \N$, then
+\begin{equation}
+  \label{y2offbyN}
+  y_2(x) = ay_1(x)\ln|x|+|x|^{r_2}\left [ 1 + \sum_{n=1}^{\infty}c_n(r_2)x^n \right ].
+\end{equation}
+
+The coefficients $a_n(r_1), b_n(r_1), c_n(r_2)$ and the constant $a$
+can be determined by substituting the form of the series solutions for
+$y$ into \eqref{fe}. The constant $a$ may turn out to be zero, in
+which case there is no logarithmic term in the solution to
+\eqref{y2offbyN}. Each of the series in \eqref{y2equal} and
+\eqref{y2offbyN} converges at least for $|x|<\rho$ and defines a
+function that is analytic in some neighborhood of $x=0$.  In all three
+cases, the two solutions $y_1(x)$ and $y_2(x)$ form a fundamental set
+of solutions for the given differential equation.
+
+\section{Bessel Equations}
+
+Bessel equations are perhaps the most widely used of the ``special''
+functions (Bessel, Airy, Legendre, etc.) in mathematical physics. They
+are most commonly seen in problems with circular or cylindrical
+symmetry, including vibrations of a uniformly stretched circular
+membrane (e.g. a drum head), quantum mechanical problems with circular
+symmetry (e.g. this week's homework assignment), heat conduction in
+cylindrical objects, diffusion problems on a lattice, etc.
+
+They are the solutions to Bessel's equation:
+
+\begin{equation}
+  \label{bessel}
+  x^2y'' + xy' + (x^2-v^2)y
+\end{equation}
+
+where $v$ is a constant, also called the \textbf{order} of the Bessel equation.
+
+Given the form of \eqref{bessel}, you will not be surprised to find
+that we plan on using the results of the preceding section in its
+analysis. We will cover three cases here (order 0, 1/2 and 1). We will
+see more applications in our triumphant return to series solutions
+later in the class (i.e. solving PDEs by separation of variables).
+
+\textbf{Problem 1} Is $x=0$ is a regular singular point of \eqref{bessel}?
+\vskip2in
+
+\textbf{Problem 2} What is the indicial equation? What are $r_1$, $r_2$?
+\vskip2in
+\subsection{Order Zero}
+``order zero'', as mentioned above, means $v=0$:
+
+
+\begin{equation}
+  \label{b0}
+  L[y] = x^2y'' + xy' + x^2y
+\end{equation}
+
+
+So, we will have $r_1=r_2=0$. As per the theorem, we know that we'll
+have one solution of the form \eqref{y1}:
+
+\begin{equation*}
+  y(x) = \phi(x,r) = a_0x^{r} + x^r\sum_{n=1}^{\infty}a_nx^n.
+\end{equation*}
+
+\textbf{Problem 3}
+After reminding yourself that
+\begin{eqnarray}
+  y(x) &=& \sum_{n=0}^{\infty}a_nx^{r+n} \notag\\
+  y'(x) &=& \sum_{n=0}^{\infty}(r+n)a_nx^{r+n-1} \notag\\
+  \label{derivs}
+  y''(x) &=& \sum_{n=0}^{\infty}(r+n)(r+n-1)a_nx^{r+n-2},
+\end{eqnarray}
+
+\textbf{3a} plug \eqref{derivs} into \eqref{b0}. You should find that you'll need
+to strip off the first two terms.
+\vskip2in
+
+\textbf{3b} what is the recurrence relation? Don't forget to simplify the denominator.
+\vskip1in
+
+You've seen these sorts of recurrence relations before. We'll ratchet
+our way up to a general form, so we start with the first term. Recall
+that $a_0$ is not zero.  Plugging in $r=0$, we see that the
+coefficient of $x^r$ is zero, as it should be from the indicial
+equation $F(r) = 0$. We are not surprised to find that we must set
+$a_1$ to zero for the coefficient of $x^r+1$ to be zero. So, our
+recurrence relation turns into
+
+\begin{equation*}
+  a_n(0) = -\frac{a_{n-2}}{n^2}
+\end{equation*}
+
+All of the odd terms are zero, and we write
+\begin{equation*}
+  a_{2m}(0) = -\frac{a_{2m-2}(0)}{(2m)^2}
+\end{equation*}
+
+\textbf{Problem 4} Write out $a_2(0), a_4(0), a_6(0)$.
+\vskip2in
+
+Looking at this, we see that we can split out $2^2, 2^4,2^6$ from the denominators, writing the general term as
+
+\begin{equation*}
+  a_{2m}(0) = \frac{(-1)^ma_0}{2^{2m}(m!)^2}, m=1,2,3,...
+\end{equation*}
+
+and so (in what we've previously decided is a unique and lucky situation), we can write out the first solution as
+
+\begin{eqnarray}
+  y_1(x) &=& a_0\left [ 1 + \sum_{m=1}^{\infty} \frac{(-1)^mx^{2m}}{2^{2m}(m!)^2}\right ] \notag\\
+  \label{J0}
+         &=& a_0\left [J_0(x) \right ]
+\end{eqnarray}
+where $J_0(x)$ is known as the \textbf{Bessel function of the first kind of order zero}. The results of Problem 1, combined with the theorem, tell us that $J_0$ is analytic at $x=0$ and that the series \eqref{J0} converges for all $x$.
+
+Now we want to find $y_2(x)$. [Hint! This will give us $Y_0$, a Bessel function of the \textit{second} kind of order zero!]. In the general case, we will need to plug back in and solve for the $b_n$ terms. In this case, we are lucky enough that we can evaluate the derivative and just solve directly for $a_n{'}(0)$.
+
+\end{document}

@@ -93,7 +93,7 @@ periods = 2
 # Note: unlike sin and cos, Jn's zeros are not integer multiples of
 # each other.  Therefore, this loop goes over a defined number of
 # periods of the lowest mode, but others won't fit evenly.
-junk = raw_input('go for barney')
+junk = input('go for barney')
 for (idx,t) in enumerate(linspace(0, periods*2*pi/jn_zeros(0,1)[0], periods*frames_per)):
     if not first:
         for m in ms:

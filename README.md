@@ -61,4 +61,4 @@ Our notebook on convolutions may be found [here](http://nbviewer.ipython.org/git
 * See information by [Rachel Ward](https://www.ma.utexas.edu/users/rachel/)
     * [Rachel Ward's class notes](https://www.ma.utexas.edu/users/rward/courses/acha14/)
     * [More of Rachel Ward's class notes](https://www.ma.utexas.edu/users/rward/courses/acha16/)
-* [Ten Lectures of Wavelets](http://epubs.siam.org/doi/book/10.1137/1.9781611970104)
+* [Ten Lectures on Wavelets](http://epubs.siam.org/doi/book/10.1137/1.9781611970104)

@@ -1,0 +1,645 @@
+\documentclass[12pt]{article}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{macros}
+\textwidth=7in
+\textheight=9.5in
+\topmargin=-1in
+\headheight=0in
+\headsep=.5in
+\hoffset  -.85in
+
+\usepackage{amsmath} % for \text{}
+\usepackage{amsfonts} % For \text{}
+\usepackage{amssymb} % For \text{}
+\usepackage{amsthm}
+\usepackage{bigints}
+
+
+%% MGL
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Ham}{\mathcal{H}}
+\newcommand{\sL}{\mathcal{L}}
+\newcommand{\sP}{\mathcal{P}}
+\newcommand{\sV}{\mathcal{V}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage[dvips, baseurl=./]{hyperref}
+%\hypersetup{
+%  colorlinks =true,
+%  pdfborder={0 0 0}
+%}
+
+% Note: Consider having JI do a day of instruction on presentations,
+% then 5 minute YouTube vids, with everyone having an audience of 4
+% ppl for their video.
+
+\usepackage[table]{xcolor}
+\usepackage{multirow}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=blue,
+  }
+
+\usepackage{float}
+\usepackage{booktabs}
+\pagestyle{empty}
+
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\begin{document}
+
+\begin{center}
+{\bf Physics 360/Math 360  \ \ T/F 1:00 - 2:20 PM,  Room:  CST 225
+}
+\end{center}
+
+\setlength{\unitlength}{1in}
+
+\begin{picture}(6,.1) 
+\put(0,0) {\line(1,0){6.25}}         
+\end{picture}
+
+\vskip.15in
+\noindent\textbf{Instructor:} Michael Lerner,  CST 213, Phone:
+765-983-1784, Email: lernemi@earlham.edu
+\vskip.15in
+\noindent\textbf{Office Hours:} T 10-11, $\Theta$ 9:00-10:00
+and by  appointment. I also have an open-door policy, and you're
+encouraged to stop in to ask questions whenever my door is open. That's
+most of the time. 
+
+%\vspace{.15in}
+%\noindent \textbf{Syllabus}
+
+%href%\href{/360/360-syllabus.pdf}{PDF version of the syllabus}
+
+%\vspace{.15in}
+%\noindent \textbf{Survey}
+
+%href%\href{/360/360-student-survey.pdf}{Student Survey}
+
+%\vspace{.15in}
+%\noindent \textbf{Homework Assignments}
+
+%href%\href{/360/hw1.pdf}{Homework 1, due Tuesday Jan 24th}
+
+%href%\href{/360/hw2.pdf}{Homework 2, due Thursday Jan 26th}
+
+%href%\href{/360/hw3.pdf}{Homework 3, due Tuesday Feb 7th}
+
+%href%\href{/360/hw4.pdf}{Homework 4, due Tuesday Feb 14th}
+
+%href%\href{/360/hw5.pdf}{Homework 5, due Tuesday Feb 23rd}
+
+%href%\href{/360/hw6.pdf}{Homework 6, due Friday Mar 9th}
+
+%href%\href{/360/hw7.pdf}{Homework 7, due Tuesday Mar 27th}
+
+
+%\vspace{.15in}
+%\noindent \textbf{Class Handouts}
+
+%href%\href{/360/secondorderregularpointsday1.pdf}{Second-order regular points,
+%href%  class handout for day 1}
+
+%href%\href{/360/CharacteristicEquation.pdf}{Connecting the ``characteristic
+%href%  equation'' to the ``characteristic polynomial'' (and not to the
+%href%  indicial equation)}
+
+%href%\href{/360/FroBessel.pdf}{Method of Frobenius and Bessel Functions}
+
+
+
+\vskip.25in
+\begin{description}
+\item[Course goals]\ \\\vspace{-.3in}
+\begin{itemize}
+  \item Students will develop a level of mathematical sophistication that will allow them to confidently and competently explore further material outside of a classroom setting.
+  \item Students will be able to apply the standard tools of
+    mathematical physics (Fourier series and transforms, series
+    solutions to partial differential equations, Bessel functions,
+    spherical harmonics, etc.) to provide quantitative insight into
+    physical systems.
+  \item Students will learn basic scientific Python programming.
+%  \item Students will be able to explain the connection between symmetry and conservation laws.
+\item Students will be able to apply numerical integration to provide quantitative insight into physical systems.
+\end{itemize}
+\item[Required Textbooks]\footnote{You can likely substitute recommended texts for the required texts, but please discuss it with me first so that I can OK your choices and make sure that you'll have access to the correct homework problems} \hfill \\
+\textbf{Boas, Mathematical Methods in the Physical Sciences, 3E}
+The third edition of this text is both an excellent resource text as well as a good text to learn from.
+\item[Prerequisite] Math 320, differential equations.
+\item[Grading Policy]\ \\\vspace{-.3in}
+\begin{itemize}
+  \item Class preparation/participation, Moodle/Piazza participation: 10\%
+  \item One mini-midterm, open book, 5\%
+  \item Two midterms, each 10\%, for a total of 20\%
+  \item One final, 15\%
+  \item Independent project, 15\%
+  \item Homework, 35\%
+\end{itemize}\vspace{-.2in}
+\item[Attendance Policy:] Students are expected to attend classes regularly. A student who incurs an excessive
+number of absences may have some or all of the class preparation/participation grade (10\%) deducted at the discretion of the instructor.
+\end{description}
+\newpage
+\noindent \textbf{Major Topics:} 
+
+\begin{center} \begin{minipage}{5in}
+\begin{flushleft}
+%Infinite Series \dotfill 3 days \\ % -1
+Power Series \\
+Computational Methods \\
+Complex Numbers \\
+Series Solution of Second Order Linear Equations \\
+Vector Analysis\\
+Fourier Series and Transforms \\
+Laplace Transforms \\
+Dirac Delta Functions \\
+%Numerical Integration \dotfill 3 days \\ % +3
+Partial Differential Equations \\
+Bessel Functions \\
+Numerical integration
+\end{flushleft}
+\end{minipage}
+\end{center}
+\vskip.1in
+\begin{description}
+\item[Recommended Textbooks] \hfill \\
+%\textbf{Boyce and DiPrima, Elementary Differential Equations and BVPs}
+%This was the differential equations book last year. We'll either use
+%parts of it or refer to your current book.
+\textbf{Boyce and DiPrima, Elementary Differential Equations and BVPs}
+This was the differential equations book last semester. It's an
+excellent reference for PDEs later in the term.\\
+\textbf{The Feynman Lectures on Physics, Volume II}
+This has some very nice explanations of the vector calculus concepts
+that we'll be covering, taken from a physicist's perspective. This
+part of Feynman is also extremely conversational and readable. You can read the whole thing online with beautiful typesetting at
+http://www.feynmanlectures.info/ \\
+\textbf{Gelfand and Fomin, Calculus of Variations}
+The best introduction I know of to calculus of variations. It's an
+\$11 Dover paperback. \\
+\textbf{Emmy Noether's Wonderful Theorem} by Dwight E. Neuenschwander
+will be the basis for our discussion of Noether's Theorem, if we cover
+Noether's theorem. This book
+is really well written, and goes much farther than we'll have time
+for. \\
+\textbf{Kusse and Westwig, Mathematical Physics}
+This text is extremely well written. It doesn't have quite the right
+focus for this particular class. \\ 
+\textbf{Arfken and Weber, Mathematical Methods for Physicists}
+This encyclopedic volume makes for a good reference, but is a bit too
+dry to learn from in this course. \\ 
+\textbf{Schey, div grad curl and all that}
+This is an extremely conversational introduction to/refresher on vector calculus \\
+\end{description}
+
+\vskip.05in
+\noindent\textbf{Prerequisites, co-requisites, etc.}\footnote {Please contact the instructor if you're considering taking 350 as a co-requisite. Doing so requires that I carefully coordinate my syllabus with whoever happens to be teaching 350 at the time.}
+\begin{description}
+\item[Prerequisite] Math 320, differential equations. \textbf{If you
+    have not taken this, talk to me ASAP}
+\item[Co-requisite] Math 350, multivariate calculus.
+\item[Strongly Suggested] Physics 125, analytical physics I.
+\item[Suggested] Math 310, linear algebra. Really, this makes everything easier.
+\end{description}
+ 
+This class has, in some iterations, spent a week covering \textbf{infinite series} (Boas sections 1.1-1.8). This year, we will assume that students are sufficiently familiar with those topics as they were covered in Math 280. \textbf{If this is not the case, let me know as soon as possible}.
+
+\vskip.25in
+\noindent\textbf{Course Goals}: One of the great strengths of a modern
+physics background is that it allows you to address problems in an
+enormous range of fields, from physics itself to economics, biology,
+ecology, computer science, complex systems, physical chemistry,
+geology, and engineering. The primary objective of this course is to
+provide a systematic introduction to mathematical techniques that will
+serve you both in future physics courses and in modeling interesting
+problems in your domain of choice. A significant secondary objective
+is to develop a level of mathematical sophistication that will allow
+you to confidently and competently explore further material on your
+own.
+
+As might be gathered from the preceding paragraph, a significant
+fraction of the results of modern scientific research can only be
+accurately expressed in the language of advanced mathematics. A glance
+at any of the most prestigious scientific journals in your field of
+interest will quickly confirm this. Thus, even experimental scientists
+or those interested primarily in field work need to achieve a certain
+degree of mathematical sophistication if they are to understand the
+conceptual foundation and interpretation of research results in their
+own fields. This course is intended to provide you with a working
+knowledge of those techniques most commonly encountered in science and
+engineering. In the process of learning these techniques, you will
+also acquire experience in the physical interpretation of mathematical
+models of physical problems.
+
+\vskip.25in
+\noindent\textbf{Structure} There will be two class meetings each
+week. The class meetings will generally consist of lectures,
+discussion of assignments, and student presentation of assigned
+problems. I have taught the course in a 2x/wk and 3x/wk format
+before. If the class has a strong preference for 3x/wk, let's discuss ASAP.
+
+It is very important that students study the appropriate text
+assignments before coming to class and that they be prepared either to
+ask questions or to discuss questions related to the assigned
+material.  The subject matter of this course is sufficiently complex
+that it is neither desirable nor possible to cover all relevant
+details in class.  The primary value of lectures and class discussions
+in this course is to explain and illustrate points which students find
+difficult or obscure.  It is essential, therefore, that students put
+in the advance work required to identify such points; the instructor
+cannot anticipate all of them.  It is hoped that all of us will work
+together to produce a class atmosphere which is conducive to lively
+and interesting discussions of the material.
+
+
+\vskip.25in
+\noindent\textbf{Tests}: There will be three midterms and a final. The
+mini-midterm will be open-book and untimed. The other tests will be
+timed and closed-book. All will be self-scheduled exams, to be picked
+up and turned in at the front desk of the library.
+
+\vskip.25in
+\noindent\textbf{Piazza}: Preclass: We often run into students who say
+things like ``I totally understand the physics ... I just can’t do the
+problems.'' This highlights the extremely important point that we need
+time in class both to discuss theoretical concepts and to work
+directly on problem solving. Readings are assigned below for every
+class period. By midnight before each class period, you must comment
+on Piazza (piazza.com/earlham/spring2022/physmath360). Your comment can be
+in one of the three following categories: (1) something interesting
+from the reading (2) something confusing from the reading (3) an
+answer to someone else’s question. In order to make sure we have a
+good, constructive discussion atmosphere, please note that
+disrespectful comments will receive no credit. You can post
+anonymously; instructors can see who made each post, but students
+cannot.
+
+\vskip.25in
+\noindent\textbf{Homework}: This is basically a course in
+problem-solving techniques.  The most common and the most damaging
+mistake a student can make in such a course is to yield to the
+temptation to try and master the material by reading the text and
+listening to the lectures while working a minimum of problems.  While
+reading and listening can give you valuable new ideas, problem-solving
+skills are only efficiently developed by solving as many problems as
+possible.  For most students the understanding and knowledge gained
+from this course will be in direct proportion to the number of
+problems which they successfully complete.  The best approach is to
+maximize the percentage of your study time devoted to a disciplined
+effort to solve problems.
+
+Homework will be assigned each approximately once per week. As with
+all Physics classes, you will find that your understanding is greatly
+improved if you start the assignments early in the week, rather than
+late in the week.
+
+\noindent\textbf{Grading Policy and Late Policy:}
+  Your grade in this class will be determined by a weighted
+        combination of your scores from multiple categories. Within
+        each category, each assignment is weighted equally. It is
+        extremely hard to catch up on late work in normal times
+        (usually things are late because students are busy, and people
+        don't tend to get less busy!). This is especially true in a
+        pandemic. So, I will drop a roughly a week worth of your
+        lowest grades from most categories. If you have to turn things
+        in late, my strong suggestion is that you prioritize getting
+        your schedule back under control. Feel free to simply
+        \textit{not do} things that will not be graded. Especially if
+        it helps you keep the rest of your life under control.
+
+        Because things can be even harder to schedule during a
+        pandemic, I'm adding a second policy this year: a late pass
+        policy that follows my policy from last year:
+
+        All students start the term with 5 free late
+        passes. You can spend a late pass to extend the deadline of a
+        single assignment to the following class period without any
+        penalty to your score. Late passes cannot be applied to
+        quizzes, or exams, but will work for
+        every other type of assignment. Once you have spent your 5
+        free late passes, you can request additional extensions, but
+        they come with a penalty to your score. For the 6th late pass,
+        I will deduct 10\% of your points on that assignment; for the
+        7th late pass, I will deduct 20\% of your points on that
+        assignment; and so on.
+        
+        Late passes are not automatic. You must always email me to let me know
+        that you plan to use a late pass on a given assignment. Once
+        you declare to me that you are spending a  late pass on an
+        assignment, that late pass is spent whether or not you follow
+        through and actually turn in the assignment by the modified
+        due date.
+
+Grading policy: several of the problems assigned in this class are
+quite challenging. Others are just rote computation. For the more
+challenging problems, my goal is to have you make the strongest
+possible effort towards \textbf{understanding} the solution. Thus, if
+you cannot fully solve the problem, say whatever you can about the way
+in which a solution would proceed from where you stop; say whatever
+you can about the qualitative behavior of a solution; say whatever you
+can about the physical meaning of the solution. 
+
+Homework problems will be graded on roughly the same scale as used in
+Physics 125 and 235:
+
+\begin{description}
+  \item[5] Solution is complete and well-written
+  \item[4] Solution is missing minor parts or some important explanations
+  \item[3] Solution is missing major parts and/or has few if any explanations
+  \item[2] At least one major portion of the problem correct
+  \item[1] Very little coherent initial effort was expended
+  \item[0] No initial solution was submitted
+\end{description}
+
+\vskip.15in
+\newpage
+\noindent\textbf{Independent project}: The primary goals of this course are involve developing a level of mathematical sophistication that will allow you to confidently and competently explore further material outside of a lecture setting. So, in order to make sure we're walking the walk, you'll each pick either an interesting problem to model or an interesting technique to learn. You'll write a short paper and present the results to the class. You'll be expected to start on this halfway through the semester, and we'll discuss it in more detail at that point. Examples might include
+
+\begin{itemize}
+  \item The Fast Fourier Transform (FFT)
+  \item Physical representations of Fourier Transforms, including circuits and optics
+  \item The discrete Fourier Transform, including application to time series data, consideration of how many useful samples you have in a dataset in Fourier space, etc.
+  \item Struve functions
+  \item Complex analysis including itegrating around poles, Cauchy
+    Integral, Residue theorem (\textbf{this is a hard topic to nail
+      down in terms of applications; you must carefully verify your
+      proposal with me first! })
+  \item Tensors, covariant vs. contravariant, pseudo-vectors, index notation
+  \item Black-Scholes Theorem (economics)
+  \item Applications of Noether's Theorem to economic systems
+  \item Modern techniques such as the immersed-boundary method
+  \item Coding and examination of more complex numerical integrators
+  \item Green-Kubo relations and the Fluctuation Theorem
+  \item Wavelet Transforms
+  \item Real world applications of any of the techniques studied in this course
+  \item Numerical integration (e.g. write your own RK4 and Velocity 
+        Verlet, compare the two for some real application)
+  \item Noether's Theorem
+  \item The physics of a golf swing
+  \item Building a better baseball lineup with Monte Carlo Methods
+  \item Biomedical examples of Laplace transforms
+  \item Interesting topic of your choice! 
+\end{itemize}
+
+\textbf{Note}: If there is sufficient demand, it is likely possible to include at least one of the above topics in the main body of the course itself.
+
+\newpage
+\vskip.25in\noindent\textbf{Course Outline} 
+
+Please find above the full schedule for the course, including lecture
+topics and due dates for various assignments. I tend to stick very
+closely to my course schedule, so it is safe to put these dates into
+your calendar now.
+I expect this class to be a lot of work, and an enormous amount of fun.
+
+\setlength{\arrayrulewidth}{.4mm}
+\setlength{\tabcolsep}{8pt}
+{\rowcolors{2}{green!80!yellow!50}{green!70!yellow!40}
+  \begin{table}[]
+    \footnotesize
+\caption{\footnotesize{Course Schedule (HW = daily homework, VP = VPython homework, Q = quiz)}}
+\label{tab:course-calendar}
+\begin{tabular}{l|l|l|l|p{0.2\linewidth}|l}
+\textbf{Week} & \textbf{Date} & \textbf{Reading Due} & \textbf{HW Due} & \textbf{Other Due} & \textbf{Quiz Due} \\ \hline
+1             & Oct. 4        & Syllabus; 1.1-1.4 &                 &                      &                   \\ 
+1             & Oct. 6       &  1.5-1.9 & HW 1            &  Concept Assessment                    &                   \\ 
+1             & Oct. 8        & 2.1-2.4  & HW 2            &                      &                   \\ \hline
+2             & Oct. 11        & 2.5-2.7  & HW 3            &                  &                  \\ 
+2             & Oct. 13        & (dropped behind) & HW 4            &                   & Q1                  \\ 
+2             & Oct. 15        &  3.1-3.5    & HW 5            & VP1                     &                   \\ \hline
+3             & Oct. 18        &  3.6-3.10    & HW 6            &                     &                   \\ 
+3             & Oct. 20        &  4.1-4.6   & HW 7            &                      & Q2                  \\ 
+3             & Oct. 22        &  4.7-4.18    & HW 8 & VP2; Non-Newtonian Physicist Assignment & \\ \hline
+4             & Oct. 25        &  5.1-5.5    & HW 9            &                     &                  \\ 
+4             & Oct. 27        &  5.6-5.10    & HW 10           &                   & Q3                \\ 
+4             & Oct. 29        & (catch up) & HW 11           &  VP3                    &                   \\ \hline
+5             & Nov. 1        &  6.1-6.7   & HW 12           &                     &                  \\ 
+5             & Nov. 3        &  6.8-6.14   & HW 13           &                   & Q4                \\ 
+5             & Nov. 5        &  7.1-7.6   & HW 14           & VP4                     &                   \\ \hline
+6             & Nov. 8        &  7.7-7.10, 9.1-9.2  & HW 15           &                     &                  \\ 
+6             & Nov. 10        &  9.2-9.3, 10.1-10.2   & HW 16           &                   & Q5                \\ 
+6             & Nov. 12        &  10.3-10.7   & HW 17           & VP5                     &                   \\ \hline
+7             & Nov. 15        &  11.1-11.5   & HW 18           &                     &                  \\ 
+7             & Nov. 17        &  11.6-11.10  & HW 19           &                   & Q6                \\ 
+7             & Nov. 19        &  8.4, 12.1-12.4      & HW 20           & VP6                     &                   \\ \hline \hline
+8             & Nov. 22        & Final Exam, 9:00-11:00     &                 &                      &                   \\ \hline
+\end{tabular}
+\end{table}
+
+\newpage
+
+\setlength{\arrayrulewidth}{.4mm}
+\setlength{\tabcolsep}{8pt}
+{\rowcolors{2}{green!80!yellow!50}{green!70!yellow!40}
+  \begin{table}[]
+    \footnotesize
+\caption{\footnotesize{Course Schedule (HW = daily homework, VP = VPython homework, Q = quiz)}}
+\label{tab:course-calendar}
+\begin{tabular}{l|l|l|l|p{0.2\linewidth}|l}
+\textbf{Week} & \textbf{Date} & \textbf{Reading Due} & \textbf{HW Due} & \textbf{Other Due} & \textbf{Quiz Due} \\ \hline
+1             & Feb. 1        & Syllabus; 1.1-1.4 &                 &                      &                   \\ 
+1             & Feb. 4       &  1.5-1.9 & HW 1            &  Concept Assessment                    &                   \\ \hline 
+2             & Feb. 8        & 2.5-2.7  & HW 3            &                  &                  \\ 
+2             & Feb. 11        & (dropped behind) & HW 4            &                   & Q1                  \\ \hline 
+3             & Feb. 15       &  3.6-3.10    & HW 6            &                     &                   \\ 
+3             & Feb. 18       &  4.1-4.6   & HW 7            &                      & Q2                  \\ \hline 
+4             & Feb. 22       &  5.1-5.5    & HW 9            &                     &                  \\ 
+4             & Feb. 25       &  Early Semester Break    &            &                   &                 \\ \hline 
+5             & Feb. 29      &  6.1-6.7   & HW 12           &                     &                  \\ 
+5             & Mar. 4      &  6.8-6.14   & HW 13           &                   & Q4                \\ \hline 
+6             & Mar. 8      &  7.7-7.10, 9.1-9.2  & HW 15           &                     &                  \\ 
+6             & Mar. 11        &  9.2-9.3, 10.1-10.2   & HW 16           &                   & Q5                \\ \hline 
+7             & Mar. 15        &  11.1-11.5   & HW 18           &                     &                  \\ 
+7             & Mar. 18        &  11.6-11.10  & HW 19           &                   & Q6                \\ \hline 
+              & Mar. 22        & Spring Break    &                 &                      &                   \\ 
+              & Mar. 25        & Spring Break     &                 &                      &                   \\ \hline
+8             & Mar. 29       & Syllabus; 1.1-1.4 &                 &                      &                   \\ 
+8             & Apr. 1      &  1.5-1.9 & HW 1            &  Concept Assessment                    &                   \\ \hline 
+9             & Apr. 5       & 2.5-2.7  & HW 3            &                  &                  \\ 
+9             & Apr. 8        & (dropped behind) & HW 4            &                   & Q1                  \\ \hline 
+10             & Apr. 12      &  3.6-3.10    & HW 6            &                     &                   \\ 
+10             & Apr. 15       &  4.1-4.6   & HW 7            &                      & Q2                  \\ \hline 
+11             & Apr. 19       &  5.1-5.5    & HW 9            &                     &                  \\ 
+11             & Apr. 22       &  Early Semester Break    &            &                   &                 \\ \hline 
+12            & Apr. 26      &  6.1-6.7   & HW 12           &                     &                  \\ 
+12             & Apr. 29     &  6.8-6.14   & HW 13           &                   & Q4                \\ \hline 
+13             & May 3    &  7.7-7.10, 9.1-9.2  & HW 15           &                     &                  \\ 
+13             & May 6       &  9.2-9.3, 10.1-10.2   & HW 16           &                   & Q5                \\ \hline 
+14             & May 10       &  11.1-11.5   & HW 18           &                     &                  \\ 
+14             & May 13       &  11.6-11.10  & HW 19           &                   & Q6                \\ \hline \hline
+              & May  16      & Final    &                 &                      &                   \\ 
+\end{tabular}
+\end{table}
+
+\newpage
+\begin{calendar}{1/8/2018}{17} 
+  % Semester starts on 1/16/2013 and last for 14 class weeks. You must
+  % always start on a Monday, even if the first day is not a
+  % Monday. Use holidays to make up the difference.
+\setlength{\calboxdepth}{.3in}
+\setlength{\calwidth}{7in}
+\MWFClass
+\caltexton{1}{\textbf{Power Series} \\ Boas 1.10-1.13 \\ Interval of Convergence, Theorems, \textbf{Taylor Series}}
+\caltextnext{Boas 1.14-1.15 $tan(x)$, $e^{tan(x)}$, Accuracy of Approximations, Some applications \\ 2.1-2.4 \textbf{Complex Numbers} Definitions and Terminology}
+\caltextnext{\textbf{Complex Numbers} \\ Boas 2.4-2.6 \\ Definitions
+  and Terminology, Complex Algebra, Complex Infinite Series} % -1
+\caltextnext{Boas 2.7-2.10 Power Series, Disk of Convergence, Functions of complex numbers, Euler's Formula, Powers and Roots of $\CC$}
+\caltextnext{Boas 2.11-2.15 Powers and Roots of $\CC$, Exp and Trig
+  Functions, Hyperbolic Functions, Logarithms, Complex Roots and
+  powers, Inverse Trig/Hyperbolic Funcs}
+% series solution to 2nd order ODEs
+% This has covered Boyce 5.2-5.7 before, specifically including
+% spherical harmonics and bessel functions.
+% We have typically devoted 6 days (two full weeks).
+% Boyce has some more mathematical rigor, especially w.r.t. Frobenius.
+
+
+\caltextnext{\textbf{Series Solution of Second Order Linear Equations}  \\ Boas 12.1-12.2 \\ The basic idea, making tables, spherical  harmonics (Legendre)}
+% Leibniz and Rodriguez become HW
+\caltextnext{Boas 12.5 Generating function, expansion of a potential}
+% Kyle: CMB for spherical harmonics. Also multipole, need up to 10k
+% sometimes!
+\caltextnext{Boas 12.7-12.8 Orthogonality and Normalization}
+\caltextnext{Boas 12.11 The Method of Frobenius}
+\caltextnext{Boas 12.12-12.13 Bessel's equation}
+\caltextnext{Boas 12.14 Graphs, zeros and numerical computation of Bessel}
+
+
+%%\caltextnext{\textbf{Series Solution of Second Order Linear Equations} \\ Boyce 5.2 \\ Series Solutions Near an Ordinary Point I} % -1
+%%\caltextnext{Boyce 5.3 Series
+%%  Solutions Near an Ordinary Point II,Spherical harmonics}
+%%% Kyle: CMB for spherical harmonics. Also multipole, need up to 10k sometimes!
+%%\caltextnext{Boyce 5.4 Euler Equations; Regular Singular Points,}
+%%\caltextnext{Boyce 5.5 Series Solutions near a Regular Singular Point, I}
+%%\caltextnext{Boyce 5.6 Series Solutions near a Regular Singular Point, II} % -1
+%%\caltextnext{Boyce 5.7 Bessel's Equation} % include approximate solutions for small x, e.g. Boas 12.20
+
+
+%% For me, here's fourier cosine series of sin(x) http://math.stackexchange.com/questions/633966/fourier-cosine-series-of-sin-x
+
+\caltextnext{\textbf{Fourier Series, Fourier and Laplace Transforms} Boas 7.1-7.2 \\ SHM, Wave Motion, Periodic Functions}
+\caltextnext{Boas 7.3-7.5 Applications of Fourier Series, Average
+  Value of a Function, Fourier Coefficients, Kronecker delta}
+\caltextnext{Boas 7.6-7.7 Dirichlet Conditions, Complex Fourier Series}
+\caltextnext{Boas 7.8-7.9 Other Intervals, Even and Odd Functions}
+%\caltextnext{Boas 7.11 Parseval's Theorem}
+\caltextnext{Boas 7.12 Fourier Transforms}
+\caltextnext{Orthogonal Functions}
+\caltextnext{ 
+Boas 8.8-8.9 Laplace Transforms} % +1 also Boyce Ch. 6
+
+\caltextnext{Boas 8.10-8.11 Convolutions and Dirac Delta Functions} % +1 % Julie Mitchel 9.1.4\
+%\caltextnext{MGLNotes Fourier transforms and optics, Applications of Laplace transforms}
+
+\caltextnext{Boas 8.11 More Dirac Delta Functions  } 
+
+\caltextnext{Boas 8.12 Green's functions \\ Boas 2.16 Application: Optics }
+
+\caltextnext{\textbf{Vector Analysis} \\ Boas 6.1-6.5 
+  Review % If teaching with multivariable co-req, move all vector
+         % analysis to end!
+  of basic concepts including Triple Products, Fields, mention tensors}
+\caltextnext{Boas 6.6 Directional Derivative, Gradient} % -1 % See Julie Mitchell 6.2\
+\caltextnext{Boas 6.7-6.8 Expressions involving $\nabla$, Line integrals}
+\caltextnext{Boas 6.9 Green's Theorem in the Plane}
+\caltextnext{Boas 6.10 Divergence and Divergence Theorem}
+\caltextnext{Boas 6.11 Curl and Stokes Theorem}
+\caltextnext{\textbf{Partial Differential Equations} Boas 13.1 - 13.2 Intro, Laplace's Equation, Steady-state Temperature in a Rectangular Plate} % +1 % Julie Mitchel 9.1.4
+\caltextnext{Boas 13.3 Diffusion/Heat Flow Equation, Schr\"{o}dinger Equation}
+\caltextnext{Boas 13.4 Wave Equation, Vibrating String}
+\caltextnext{Boas 13.5 Steady-state temperature in a cylinder}
+%\caltextnext{I'm not sure what happened, but we lost a day here.}
+\caltextnext{Boas 13.6 Vibration of a Circular Membrane (in-class discussion)}
+\caltextnext{\textbf{Project workday}}
+%\caltextnext{\textbf{Visiting speaker}}
+\caltextnext{Boas 13.6 Vibration of a Circular Membrane (group
+  worksheet and movies)
+\\ briefly Boas 13.7 Steady-state temperature in a sphere
+\\ Stochastic differential equations and diffusion}
+\caltextnext{\textbf{Project workday}}
+\caltextnext{\textbf{More PDEs} Boas 13.8  Poisson's Equation and a return to Green's
+  functions\\ }
+\caltextnext{Boas 13.9 Integral Transform Solutions of PDEs}
+\caltextnext{\textbf{Project workday, led by guest}}
+%\caltextnext{Boas 13.10 Misc. PDE problems}
+\caltextnext{\textbf{Numerical Integration} \\ MGLNotes \\ Numerical Integration with Euler, Verlet and Runge-Kutta} % see Julie Mitchel, 8.5, BJL Chapters.
+\caltextnext{MGLNotes code for integrators, special cases and series approximations}
+\caltextnext{MGLNotes Symplectic Integration and code examples} % http://doswa.com/2009/01/02/fourth-order-runge-kutta-numerical-integration.html
+%\caltextnext{\textbf{Noether's Theorem} \\ MGLNotes \\ Variational principles and Euler's Equation I}
+%\caltextnext{MGLNotes Variational principles and Euler's Equation II}
+%\caltextnext{MGLNotes General variation of a functional and canonical form of Euler's Equations}
+%\caltextnext{MGLNotes Noether's Theorem and Conservation Laws I}
+%\caltextnext{MGLNotes Noether's Theorem and Conservation Laws II}
+%\caltextnext{Numerical Integration and/or Student Choice and/or catch up to syllabus}
+%\caltextnext{Numerical Integration and/or Student Choice and/or catch up to syllabus}
+%\caltextnext{Independent project presentations}
+
+% Things that are missing
+% FFT one day
+%\caltexton{11}{\framebox{\textbf{RESCHEDULED TO THURSDAY}}}
+%\caltexton{15}{\framebox{\textbf{Guest Lecture}}}
+%\caltexton{16}{\framebox{\textbf{Guest Lecture}}}
+
+\caltexton{7}{\framebox{\textbf{Mini-midterm}}}
+\caltexton{21}{\framebox{\textbf{Midterm 1}}}
+\caltexton{35}{\framebox{\textbf{Midterm 2}}}
+\caltexton{27}{\framebox{\textbf{Project topics}}}
+\caltexton{28}{\framebox{\textbf{Paragraph about project}}}
+\caltexton{33}{\framebox{\textbf{Project draft 1}} \\ Draft due 8:00 AM Tomorrow}
+\caltexton{39}{\framebox{\textbf{Project draft 2}}}
+% Holidays
+
+% Holidays
+\caltexton{17}{(Michael at BPS, John Howell takes charge)}
+\caltexton{18}{(Michael at BPS, John Howell continues to run the show)}
+\caltexton{38}{(Michael at AACR)}
+
+
+\Holiday{1/8/2018}{}
+\Holiday{1/9/2018}{}
+
+\Holiday{2/15/2018}{Early Semester Break}
+\Holiday{2/16/2018}{\textbf{\textsf{Early Semester Break}}}
+\Holiday{2/17/2018}{Early Semester Break}
+\Holiday{2/18/2018}{Early Semester Break}
+
+\Holiday{3/10/2018}{Spring Break}
+\Holiday{3/11/2018}{Spring Break}
+\Holiday{3/12/2018}{\textbf{\textsf{Spring Break}}}
+\Holiday{3/13/2018}{Spring Break}
+\Holiday{3/14/2018}{\textbf{\textsf{Spring Break}}}
+\Holiday{3/15/2018}{Spring Break}
+\Holiday{3/16/2018}{\textbf{\textsf{Spring Break}}}
+\Holiday{3/17/2018}{Spring Break}
+\Holiday{3/18/2018}{Spring Break}
+
+\Holiday{4/17/2018}{Epic Expo (no class)}
+\Holiday{4/18/2018}{\textsf{\textbf{Epic Expo} (no class)}}
+
+\Holiday{12/9/2017}{Reading Day} 
+\Holiday{12/10/2017}{Reading Day} 
+\Holiday{4/30/2018}{Finals} 
+\Holiday{5/1/2018}{Reading Day} 
+\Holiday{5/2/2018}{Finals} 
+\Holiday{5/3/2018}{Finals}
+\Holiday{5/5/2018}{Commencement} 
+
+% ... and so on
+
+\caltext{3/30/2018}{\framebox{Last day to drop}}
+\caltext{4/27/2018}{\framebox{Last class}}
+
+
+
+%\newcounter{quiznumber}
+%\weeklytext{\stepcounter{quiznumber} HW~\arabic{quiznumber}}
+
+\end{calendar}
+
+Much of this syllabus has been taken from syllabi provided by Ray Hivley and John Howell.
+
+\end{document}

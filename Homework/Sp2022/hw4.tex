@@ -6,22 +6,120 @@
 \pagestyle{empty}
 \begin{document}
 \input{header}
-\noindent\textbf{Assignment 4, Due Monday February \nth{8}}
+
+%% Old assignment
+%%\noindent\textbf{Assignment 4, Due Monday February \nth{8}}
+%%\vskip.15in
+%%
+%%{\bf Regarding the Method of Frobenius.}
+%%
+%%Solving problems the Boas way:
+%%
+%%\begin{questions}
+%%\question[5] Boas 12.11.8
+%%\question[5] Boas 12.11.11
+%%\end{questions}
+%%
+%%{\bf Using the full method of Frobenius.}
+%%
+%%This was handed out as a separate worksheet.  Complete it and turn it
+%%in by Wednesday February \nth{10}.
+%%
+
+\noindent\textbf{Assignment 4, Due Thursday Mar 10, end of day.}
 \vskip.15in
 
-{\bf Regarding the Method of Frobenius.}
 
-Solving problems the Boas way:
+\vskip.1in \textbf{Legendre Problem 3} The Legendre polynomial $P_n(x)$ is
+defined as the polynomial solution of the Legendre equation with
+$\alpha=n$ that also satisfies the condition
+$P_n(1)=1$.\\  
 
-\begin{questions}
-\question[5] Boas 12.11.8
-\question[5] Boas 12.11.11
-\end{questions}
+\textbf{(a)} Using the results of Problem 2, find the
+first five Legendre polynomials, $P_0(x),...,P_5(x)$. \\  
 
-{\bf Using the full method of Frobenius.}
+\textbf{(b)}
+Plot the graphs of $P_0(x),...,P_5(x)$ in the range for which we've
+demonstrated convergence, $|x|\le1$. You can check your answers with
+Wolfram Alpha (e.g. go to wolframalpha.com and type 
+``plot 0.5*(3x\verb|^|2-1) from -1 to
+1'' in the box), but you need to print out solutions here using Python
++ matplotlib. For this, please refer to the in-class notebooks and ask
+your instructor/classmates for help early and often!\\
 
-This was handed out as a separate worksheet.  Complete it and turn it
-in by Wednesday February \nth{10}.
+\textbf{(c)} Find the zeros of $P_0(x),...,P_5(x)$.
+
+\vskip.1in
+\textbf{Legendre Problem 4} The Legendre polynomials play an important role in
+mathematical physics. For example, solving the potential equation
+(Laplace's equation) in spherical coordinates, we encounter the
+equation 
+
+
+\begin{equation*}
+  \dd{F(\phi)}{\phi} + \cot\phi\fd{F(\phi)}{\phi} + n(n+1)F(\phi) = 0,\qquad 0 < \phi < \pi
+\end{equation*}
+
+Show that the change of variables $x=\cos\phi$ leads to the Legendre
+equation with $\alpha=n$ for $y=f(x)=F(\cos^{-1}(x))$ 
+
+Hint: you may need to use the fact that
+
+
+\begin{equation*}
+  \sin(\arccos(x)) = \sqrt{1-x^2};\qquad \cot(\arccos(x)) = \frac{x}{\sqrt{1-x^2}}
+\end{equation*}
+
+\textbf{Legendre Problem 5} Show that the Legendre equation can also be written as
+
+\begin{equation*}
+  [(1-x^2)y']' = -\alpha(\alpha+1)y
+\end{equation*}
+
+It then follows that
+
+\begin{equation}
+  \label{e1}
+  [(1-x^2)P_n^{'}(x)]' = -n(n+1)P_n(x)
+\end{equation}
+and
+\begin{equation}
+  \label{e2}
+  [(1-x^2)P_m^{'}(x)]' = -m(m+1)P_m(x).
+\end{equation}
+By multiplying \eqref{e1} by $P_m(x)$ and \eqref{e2} by $P_n(x)$,
+\textbf{integrating by parts}, and then subtracting one equation from the
+other, show that
+
+
+\begin{equation}
+  \label{orth}
+  \int_{-1}^{1}P_n(x)P_m(x)dx = 0 \qquad \mathrm{if} \quad n \ne m
+\end{equation}
+
+This property \eqref{orth} of the Legendre polynomials is known as the
+orthogonality property. If $m=n$, it can be shown that the value of
+the integral in \eqref{orth} is $2/(2n+1)$. 
+
+\vskip.1in
+Given a polynomial $f$ of degree $n$, it is possible to express $f$ as a linear combination of $P_0,P_1,...,P_n$:
+
+\begin{equation}
+  \label{basis}
+  f(x) = \sum_{k=0}^n a_kP_k(x)
+\end{equation}
+
+Note that, since the $n+1$ polynomials $P_0,...,P_n$ are linearly
+independent, and the degree of $P_k$ is $k$, any polynomial of degree
+$n$ can be expressed as \eqref{basis}. \\ Using the result of Problem
+7, you can show that 
+
+
+\begin{equation*}
+  a_k=\frac{2k+1}{2}\int_{-1}^1f(x)P_k(x)dx
+\end{equation*}
+
+\textbf{but you don't have to! You're done!}
 
 
 \end{document}

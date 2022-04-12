@@ -1,0 +1,81 @@
+\documentclass[12pt]{article}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{macros}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pagestyle{empty}
+\begin{document}
+\input{header}
+\noindent\textbf{Assignment 3, Due Thursday Feb 24, end of day.}
+\vskip.15in
+
+% Last one ended with 2.10.20
+
+\noindent{\bf Actually due early}
+
+The first part is actually due on Tuesday: we started working on a
+problem in class, where you were solving a differential equation via
+the table method. For Tuesday, get as far as you can on that
+problem. Please feel \textit{encouraged} to post questions on Piazza!
+This is meant to be a group problem.
+
+\noindent {\bf Due on the real due date}
+\\
+
+\noindent \textbf{Table problem:} Using a table like the one in Boas \S 12.2, solve problem 12.1.1
+
+\noindent{\bf Legendre Problems:}
+\\
+
+Next set of problems: In this assignment, as in many of the future
+assignments, we will investigate a particular topic in depth, rather
+than solving several separate problems. This week, we focus on the
+Legendre polynomials, which have broad applicability in mathematical
+physics, especially in the modeling of spherically symmetric systems.
+
+The text of the following problems is taken (with some small changes)
+from Boyce and DiPrima, Chapter 5, section 3.
+
+The following problems deal with the Legendre equation:
+
+
+\begin{equation}
+  \label{L}
+  (1-x^2)y'' - 2xy' + \alpha(\alpha+1)y = 0
+\end{equation}
+
+Following the convention of choosing a fundamental set of solutions such that
+
+\begin{align*}
+  y_1(x) &= 1 + b_2(x-x_0)^2 + ... \\
+  y_2(x) &= (x-x_0) + c_2 (x-x_0)^3 + ... \\
+  b_2+c_2 &= a_2
+\end{align*}
+
+(Note that these series have already included the fact that one will
+be even and one will be odd, a fact that you'll show below.)
+
+Two solutions of the Legendre equation for $|x| < 1$ are
+
+\begin{align*}
+  y_1(x) &= 1 - \frac{\alpha(\alpha+1)}{2!}x^2 + \frac{\alpha(\alpha-2)(\alpha+1)(\alpha+3)}{4!}x^4 \\
+   &+ \sum_{m=3}^{\infty}(-1)^m\frac{\alpha\cdot\cdot\cdot(\alpha-2m+2)(\alpha+1)\cdot\cdot\cdot(\alpha+2m-1)}{(2m)!}x^{2m}, \\
+  y_2(x) &= x - \frac{(\alpha - 1)(\alpha + 2)}{3!}x^3 + \frac{(\alpha-1)(\alpha-3)(\alpha+2)(\alpha+4)}{5!}x^5 \\
+  &+ \sum_{m=3}^{\infty}\frac{(\alpha-1)\cdot\cdot\cdot(\alpha-2m+1)(\alpha+2)\cdot\cdot\cdot(\alpha+2m)}{(2m+1)!}x^{2m+1}
+\end{align*}
+
+\vskip.1in
+\textbf{Legendre Problem 1}
+Write out the first 4 terms for $y_1$ and $y_2$.
+
+\vskip.1in
+\textbf{Legendre Problem 2} Show that, if $\alpha$ is zero or a positive even
+integer $2n$, the series solution $y_1$ reduces to a polynomial of
+degree $2n$ containing only even powers of $x$. Find the polynomials
+corresponding to $\alpha=0,2,4$. Similarly, show that if $\alpha$ is a
+positive odd integer $2n+1$, the series solution $y_2$ reduces to a
+polynomial of degree $2n+1$ containing only odd powers of $x$. Find
+the polynomials corresponding to $\alpha=1,3,5$. 
+
+(There will be more Legendre problems on the next homework assignment)
+\end{document}

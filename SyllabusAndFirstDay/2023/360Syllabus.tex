@@ -1,0 +1,614 @@
+\documentclass[12pt]{article}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{macros}
+%% MGL
+\usepackage{amsmath} % for \text{}
+\usepackage{amsfonts} % For \text{}
+\usepackage{amssymb} % For \text{}
+\usepackage{amsthm}
+\usepackage{bigints}
+
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Ham}{\mathcal{H}}
+\newcommand{\sL}{\mathcal{L}}
+\newcommand{\sP}{\mathcal{P}}
+\newcommand{\sV}{\mathcal{V}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[table]{xcolor}
+\usepackage{multirow}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=blue,
+  }
+
+  \usepackage{float}
+  \usepackage[super]{nth}
+  \usepackage{booktabs}
+\restylefloat{table}
+
+\pagestyle{empty}
+
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\textwidth=7in
+\textheight=9.75in
+\topmargin=-1in
+\headheight=0in
+\headsep=.5in
+\hoffset  -.85in
+\begin{document}
+
+\begin{center}
+{\bf Physics 360: Mathematical Methods of Physics
+}
+\end{center}
+
+\setlength{\unitlength}{1in}
+
+\hrule
+
+\vskip.15in 
+\noindent\textbf{Instructor:} Michael Lerner,  CST 213, Email:
+\href{lernemi@earlham.edu}{lernemi@earlham.edu},  Phone: 727-LERNERM
+%\vskip.15in
+
+% Instructor Notes
+% 2018 Moodle (EC only): https://moodle13-18.earlham.edu/course/view.php?id=10018
+% Check out the in-class python notebooks from last go-round.
+
+\begin{description}
+  \item[Office Hours:] TBD. I also have an open-door policy, and you're
+        encouraged to stop in to ask questions whenever my door is
+        open. That's most of the time.  %I also have an open-door policy, and you're
+        % encouraged to stop in to ask questions whenever my door is
+        % open. That's most of the time.
+  \item[When and where:] Class meetings will be
+        MWF 11:00-12:50 in CST 225.  If Zoom sessions are needed, they will
+        all use: \url{https://us02web.zoom.us/j/88190538447}
+  \item[COVID:] Campus-wide coronavirus policies and information: \url{https://earlham.edu/coronavirus}
+  \item[Required Materials:] Mathematical Methods in the Physical Sciences, Boas, 3E\\
+        Piazza account
+        (\url{piazza.com/earlham/spring2022/physmath360})
+  \item[Pre- and Co-requisites:] Math 320 (differential equations) and Math 250 (multivariate calculus).
+  \item[Strongly-suggested:] Physics 125, Matter in Motion \textbf{Suggested:} Math 310 (Linear Algebra)
+  \item[Course Goals:]
+        One of the great strengths of a modern
+        physics background is that it allows you to address problems in an
+        enormous range of fields, from physics itself to economics, biology,
+        ecology, computer science, complex systems, physical chemistry,
+        geology, and engineering. The primary objective of this course is to
+        provide a systematic introduction to mathematical techniques that will
+        serve you both in future physics courses and in modeling interesting
+        problems in your domain of choice. A significant secondary objective
+        is to develop a level of mathematical sophistication that will allow
+        you to confidently and competently explore further material on your
+        own.
+
+        A significant
+        fraction of the results of modern scientific research can only be
+        accurately expressed in the language of advanced mathematics. A glance
+        at any of the most prestigious scientific journals in your field of
+        interest will quickly confirm this. Thus, even experimental scientists
+        or those interested primarily in field work need to achieve a certain
+        degree of mathematical sophistication if they are to understand the
+        conceptual foundation and interpretation of research results in their
+        own fields. This course is intended to provide you with a working
+        knowledge of those techniques most commonly encountered in science and
+        engineering. In the process of learning these techniques, you will
+        also acquire experience in the physical interpretation of mathematical
+        models of physical problems. \ \\\vspace{-.3in}
+
+        \begin{enumerate}
+          \item Students will learn to apply foundational topics of mathematical physics to a wide array of physical situations.
+          \item Students will chose a topic not covered in this class, model it with the techniques of mathematical physics, and present their work to the class.
+          \item Students will gain experience in the physical interpretation of mathematical models of physical systems.
+        \end{enumerate}
+
+        This course contributes to several of Earlham's overall educational goals: \ \\\vspace{-.3in}
+        \begin{enumerate}
+          \item Critical reading and thoughtful reflection
+          \item Understanding the scientific process
+          \item Analytic reasoning
+          \item Mathematics proficiency
+          \item Group learning
+        \end{enumerate}
+        
+\end{description}       
+
+\newpage
+
+\noindent\textbf{Course Calendar}\footnote{ 
+\noindent If we get substantially ahead of this syllabus, we can include extra topics like numerical integrators or Noether's theorem.
+
+\noindent This class has, in some iterations, spent a week covering \textbf{infinite series} (Boas sections 1.1-1.8). This year, we will assume that students are sufficiently familiar with those topics as they were covered in Math 280. \textbf{If this is not the case, let me know as soon as possible}.}
+
+
+\setlength{\arrayrulewidth}{.4mm}
+\setlength{\tabcolsep}{8pt}
+{\rowcolors{2}{green!80!yellow!50}{green!70!yellow!40}
+  \begin{table}[h]
+    \footnotesize
+\caption{\footnotesize{Course Schedule (HW, Reading, project work due on day listed; exams handed out on day listed)}}
+\label{tab:course-calendar}
+\begin{tabular}{l|l|p{0.18\linewidth}|p{0.31\linewidth}|l|l}
+\textbf{Week} & \textbf{Date} & \textbf{Read} & \textbf{Topics} & \textbf{HW} & \textbf{Other} \\ \hline
+1             &         & 1.10-1.14  & Power Series, Taylor Series &  &                   \\ 
+1             &        & 1.15, 2.1-2.6 & Accuracy of Approx, $\CC$ & 1 &                   \\ \hline 
+2             &         & 2.7-2.10, 2.11-2.13 & Cmplx Power Series, $f(z)$,$z^x$ &  &                  \\ 
+2             &         &2.14-2.15, 12.1-12.2 & $x^z$, \textbf{Series Solns} of \nth{2} Order ODEs & 2 &                   \\ \hline 
+3             &        & 12.5, 12.7 & Generating functions & &                  \\ 
+3             &        & 12.8, 12.11 & Orthogonality, Frobenius & 3 &                   \\ \hline 
+4             &        & 12.12-12.13, 12.14 & Bessel's Equation &  & Mini-Midterm                 \\ 
+4             &        & &  & 4 &                 \\ \hline 
+5             &       & 7.1-7.4 & \textbf{Fourier Series}  &  &                  \\ 
+5             &       & 7.5-7.7 & More Fourier & 5 &                 \\ \hline 
+6             &       & 7.8-7.9, & Other Intervals, Even and Odd Fns &  &                  \\ 
+6             &         & 7.12, [*]Extra Material &Fourier Transform, [*]Orthogonal Fns & 6 &                 \\ \hline 
+%7             & Mar. 15        & 8.8-8.10 & \textbf{Laplace Transform}, Convolutions & & Midterm 1                 \\ 
+%7             & Mar. 18        & 8.11 & Dirac Delta Functions & 7 &                 \\ \hline 
+%              & Mar. 22        & \textbf{Spring Break} &  &  &                   \\ 
+%              & Mar. 25        & \textbf{Spring Break} &  &  &                   \\ \hline
+%8             & Mar. 29       & 8.12, 2.16 & Green's functions, optics  &  &                   \\ 
+%8             & Apr. 1      & none & catch up & 8 &                   \\ \hline 
+7             &         & -7.11 & Finish Fourier Series & &                  \\  
+7             &         & 7.12, 8.8-8.9  & Transforms: Fourier and Laplace & 7 &                 \\ \hline 
+8              &         & \textbf{Spring Break} &  &  &                   \\ 
+8              &         & \textbf{Spring Break} &  &  &                   \\ \hline
+9             &        & 8.10-8.11 & Convolutions, Dirac Delta Functions  &  & Midterm 1                  \\  
+9             &       & 8.11-8.12 & Dirac Delta Functions, Green's functions & 8 &                   \\ \hline  
+10             &        & 6.1-6.6 & \textbf{Vector Analysis} basic concepts, directional derivative &  &                  \\ 
+10             &         &(catch up) & & 9 &                   \\ \hline 
+11             &       &6.6-6.8 & gradient, $\nabla$, line integrals &  &  Project Topics                 \\ 
+11             &        &6.9, 6.10 & Green's Thm, Divergence Thm & 10 &  Paragraph about project                 \\ \hline 
+12             &        &  6.11 & Curl and Stokes Theorem &  &                \\ 
+12             &        & \textbf{Project Workday} &  & 11 &                 \\ \hline 
+13            &       & 13.1-13.3 & \textbf{PDEs} Laplace, heated plate &  & Project Draft 1                 \\ 
+13             &      & \textbf{Earlham Day} &  &  &   Midterm 2               \\ 
+13             &      & \textbf{Project Workday} &  & 12 &   Midterm 2               \\ \hline  
+14             &    & 13.4 & Wave Equation, Vibrating String &  & Project Draft 2                 \\ 
+14             &       & \textbf{Project Workday} &  & 13 &                 \\ \hline 
+15             &        &13.5, 13.6 & Steady state temp in cylinder, circular membrane &  &                  \\ 
+15             &        & 13.6, 13.7 & circular membrane, sphere, diffusion & 14 &                 \\ \hline \hline
+              &       & Final Exam & As per EC schedule. Take-home final, in-person presentations.  &                      &                   \\ 
+\end{tabular}
+\end{table}
+% Look at older syllabi to see what has been removed here. In particular, numerical integration and (longer ago) Noether's theorem.
+
+% I kind of can't believe we didn't get to
+% 13.8, 13.9 & Poisson's % equation, Integral transform solutions to PDE
+% and it breaks my heart.
+
+% \begin{tabular}{p{1cm}|p{2cm}|p{2cm}|p{0.25\linewidth}|p{2cm}|p{1cm}|p{1cm}}
+
+\newpage
+
+\noindent \textbf{Major Topics:} 
+
+\begin{center} \begin{minipage}{5in}
+\begin{flushleft}
+%Infinite Series \dotfill 3 days \\ % -1
+Power Series \\
+Computational Methods \\
+Complex Numbers \\
+Series Solution of Second Order Linear Equations \\
+Vector Analysis\\
+Fourier Series and Transforms \\
+Laplace Transforms \\
+Dirac Delta Functions \\
+%Numerical Integration \dotfill 3 days \\ % +3
+Partial Differential Equations \\
+Bessel Functions \\
+Numerical integration
+\end{flushleft}
+\end{minipage}
+\end{center}
+\vskip.1in
+\begin{description}
+  \item[Recommended Textbooks] \hfill \\
+    %     \textbf{Boyce and DiPrima, Elementary Differential Equations and BVPs}
+    %     This was the differential equations book last year. We'll either use
+    %     parts of it or refer to your current book.
+        \textbf{Boyce and DiPrima, Elementary Differential Equations and BVPs}
+        This was the differential equations book last semester. It's an
+        excellent reference for PDEs later in the term.\\
+        \textbf{The Feynman Lectures on Physics, Volume II}
+        This has some very nice explanations of the vector calculus concepts
+        that we'll be covering, taken from a physicist's perspective. This
+        part of Feynman is also extremely conversational and readable. You can read the whole thing online with beautiful typesetting at
+        http://www.feynmanlectures.info/ \\
+        \textbf{Gelfand and Fomin, Calculus of Variations}
+        The best introduction I know of to calculus of variations. It's an
+        \$11 Dover paperback. \\
+        \textbf{Emmy Noether's Wonderful Theorem} by Dwight E. Neuenschwander
+        will be the basis for our discussion of Noether's Theorem, if we cover
+        Noether's theorem. This book
+        is really well written, and goes much farther than we'll have time
+        for. \\
+        \textbf{Kusse and Westwig, Mathematical Physics}
+        This text is extremely well written. It doesn't have quite the right
+        focus for this particular class. \\ 
+        \textbf{Arfken and Weber, Mathematical Methods for Physicists}
+        This encyclopedic volume makes for a good reference, but is a bit too
+        dry to learn from in this course. \\ 
+        \textbf{Schey, div grad curl and all that}
+        This is an extremely conversational introduction to/refresher on vector calculus \\
+
+  \item[Communication:] My preferred mode of communication is email. I
+        will check my email multiple times per day during the work
+        week. If you have sent me an email and have not heard back
+        from me within 24 hours (excluding weekends), you should email
+        me again or drop by my office to ask your question in
+        person. I cannot guarantee that I will regularly check my
+        email on evenings or on weekends. 
+  
+        I expect that you will check your Earlham email at least once per
+        day. That is, 24 hours after sending an email to the class, it
+        is my expectation that all of you will have read that
+        email. Emailed assignments, due dates, policy changes, and
+        other course information carry the same weight as information
+        contained in the syllabus. 
+
+        Information relevant to the course will also be posted to the Moodle
+        page. You are responsible for checking Moodle at the same
+        frequency and with the same conditions applied to email
+        communication.
+        \newpage
+        
+  \item[Workload Expectations:] The expectation is that you will spend
+        2-3 hours outside class for every hour in class. So, for this
+        three-credit class, you can expect to spend roughly 6-9 hours
+        per week on reading, homework and exams. \textbf{If you find
+        yourself spending significantly more (or less) than this,
+        please let me know ASAP! That's an instructor-error that I can
+        easily fix.}
+        
+  \item[Contacting me about sensitive issues:] What if you have
+        something you want to talk about, but don't feel comfortable
+        doing so in a public (or non-anonymous) space? This often
+        comes up with issues of racism, sexism, and other kinds of
+        discrimination. It can come up with issues that relate to my
+        behavior, the behavior of your classmates, or the world in
+        general. Please feel {\it encouraged} to use either the
+        anonymous forum on Moodle (I can't see who wrote something in
+        the anonymous Moodle forum, though I {\it can} see who writes
+        anonymous Piazza comments), or to leave a written note under
+        my door. If you want to write a note, you may want to type it
+        up and print it out so that your handwriting is further
+        anonymized. Of course, if you feel comfortable and safe doing
+        so, you are also encouraged to talk publicly or
+        non-anonymously about these things! 
+
+        If you are not comfortable with any of these options, you are
+        encouraged to contact the Vice President for Student Life,
+        Bonita Washington-Lacey (\url{mailto:washibo@earlham.edu}).
+
+  \item[Academic Enrichment Center (tutoring, study help):] The
+        Academic Enrichment Center (AEC) provides assistance with
+        study habits and skills as well as a peer tutoring
+        service. The AEC is staffed by trained peer tutors for either
+        pre-arranged group tutoring sessions (provided for many math,
+        science and social science courses) or one-on-one tutoring
+        sessions for other courses. Peer tutoring is a free service
+        offered to all Earlham students. While we typically do not
+        have tutors assigned to this class, we can definitely find
+        one-on-one tutors for you at your request! Please visit
+        \url{https://earlham.edu/academics/academic-support-and-special-programs/academic-enrichment-center} 
+        for more information.
+
+  \item[Diversity Statement:] I can hardly overstate how much inclusion,
+        equity and diversity considerations have shaped my entire thinking
+        around teaching and practicing physics. It affects everything from the
+        way that physics is framed historically to the way that it is
+        typically taught in your classrooms. My main goal is to create an
+        environment that tells all of us that we can do physics; that invites
+        people into physics who have never been invited, or who have been
+        explicitly included. In the American physics context, these issues are
+        most commonly framed in terms of gender, race, and the typical
+        colonial framing of a physics curriculum. In most of our
+        introductory classes, we have a ``Non-Newtonian Physicist''
+        assignment that focuses specifically on decolonising an
+        introductory physics curriculum. In this class, you can choose
+        whether to do this as a separate assignment, or whether to
+        integrate into your independent project.
+
+        Physics cannot be divorced from the world in which we study it. I
+        expect that we will recognize that in this class, and I expect
+        that we will create an inclusive and welcoming
+        environment. More specifically, I expect that we will strive
+        \textit{not} to create an environment that excludes
+        people. This is hard work. We will get things wrong. You will
+        get things wrong. \textit{I} will get things wrong. Especially
+        when I get things wrong, I encourage you to refer to the
+        resources in the previous section of the syllabus (direct
+        comments, anonymous Moodle comments, anonymous comments under
+        my door, and comments to Bonita).
+
+        \newpage
+
+  \item[Grading Policy and Late Policy:]
+        Your grade in this class will be determined by a weighted
+        combination of your scores from multiple categories. Within
+        each category, each assignment is weighted equally. It is
+        extremely hard to catch up on late work in normal times
+        (usually things are late because students are busy, and people
+        don't tend to get less busy!). This is especially true in a
+        pandemic. So, I will drop a roughly a week worth of your
+        lowest grades from most categories. If you have to turn things
+        in late, my strong suggestion is that you prioritize getting
+        your schedule back under control. Feel free to simply
+        \textit{not do} things that will not be graded. Especially if
+        it helps you keep the rest of your life under control.
+
+        Because things can be even harder to schedule during a
+        pandemic, I'm adding a second policy this year: a late pass
+        policy that follows my policy from last year:
+
+        All students start the term with 5 free late
+        passes. You can spend a late pass to extend the deadline of a
+        single assignment to the following class period without any
+        penalty to your score. Late passes cannot be applied to
+        quizzes, or exams, but will work for
+        every other type of assignment. Once you have spent your 5
+        free late passes, you can request additional extensions, but
+        they come with a penalty to your score. For the 6th late pass,
+        I will deduct 10\% of your points on that assignment; for the
+        7th late pass, I will deduct 20\% of your points on that
+        assignment; and so on.
+        
+        Late passes are not automatic. You must always email me to let me know
+        that you plan to use a late pass on a given assignment. Once
+        you declare to me that you are spending a  late pass on an
+        assignment, that late pass is spent whether or not you follow
+        through and actually turn in the assignment by the modified
+        due date.
+
+\setlength{\arrayrulewidth}{1mm}
+\setlength{\tabcolsep}{8pt}
+%\renewcommand{\arraystretch}{2.5}
+{\rowcolors{2}{green!80!yellow!50}{green!70!yellow!40}
+\begin{table}[H]
+%\caption{Grading Breakdown}
+\label{tab:overall-grade-weights-table}
+\begin{tabular}{llll}
+\hline
+\textbf{Assignment}                                              & \textbf{Number} & \textbf{Drop} & \textbf{Weight} \\ \hline
+\textbf{Attendance/preparation/participation (including Piazza)} & 41     & 3    & 10     \\
+\textbf{Homework }                                         & 14     & 1    & 33     \\
+\textbf{Non-Newtonian Physicist }                          & 1      & 0    & 3     \\
+\textbf{Mini-midterm (open-book) }                                        & 1      & 0    & 5     \\
+\textbf{Two midterms, equally-weighted }                                    & 2      & 0    & 20     \\
+\textbf{Final exam }                                              & 1      & 0    & 14     \\
+\textbf{Independent Project }                                    & 1      & 0    & 15     \\ \hline 
+\end{tabular}
+\end{table}
+        }
+
+        \newpage
+        Final grades will be calculated according to the following
+        scale, although individual quiz and exam scores may be curved.
+
+        % Please add the following required packages to your document preamble:
+% \usepackage{booktabs}
+\setlength{\arrayrulewidth}{1mm}
+\setlength{\tabcolsep}{8pt}
+%\renewcommand{\arraystretch}{2.5}
+{\rowcolors{2}{green!80!yellow!50}{green!70!yellow!40}
+\begin{table}[H]
+%\caption{Grading Breakdown}
+\label{tab:overall-grade-cutoffs-table}
+\begin{tabular}{ll}
+\hline
+ \textbf{Grade} & \textbf{Range}       \\ \hline
+A+    & 99.1-100\%  \\
+A     & 93.0-99.0\% \\
+A-    & 90.0-92.9\% \\
+B+    & 87.0-89.9\% \\
+B     & 83.0-86.9\% \\
+B-    & 80.0-82.3\% \\
+C+    & 77.0-79.9\% \\
+C     & 73.0-76.9\% \\
+C-    & 70.0-72.9\% \\
+D+    & 67.0-69.9\% \\
+D     & 63.0-66.9\% \\
+D-    & 60.0-62.9\% \\
+F     & 0.0-59.9\% 
+\end{tabular}
+\end{table}
+        }
+        
+
+  \item[Standard Grading Rubric:]
+        Several of the problems assigned in this class are
+        quite challenging. Others are just rote computation. For the more
+        challenging problems, my goal is to have you make the strongest
+        possible effort towards \textbf{understanding} the solution. Thus, if
+        you cannot fully solve the problem, say whatever you can about the way
+        in which a solution would proceed from where you stop; say whatever
+        you can about the qualitative behavior of a solution; say whatever you
+        can about the physical meaning of the solution. 
+
+        Homework problems will be graded on roughly the same scale as used in
+        Physics 125 and 235:
+        % Please add the following required packages to your document preamble:
+% \usepackage{booktabs}
+\setlength{\arrayrulewidth}{1mm}
+\setlength{\tabcolsep}{8pt}
+%\renewcommand{\arraystretch}{2.5}
+{\rowcolors{2}{green!80!yellow!50}{green!70!yellow!40}
+\begin{table}[H]
+%\caption{Grading Breakdown}
+\label{tab:standard-grading-rubric-table}
+\begin{tabular}{ll}
+\hline
+ \textbf{Grade} & \textbf{Explanation}       \\ \hline
+  5 & Solution is complete and well-written\\
+  4 & Solution is missing minor parts or some important explanations\\
+  3 & Solution is missing major parts and/or has few if any explanations\\
+  2 & At least one major portion of the problem correct\\
+  1 & Very little coherent initial effort was expended\\
+  0 & No initial solution was submitted\\
+\end{tabular}
+\end{table}
+        }
+
+  \item[Academic Accommodations:] 
+        Students with a documented disability (e.g., physical,
+        learning, psychiatric, visual, hearing, etc.) who need to
+        arrange reasonable classroom accommodations must request
+        accommodation memos from the Academic Enrichment Center(main
+        floor of Lilly Library) and contact their  instructors each
+        semester. For greater success, students are strongly
+        encouraged to visit the Academic Enrichment Center within the
+        first two weeks of each semester to begin the process.
+        {\small
+        \url{https://www.earlham.edu/academic-enrichment-center/disability-services}}
+
+
+        We at Earlham appreciate the contribution that athletes make
+        to the vitality of our community. If you must miss class due
+        to a competition, notify me well in advance so we can make
+        arrangements for you to make up the work. If you do not notify
+        me in advance, there is every chance that I may not be able to
+        make special arrangements.
+
+  \item[Attendance/preparation/participation (including Piazza):]
+        Especially in a pandemic, attendance is (1) critical (2)
+        sometimes hard to sustain. During class, we will cover
+        material via lecture, and we will work on problems together and via groups in breakout rooms. This
+        problem solving is a critical component of the class, and it is the main reason
+        attendance is required. We all know that circumstances
+        sometimes make it hard or impossible to attend, so I will drop
+        your three lowest attendance and participation grades.
+
+        It is very important that students study the appropriate text
+        assignments before coming to class and that they be prepared either to
+        ask questions or to discuss questions related to the assigned
+        material.  The subject matter of this course is sufficiently complex
+        that it is neither desirable nor possible to cover all relevant
+        details in class.  The primary value of lectures and class discussions
+        in this course is to explain and illustrate points which students find
+        difficult or obscure.  It is essential, therefore, that students put
+        in the advance work required to identify such points; the instructor
+        cannot anticipate all of them.  It is hoped that all of us will work
+        together to produce a class atmosphere which is conducive to lively
+        and interesting discussions of the material.
+        Readings are
+        assigned for every class period. By \textbf{midnight before each
+        class period, you must comment on Piazza}. Your comment can be
+        in one of the three following categories: (1) something
+        interesting from the reading, (2) something confusing from the
+        reading, (3) an answer to someone else’s question. In order to
+        make sure we have a good, constructive discussion atmosphere,
+        please note that disrespectful comments will receive no credit
+        and may be removed. You can post anonymously; instructors can
+        see who made each post, but students cannot.
+        \textbf{The piazza comments count for 5\% of your grade.}
+        
+  \item[Exams:] There will be three midterms and a final. The first
+        midterm (the ``mini-midterm'') will be open-book and
+        untimed. The other tests will be timed and closed-book. All
+        will be self-scheduled take-home exams. The final will be
+        cumulative, and we will have a clear discussion and review of topics before
+        the exam. We will use the scheduled final exam time for
+        project presentations.
+        If you have a time conflict, you must reach out to me in
+        advance of the date of the final.
+
+  \item[Homework:] This is basically a course in
+        problem-solving techniques.  The most common and the most damaging
+        mistake a student can make in such a course is to yield to the
+        temptation to try and master the material by reading the text and
+        listening to the lectures while working a minimum of problems.  While
+        reading and listening can give you valuable new ideas, problem-solving
+        skills are only efficiently developed by solving as many problems as
+        possible.  For most students the understanding and knowledge gained
+        from this course will be in direct proportion to the number of
+        problems which they successfully complete.  The best approach is to
+        maximize the percentage of your study time devoted to a disciplined
+        effort to solve problems.
+        
+        Homework will be assigned each approximately once per week. As with
+        all Physics classes, you will find that your understanding is greatly
+        improved if you start the assignments early in the week, rather than
+        late in the week.
+        
+        \newpage
+  \item[Independent project:] The primary goals of this course are
+        involve developing a level of mathematical sophistication that
+        will allow you to confidently and competently explore further
+        material outside of a lecture setting. So, in order to make
+        sure we're walking the walk, you'll each pick either an
+        interesting problem to model or an interesting technique to
+        learn. You'll write a short paper and present the results to
+        the class. You'll be expected to start on this halfway through
+        the semester, and we'll discuss it in more detail at that
+        point. Examples might include 
+
+        \begin{itemize}
+          \item The Fast Fourier Transform (FFT)
+          \item Physical representations of Fourier Transforms, including circuits and optics
+          \item The discrete Fourier Transform, including application to time series data, consideration of how many useful samples you have in a dataset in Fourier space, etc.
+          \item Struve functions
+          \item Complex analysis including itegrating around poles, Cauchy
+                Integral, Residue theorem (\textbf{this is a hard topic to nail
+                down in terms of applications; you must carefully verify your
+                proposal with me first! })
+          \item Tensors, covariant vs. contravariant, pseudo-vectors, index notation
+          \item Black-Scholes Theorem (economics)
+          \item Applications of Noether's Theorem to economic systems
+          \item Modern techniques such as the immersed-boundary method
+          \item Coding and examination of more complex numerical integrators
+          \item Green-Kubo relations and the Fluctuation Theorem
+          \item Wavelet Transforms
+          \item Real world applications of any of the techniques studied in this course
+          \item Numerical integration (e.g. write your own RK4 and Velocity 
+                Verlet, compare the two for some real application)
+          \item Noether's Theorem
+          \item The physics of a golf swing
+          \item Building a better baseball lineup with Monte Carlo Methods
+          \item Biomedical examples of Laplace transforms
+          \item Interesting topic of your choice! 
+        \end{itemize}
+
+\textbf{Note}: If there is sufficient demand, it is likely possible to include at least one of the above topics in the main body of the course itself.
+        
+    \item[Academic Integrity:] {\small
+        \url{http://www.earlham.edu/curriculum-guide/academic-integrity/}}
+        As with all Earlham courses, this course is covered by the
+        academic integrity policy. Much of the work in this class is
+        group-based, but not all of it. Specific expectations are
+        discussed in class and in this syllabus, but: daily problems
+        should be attempted individually first. You may then 
+        ask for guidance in class, in the forums, and from your
+        peers. Quizzes and exams must be done individually.
+
+  \item[Sexual Harassment and Title IX] Federal law, Title IX, and
+        Earlham College policy prohibits discrimination, harassment,
+        and violence based on sex and gender (including sexual
+        harassment, sexual assault, domestic / dating violence,
+        stalking, sexual exploitation, and retaliation). If you or
+        someone you know has been harassed or assaulted, you can
+        receive confidential support from a number of resources on and
+        off campus, listed here:
+        \url{http://earlham.edu/counseling-services/confidential-resources-for-survivors-of-sexual-violence/}.
+
+        Alleged 
+        violations can be reported non-confidentially to the Title IX
+        Coordinator, Jenelle Job, at ext. 1346. Reports to law
+        enforcement can be made to Earlham Public Safety at ext. 1400,
+        or to the Richmond Police Department at 765-983-7247 (for
+        non-emergency calls). I will seek to keep information you
+        share with me private to the greatest extent possible, but as
+        a professor I have mandatory reporting responsibilities
+        regarding sexual misconduct and crimes I learn about to help
+        make our campus a safer place for all. 
+        
+\end{description}
+
+
+
+\end{document}

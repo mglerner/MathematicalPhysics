@@ -1,0 +1,101 @@
+\documentclass[12pt]{article}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{macros}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pagestyle{empty}
+\begin{document}
+\input{header}
+\noindent\textbf{Assignment 3, Due Tuesday Feb 20}
+\vskip.15in
+
+As you know, there's an exam coming up covering complex numbers. I
+won't cover logs on the exam, but I will cover things like complex
+powers, geometric representations, and trig functions.
+
+\section{A bit of programming - spend 10 minutes on this before Friday
+  the 16th}
+
+Start from the Google Colab notebook we developed in class
+
+\url{https://colab.research.google.com/drive/14KRuTQ0W3lphr3ycC7qjFoi5m-CB0Bci#scrollTo=Cl0SPSuivAOv}
+
+make a new cell, and define your own function called ``airy2''. That
+function should be the second non-trivial (i.e. not always zero)
+solution to Airy's equation.
+
+\section{Solving differential equations}
+
+Using a table like the one in Boas \S 12.2, solve problem 12.1.1
+
+\section{Looking at the Legendre equation: part 1}
+
+In this assignment, as in many of the future assignments, we will
+investigate a particular topic in depth, rather than solving several
+separate problems. This week, we focus on the Legendre polynomials,
+which have broad applicability in mathematical physics, especially in
+the modeling of spherically symmetric systems.
+
+The text of the following problems is taken (with some small changes)
+from Boyce and DiPrima, Chapter 5, section 3.
+
+The following problems deal with the Legendre equation:
+
+\begin{equation}
+  \label{L}
+  (1-x^2)y'' - 2xy' + \alpha(\alpha+1)y = 0
+\end{equation}
+
+Following the convention of choosing a fundamental set of solutions such that
+
+\begin{align*}
+  y_1(x) &= 1 + b_2(x-x_0)^2 + ... \\
+  y_2(x) &= (x-x_0) + c_2 (x-x_0)^3 + ... \\
+  b_2+c_2 &= a_2
+\end{align*}
+
+(Note that these series have already included the fact that one will
+be even and one will be odd, a fact that you'll show below.)
+
+Two solutions of the Legendre equation for $|x| < 1$ are
+
+\begin{align*}
+  y_1(x) &= 1 - \frac{\alpha(\alpha+1)}{2!}x^2 + \frac{\alpha(\alpha-2)(\alpha+1)(\alpha+3)}{4!}x^4 \\
+   &+ \sum_{m=3}^{\infty}(-1)^m\frac{\alpha\cdot\cdot\cdot(\alpha-2m+2)(\alpha+1)\cdot\cdot\cdot(\alpha+2m-1)}{(2m)!}x^{2m}, \\
+  y_2(x) &= x - \frac{(\alpha - 1)(\alpha + 2)}{3!}x^3 + \frac{(\alpha-1)(\alpha-3)(\alpha+2)(\alpha+4)}{5!}x^5 \\
+  &+ \sum_{m=3}^{\infty}\frac{(\alpha-1)\cdot\cdot\cdot(\alpha-2m+1)(\alpha+2)\cdot\cdot\cdot(\alpha+2m)}{(2m+1)!}x^{2m+1}
+\end{align*}
+
+\vskip.1in
+\textbf{Problem 1}
+Write out the first 4 terms for $y_1$ and $y_2$.
+
+\vskip.1in
+\textbf{Problem 2} Show that, if $\alpha$ is zero or a positive even
+integer $2n$, the series solution $y_1$ reduces to a polynomial of
+degree $2n$ containing only even powers of $x$. Find the polynomials
+corresponding to $\alpha=0,2,4$. Similarly, show that if $\alpha$ is a
+positive odd integer $2n+1$, the series solution $y_2$ reduces to a
+polynomial of degree $2n+1$ containing only odd powers of $x$. Find
+the polynomials corresponding to $\alpha=1,3,5$. 
+
+\vskip.1in \textbf{Problem 3} The Legendre polynomial $P_n(x)$ is
+defined as the polynomial solution of the Legendre equation with
+$\alpha=n$ that also satisfies the condition
+$P_n(1)=1$.\\  
+
+\textbf{(a)} Using the results of Problem 2, find the
+first five Legendre polynomials, $P_0(x),...,P_5(x)$. \\  
+
+\textbf{(b)}
+Plot the graphs of $P_0(x),...,P_5(x)$ in the range for which we've
+demonstrated convergence, $|x|\le1$. The end goal is to do this in a
+Python notebook. That may be too much programming, though. If the
+Python is a barrier, you can check your answers with
+Wolfram Alpha (e.g. go to wolframalpha.com and type 
+``plot 0.5*(3x\verb|^|2-1) from -1 to
+1'' in the box), or via Desmos. Then we can do the Python work in class.!\\
+
+\textbf{(c)} Find the zeros of $P_0(x),...,P_5(x)$.
+
+\end{document}

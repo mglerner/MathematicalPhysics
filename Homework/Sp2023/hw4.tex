@@ -1,0 +1,145 @@
+\documentclass[12pt]{article}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{macros}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pagestyle{empty}
+\begin{document}
+\input{header}
+\noindent\textbf{Assignment 4, Due as Friday Feb 24}
+\vskip.15in
+
+
+\section{Looking at the Legendre equation: part 2}
+
+\vskip.1in 
+\textbf{Problem 4} The Legendre polynomials play an important role in
+mathematical physics. For example, solving the potential equation
+(Laplace's equation) in spherical coordinates, we encounter the
+equation 
+
+
+\begin{equation*}
+  \dd{F(\phi)}{\phi} + \cot\phi\fd{F(\phi)}{\phi} + n(n+1)F(\phi) = 0,\qquad 0 < \phi < \pi
+\end{equation*}
+
+Show that the change of variables $x=\cos\phi$ leads to the Legendre
+equation with $\alpha=n$ for $y=f(x)=F(\cos^{-1}(x))$ 
+
+Hint: you may need to use the fact that
+
+
+\begin{equation*}
+  \sin(\arccos(x)) = \sqrt{1-x^2};\qquad \cot(\arccos(x)) = \frac{x}{\sqrt{1-x^2}}
+\end{equation*}
+
+\vskip.1in 
+\noindent\textbf{Problem 5} Show that the Legendre equation can also be written as
+
+\begin{equation*}
+  [(1-x^2)y']' = -\alpha(\alpha+1)y
+\end{equation*}
+
+It then follows that
+
+\begin{equation}
+  \label{e1}
+  [(1-x^2)P_n^{'}(x)]' = -n(n+1)P_n(x)
+\end{equation}
+and
+\begin{equation}
+  \label{e2}
+  [(1-x^2)P_m^{'}(x)]' = -m(m+1)P_m(x).
+\end{equation}
+By multiplying \eqref{e1} by $P_m(x)$ and \eqref{e2} by $P_n(x)$,
+\textbf{integrating by parts}, and then subtracting one equation from the
+other, show that
+
+
+\begin{equation}
+  \label{orth}
+  \int_{-1}^{1}P_n(x)P_m(x)dx = 0 \qquad \mathrm{if} \quad n \ne m
+\end{equation}
+
+This property \eqref{orth} of the Legendre polynomials is known as the
+orthogonality property. If $m=n$, it can be shown that the value of
+the integral in \eqref{orth} is $2/(2n+1)$. 
+
+\vskip.1in
+Given a polynomial $f$ of degree $n$, it is possible to express $f$ as a linear combination of $P_0,P_1,...,P_n$:
+
+\begin{equation}
+  \label{basis}
+  f(x) = \sum_{k=0}^n a_kP_k(x)
+\end{equation}
+
+Note that, since the $n+1$ polynomials $P_0,...,P_n$ are linearly
+independent, and the degree of $P_k$ is $k$, any polynomial of degree
+$n$ can be expressed as \eqref{basis}. \\ Using the result of Problem
+7, you can show that 
+
+
+\begin{equation*}
+  a_k=\frac{2k+1}{2}\int_{-1}^1f(x)P_k(x)dx
+\end{equation*}
+
+\textbf{but you don't have to! You're done!}
+
+
+\section{Boas \S7.2 Wave Review}
+Make sure you understand the following problems
+
+1, 6, 7, 17, 21.
+
+(You do not have to turn them in.)
+
+\section{Boas \S7.4 Average Value}
+%(Boas \S7.4, Problems \#3, 4, 10, 14) These should be relatively
+%fast. Making a quick sketch of the function will make some of
+%these trivial. 
+For your reference, these are Boas \S7.4 problems \#3, 4, 10 % and 14 
+\subsection{} 
+Find the average value of the function on the given interval. You may
+use equation 4.8 if it applies. It's well worth your time to make a
+quick sketch of the function, as you may be able to quickly see
+the average value. Especially when it's zero. If you find yourself
+spending more than 5 minutes on any one of these, please post to
+Piazza asking for hints, and then move on to the next one.
+
+\begin{equation}
+  \sin x + 2\sin 2x + 3\sin 3x \qquad \textrm{on} \quad (0,2\pi)
+\end{equation}
+
+\subsection{}
+\begin{equation}
+  1 - e^{-x} \qquad \textrm{on} \quad (0,1)
+\end{equation}
+
+\subsection{}
+\begin{equation}
+  \cos x \qquad \textrm{on} \quad (0,3\pi)
+\end{equation}
+
+%%\subsection{}
+%%Read through Problem 13. If the result doesn't seem obvious to you,
+%%you may prove it and I'll grade it for extra credit. Use the result of
+%%Problem 13 to evaluate the following integral without doing any calculation.
+%%\begin{equation}
+%%  \int_0^{4\pi/3}\sin^2\left(\frac{3x}{2}\right) dx
+%%\end{equation}
+
+
+\section{Boas \S7.5 Fourier Series}
+
+\subsection{}
+Problem \S7.5.9 (also graph the sum of the first four non-zero terms using Python in
+addition to solving)
+
+\subsection{}
+Problem 12.
+
+\subsection{}
+For extra credit, you may do problem 13.
+%% MGL: this includes hw5.tex
+
+\end{document}

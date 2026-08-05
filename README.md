@@ -2,6 +2,18 @@
 
 Course material from my mathematical physics class and related info
 
+## Smith College era (Fall 2026-)
+
+Taught 2012-2024 at Earlham College (Physics 360, Boas); from Fall 2026
+taught at Smith College as PHY 210 using Felder & Felder, _Mathematical
+Methods in Engineering and Physics_. Current-semester planning lives in
+`SyllabusAndFirstDay/2026/`. The topic directories below (Fourier, Laplace,
+Bessel, ...) are textbook-independent and carry over.
+
+Non-public materials (solutions, exams, grades, other professors' files)
+live in `private/`, a gitignored symlink to
+`~/Dropbox/__Smith/Classes/210-MathMethods/private/`.
+
 ## Prerequisites
 
 * Python materials
@@ -26,8 +38,7 @@ Course material from my mathematical physics class and related info
 
 Our notebook on convolutions may be found [here](http://nbviewer.ipython.org/github/mglerner/MathematicalPhysics/blob/master/Convolutions/Convolution%20Animations.ipynb)
 
-### Resources for Independent Projects 
-
+### Resources for Independent Projects
 
 ### Bayesian Estimation
 

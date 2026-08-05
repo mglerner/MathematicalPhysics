@@ -1,0 +1,62 @@
+%% Document setup for Syllabus and HW
+%% Related to termcal package
+
+% Note that it appears termcal calendars have to start on a Monday!
+
+\usepackage{termcal}
+% Examples from  https://sites.google.com/site/mattmastin/teaching/grsc-7700/latex-templates
+% and http://tex.stackexchange.com/questions/843/latex-classes-or-styles-for-schedules-and-or-calendars
+%%\renewcommand{\arraystretch}{2}
+
+
+% Few useful commands (our classes always meet either on Monday and Wednesday 
+% or on Tuesday and Thursday)
+
+\newcommand{\MWClass}{%
+\calday[Monday]{\classday} % Monday
+\skipday % Tuesday (no class)
+\calday[Wednesday]{\classday} % Wednesday
+\skipday % Thursday (no class)
+\skipday % Friday 
+\skipday\skipday % weekend (no class)
+}
+\newcommand{\MWFClass}{%
+\calday[Monday]{\classday} % Monday
+\skipday % Tuesday (no class)
+\calday[Wednesday]{\classday} % Wednesday
+\skipday % Thursday (no class)
+\calday[Friday]{\classday} % Friday 
+\skipday\skipday % weekend (no class)
+}
+
+\newcommand{\TRClass}{%
+\skipday % Monday (no class)
+\calday[Tuesday]{\classday} % Tuesday
+\skipday % Wednesday (no class)
+\calday[Thursday]{\classday} % Thursday
+\skipday % Friday 
+\skipday\skipday % weekend (no class)
+}
+
+\newcommand{\MThFClass}{%
+\calday[Monday]{\classday} % Monday
+\skipday % Tuesday (no class)
+\skipday % Wednesday (no class)
+\calday[Thursday]{\classday} % Thursday
+\calday[Friday]{\classday} % Friday
+\skipday\skipday % weekend (no class)
+}
+
+\newcommand{\Holiday}[2]{%
+\options{#1}{\noclassday}
+\caltext{#1}{#2}
+}
+
+\newcommand{\Assigned}[1]{
+\textbf{\underline{#1}}
+}
+
+
+% ***********************************************************
+% ********************** END HEADER *************************
+% ***********************************************************

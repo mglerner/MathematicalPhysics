@@ -53,3 +53,7 @@ nosetests.xml
 
 # Other packages
 JSAnimation
+
+# Symlink to Dropbox: solutions, exams, grades, other professors' materials.
+# Never commit; Dropbox is the backup.
+private

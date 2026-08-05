@@ -39,9 +39,11 @@ That gives 39 MWF meetings (before Mountain Day), vs. the previous prof's
   gives a different pattern (e.g. TTh), regenerate with new dates.
 - Quiz dates (Fri Oct 2, Fri Oct 23, Fri Nov 13) follow the previous prof's
   unit groupings but are my placement, not hers.
-- Grading skeleton in the xlsx "Grade Categories" sheet (attendance, 13 WHW
-  drop 1, 3 quizzes, final) is a placeholder mirroring the previous prof;
-  point values are invented and need real decisions.
+- Grading is point-based with a course total of exactly 1000 points
+  (enforced by an assertion in the generator). Current split — attendance
+  39 drop 3 @ 1 = 36; WHW 13 drop 1 @ 32 = 384; quizzes 3 @ 110 = 330;
+  final 250 — is my placeholder; the categories mirror the previous prof
+  but the point values need real decisions.
 
 ## Course machinery
 

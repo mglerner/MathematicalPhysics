@@ -173,12 +173,15 @@ def build(outpath):
     for cell in gc[1]:
         cell.font = header_font
         cell.fill = header_fill
+    # Course total must be exactly 1000 points.
     cats = [
         ("Attendance/participation", 39, 3, 1),
-        ("Written Homework (WHW)", 13, 1, 25),
-        ("Quizzes", 3, 0, 60),
-        ("Final exam", 1, 0, 100),
+        ("Written Homework (WHW)", 13, 1, 32),
+        ("Quizzes", 3, 0, 110),
+        ("Final exam", 1, 0, 250),
     ]
+    total = sum((num - drop) * pts for _, num, drop, pts in cats)
+    assert total == 1000, f"grade categories sum to {total}, not 1000"
     for i, (name, num, drop, pts) in enumerate(cats, start=2):
         gc.append([name, num, drop, pts, f"=(B{i}-C{i})*D{i}"])
     gc.append(["Total", None, None, None, f"=SUM(E2:E{1 + len(cats)})"])

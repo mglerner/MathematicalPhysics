@@ -12,10 +12,13 @@ professor used in Spring 2026 (source spreadsheet:
   P125 calendar (two side-by-side blocks; Week / Class / Date / Topics /
   Reading Due / HW Due / Exams). Import into Google Sheets
   (File > Import > Upload) and embed that sheet in Moodle.
-- `make_fall2026_calendar.py` — regenerates the xlsx. Edit the `SLOTS` /
-  `QUIZZES` tables and rerun:
+- `make_fall2026_calendar.py` — regenerates the xlsx. Edit the `CONTENT` /
+  `SPECIALS` / `cats` tables and rerun:
   `python make_fall2026_calendar.py "PHY210 F2026 Calendar.xlsx"`
   (the `courses/` uv venv has openpyxl; direnv activates it automatically).
+  **The script is the source of truth**: hand-edits to the xlsx get
+  clobbered on regeneration, so fold them into the script (as was done
+  with the 2026-08-11 grade-category edits).
 - `PHY210Syllabus.tex` — copy of the Earlham 2024 syllabus, **not yet
   adapted**; see the TODO block at the top for everything that must change.
 
@@ -26,24 +29,33 @@ professor used in Spring 2026 (source spreadsheet:
 - Autumn recess: Sat Oct 10 - Tue Oct 13 (kills Mon Oct 12).
 - Cromwell Day: Tue Nov 10 (no MWF impact).
 - Mountain Day: TBA by the president — one fall day's classes cancel;
-  the schedule will need a live shuffle when it lands.
+  the Fri Oct 9 flex day is the designated absorber (shuffle into it).
 - Thanksgiving: Wed Nov 25 - Sun Nov 29 (kills Wed Nov 25, Fri Nov 27).
 - Reading period Dec 16-18; exams Sat Dec 19 - Tue Dec 22.
 
-That gives 39 MWF meetings (before Mountain Day), vs. the previous prof's
-39 spring slots, so the sequence maps over almost one-to-one.
+That gives 39 MWF meetings, vs. the previous prof's 39 spring slots, so
+her calendar maps over exactly one-to-one: 35 content slots (including
+her Jupyter-ODE day and practice/review day) + 3 dedicated in-class quiz
+days + 1 flex day where her week-5 snow day fell. **The calendar is
+full** — adding a new topic (Python days, FFTs, etc.) means converting
+the flex day or the practice/review day, or displacing content. An
+earlier draft padded the tail with invented days ("Python: FFTs and real
+data", extra review days); those were mine, not hers, and were removed
+2026-08-11 in favor of the faithful mapping.
 
 ## Assumptions to verify
 
 - **MWF meeting pattern** — the whole calendar assumes it. If the registrar
   gives a different pattern (e.g. TTh), regenerate with new dates.
-- Quiz dates (Fri Oct 2, Fri Oct 23, Fri Nov 13) follow the previous prof's
-  unit groupings but are my placement, not hers.
-- Grading is point-based with a course total of exactly 1000 points
-  (enforced by an assertion in the generator). Current split — attendance
-  39 drop 3 @ 1 = 36; WHW 13 drop 1 @ 32 = 384; quizzes 3 @ 110 = 330;
-  final 250 — is my placeholder; the categories mirror the previous prof
-  but the point values need real decisions.
+- Quizzes are **dedicated in-class Friday days** (matching the previous
+  prof): Sep 25 (Ch 1), Oct 23 (Ch 10, 3, 2), Nov 20 (Ch 6, 5). The
+  coverage groupings are hers; the exact dates are my placement at the
+  matching points in the fall sequence. WHW is still due on quiz Fridays
+  (she did the same).
+- Grading (decided 2026-08-11, total exactly 1000, asserted in the
+  generator): attendance 39 drop 4 @ 1 = 35; WHW 13 drop 1 @ 25 = 300;
+  Non-Newtonian Scientist = one HW = 25; quizzes 3 @ 150 = 450;
+  final 190. This needs to go into the syllabus when it's adapted.
 
 ## Course machinery
 

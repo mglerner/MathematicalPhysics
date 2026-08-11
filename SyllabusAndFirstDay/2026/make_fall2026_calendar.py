@@ -38,7 +38,20 @@ def class_days():
 # (topic, reading_due) per teaching slot, in the previous prof's order.
 # Readings are the Felder & Felder sections being covered; the "Reading Due"
 # column mirrors the P125 calendar's read-before-class convention.
-SLOTS = [
+#
+# Quizzes are dedicated in-class days (as on the previous prof's calendar),
+# pinned to Friday slot indices; the flex day sits where her Spring '26
+# snow day fell (week 5) and absorbs snow / Mountain Day / drift.
+# 35 content slots + 3 quiz days + 1 flex day = 39 MWF meetings, exactly
+# matching her 39 spring slots. The calendar is FULL: adding a new topic
+# means converting the flex or practice day, or displacing content.
+SPECIALS = {
+    7: ("Quiz 1 (Ch 1)", True),                          # Fri Sep 25
+    13: ("Flex day (snow / Mountain Day buffer)", False),  # Fri Oct 9
+    18: ("Quiz 2 (Ch 10, 3, 2)", True),                  # Fri Oct 23
+    30: ("Quiz 3 (Ch 6, 5)", True),                      # Fri Nov 20
+}
+CONTENT = [
     ("Syllabus; SHO and overview of differential equations", "1.1-1.2"),
     ("Generating ODEs from physical situations", "1.1-1.2"),
     ("Arbitrary constants; initial conditions", "1.3"),
@@ -74,24 +87,16 @@ SLOTS = [
     ("Fourier series: different periods, finite domains", "9.4"),
     ("Fourier series with complex exponentials", "9.5"),
     ("Intro to PDEs: the heat equation", "11.1-11.2"),
-    ("PDEs continued; separation of variables preview", "11.2"),
-    ("Python: FFTs and real data", ""),
-    ("Review / flex day", ""),
-    ("Review and wrap-up", ""),
 ]
-
-# in-class quizzes on Fridays at unit boundaries, mirroring the previous
-# prof's coverage groupings; HW due each Friday.
-QUIZZES = {
-    10: "Quiz 1 (Ch 1 + 10)",        # slot index (0-based): Fri Oct 2
-    18: "Quiz 2 (Ch 10, 3, 2)",      # Fri Oct 23
-    27: "Quiz 3 (Ch 6, 5)",          # Fri Nov 13
-}
 
 def build(outpath):
     days = list(class_days())
     n = len(days)
-    slots = SLOTS[:n]
+    assert len(CONTENT) + len(SPECIALS) == n, (
+        f"{len(CONTENT)} content + {len(SPECIALS)} specials "
+        f"for {n} class meetings")
+    assert all(days[i].weekday() == 4 for i in SPECIALS), (
+        "quiz/flex day not on a Friday")
 
     # rows: one per class meeting; insert break markers
     rows = []          # (week, class_no, date, topic, reading, hw, exam)
@@ -99,9 +104,9 @@ def build(outpath):
     last_week = None
     class_no = 0
     hw_no = 0
-    slot_i = 0
+    content_i = 0
     breaks_seen = set()
-    for d in days:
+    for slot_i, d in enumerate(days):
         iso_week = d.isocalendar()[1]
         if iso_week != last_week:
             week_no += 1
@@ -111,15 +116,19 @@ def build(outpath):
             if bd not in breaks_seen and bd < d:
                 breaks_seen.add(bd)
                 rows.append((None, None, bd, f"No class - {why}", "", "", ""))
-        topic, reading = slots[slot_i] if slot_i < len(slots) else ("", "")
-        exam = QUIZZES.get(slot_i, "")
+        if slot_i in SPECIALS:
+            label, is_quiz = SPECIALS[slot_i]
+            topic, reading, exam = label, "", (label if is_quiz else "")
+        else:
+            topic, reading = CONTENT[content_i]
+            exam = ""
+            content_i += 1
         hw = ""
-        if d.weekday() == 4 and slot_i > 0:  # Fridays
-            hw_no += 1
+        if d.weekday() == 4 and slot_i > 0:  # Fridays (incl. quiz days,
+            hw_no += 1                       # matching the previous prof)
             hw = f"WHW{hw_no:02d}"
         class_no += 1
         rows.append((week_no, class_no, d, topic, reading, hw, exam))
-        slot_i += 1
     for bd, why in NO_CLASS.items():
         if bd not in breaks_seen:
             rows.append((None, None, bd, f"No class - {why}", "", "", ""))
@@ -173,17 +182,20 @@ def build(outpath):
     for cell in gc[1]:
         cell.font = header_font
         cell.fill = header_fill
-    # Course total must be exactly 1000 points.
+    # Michael's decided scheme (2026-08-11). Course total must be exactly
+    # 1000 points. pts_cell, when set, is the formula written to the sheet
+    # (Non-Newtonian Scientist is worth one homework, by reference).
     cats = [
-        ("Attendance/participation", 39, 3, 1),
-        ("Written Homework (WHW)", 13, 1, 32),
-        ("Quizzes", 3, 0, 110),
-        ("Final exam", 1, 0, 250),
+        ("Attendance/participation", 39, 4, 1, None),
+        ("Written Homework (WHW)", 13, 1, 25, None),
+        ("Non-Newtonian Scientist", 1, 0, 25, "=D3"),
+        ("Quizzes", 3, 0, 150, None),
+        ("Final exam", 1, 0, 190, None),
     ]
-    total = sum((num - drop) * pts for _, num, drop, pts in cats)
+    total = sum((num - drop) * pts for _, num, drop, pts, _ in cats)
     assert total == 1000, f"grade categories sum to {total}, not 1000"
-    for i, (name, num, drop, pts) in enumerate(cats, start=2):
-        gc.append([name, num, drop, pts, f"=(B{i}-C{i})*D{i}"])
+    for i, (name, num, drop, pts, pts_cell) in enumerate(cats, start=2):
+        gc.append([name, num, drop, pts_cell or pts, f"=(B{i}-C{i})*D{i}"])
     gc.append(["Total", None, None, None, f"=SUM(E2:E{1 + len(cats)})"])
     for j, w in enumerate([28, 9, 7, 12, 13]):
         gc.column_dimensions[openpyxl.utils.get_column_letter(j + 1)].width = w

@@ -14,6 +14,9 @@ ipywidgets
 # Emacs backup files
 *~
 
+# Office lock files
+~$*
+
 # C extensions
 *.so
 

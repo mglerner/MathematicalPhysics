@@ -19,12 +19,15 @@
    (TeX-add-symbols
     '("todonote" 1))
    (LaTeX-add-labels
+    "fig:coupled"
     "sec:prereqs"
     "sec:calendar"
+    "fig:heat"
     "sec:machinery"
     "sec:nonnewtonian"
     "sec:ai"
     "sec:policies"
+    "sec:advice"
     "sec:resources"))
  :latex)
 

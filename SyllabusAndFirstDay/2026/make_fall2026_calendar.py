@@ -74,7 +74,9 @@ CONTENT = [
     ("Eigenvalues and eigenvectors, continued", "6.8"),
     ("The two-coupled-oscillator problem", "6.9"),
     ("Setting up 1D and 2D integrals", "5.1-5.2"),
-    ("Cartesian 2D integrals; polar coordinates", "5.3-5.4"),
+    # Polar double integrals are Felder 5.6, not 5.3-5.4 (verified against the
+    # textbook TOC 2026-08-17; the S26 grid this row was copied from mislabels it).
+    ("Cartesian 2D integrals; polar coordinates", "5.3-5.4, 5.6"),
     ("Line integrals and surface integrals", "5.8, 5.10"),
     ("Practice / review day", ""),
     ("Vector and scalar fields; the gradient", "8.1-8.4"),

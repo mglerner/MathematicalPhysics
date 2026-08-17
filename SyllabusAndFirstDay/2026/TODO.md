@@ -35,17 +35,16 @@ which has the full materials map, item banks, and privacy-cleanup list).
 - Math pretest ported to LaTeX (`Pretest/`); due-date placeholder
   Fri Sep 18 pending final calendar.
 
-## Post-calendar build task (next big work item)
+## Post-calendar build task -- DONE 2026-08-17
 
-Re-cut Gillian's WHW problem lists (transcribed; WHW 09 still to
-capture) to match OUR calendar: 13 WHWs keyed to the new week
-boundaries, Warm-up/Essentials/Depth tiers preserved, covering
-Mon+Wed material with Friday's topic rolling forward; add problems for
-the units S26 lacked (Ch 5 coords day, Feynman div/curl days, 9.6,
-11.3-11.4 -- sources: Gary's 18F assigned-problem xlsx, F22 In Class
-Problems tree, the S23 token-earning lists). AND assign a PCCI to
-every eligible class day (mostly the section's Discovery Exercise;
-Gary's 22S/18F schedules map DE -> day; his 15F timing log sizes them).
+WHW/PCCI re-cut encoded in the generator: 13 tiered WHW lists on a new
+"WHW Problem Lists" xlsx tab (re-cut from Gillian's transcribed forms
++ attested supplements), and 35 PCCIs inline in a new Schedule-tab
+column (mostly Discovery Exercises; all numbers attested). Review
+items: WHW05 is heavy (10.11 + all of Ch 3 -- deliberate, tiers carry
+it); WHW04's Depth and the day-1/Python-day/Feynman-day PCCIs are
+authored tasks, not book problems; the PDE days (Dec 11/14) have no
+WHW after them -- the final's practice set covers that material.
 
 ## Syllabus-writing session
 

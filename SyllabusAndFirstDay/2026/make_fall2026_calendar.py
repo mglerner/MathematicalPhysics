@@ -175,6 +175,7 @@ PCCI = {
 # material S26's forms did not (coordinates day, the Feynman div/curl
 # days, 9.6, 11.3), problems come from Gary Felder's assigned lists and
 # Casey Berger's F22 in-class sets -- every number is attested.
+# Problems assigned as a PCCI are NOT repeated in the WHW lists.
 # Tuples: (whw, covers, warmup, essentials, depth).
 WHWS = [
     (1, "Intro to ODEs (1.1-1.2)",
@@ -188,12 +189,12 @@ WHWS = [
      "Separation of variables: 1.103",
      "Arbitrary constants: 1.60. Separation of variables: 1.105"),
     (3, "Guess and check, superposition (1.6); linear operators (10.2)",
-     "Guess and check: 1.108, 1.109. Sec 10.2: 10.1, 10.3, 10.5, 10.8",
+     "Guess and check: 1.108, 1.109",
      "Guess and check: 1.111, 1.113, 1.117, 1.122, 1.29. "
      "Sec 10.2: 10.13, 10.26, 10.31",
      "Guess and check: 1.125, 1.131. Sec 10.2: 10.32, 10.33"),
     (4, "ODEs in Python; Heaviside, Dirac, Laplace (10.10)",
-     "10.216, 10.217, 10.218",
+     "10.217, 10.218",
      "Sec 10.10: 10.219, 10.223, 10.230, 10.242",
      "Redo the class notebook's exercises from scratch in a fresh "
      "notebook on posit.smith.edu"),
@@ -211,8 +212,7 @@ WHWS = [
      "Maclaurin series: 2.86, 2.87"),
     (7, "Taylor series (2.4-2.5); matrices and the three-spring "
         "problem (6.1-6.2)",
-     "Taylor series: 2.41. The three-spring problem: 6.2. "
-     "Normal modes: 6.3. Matrices: 6.19",
+     "Taylor series: 2.41. Normal modes: 6.3. Matrices: 6.19",
      "Maclaurin/Taylor: 2.47, 2.49, 2.53, 2.55, 2.57, 2.67. "
      "The three-spring problem: 6.7, 6.17. Normal modes: 6.9. "
      "Matrices: 6.21, 6.23",
@@ -227,12 +227,12 @@ WHWS = [
      "Basis and transformations: 6.45, 6.53, 6.55, 6.57, 6.61. "
      "Determinants: 6.147, 6.161"),
     (9, "Eigenvalues and eigenvectors (6.8); coupled oscillators (6.9)",
-     "Eigenvectors & eigenvalues: 6.166, 6.170, 6.172, 6.175",
+     "Eigenvectors & eigenvalues: 6.170, 6.172",
      "Eigenvectors & eigenvalues: 6.171, 6.173, 6.177",
      "Eigenvectors & eigenvalues: 6.179, 6.181, 6.185"),
     (10, "Setting up integrals; Cartesian doubles, polar; line and "
          "surface integrals (5.1-5.4, 5.6, 5.8, 5.10)",
-     "Setting up 1D integrals: 5.1-5.3. Single integrals in multiple "
+     "Setting up 1D integrals: 5.2, 5.3. Single integrals in multiple "
      "dimensions: 5.25, 5.27, 5.29, 5.31. Cartesian rectangular double "
      "integrals: 5.61, 5.63. Line integrals: 5.197. Surface integrals: "
      "5.255",
@@ -245,7 +245,7 @@ WHWS = [
     (11, "Cylindrical and spherical coordinates (5.5, 5.7); fields, "
          "potential, gradient (8.1-8.5)",
      "Spherical coordinates: 5.167, 5.174. Scalar and vector fields: "
-     "DE 8.2.1, 8.1. Potential in 1D: DE 8.3.1, 8.29, 8.35. From "
+     "8.1. Potential in 1D: DE 8.3.1, 8.29, 8.35. From "
      "potential to gradients: 8.53, 8.55",
      "Spherical coordinates: 5.181, 5.187. Polar and cylindrical: "
      "5.129, 5.137, 5.147, 5.153. Scalar and vector fields: 8.5, 8.7, "
@@ -255,16 +255,14 @@ WHWS = [
      "All coordinates: 5.165"),
     (12, "Divergence and curl, Feynman and Felder (Feynman II 2-3, "
          "8.6-8.7); divergence theorem and Stokes' theorem (8.9-8.10)",
-     "Divergence and curl by inspection: 8.84, 8.86. "
-     "Divergence theorem: DE 8.9.1",
+     "Divergence and curl by inspection: 8.84, 8.86",
      "Divergence and curl: 8.88, 8.90, 8.94, 8.98, 8.102, 8.110. "
      "Divergence theorem: 8.147, 8.151, 8.155, 8.157. "
      "Stokes' theorem: 8.159, 8.163, 8.165, 8.169, 8.171",
      "8.106. Write out Feynman's flux-through-a-tiny-cube derivation "
      "of the divergence theorem in your own words, with pictures"),
     (13, "Conservative fields (8.11); Fourier series (9.1-9.5)",
-     "Conservative fields: DE 8.11.1. Fourier series: DE 9.2.1, 9.5, "
-     "9.7, 9.9",
+     "Fourier series: 9.5, 9.7, 9.9",
      "Conservative fields: 8.178. Fourier series: 9.15, 9.17, 9.23, "
      "9.27, 9.29, 9.33",
      "Conservative fields: 8.173, 8.177, 8.179, 8.181. Different "

@@ -13,46 +13,39 @@ which has the full materials map, item banks, and privacy-cleanup list).
   `private/GillianManbirS26/PHY210 S26/Weekly Homeworks (WHW)/WHW problem
   lists (transcribed 2026-08-17).md` (WHW 09 still to capture).
   Due Fridays end of day, covering Mon+Wed material (S26 convention).
-- **PCCI adopted in spirit** (2026-08-17): a short pre-class check-in,
-  Gary Felder-style (mostly Felder Discovery Exercises done BEFORE the
-  topic; <= 15 min; good-faith-effort grading -- full credit for a clear
-  description of where you're stuck; drop ~3). Turned in on paper at the
-  start of class, paired with a four-color-card comfort poll as the
-  class opener. OPEN: cadence (see below) and where the points live.
-- **Non-Newtonian Scientist due early** (2026-08-17): before the drop
-  deadline if feasible (drop = Tue Sep 22 per README -- VERIFY), i.e.
-  due ~Fri Sep 18 or Mon Sep 21, to build belonging while enrollment is
-  still settling; at the absolute latest, mid-semester.
-- Sequence mirrors S26 (per plan-of-record calendar); Feynman Vol II
-  Ch 2-3 substitutes into the Ch 8 pictures-before-formulas slot.
+- **PCCIs Gary's way** (2026-08-17): most class days (natural skips:
+  quiz Fridays, day after a quiz), mostly Felder Discovery Exercises
+  done BEFORE the topic; <= 15 min; good-faith-effort grading -- full
+  credit for a clear description of where you're stuck; drop ~3. Turned
+  in on paper at the start of class + four-color-card comfort poll as
+  the class opener. Still open: where the points live (candidate: the
+  PCCI turn-in IS the attendance/participation artifact).
+- **Non-Newtonian Scientist due mid-semester: Mon Oct 26** (2026-08-17;
+  encoded in the calendar's HW Due column).
+- **Calendar decisions all locked** (2026-08-17, encoded in the
+  generator; see README.md for the summary): review day -> cyl/spherical
+  coordinates day (5.5, 5.7; App. D); Feynman Vol II Ch 2-3 read BEFORE
+  Felder 8.6-8.7 (geometric div/curl definitions first; Ch 3 also cited
+  on the theorems day); Fourier series in 2 days (9.1-9.3, 9.4-9.5);
+  PDEs protected with 2 days (Fri Dec 11: 11.1-11.2 + 11.4; Mon Dec 14:
+  11.3); Fourier transforms (9.6) ride the Dec 14 finale graphically
+  (Gary's last-day design: sketch-the-transform + exoplanets + image
+  compression); 2.6-2.7 convergence cut, Appendix C pointer on the
+  Taylor day's reading.
 - Math pretest ported to LaTeX (`Pretest/`); due-date placeholder
   Fri Sep 18 pending final calendar.
 
-## Open decisions -- calendar
+## Post-calendar build task (next big work item)
 
-(Full evidence in the inventory report, section 1.)
-
-1. Felder 5.5/5.7 (triple integrals, cylindrical/spherical): assigned to
-   no meeting but S26 taught AND quizzed them. Recommendation: make the
-   Class-28 practice/review day the explicit coordinate-systems day (as
-   Manbir actually used 4/6) and widen the Ch 5 reading to 5.1-5.10.
-2. Ch 8 reading overlap across Thanksgiving (Classes 32/33 carry
-   8.5-8.7 then 8.6-8.7): deliberate review-on-return, or clean
-   8.6 / 8.7 split?
-3. Is the Ch 11 heat-equation day protected or sacrificial? (Gillian's
-   section never reached it; F22 got one rushed LDOC meeting. If
-   protected: finish Ch 8 before Thanksgiving, and the Earlham
-   SteadyStateTemperatureInPlateReview.pdf is the ready-made core.)
-4. 2.6-2.7 (series convergence) stays cut? If so, point students at
-   Felder Appendix C.
-5. PCCI cadence: most class days (Gary ran ~37/term; it's what makes
-   discovery-exercise pedagogy work on every topic) vs. lighter (e.g.
-   skip quiz Fridays and review days, ~2-3/week). Gary's 15F timing log
-   (old/15F/Assigned Problems.docx) has minutes-per-exercise data for
-   sizing. Recommendation: Gary's actual practice -- "most days" with
-   natural skips -- and revisit at the mid-semester assessment.
-6. Non-Newtonian due date on the calendar + generator (currently the
-   25 pts exist but no due date is placed).
+Re-cut Gillian's WHW problem lists (transcribed; WHW 09 still to
+capture) to match OUR calendar: 13 WHWs keyed to the new week
+boundaries, Warm-up/Essentials/Depth tiers preserved, covering
+Mon+Wed material with Friday's topic rolling forward; add problems for
+the units S26 lacked (Ch 5 coords day, Feynman div/curl days, 9.6,
+11.3-11.4 -- sources: Gary's 18F assigned-problem xlsx, F22 In Class
+Problems tree, the S23 token-earning lists). AND assign a PCCI to
+every eligible class day (mostly the section's Discovery Exercise;
+Gary's 22S/18F schedules map DE -> day; his 15F timing log sizes them).
 
 ## Syllabus-writing session
 

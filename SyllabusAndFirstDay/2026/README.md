@@ -35,13 +35,25 @@ professor used in Spring 2026 (source spreadsheet:
 
 That gives 39 MWF meetings, vs. the previous prof's 39 spring slots, so
 her calendar maps over exactly one-to-one: 35 content slots (including
-her Jupyter-ODE day and practice/review day) + 3 dedicated in-class quiz
-days + 1 flex day where her week-5 snow day fell. **The calendar is
-full** — adding a new topic (Python days, FFTs, etc.) means converting
-the flex day or the practice/review day, or displacing content. An
-earlier draft padded the tail with invented days ("Python: FFTs and real
-data", extra review days); those were mine, not hers, and were removed
-2026-08-11 in favor of the faithful mapping.
+her Jupyter-ODE day) + 3 dedicated in-class quiz days + 1 flex day where
+her week-5 snow day fell. **The calendar is full** — the flex day is the
+only remaining buffer (the old practice/review day became the
+coordinate-systems day on 2026-08-17), so adding anything else means
+displacing content. An earlier draft padded the tail with invented days
+("Python: FFTs and real data", extra review days); those were mine, not
+hers, and were removed 2026-08-11 in favor of the faithful mapping.
+
+Calendar decisions locked 2026-08-17 (see TODO.md for the full list):
+review day -> cylindrical/spherical coordinates day (5.5, 5.7); Feynman
+Vol II Ch 2-3 assigned BEFORE Felder 8.6-8.7 (geometric definitions of
+div/curl first); Fourier series compressed to 2 days (9.4 finite-domain
+work partly lands in the PDE days where boundary conditions motivate
+it); PDEs protected with 2 days (11.1-11.2+11.4, then 11.3); Fourier
+transforms (9.6) ride the finale graphically on the last day;
+2.6-2.7 convergence cut with an Appendix C pointer; Non-Newtonian
+Scientist due mid-semester (Mon Oct 26); 13 WHWs (due Fridays); PCCIs
+adopted Gary-Felder-style (most class days, good-faith-effort grading,
+paper turn-in at the start of class + four-color-card comfort poll).
 
 ## Assumptions to verify
 

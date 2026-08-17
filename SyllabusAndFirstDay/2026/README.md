@@ -57,8 +57,12 @@ paper turn-in at the start of class + four-color-card comfort poll).
 
 ## Assumptions to verify
 
-- **MWF meeting pattern** — the whole calendar assumes it. If the registrar
-  gives a different pattern (e.g. TTh), regenerate with new dates.
+- **MWF meeting pattern: VERIFIED 2026-08-17** via the registrar's course
+  schedule listing: PHY 210 01, MWF 9:25-10:40 AM, McConnell 404,
+  in-person, 4 credits, cap 30 (19 enrolled as of 2026-08-17).
+  Enforced requirements: MTH 212 & PHY 111, 117 or 119.
+  (Same listing: PHY 317 01 meets W/F 1:20-2:35 + Mon 1:40-2:55,
+  Sabin-Reed 308, 9 enrolled.)
 - Quizzes are **dedicated in-class Friday days** (matching the previous
   prof): Sep 25 (Ch 1), Oct 23 (Ch 10, 3, 2), Nov 20 (Ch 6, 5). The
   coverage groupings are hers; the exact dates are my placement at the

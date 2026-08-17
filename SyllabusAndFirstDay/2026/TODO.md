@@ -49,10 +49,10 @@ Gary's 22S/18F schedules map DE -> day; his 15F timing log sizes them).
 
 ## Syllabus-writing session
 
-7. Rewrite `PHY210Syllabus.tex` (its lines 68-87 TODO block): Boas ->
-   Felder refs; strip Earlham offices/phone/Zoom/COVID/Piazza; INVERT
-   the prereqs (Smith 210 TEACHES ODEs; prereq = MTH 212 + PHY 117);
-   Smith ARC/Title IX/resources.
+7. DONE 2026-08-17 (draft): `PHY210Syllabus.tex` rewritten for Smith
+   F2026 (compiles clean; 7 red [TODO] markers remain in the PDF:
+   office, office hours, time/room, tutor names, WHW turn-in structure
+   confirm, calculator policy confirm, recording policy).
 8. Grading table = the 1000-point scheme (attendance 39 drop 4 @ 1;
    WHW 13 drop 1 @ 25 = 300; Non-Newtonian 25; quizzes 3 @ 150; final
    190). Decide where PCCI credit lives -- candidate: PCCI turn-in IS
@@ -96,7 +96,7 @@ Gary's 22S/18F schedules map DE -> day; his 15F timing log sizes them).
 19. FIND the Non-Newtonian assignment prompt: not in the 360 archive
     (grep confirmed); search Earlham 125/235 trees + EarlhamArtifacts.
 20. FIND the four-color card templates (Earlham directories).
-21. Capture WHW 09 from Gillian's form (last missing problem list).
+21. DONE 2026-08-17: WHW 09 captured; all 12 S26 lists transcribed.
 22. Ask Gillian: schedule Google Sheet share; whether Ch 11 was cut in
     both sections; Quiz-2-Wednesday story; Apr 29 / May 1.
 23. Ask Manbir: F23 post-mortem (scope cut or overrun); real pacing.

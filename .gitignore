@@ -57,6 +57,11 @@ nosetests.xml
 # Other packages
 JSAnimation
 
-# Symlink to Dropbox: solutions, exams, grades, other professors' materials.
+# Symlinks to Dropbox: solutions, exams, grades, other professors' materials.
 # Never commit; Dropbox is the backup.
+# private       -> __Smith/Classes/210-MathMethods/private
+# privateEarlham -> __EARLHAM/Courses/360-Mathematical_Physics
+#   (kept as a sibling, not inside private/, because a symlink inside a
+#    Dropbox-synced dir pointing at another Dropbox dir confuses sync)
 private
+privateEarlham

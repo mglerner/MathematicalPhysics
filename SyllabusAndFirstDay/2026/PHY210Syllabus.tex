@@ -61,20 +61,29 @@ Concretely, by the end of this course you will be able to:
 \begin{enumerate}
   \item Describe a physical scenario mathematically (most often as a
         differential equation), solve the resulting model, verify your
-        solution, and interpret it back in the real world -- including
-        honestly assessing where the model breaks down.
-  \item Apply the core toolboxes of mathematical physics: ordinary
-        differential equations, Laplace transforms, complex numbers,
-        series approximations, linear algebra through eigenvectors and
-        normal modes, multidimensional integrals, vector calculus,
-        Fourier series, and an introduction to partial differential
-        equations.
-  \item Check your work the way a scientist does: verify units, plug
-        solutions back into the original equations, and test limiting
+        solution, and interpret it back in the real world (including
+        assessing where the model breaks down).
+  \item Apply core tools of mathematical physics: ordinary
+    differential equations, Laplace transforms, complex numbers,
+    series approximations, linear algebra (including matrix manipulation,
+    eigenvalues and eigenvectors) and
+    normal modes, multidimensional integrals, vector calculus,
+    Fourier series, and introductory partial differential
+    equations.
+  \item Check your work the way scientists and engineers do: verify units, plug
+        solutions back into the original equations, test limiting
         cases.
-  \item Use Python to perform symbolic calculations, and to visualize
-        and explore mathematical models.
+  \item Use Python to visualize
+    and explore mathematical models.
 \end{enumerate}
+
+\begin{marginfigure}
+  \includegraphics{coupled_oscillators}
+  \caption{Two coupled oscillators trading energy back and forth. By
+    week 9 you will be able to predict this motion exactly, and in
+    week 15 it becomes the wave equation.}
+  \label{fig:coupled}
+\end{marginfigure}
 
 \section{Prerequisites}\label{sec:prereqs}
 
@@ -87,7 +96,7 @@ sections and all answers to odd problems are free at
 Jupyter notebooks on \url{https://posit.smith.edu} -- nothing to
 install or buy.}
 
-\section{The shape of the semester}\label{sec:calendar}
+\section{Course calendar}\label{sec:calendar}
 
 The complete day-by-day schedule (topics, reading due, homework due)
 is posted on Moodle and kept up to date
@@ -141,12 +150,20 @@ there.\marginnote{\textbf{Key dates}\\[2pt]
     \addlinespace
     15     & Partial differential equations: the heat equation,
              separation of variables, normal modes of the wave
-             equation; Fourier transforms as the closing vista &
+             equation; Fourier transforms to close us out &
              Ch.\ 11; 9.6\\
     \bottomrule
   \end{tabular}
 }
 \medskip
+
+\begin{marginfigure}
+  \includegraphics{heat_equation}
+  \caption{A uniformly hot bar with its ends held cold, relaxing
+    toward equilibrium. The sharp corners disappear almost instantly
+    --- by week 15 you'll know why.}
+  \label{fig:heat}
+\end{marginfigure}
 
 \newthought{A word about Feynman.} For the vector-calculus unit,
 Chapters 2 and 3 of \textit{The Feynman Lectures on Physics, Volume
@@ -330,17 +347,20 @@ Honor Code and will be treated as such}, and any AI use in work you
 submit must be cited, like any other source.\sidenote{Adapted, with
 thanks, from Will Raven.}
 
-Two things are worth saying plainly. First, AI models make subtle
+Two things worth noting clearly: First, AI models make subtle
 errors, hallucinate, and hand you technically-correct solutions that
 teach you nothing; your job is to verify, question, and ultimately
-understand the physics. Second -- and this matters in \emph{this}
-course specifically -- your PCCIs and WHWs are graded on good-faith
+understand the physics. Second your PCCIs and WHWs are graded on good-faith
 effort, not correctness. There are no points available for a polished
 answer. The only thing being graded is the record of \emph{your}
-thinking, including where you got stuck; having an AI polish that
-record destroys the one thing it's for. Where AI genuinely helps:
-asking for alternative explanations of a concept, checking your
-algebra \emph{after} you've done it, and exploring beyond the course.
+thinking, including where you got stuck; having an AI polish that doesn't help
+your grade at all, and cheats you of learning.
+
+We're happy to use AI where it actually helps in this class, but we have to be
+careful not to use it before then. So, feel free to use AI to dig further in, to
+get alternate explanations, to check rote algebra after you've done it, to
+explore new topics, etc. But keep it in check to make sure you're in charge of
+your own learning.
 
 \section{Policies and logistics}\label{sec:policies}
 
@@ -424,6 +444,68 @@ perpetrated now against Indigenous people and their land and water.
 \newthought{Course feedback.} During the last week of classes,
 approximately 15 minutes at the beginning of one class will be set
 aside for you to complete the course feedback questionnaire.
+
+\section{Advice from former students}\label{sec:advice}
+
+Gary Felder --- the author of our textbook, who taught this course at
+Smith for many years --- asked his Spring 2021 math-methods students
+what advice they would give to future students. Their answers are
+reproduced verbatim below (their course used Mathematica where we use
+Python).
+
+\begin{itemize}\small
+  \item Go to tutoring and office hours and ask questions whenever you
+        are confused. Most importantly do the readings.
+  \item It's a good course, but it is challenging. Make sure you read
+        the textbook, and go to tutoring/office hours if you're unsure
+        about anything.
+  \item Definitely go to drop--in hours if you can, and studying with
+        other people can be very helpful.
+  \item This course will show you how many of the seemingly tangential
+        bits of math you have learned in earlier courses are very
+        useful for solving problems and how they are often linked to a
+        far richer set of mathematical skills/concepts. Due to this, it
+        is really important to be comfortable with the concepts from
+        earlier courses that are embellished in this course(luckily
+        Gary provides an intro test that allows you to make sure you
+        have the required concepts down). By the same logic, it is
+        really important to make sure you understand each chapter of
+        the course, because most subsequent sections build on the tools
+        you acquire in each unit.
+  \item Start your weekly assignment early so that you have time to go
+        to Office Hours for help! Make sure you understand every
+        homework problem and are able to apply the same concepts to
+        similar problems.
+  \item Go to office hours. Don't spend hours on the homework because
+        you can always go to office hours and that will be a more
+        effective use of your time.
+  \item I would tell the student that even though ``math methods''
+        sounds scary, it's not that bad. The professor and the weekly
+        homework prepare you for the exams. Always make sure to check
+        your work and units.
+  \item I would tell students to really take advantage of office hours
+        and tutor hours especially when it comes to understanding and
+        using Mathamatica because it will save you so much time and
+        make your understanding of the course so much better.
+  \item Don't take this class unless you're required to and even then
+        encourage your major/minor to remove it from their
+        curriculum. Beyond that its just a slog to get through this
+        course.
+  \item To a student who is interested in taking this course in the
+        future I would recommend them to be active about their own
+        education and focus on mastering topics early before it gets
+        too late.
+  \item This course is a lot more interesting than it sounds. It's not
+        an easy course, but also isn't the total nightmare that I was
+        anticipating. We learn a lot of math, but also understand the
+        why through applications. In other words, we don't just do
+        calculations, we apply the math and understand the mathematical
+        concepts. The applications make things more interesting and
+        meaningful. My main advice is to read the textbook and take all
+        assignments seriously. (It would be hard to catch up if you get
+        behind by skimping on an assignment). Don't be afraid to speak
+        up to ask questions.
+\end{itemize}
 
 \section{Recommended books, and other resources}\label{sec:resources}
 

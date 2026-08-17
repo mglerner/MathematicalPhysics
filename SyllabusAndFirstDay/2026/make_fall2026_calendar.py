@@ -43,8 +43,9 @@ def class_days():
 # pinned to Friday slot indices; the flex day sits where her Spring '26
 # snow day fell (week 5) and absorbs snow / Mountain Day / drift.
 # 35 content slots + 3 quiz days + 1 flex day = 39 MWF meetings, exactly
-# matching her 39 spring slots. The calendar is FULL: adding a new topic
-# means converting the flex or practice day, or displacing content.
+# matching her 39 spring slots. The calendar is FULL: the flex day is the
+# only buffer left (the old practice/review day is now the coordinate-
+# systems day), so adding anything else means displacing content.
 SPECIALS = {
     7: ("Quiz 1 (Ch 1)", True),                          # Fri Sep 25
     13: ("Flex day (snow / Mountain Day buffer)", False),  # Fri Oct 9
@@ -66,7 +67,9 @@ CONTENT = [
     ("Euler's formula; complex ODEs", "3.5"),
     ("Linear approximations", "2.1-2.2"),
     ("Maclaurin series", "2.3"),
-    ("Taylor series; finding one series from another", "2.4-2.5"),
+    # 2.6-2.7 (convergence) deliberately cut (decision 2026-08-17);
+    # Appendix C is the pointed-to substitute.
+    ("Taylor series; finding one series from another", "2.4-2.5 (convergence: App. C)"),
     ("Properties of matrices", "6.1-6.2"),
     ("Matrix x column; vector transformations", "6.3-6.4"),
     ("Matrix multiplication; identity, determinant, inverse", "6.5-6.7"),
@@ -78,18 +81,39 @@ CONTENT = [
     # textbook TOC 2026-08-17; the S26 grid this row was copied from mislabels it).
     ("Cartesian 2D integrals; polar coordinates", "5.3-5.4, 5.6"),
     ("Line integrals and surface integrals", "5.8, 5.10"),
-    ("Practice / review day", ""),
+    # Decision 2026-08-17: the review day IS the coordinate-systems day
+    # (how the S26 sections actually used it); 5.5/5.7 get real coverage
+    # and Quiz 3 can fairly test them.
+    ("Coordinate systems: cylindrical and spherical (review + practice)",
+     "5.5, 5.7; App. D"),
     ("Vector and scalar fields; the gradient", "8.1-8.4"),
     ("Work, path integrals, and the gradient theorem", "8.5"),
-    ("Gradient, divergence, curl", "8.5-8.7"),
+    # Decision 2026-08-17: Feynman's geometric definitions of divergence
+    # and curl come BEFORE Felder's treatment. Free reading edition:
+    # feynmanlectures.caltech.edu (Vol II Ch 2-3).
+    ("Divergence and curl, geometrically", "Feynman Vol II Ch 2-3"),
     ("Divergence, curl, and the Laplacian", "8.6-8.7"),
-    ("Divergence theorem; Stokes' theorem", "8.9-8.10"),
+    ("Divergence theorem; Stokes' theorem", "8.9-8.10; Feynman Vol II Ch 3"),
     ("Conservative vector fields", "8.11"),
+    # Decisions 2026-08-17: Fourier series in 2 days; PDEs protected with
+    # 2 days; Fourier transforms ride the finale (graphical treatment +
+    # exoplanets / image compression as the closing demos, a la Gary
+    # Felder's last-day design).
     ("Introduction to Fourier series", "9.1-9.3"),
-    ("Fourier series: different periods, finite domains", "9.4"),
-    ("Fourier series with complex exponentials", "9.5"),
-    ("Intro to PDEs: the heat equation", "11.1-11.2"),
+    ("Fourier series: different periods, finite domains, complex exponentials",
+     "9.4-9.5"),
+    ("Intro to PDEs: the heat equation; separation of variables",
+     "11.1-11.2, 11.4"),
+    ("Normal modes of the wave equation; Fourier transforms",
+     "11.3, 9.6"),
 ]
+
+# Extra (non-WHW) due dates shown in the HW Due column.
+# Non-Newtonian Scientist: mid-semester (decision 2026-08-17); Mon Oct 26
+# is the calendar midpoint and has no competing WHW deadline.
+EXTRA_DUE = {
+    date(2026, 10, 26): "Non-Newtonian Scientist due",
+}
 
 def build(outpath):
     days = list(class_days())
@@ -129,6 +153,8 @@ def build(outpath):
         if d.weekday() == 4 and slot_i > 0:  # Fridays (incl. quiz days,
             hw_no += 1                       # matching the previous prof)
             hw = f"WHW{hw_no:02d}"
+        if d in EXTRA_DUE:
+            hw = f"{hw}; {EXTRA_DUE[d]}" if hw else EXTRA_DUE[d]
         class_no += 1
         rows.append((week_no, class_no, d, topic, reading, hw, exam))
     for bd, why in NO_CLASS.items():

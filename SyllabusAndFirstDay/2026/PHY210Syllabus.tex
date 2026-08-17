@@ -1,504 +1,464 @@
 % PHY 210 Syllabus, Smith College, Fall 2026 -- Michael Lerner
 %
-% Rewritten 2026-08-17 from the Earlham 2024 syllabus (see git history for
-% the original). Sources: the F2026 calendar (make_fall2026_calendar.py, the
-% source of truth for dates and the 1000-point scheme), the S26 Smith
-% syllabus (boilerplate: Honor Code, ARC, land acknowledgment, resources),
-% Will Raven's F2025 AI statement (adapted, credited), Gary Felder's PCCI
-% policy language (adapted), and Michael's own Earlham prose (course goals,
-% communication, workload, sensitive issues, diversity, late passes).
+% Tufte-handout restyle 2026-08-17 (per the old Biophysics-midterm
+% experiment): sidenotes for asides and links, margin tables for key
+% dates and the grade scale, booktabs tables, \newthought openers.
+% Content sources unchanged from the first F2026 rewrite (see git
+% history): the locked calendar (make_fall2026_calendar.py), S26
+% boilerplate, Will Raven's AI statement (adapted, credited), Gary
+% Felder's PCCI language (adapted), Michael's Earlham prose.
 %
 % Red [TODO: ...] markers flag facts to fill in before distribution.
-% Build: pdflatex PHY210Syllabus.tex   (from this directory)
-\documentclass[12pt]{article}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\input{../macros}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\usepackage[table]{xcolor}
-\usepackage{multirow}
-\usepackage{hyperref}
-\hypersetup{
-    colorlinks=true,
-    linkcolor=blue,
-    filecolor=magenta,
-    urlcolor=blue,
-  }
-\usepackage{float}
-\usepackage[super]{nth}
+% Build: pdflatex PHY210Syllabus.tex  (twice, for margin-note placement)
+\documentclass{tufte-handout}
+
+\usepackage{amsmath}
+\usepackage{graphicx}
+\setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
 \usepackage{booktabs}
-\restylefloat{table}
+\usepackage{units}
+\usepackage{multicol}
 
 \newcommand{\todonote}[1]{{\color{red} \textbf{[TODO: #1]}}}
 
-\pagestyle{empty}
+\title{PHY 210: Mathematical Methods of Physical Sciences and
+  Engineering\thanks{Smith College, Fall 2026}}
+\author[Michael G. Lerner]{Michael G. Lerner}
+\date{Fall 2026}
 
-\renewcommand{\thefootnote}{\fnsymbol{footnote}}
 \begin{document}
 
-\begin{center}
-{\bf PHY 210: Mathematical Methods of Physical Sciences and Engineering\\
-Smith College, Fall 2026}
-\end{center}
+\maketitle
 
-\setlength{\unitlength}{1in}
-
-\hrule
-
-\vskip.15in
-\noindent\textbf{Instructor:} Michael Lerner, \todonote{office},
-Email: \href{mailto:mglerner@smith.edu}{mglerner@smith.edu}
-
-\begin{description}
-  \item[Office Hours:] \todonote{days/times, set after the week-1
-        scheduling poll}. I also have an open-door policy, and you're
-        encouraged to stop in to ask questions whenever my door is
-        open. That's most of the time.
-  \item[When and where:] Class meetings are MWF,
-        \todonote{time and room}. First meeting Wednesday, September 9;
-        last meeting Monday, December 14.
-  \item[Required materials:] Felder \& Felder, \textit{Mathematical
-        Methods in Engineering and Physics} (Wiley). Some sections and
-        all answers to odd problems are free online at
-        \url{https://www.felderbooks.com/mathmethods/}. We will also use
-        Python (via Jupyter notebooks on Smith's server at
-        \url{https://posit.smith.edu} -- nothing to install or buy).
-        Course announcements, documents, and assignments live on Moodle.
-  \item[Prerequisites:] MTH 212 (multivariable calculus) and PHY 117 or
-        PHY 119, or permission of the instructor. \textbf{Differential
-        equations are NOT a prerequisite} -- this course is where you
-        learn them.
-  \item[Course Goals:]
-        One of the great strengths of a modern
-        physics background is that it allows you to address problems in an
-        enormous range of fields, from physics itself to economics, biology,
-        ecology, computer science, complex systems, physical chemistry,
-        geology, and engineering. The primary objective of this course is to
-        provide a systematic introduction to mathematical techniques that will
-        serve you both in future physics courses and in modeling interesting
-        problems in your domain of choice. A significant secondary objective
-        is to develop a level of mathematical sophistication that will allow
-        you to confidently and competently explore further material on your
-        own.
-
-        Concretely, by the end of this course you will be able to:
-        \ \\\vspace{-.3in}
-        \begin{enumerate}
-          \item Describe a physical scenario mathematically (most often
-                as a differential equation), solve the resulting model,
-                verify your solution, and interpret it back in the real
-                world -- including honestly assessing where the model
-                breaks down.
-          \item Apply the core toolboxes of mathematical physics:
-                ordinary differential equations, Laplace transforms,
-                complex numbers, series approximations, linear algebra
-                through eigenvectors and normal modes, multidimensional
-                integrals, vector calculus, Fourier series, and an
-                introduction to partial differential equations.
-          \item Check your work the way a scientist does: verify units,
-                plug solutions back into the original equations, and
-                test limiting cases.
-          \item Use Python to perform symbolic calculations, and to
-                visualize and explore mathematical models.
-        \end{enumerate}
-\end{description}
-
-\newpage
-
-\noindent\textbf{Course Calendar}
-
-\vskip.1in
-\noindent The complete day-by-day schedule (topics, reading due,
-homework due) is posted on Moodle and will be kept up to date there.
-The shape of the semester:
-
-\setlength{\arrayrulewidth}{.4mm}
-\setlength{\tabcolsep}{8pt}
-{\rowcolors{2}{green!80!yellow!50}{green!70!yellow!40}
-  \begin{table}[H]
-    \footnotesize
-\begin{tabular}{l|p{0.52\linewidth}|l}
-\textbf{Weeks} & \textbf{Topics} & \textbf{Felder \& Felder} \\ \hline
-1-3   & Ordinary differential equations: setting them up from physical
-        situations, arbitrary constants, separation of variables, guess
-        and check, superposition & Ch.\ 1 \\
-3-4   & Heaviside, Dirac delta, and the Laplace transform (with Python)
-      & 10.2, 10.10-10.11 \\
-5     & Complex numbers and Euler's formula & Ch.\ 3 \\
-6-7   & Linear approximations, Maclaurin and Taylor series & Ch.\ 2 \\
-7-9   & Linear algebra: matrices as transformations, eigenvalues and
-        eigenvectors, coupled oscillators and normal modes & Ch.\ 6 \\
-10-11 & Integrals in two and more dimensions; cylindrical and spherical
-        coordinates; line and surface integrals & Ch.\ 5 \\
-11-13 & Vector calculus: gradient, divergence, curl -- \textbf{defined
-        geometrically, following Feynman} -- then the divergence theorem,
-        Stokes' theorem, and conservative fields & Feynman II 2-3; Ch.\ 8 \\
-14    & Fourier series & Ch.\ 9 \\
-15    & Partial differential equations: the heat equation, separation of
-        variables, normal modes of the wave equation; Fourier transforms
-        as the closing vista & Ch.\ 11; 9.6 \\
-\end{tabular}
-\end{table}
+\marginnote[2\baselineskip]{%
+  \textbf{Instructor:} Michael Lerner\\
+  \todonote{office}\\
+  \href{mailto:mglerner@smith.edu}{mglerner@smith.edu}\\[4pt]
+  \textbf{Class:} MWF, \todonote{time, room}\\
+  First meeting Wed Sep 9\\
+  Last meeting Mon Dec 14\\[4pt]
+  \textbf{Office hours:} \todonote{set after the week-1 scheduling
+  poll}. I also have an open-door policy: stop in whenever my door is
+  open. That's most of the time.\\[4pt]
+  \textbf{Text:} Felder \& Felder, \textit{Mathematical Methods in
+  Engineering and Physics}\\[4pt]
+  \textbf{Website:} Moodle\\
+  \textbf{Python:} \url{https://posit.smith.edu}
 }
 
-\noindent\textbf{Key dates:}
+\newthought{One of the great strengths} of a modern physics background
+is that it allows you to address problems in an enormous range of
+fields, from physics itself to economics, biology, ecology, computer
+science, complex systems, physical chemistry, geology, and
+engineering. The primary objective of this course is to provide a
+systematic introduction to mathematical techniques that will serve you
+both in future physics courses and in modeling interesting problems in
+your domain of choice. A significant secondary objective is to develop
+a level of mathematical sophistication that will allow you to
+confidently and competently explore further material on your own.
+
+Concretely, by the end of this course you will be able to:
+\begin{enumerate}
+  \item Describe a physical scenario mathematically (most often as a
+        differential equation), solve the resulting model, verify your
+        solution, and interpret it back in the real world -- including
+        honestly assessing where the model breaks down.
+  \item Apply the core toolboxes of mathematical physics: ordinary
+        differential equations, Laplace transforms, complex numbers,
+        series approximations, linear algebra through eigenvectors and
+        normal modes, multidimensional integrals, vector calculus,
+        Fourier series, and an introduction to partial differential
+        equations.
+  \item Check your work the way a scientist does: verify units, plug
+        solutions back into the original equations, and test limiting
+        cases.
+  \item Use Python to perform symbolic calculations, and to visualize
+        and explore mathematical models.
+\end{enumerate}
+
+\section{Prerequisites}\label{sec:prereqs}
+
+MTH 212 (multivariable calculus) and PHY 117 or PHY 119, or permission
+of the instructor. \textbf{Differential equations are NOT a
+prerequisite} -- this course is where you learn
+them.\sidenote{Required materials: the Felder \& Felder text (some
+sections and all answers to odd problems are free at
+\url{https://www.felderbooks.com/mathmethods/}), and Python via
+Jupyter notebooks on \url{https://posit.smith.edu} -- nothing to
+install or buy.}
+
+\section{The shape of the semester}\label{sec:calendar}
+
+The complete day-by-day schedule (topics, reading due, homework due)
+is posted on Moodle and kept up to date
+there.\marginnote{\textbf{Key dates}\\[2pt]
+  \begin{tabular}{@{}ll@{}}
+  Fri Sep 18  & Math pretest due\\
+  Fri Sep 25  & Quiz 1 (Ch.\ 1)\\
+  Fri Oct 9   & Flex day\\
+  Mon Oct 12  & No class (recess)\\
+  Fri Oct 23  & Quiz 2 (Ch.\ 10, 3, 2)\\
+  Mon Oct 26  & Non-Newtonian due\\
+  Fri Nov 20  & Quiz 3 (Ch.\ 6, 5)\\
+  Wed Nov 25  & No class\\
+  Fri Nov 27  & No class\\
+  Dec 19--22  & Final exam period\\
+  \end{tabular}\\[4pt]
+  The flex day absorbs Mountain Day, snow, or wherever we're behind.}
+
+\medskip
+{\small\noindent
+  \begin{tabular}{@{}lp{2.55in}l@{}}
+    \toprule
+    \textbf{Weeks} & \textbf{Topics} & \textbf{Reading}\\
+    \midrule
+    1--3   & Ordinary differential equations: setting them up from
+             physical situations, arbitrary constants, separation of
+             variables, guess and check, superposition & Ch.\ 1\\
+    \addlinespace
+    3--4   & Heaviside, Dirac delta, and the Laplace transform (with
+             Python) & 10.2, 10.10--11\\
+    \addlinespace
+    5      & Complex numbers and Euler's formula & Ch.\ 3\\
+    \addlinespace
+    6--7   & Linear approximations, Maclaurin and Taylor series &
+             Ch.\ 2\\
+    \addlinespace
+    7--9   & Linear algebra: matrices as transformations, eigenvalues
+             and eigenvectors, coupled oscillators and normal modes &
+             Ch.\ 6\\
+    \addlinespace
+    10--11 & Integrals in two and more dimensions; cylindrical and
+             spherical coordinates; line and surface integrals &
+             Ch.\ 5\\
+    \addlinespace
+    11--13 & Vector calculus: gradient, divergence, curl --
+             \textbf{defined geometrically, following Feynman} -- then
+             the divergence theorem, Stokes' theorem, and conservative
+             fields & Feynman II 2--3; Ch.\ 8\\
+    \addlinespace
+    14     & Fourier series & Ch.\ 9\\
+    \addlinespace
+    15     & Partial differential equations: the heat equation,
+             separation of variables, normal modes of the wave
+             equation; Fourier transforms as the closing vista &
+             Ch.\ 11; 9.6\\
+    \bottomrule
+  \end{tabular}
+}
+\medskip
+
+\newthought{A word about Feynman.} For the vector-calculus unit,
+Chapters 2 and 3 of \textit{The Feynman Lectures on Physics, Volume
+II} are \emph{assigned reading}: we will meet divergence and curl
+through Feynman's physical, geometric definitions before we see the
+formulas in Felder.\sidenote{This part of Feynman is extremely
+conversational and readable, and you can read the whole thing free,
+with beautiful typesetting, at
+\url{https://www.feynmanlectures.caltech.edu/}.}
+
+\section{How the course works}\label{sec:machinery}
+
+Everything in this course is worth points, and the course total is
+exactly 1000 points. Within each category, each assignment is weighted
+equally.\marginnote{\textbf{Grade scale} (not curved)\\[2pt]
+  \begin{tabular}{@{}llll@{}}
+  A  & 93+      & C+ & 77--79.9\\
+  A- & 90--92.9 & C  & 73--76.9\\
+  B+ & 87--89.9 & C- & 70--72.9\\
+  B  & 83--86.9 & D+ & 67--69.9\\
+  B- & 80--82.9 & D  & 63--66.9\\
+     &          & D- & 60--62.9\\
+     &          & E  & below 60\\
+  \end{tabular}}
+
+\medskip
+{\small\noindent
+  \begin{tabular}{@{}lrrrr@{}}
+    \toprule
+    \textbf{Category} & \textbf{Number} & \textbf{Drop} &
+    \textbf{Each} & \textbf{Total}\\
+    \midrule
+    Participation \& pre-class check-ins (PCCIs) & 39 & 4 & 1 & 35\\
+    Weekly homework (WHW) & 13 & 1 & 25 & 300\\
+    Non-Newtonian Scientist & 1 & 0 & 25 & 25\\
+    Quizzes (in class) & 3 & 0 & 150 & 450\\
+    Final exam & 1 & 0 & 190 & 190\\
+    \midrule
+    \textbf{Course total} & & & & \textbf{1000}\\
+    \bottomrule
+  \end{tabular}
+}
+\medskip
+
+\subsection{Pre-class check-ins (PCCIs)}
+
+Most class days there will be a short PCCI due at the start of class,
+on paper. Many of these are the textbook's ``Discovery Exercises,''
+designed to introduce you to a topic \emph{before} we cover it; others
+are short problems on material we've just covered. \textbf{You will
+receive full credit for a good-faith effort that includes a clear
+description of anything you are stuck on.} An incorrect or incomplete
+answer \emph{without} such an explanation won't receive full
+credit.\sidenote{For example, if the question were to differentiate
+$f(g(x))$: ``I don't know'' earns nothing; the correct answer earns
+full credit; and so does ``I think it's $f'(g(x))$, except I know the
+chain rule says to do something different because it's $f(g(x))$ and
+not just $x$ -- I'm not clear on what, though.''} A PCCI should take
+you less than 15 minutes; if one doesn't, please tell me. Turning in
+the day's PCCI is also how attendance is recorded, and your four
+lowest participation days are dropped, so occasional absences and off
+days cost you nothing.
+
+\subsection{Weekly homework (WHW)}
+
+This is basically a course in problem-solving techniques. The most
+common and the most damaging mistake a student can make in such a
+course is to yield to the temptation to try and master the material by
+reading the text and listening to the lectures while working a minimum
+of problems. While reading and listening can give you valuable new
+ideas, problem-solving skills are only efficiently developed by
+solving as many problems as possible. For most students the
+understanding and knowledge gained from this course will be in direct
+proportion to the number of problems which they successfully complete.
+
+Each week I will post a WHW problem list, organized in three tiers:
+\textbf{Warm-up} (start here), \textbf{Essentials} (the core -- if you
+can do these, you're on track), and \textbf{Depth} (for when you want
+more). You are not expected to do every problem; do whichever problems
+you need practice on. If a tier starts to feel easy, that's a good
+sign that you're comfortable with it.\sidenote{Answers to odd problems
+are in the book's Appendix M, free at
+\url{https://www.felderbooks.com/mathmethods/}.}
+
+Each Friday by the end of the day, you will turn in (on Moodle): (1) a
+photograph of your written work on \textbf{at least one problem} from
+that week's list, with a sentence or two about where you got stuck or
+what you'd like feedback on, and (2) a short reflection form. WHWs are
+graded on the same good-faith standard as PCCIs: thoughtful engagement
+earns full credit. \todonote{confirm final WHW turn-in structure
+before distribution}
+
+\subsection{Quizzes}
+
+Three quizzes, in class, taking the full period, on the Fridays listed
+in the margin above. Sample quizzes with solutions will be posted
+beforehand, and quiz questions will be closely aligned with the
+in-class problems and the WHW lists. Quizzes are closed-book; you may
+bring \textbf{one 8.5$\times$11 sheet of handwritten notes, both
+sides}.\sidenote{\todonote{calculator policy -- recommend: a basic
+calculator is fine; no phones, laptops, or internet-connected
+devices}} Each quiz covers material from earlier weeks, never the week
+the quiz is given, and I will announce the exact section coverage in
+class about a week ahead. If you need accommodations, contact me well
+before the quiz.
+
+\subsection{Final exam, with redemption problems}
+
+The final has two parts. The \emph{required} part covers the last
+third of the course (vector calculus, Fourier series, and PDEs). The
+rest consists of \emph{optional redemption problems} drawn from the
+three quizzes: if you do better on a redemption problem than you did
+on the corresponding quiz problem, the new score replaces the old
+one. There is no penalty for attempting a redemption problem -- you
+cannot lose points. Do the required problems first; then do as many
+redemption problems as you want and have time for.
+
+\subsection{Partial credit, and how to get it}
+
+Several of the problems in this class are quite challenging. For the
+harder problems, my goal is to have you make the strongest possible
+effort toward \textbf{understanding} the solution. Thus, if you cannot
+fully solve a problem (on a quiz or the final), say whatever you can
+about the way in which a solution would proceed from where you stop;
+say whatever you can about the qualitative behavior of a solution; say
+whatever you can about the physical meaning of the solution. And
+always, always: \textbf{check your units}, and \textbf{plug your
+solution back into the original equation}.\sidenote{You are never done
+solving a differential equation until you have verified that your
+solution works.}
+
+\subsection{Late policy}
+
+It is extremely hard to catch up on late work (usually things are late
+because you are busy, and people don't tend to get less busy!). That
+is why every category has built-in drops: four participation days, one
+full WHW. My strong suggestion, when life happens, is to use the drops
+and prioritize getting your schedule back under control.
+
+Beyond the drops: all students start the term with \textbf{3 free late
+passes}. You can spend a late pass to extend a WHW (or the
+Non-Newtonian assignment) to the following class period with no
+penalty. Late passes are not automatic -- email me before the deadline
+to say you're using one, and once declared it is spent whether or not
+you turn the work in by the extended date.\sidenote{Late passes cannot
+be applied to PCCIs (their whole value is priming you for that day's
+class -- the drops cover them), to quizzes, or to the final. After
+your free passes are spent, further extensions cost 10\%, then 20\%,
+and so on, of that assignment's points.}
+
+\section{The Non-Newtonian Scientist}\label{sec:nonnewtonian}
+
+I can hardly overstate how much inclusion, equity and diversity
+considerations have shaped my entire thinking around teaching and
+practicing physics. It affects everything from the way that physics is
+framed historically to the way that it is typically taught in your
+classrooms. My main goal is to create an environment that tells all of
+us that we can do physics; that invites people into physics who have
+never been invited, or who have been explicitly excluded. In this
+class, the ``Non-Newtonian Scientist'' assignment (due Monday, October
+26) engages directly with who does physics and how the standard
+physics canon got assembled; the full prompt will be posted on Moodle.
+
+Physics cannot be divorced from the world in which we study it. I
+expect that we will recognize that in this class, and I expect that we
+will create an inclusive and welcoming environment. More specifically,
+I expect that we will strive \textit{not} to create an environment
+that excludes people. This is hard work. We will get things wrong. You
+will get things wrong. \textit{I} will get things wrong. Especially
+when I get things wrong, I encourage you to tell me -- directly, or
+through any of the anonymous channels below.
+
+\section{Use of artificial intelligence}\label{sec:ai}
+
+AI is a powerful tool, and it offers real potential to enhance your
+learning in this course. Used improperly, it can genuinely hinder your
+development as a physicist. You are welcome to use AI in this class,
+provided you always adhere to the Honor Code: \textbf{using AI to
+solve homework, PCCI, quiz, or exam problems is a violation of the
+Honor Code and will be treated as such}, and any AI use in work you
+submit must be cited, like any other source.\sidenote{Adapted, with
+thanks, from Will Raven.}
+
+Two things are worth saying plainly. First, AI models make subtle
+errors, hallucinate, and hand you technically-correct solutions that
+teach you nothing; your job is to verify, question, and ultimately
+understand the physics. Second -- and this matters in \emph{this}
+course specifically -- your PCCIs and WHWs are graded on good-faith
+effort, not correctness. There are no points available for a polished
+answer. The only thing being graded is the record of \emph{your}
+thinking, including where you got stuck; having an AI polish that
+record destroys the one thing it's for. Where AI genuinely helps:
+asking for alternative explanations of a concept, checking your
+algebra \emph{after} you've done it, and exploring beyond the course.
+
+\section{Policies and logistics}\label{sec:policies}
+
+\newthought{Communication.} My preferred mode of communication is
+email. I will check my email multiple times per day during the work
+week. If you have sent me an email and have not heard back from me
+within 24 hours (excluding weekends), you should email me again or
+drop by my office to ask your question in person. I cannot guarantee
+that I will regularly check my email on evenings or on
+weekends.\sidenote{I expect that you will check your Smith email at
+least once per day: 24 hours after I email the class, I expect
+everyone has read it. Emailed assignments, due dates, and policy
+changes carry the same weight as this syllabus, and the same goes for
+Moodle.}
+
+\newthought{Workload.} This course should take about 12 hours of your
+time per week: about 4 in class, and about 8 outside it on reading,
+PCCIs, homework problems, and review. \textbf{If you find yourself
+spending significantly more (or less) than this, please let me know
+ASAP! That's an instructor-error that I can easily fix.}
+
+\newthought{Sensitive issues.} What if you have something you want to
+talk about, but don't feel comfortable doing so in a public (or
+non-anonymous) space? This often comes up with issues of racism,
+sexism, and other kinds of discrimination. It can come up with issues
+that relate to my behavior, the behavior of your classmates, or the
+world in general. Please feel \textit{encouraged} to use either the
+anonymous feedback form linked on Moodle, or to leave a written note
+under my door.\sidenote{If you want to write a note, you may want to
+type it up and print it out so that your handwriting is further
+anonymized.} Of course, if you feel comfortable and safe doing so, you
+are also encouraged to talk publicly or non-anonymously about these
+things! If you are not comfortable with any of these options, the
+Resources section below lists offices that can help, including
+confidential ones.
+
+\newthought{Recording.} \todonote{finalize recording policy --
+planned: class projections are captured as PDFs and posted after each
+class; some or all classes may be video-recorded and posted for
+enrolled students}
+
+\newthought{Honor Code.} Students and faculty at Smith are part of an
+academic community defined by its commitment to scholarship, which
+depends on scrupulous and attentive acknowledgement of all sources of
+information and honest and respectful use of college resources. Smith
+College expects all students to be honest and committed to the
+principles of academic and intellectual integrity in their preparation
+and submission of course work and examinations. All submitted work of
+any kind must be the original work of the student, who must cite all
+the sources used in its preparation (including, for example, any AI
+tools). Students voted to establish the academic honor system in
+1944. The basis of the Academic Honor Code is articulated in Article X
+of the SGA Constitution and Article VII of the SGA
+Bylaws.\sidenote{In this class specifically: you are encouraged to
+work together on the WHW problems and to study together for quizzes,
+but PCCIs should be attempted individually first, everything you turn
+in must be your own work, and quizzes and the final must be done
+individually.}
+
+\newthought{Academic accommodations.} If you need classroom
+accommodations, please contact me and include your letter from the
+Accessibility Resource Center (ARC,
+\href{mailto:arc@smith.edu}{arc@smith.edu}). I promise to be flexible
+in meeting any documented need for accommodations in a way that works
+well for you. If you would like some accommodation but do not have an
+ARC letter, let me know and we can discuss your concerns: with or
+without a letter, I want to provide you the support you need to
+succeed in this course.
+
+\newthought{Land acknowledgment.} We acknowledge that we are on
+Indigenous land: the territory of the Nipmuc people. We are grateful
+for the opportunity to live, learn, and grow on this sacred land, and
+extend our respect to citizens of this nation who live here today, and
+to their ancestors who have lived here for hundreds of generations. We
+recognize the repeated violations of sovereignty, territory, and water
+perpetrated by invaders who have impacted the original inhabitants of
+this land for 400 years. We know this acknowledgement is insufficient,
+and does not undo the harm that has been done and continues to be
+perpetrated now against Indigenous people and their land and water.
+
+\newthought{Course feedback.} During the last week of classes,
+approximately 15 minutes at the beginning of one class will be set
+aside for you to complete the course feedback questionnaire.
+
+\section{Recommended books, and other resources}\label{sec:resources}
+
+\newthought{Books.} \textit{The Feynman Lectures on Physics, Volume
+II} (assigned for the vector-calculus unit; see above). Boas,
+\textit{Mathematical Methods in the Physical Sciences}: the classic
+alternative presentation -- if Felder's treatment of a topic isn't
+clicking, try Boas's; I taught from her book for a decade and am happy
+to point you at the parallel section. Schey, \textit{div grad curl and
+all that}: an extremely conversational introduction to (and refresher
+on) vector calculus. Boyce and DiPrima, \textit{Elementary
+Differential Equations and Boundary Value Problems}: a thorough
+reference for more depth on differential equations. Arfken and Weber,
+\textit{Mathematical Methods for Physicists}: an encyclopedic
+reference; too dry to learn from in this course, but useful later in
+your career.
+
+\newthought{People and places.} There are many resources at Smith to
+help you succeed in this course and in your college career:
 \begin{itemize}
-  \item Math pretest due Friday, September 18 (graded for completion).
-  \item Quizzes, in class, full period: Friday September 25 (Ch.\ 1);
-        Friday October 23 (Ch.\ 10, 3, 2); Friday November 20
-        (Ch.\ 6, 5).
-  \item Non-Newtonian Scientist assignment due Monday, October 26.
-  \item Friday October 9 is a flex day (it absorbs Mountain Day, snow,
-        or wherever we're behind).
-  \item No class: Monday October 12 (autumn recess), Wednesday November
-        25 and Friday November 27 (Thanksgiving).
-  \item Final exam during the registrar's exam period, December 19-22.
+  \item Your instructor! I am here to help you. That's my job, so
+        don't think it's bothering me to have you reach out with
+        questions or concerns.
+  \item The Spinelli Center -- open hours, one-on-one appointments,
+        and math review workshops.\sidenote{\todonote{course tutor /
+        Learning Assistant names and tutoring hours, once assigned}}
+  \item Workshops for time management and managing stress (Tutoring
+        \& Learning Specialist Services).
+  \item Writing help from the Jacobson Center.
+  \item Crisis resources, counseling resources, and wellness services
+        (Schacht Center).
+  \item Resources for gender identity and expression.
+  \item Where to report sexual misconduct and other forms of
+        discrimination. Please note that your instructors are
+        Responsible Reporters.
 \end{itemize}
-
-\newpage
-
-\begin{description}
-  \item[Recommended Textbooks] \hfill \\
-        \textbf{The Feynman Lectures on Physics, Volume II} -- Chapters
-        2 and 3 are \emph{assigned reading} for our vector-calculus
-        unit: we will meet divergence and curl through Feynman's
-        physical, geometric definitions before we see the formulas in
-        Felder. This part of Feynman is extremely conversational and
-        readable, and you can read the whole thing free, with beautiful
-        typesetting, at \url{https://www.feynmanlectures.caltech.edu/}. \\
-        \textbf{Boas, Mathematical Methods in the Physical Sciences} --
-        the classic alternative presentation. If Felder's treatment of a
-        topic isn't clicking, try Boas's; I taught from her book for a
-        decade and am happy to point you at the parallel section. \\
-        \textbf{Schey, div grad curl and all that} -- an extremely
-        conversational introduction to (and refresher on) vector
-        calculus. \\
-        \textbf{Boyce and DiPrima, Elementary Differential Equations and
-        Boundary Value Problems} -- a thorough reference if you want
-        more depth on differential equations than we cover. \\
-        \textbf{Arfken and Weber, Mathematical Methods for Physicists}
-        -- an encyclopedic reference; too dry to learn from in this
-        course, but useful later in your career.
-
-  \item[Communication:] My preferred mode of communication is email. I
-        will check my email multiple times per day during the work
-        week. If you have sent me an email and have not heard back
-        from me within 24 hours (excluding weekends), you should email
-        me again or drop by my office to ask your question in
-        person. I cannot guarantee that I will regularly check my
-        email on evenings or on weekends.
-
-        I expect that you will check your Smith email at least once per
-        day. That is, 24 hours after sending an email to the class, it
-        is my expectation that all of you will have read that
-        email. Emailed assignments, due dates, policy changes, and
-        other course information carry the same weight as information
-        contained in the syllabus. Information relevant to the course
-        will also be posted to Moodle, and you are responsible for
-        checking Moodle with the same frequency.
-
-  \item[Workload Expectations:] This course should take about 12 hours
-        of your time per week: about 4 in class, and about 8 outside it
-        on reading, pre-class check-ins, homework problems, and review.
-        \textbf{If you find yourself spending significantly more (or
-        less) than this, please let me know ASAP! That's an
-        instructor-error that I can easily fix.}
-
-  \item[Contacting me about sensitive issues:] What if you have
-        something you want to talk about, but don't feel comfortable
-        doing so in a public (or non-anonymous) space? This often
-        comes up with issues of racism, sexism, and other kinds of
-        discrimination. It can come up with issues that relate to my
-        behavior, the behavior of your classmates, or the world in
-        general. Please feel {\it encouraged} to use either the
-        anonymous feedback form linked on Moodle, or to leave a written
-        note under my door. If you want to write a note, you may want
-        to type it up and print it out so that your handwriting is
-        further anonymized. Of course, if you feel comfortable and safe
-        doing so, you are also encouraged to talk publicly or
-        non-anonymously about these things! If you are not comfortable
-        with any of these options, the Resources section at the end of
-        this syllabus lists offices that can help, including
-        confidential ones.
-
-  \item[Tutoring and study help:] The Spinelli Center supports
-        quantitative courses across the college, with both drop-in
-        hours and one-on-one appointments, plus math review workshops.
-        \todonote{course tutor / Learning Assistant names and tutoring
-        hours, once assigned}.
-
-  \item[Diversity Statement:] I can hardly overstate how much inclusion,
-        equity and diversity considerations have shaped my entire thinking
-        around teaching and practicing physics. It affects everything from the
-        way that physics is framed historically to the way that it is
-        typically taught in your classrooms. My main goal is to create an
-        environment that tells all of us that we can do physics; that invites
-        people into physics who have never been invited, or who have been
-        explicitly excluded. In this class, the ``Non-Newtonian
-        Scientist'' assignment (due Monday, October 26) engages directly
-        with who does physics and how the standard physics canon got
-        assembled; the full prompt will be posted on Moodle.
-
-        Physics cannot be divorced from the world in which we study it. I
-        expect that we will recognize that in this class, and I expect
-        that we will create an inclusive and welcoming
-        environment. More specifically, I expect that we will strive
-        \textit{not} to create an environment that excludes
-        people. This is hard work. We will get things wrong. You will
-        get things wrong. \textit{I} will get things wrong. Especially
-        when I get things wrong, I encourage you to use any of the
-        channels above -- direct comments, the anonymous form, notes
-        under my door -- to tell me.
-
-        \newpage
-
-  \item[Grading:] Everything in this course is worth points, and the
-        course total is exactly 1000 points. Within each category, each
-        assignment is weighted equally.
-
-\setlength{\arrayrulewidth}{1mm}
-\setlength{\tabcolsep}{8pt}
-{\rowcolors{2}{green!80!yellow!50}{green!70!yellow!40}
-\begin{table}[H]
-\label{tab:overall-grade-weights-table}
-\begin{tabular}{lllll}
-\hline
-\textbf{Category} & \textbf{Number} & \textbf{Drop} & \textbf{Points each} & \textbf{Total} \\ \hline
-\textbf{Participation \& pre-class check-ins (PCCIs)} & 39 & 4 & 1 & 35 \\
-\textbf{Weekly homework (WHW)} & 13 & 1 & 25 & 300 \\
-\textbf{Non-Newtonian Scientist} & 1 & 0 & 25 & 25 \\
-\textbf{Quizzes (in class)} & 3 & 0 & 150 & 450 \\
-\textbf{Final exam} & 1 & 0 & 190 & 190 \\ \hline
-\textbf{Course total} & & & & \textbf{1000} \\ \hline
-\end{tabular}
-\end{table}
-}
-
-  \item[Pre-Class Check-Ins (PCCIs):] Most class days there will be a
-        short PCCI due at the start of class, on paper. Many of these
-        are the textbook's ``Discovery Exercises,'' designed to
-        introduce you to a topic \emph{before} we cover it; others are
-        short problems on material we've just covered. \textbf{You will
-        receive full credit for a good-faith effort that includes a
-        clear description of anything you are stuck on.} An incorrect
-        or incomplete answer \emph{without} such an explanation won't
-        receive full credit. For example, if the question were to
-        differentiate $f(g(x))$: ``I don't know'' earns nothing; the
-        correct answer earns full credit; and so does ``I think it's
-        $f'(g(x))$, except I know the chain rule says to do something
-        different because it's $f(g(x))$ and not just $x$ -- I'm not
-        clear on what, though.'' A PCCI should take you less than 15
-        minutes; if one doesn't, please tell me. Turning in the day's
-        PCCI is also how attendance is recorded, and your four lowest
-        participation days are dropped, so occasional absences and
-        off days cost you nothing.
-
-  \item[Weekly Homework (WHW):] This is basically a course in
-        problem-solving techniques. The most common and the most damaging
-        mistake a student can make in such a course is to yield to the
-        temptation to try and master the material by reading the text and
-        listening to the lectures while working a minimum of problems. While
-        reading and listening can give you valuable new ideas, problem-solving
-        skills are only efficiently developed by solving as many problems as
-        possible. For most students the understanding and knowledge gained
-        from this course will be in direct proportion to the number of
-        problems which they successfully complete.
-
-        Each week I will post a WHW problem list, organized in three
-        tiers: \textbf{Warm-up} (start here), \textbf{Essentials} (the
-        core -- if you can do these, you're on track), and
-        \textbf{Depth} (for when you want more). You are not expected
-        to do every problem; do whichever problems you need practice
-        on. If a tier starts to feel easy, that's a good sign that
-        you're comfortable with it. Answers to odd problems are in the
-        book's Appendix M
-        (\url{https://www.felderbooks.com/mathmethods/}).
-
-        Each Friday by the end of the day, you will turn in (on Moodle):
-        (1) a photograph of your written work on \textbf{at least one
-        problem} from that week's list, with a sentence or two about
-        where you got stuck or what you'd like feedback on, and (2) a
-        short reflection form. WHWs are graded on the same good-faith
-        standard as PCCIs: thoughtful engagement earns full credit.
-        \todonote{confirm final WHW turn-in structure before
-        distribution}
-
-  \item[Quizzes:] Three quizzes, in class, taking the full period, on
-        the Fridays listed above. Sample quizzes with solutions will be
-        posted beforehand, and quiz questions will be closely aligned
-        with the in-class problems and the WHW lists. Quizzes are
-        closed-book; you may bring \textbf{one 8.5$\times$11 sheet of
-        handwritten notes, both sides}. \todonote{calculator policy --
-        recommend: a basic calculator is fine; no phones, laptops, or
-        internet-connected devices} Each quiz covers material from
-        earlier weeks, never the week the quiz is given, and I will
-        announce the exact section coverage in class about a week
-        ahead. If you need accommodations, contact me well before the
-        quiz.
-
-  \item[Final exam (with redemption problems):] The final has two
-        parts. The \emph{required} part covers the last third of the
-        course (vector calculus, Fourier series, and PDEs). The rest
-        consists of \emph{optional redemption problems} drawn from the
-        three quizzes: if you do better on a redemption problem than
-        you did on the corresponding quiz problem, the new score
-        replaces the old one. There is no penalty for attempting a
-        redemption problem -- you cannot lose points. Do the required
-        problems first; then do as many redemption problems as you
-        want and have time for.
-
-  \item[Partial credit, and how to get it:] Several of the problems in
-        this class are quite challenging. For the harder problems, my
-        goal is to have you make the strongest possible effort toward
-        \textbf{understanding} the solution. Thus, if you cannot fully
-        solve a problem (on a quiz or the final), say whatever you can
-        about the way in which a solution would proceed from where you
-        stop; say whatever you can about the qualitative behavior of a
-        solution; say whatever you can about the physical meaning of
-        the solution. And always, always: \textbf{check your units},
-        and \textbf{plug your solution back into the original
-        equation}. You are never done solving a differential equation
-        until you have verified that your solution works.
-
-  \item[Late policy:] It is extremely hard to catch up on late work
-        (usually things are late because you are busy, and people
-        don't tend to get less busy!). That is why every category has
-        built-in drops: four participation days, one full WHW. My
-        strong suggestion, when life happens, is to use the drops and
-        prioritize getting your schedule back under control.
-
-        Beyond the drops: all students start the term with \textbf{3
-        free late passes}. You can spend a late pass to extend a WHW
-        (or the Non-Newtonian assignment) to the following class period
-        with no penalty. Late passes are not automatic -- email me
-        before the deadline to say you're using one, and once declared
-        it is spent whether or not you turn the work in by the extended
-        date. Late passes cannot be applied to PCCIs (their whole value
-        is priming you for that day's class -- the drops cover them),
-        to quizzes, or to the final. After your free passes are spent,
-        further extensions cost 10\%, then 20\%, and so on, of that
-        assignment's points.
-
-        \newpage
-
-  \item[Grade scale:] Grades are not curved. Final grades follow the
-        standard scale:
-
-\setlength{\arrayrulewidth}{1mm}
-\setlength{\tabcolsep}{8pt}
-{\rowcolors{2}{green!80!yellow!50}{green!70!yellow!40}
-\begin{table}[H]
-\label{tab:overall-grade-cutoffs-table}
-\begin{tabular}{llll}
-\hline
- \textbf{Grade} & \textbf{Range} & \textbf{Grade} & \textbf{Range} \\ \hline
-A  & 93-100\% & C+ & 77-79.9\% \\
-A- & 90-92.9\% & C  & 73-76.9\% \\
-B+ & 87-89.9\% & C- & 70-72.9\% \\
-B  & 83-86.9\% & D+ & 67-69.9\% \\
-B- & 80-82.9\% & D  & 63-66.9\% \\
-   &           & D- & 60-62.9\% \\
-   &           & E  & 0-59.9\% \\
-\end{tabular}
-\end{table}
-}
-
-  \item[Use of Artificial Intelligence:] AI is a powerful tool, and it
-        offers real potential to enhance your learning in this course.
-        Used improperly, it can genuinely hinder your development as a
-        physicist. You are welcome to use AI in this class, provided
-        you always adhere to the Honor Code: \textbf{using AI to solve
-        homework, PCCI, quiz, or exam problems is a violation of the
-        Honor Code and will be treated as such}, and any AI use in
-        work you submit must be cited, like any other source.
-
-        Two things are worth saying plainly. First, AI models make
-        subtle errors, hallucinate, and hand you technically-correct
-        solutions that teach you nothing; your job is to verify,
-        question, and ultimately understand the physics. Second --
-        and this matters in \emph{this} course specifically -- your
-        PCCIs and WHWs are graded on good-faith effort, not
-        correctness. There are no points available for a polished
-        answer. The only thing being graded is the record of
-        \emph{your} thinking, including where you got stuck; having an
-        AI polish that record destroys the one thing it's for. Where
-        AI genuinely helps: asking for alternative explanations of a
-        concept, checking your algebra \emph{after} you've done it,
-        and exploring beyond the course. [Adapted, with thanks, from
-        Will Raven.]
-
-  \item[Recording:] \todonote{finalize recording policy -- planned:
-        class projections are captured as PDFs and posted after each
-        class; some or all classes may be video-recorded and posted for
-        enrolled students}
-
-  \item[Academic Integrity and Honesty / Honor Code:] Students and
-        faculty at Smith are part of an academic community defined by
-        its commitment to scholarship, which depends on scrupulous and
-        attentive acknowledgement of all sources of information and
-        honest and respectful use of college resources. Smith College
-        expects all students to be honest and committed to the
-        principles of academic and intellectual integrity in their
-        preparation and submission of course work and examinations. All
-        submitted work of any kind must be the original work of the
-        student, who must cite all the sources used in its preparation
-        (including, for example, any AI tools). Students voted to
-        establish the academic honor system in 1944. The basis of the
-        Academic Honor Code is articulated in Article X of the SGA
-        Constitution and Article VII of the SGA Bylaws.
-
-        In this class specifically: you are encouraged to work together
-        on the WHW problems and to study together for quizzes, but
-        PCCIs should be attempted individually first, everything you
-        turn in must be your own work, and quizzes and the final must
-        be done individually.
-
-  \item[Academic Accommodations:] If you need classroom accommodations,
-        please contact me and include your letter from the
-        Accessibility Resource Center (ARC,
-        \href{mailto:arc@smith.edu}{arc@smith.edu}). I promise to be
-        flexible in meeting any documented need for accommodations in a
-        way that works well for you. If you would like some
-        accommodation but do not have an ARC letter, let me know and we
-        can discuss your concerns: with or without a letter, I want to
-        provide you the support you need to succeed in this course.
-
-  \item[Land Acknowledgment:] We acknowledge that we are on Indigenous
-        land: the territory of the Nipmuc people. We are grateful for
-        the opportunity to live, learn, and grow on this sacred land,
-        and extend our respect to citizens of this nation who live here
-        today, and to their ancestors who have lived here for hundreds
-        of generations. We recognize the repeated violations of
-        sovereignty, territory, and water perpetrated by invaders who
-        have impacted the original inhabitants of this land for 400
-        years. We know this acknowledgement is insufficient, and does
-        not undo the harm that has been done and continues to be
-        perpetrated now against Indigenous people and their land and
-        water.
-
-  \item[Course feedback:] During the last week of classes,
-        approximately 15 minutes at the beginning of one class will be
-        set aside for you to complete the course feedback
-        questionnaire.
-
-  \item[Resources:] There are many resources at Smith to help you
-        succeed in this course and in your college career. Here are
-        some:
-        \begin{itemize}
-          \item Your instructor! I am here to help you. That's my job,
-                so don't think it's bothering me to have you reach out
-                with questions or concerns.
-          \item The Spinelli Center -- open hours, one-on-one
-                appointments, and math review workshops.
-          \item Workshops for time management and managing stress
-                (Tutoring \& Learning Specialist Services).
-          \item Writing help from the Jacobson Center.
-          \item Crisis resources, counseling resources, and wellness
-                services (Schacht Center).
-          \item Resources for gender identity and expression.
-          \item Where to report sexual misconduct and other forms of
-                discrimination. Please note that your instructors are
-                Responsible Reporters.
-        \end{itemize}
-\end{description}
 
 \end{document}

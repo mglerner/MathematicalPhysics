@@ -34,6 +34,33 @@ which has the full materials map, item banks, and privacy-cleanup list).
   Taylor day's reading.
 - Math pretest ported to LaTeX (`Pretest/`); due-date placeholder
   Fri Sep 18 pending final calendar.
+- **Moodle: build our own course** (2026-08-18) -- do NOT restore
+  Gillian's backup. Topic-organized (Collapsed Topics format; ask ITS
+  about format_tiles), WHWs as NATIVE Moodle assignments (file upload
+  + online-text reflection; no Google Forms) so every deadline lands
+  on the students' Moodle calendar -- fixing S26's empty-calendar
+  failure. Full details: `MoodleBuildSpec.md` (the build is an
+  afternoon of clicking once the F2026 shell exists).
+- **Python assessed weekly, Gary-style** (2026-08-18): a required
+  small computational problem (Python, not Mathematica) on most WHWs
+  (~8-10 of 13), plus the Sep 28 onboarding class run as a full class
+  (bring laptops). BUILD TASK: draft the per-week computational items
+  (sources: Michael's Earlham notebooks, Gary's purple-tier problems,
+  the S26 ODE_basics notebook) and add them to the generator's WHW
+  lists; adjust WHW point/grading language if needed.
+- **AI-aware assignment design** (2026-08-18): an early-semester class
+  discussion (~15 min chunk, week 1-2) on how/whether AI belongs in
+  homework and computational work; norms co-written with students and
+  posted to Moodle alongside the syllabus policy. Computational
+  problems ask for predict-before-run / interpret-after / what-didn't-
+  work -- the parts AI polish erases.
+- **Chapter order confirmed as-inherited** (2026-08-18): the
+  1 -> 10 -> 3 -> 2 -> 6 -> 5 -> 8 -> 9 -> 11 sequence is
+  Gillian/Manbir's restructuring (Gary and Berger both ran
+  1,2,3,5,6,8,9,11 with no Ch 10); we keep it (materials + WHW/PCCI
+  machinery are keyed to it). Known wart: Laplace lands before
+  Euler's formula -- handled Manbir-style with an explicit IOU when
+  complex roots first appear.
 
 ## Post-calendar build task -- DONE 2026-08-17
 
@@ -58,9 +85,10 @@ WHW after them -- the final's practice set covers that material.
    WHW 13 drop 1 @ 25 = 300; Non-Newtonian 25; quizzes 3 @ 150; final
    190). Decide where PCCI credit lives -- candidate: PCCI turn-in IS
    the attendance/participation artifact (no new category needed).
-9. WHW turn-in component: keep the reflection form (7 S26 questions,
-   transcribed) but add "photograph one problem's work + one sentence on
-   where you got stuck," graded to Gary's good-faith standard. Decide.
+9. DECIDED 2026-08-18: WHW turn-in = native Moodle assignment, photo
+   of worked problem(s) as file upload + reflection questions answered
+   in the online-text box, good-faith graded. Encoded in
+   MoodleBuildSpec.md; syllabus updated.
 10. AI policy: start from Will Raven's F2025 version
     (`SmithPreMichaelArtifacts/PHY317 F2025 Syllabus.pdf`), not the
     older S26 copy; refresh the dated ChatGPT anecdotes with current
@@ -110,18 +138,20 @@ WHW after them -- the final's practice set covers that material.
     both sections; Quiz-2-Wednesday story; Apr 29 / May 1.
 23. Ask Manbir: F23 post-mortem (scope cut or overrun); real pacing.
 24. Ask ITS/AV + classroom: Panopto/Zoom recording setup, group
-    whiteboards in the assigned room.
+    whiteboards in McConnell 404, AND whether they'll install the
+    `format_tiles` Moodle course format (Collapsed Topics is the
+    fallback, already installed).
 25. Ask math dept: does MTH 212 still deliver the negotiated topics
     (Gary's listening-session memo says commitment != reality on
     cyl/sph coords and div/curl).
 
 ## Build tasks (after decisions)
 
-26. Moodle: restore the S26 .mbz into the F2026 shell; re-point all 20
-    Gillian-owned Google links (12 WHW forms, SMART/feedback/extension
-    forms, appointment calendar, schedule Sheet); set WHW due dates
-    (S26 left most unset); create the Final gradebook item; rename
-    date-stamped deck names.
+26. SUPERSEDED 2026-08-18 by MoodleBuildSpec.md: we build our own
+    course rather than restoring Gillian's backup (which stays as a
+    reference archive). No Google links to re-point -- the WHWs are
+    native assignments and the only surviving Google artifact is our
+    own anonymous-feedback form.
 27. Notebooks: delete %pip cells; swap in the fixed
     apply_initial_conditions() (tested replacement in the inventory
     outputs); add narration to Symmetry/FourierSeries; confirm posit

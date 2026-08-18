@@ -95,9 +95,16 @@ WHW after them -- the final's practice set covers that material.
     autumn recess Oct 10-13, Cromwell Day Nov 10, reading period +
     exam window. (MWF pattern + time/room VERIFIED 2026-08-17 via the
     course schedule listing: MWF 9:25-10:40, McConnell 404.)
-19. FIND the Non-Newtonian assignment prompt: not in the 360 archive
-    (grep confirmed); search Earlham 125/235 trees + EarlhamArtifacts.
-20. FIND the four-color card templates (Earlham directories).
+19. Non-Newtonian assignment prompt: CONFIRMED NOT ON DISK anywhere
+    (full-tree search 2026-08-18: the 125 2021-2023, 235 2021, and 480
+    2023 syllabi all MENTION it -- 30 pts in the 125 scheme -- but no
+    file contains the prompt; it was evidently Moodle-only at
+    Earlham). Options: check the June 2026 Earlham cloud extract for
+    Moodle content, ask an Earlham colleague for a Moodle export, or
+    rewrite it fresh (Michael authored the original).
+20. Four-color card templates: not found in the Earlham trees (search
+    2026-08-18). Michael to locate elsewhere or remake (a quarter-page
+    four-color PDF is a quick matplotlib job on request).
 21. DONE 2026-08-17: WHW 09 captured; all 12 S26 lists transcribed.
 22. Ask Gillian: schedule Google Sheet share; whether Ch 11 was cut in
     both sections; Quiz-2-Wednesday story; Apr 29 / May 1.

@@ -94,10 +94,13 @@ WHW after them -- the final's practice set covers that material.
     older S26 copy; refresh the dated ChatGPT anecdotes with current
     failure examples; add a line that effort-graded work (PCCI/WHW) is
     only worth doing un-assisted; keep consistent with PHY 317.
-11. Quiz machinery: coverage per quiz (S26: Q1 Ch 1; Q2 Ch 10+3+2; Q3
-    Ch 6+5 -- but see 5.5/5.7); one double-sided note sheet; pick ONE
-    calculator policy (S26 drifted mid-semester); v1/v2 variants;
-    practice set + solutions posted beforehand (S26 house style).
+11. Quiz machinery -- DECIDED 2026-08-18 in the syllabus: sample
+    quizzes + solutions posted beforehand (committed); questions
+    aligned with in-class problems and WHW lists; one double-sided
+    handwritten note sheet; basic calculator OK, no phones/laptops/
+    internet devices, documented accommodations always met. Still to
+    build: the actual quiz instruments (v1/v2 variants; item banks in
+    the inventory report).
 12. Final redemption rules: S26 model = original quiz problems verbatim,
     improvement retroactively restores quiz points. KEEP PER-PROBLEM
     QUIZ RECORDS (Gillian had to beg students for photos of their own

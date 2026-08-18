@@ -126,9 +126,12 @@ EXTRA_DUE = {
 # the 2026-08-17 inventory report. Timing calibration: Gary's students
 # reported ~8-27 min per DE (old/15F/Assigned Problems.docx).
 PCCI = {
-    date(2026, 9, 9): "Read the syllabus and the advice from former "
-                      "students; bring one question or comment",
-    date(2026, 9, 11): "DE 1.2.1",
+    # No PCCI on day 1 (nobody has the syllabus before the first
+    # class); first collection is day 2, matching Gary's practice.
+    # DE 1.2.1 is deliberately unassigned: class 01 does its content
+    # live (the y'=8x ladder).
+    date(2026, 9, 11): "Read the syllabus and the advice from former "
+                       "students; bring one question or comment",
     date(2026, 9, 14): "DE 1.3.1 Part 1",
     date(2026, 9, 16): "DE 1.5.1 Parts 1-5",
     date(2026, 9, 18): "DE 1.6.1 Parts 1-3",

@@ -163,3 +163,16 @@ WHW after them -- the final's practice set covers that material.
     (Math Review/Message to students.docx + attachments).
 29. Fix Manbir-deck errata before reusing any page (list in the report).
 30. Privacy cleanup pass over inherited trees (list in the report).
+
+31. Fluctuation-theorem Stage-0 seeds (added 2026-08-24; source:
+    `../../../FluctuationTheorems/ROADMAP.md`): fold into 210 as
+    Depth-tier WHW problems / small asides, costing no calendar
+    slots -- (a) Gaussian moment identity <e^(cX)> = e^(c mu + c^2
+    sigma^2/2) on a series/integration week; (b) Jensen's inequality
+    for e^x (state, two-point proof, picture); (c) Fourier transform
+    of e^(-a|t|) is a Lorentzian (Fourier week Depth); (d) linear
+    first-order ODE solution as convolution with e^(-t/tau) (Ch 1 or
+    10 Depth). Jacobians and the 2D divergence theorem are already
+    load-bearing course content (Ch 5 + the Feynman unit) -- no
+    action needed there. Each seed pays off in PHY 317's Liouville
+    aside and the eventual FT module.

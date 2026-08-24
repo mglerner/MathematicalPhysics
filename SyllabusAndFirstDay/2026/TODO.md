@@ -167,7 +167,15 @@ WHW after them -- the final's practice set covers that material.
 29. Fix Manbir-deck errata before reusing any page (list in the report).
 30. Privacy cleanup pass over inherited trees (list in the report).
 
-31. Fluctuation-theorem Stage-0 seeds (added 2026-08-24; source:
+31. WHW02's Moodle description needs a correction note for Felder
+    problem 1.43 (in its warm-up list): the book misprints
+    multiplications that should be divisions -- dy/dx = (1-2xy)/(x^2+1)
+    with solution y = (C+x)/(x^2+1). Verified against the publisher
+    solutions (prep-pack 03 build, 2026-08-24); Gillian announced the
+    same correction in class S26. Also fixed the same day: WHW03's
+    "1.29" was a transcription error for 1.129 (generator corrected).
+
+32. Fluctuation-theorem Stage-0 seeds (added 2026-08-24; source:
     `../../../FluctuationTheorems/ROADMAP.md`): fold into 210 as
     Depth-tier WHW problems / small asides, costing no calendar
     slots -- (a) Gaussian moment identity <e^(cX)> = e^(c mu + c^2

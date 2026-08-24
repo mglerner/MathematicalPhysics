@@ -143,7 +143,9 @@ WHW after them -- the final's practice set covers that material.
 24. Ask ITS/AV + classroom: Panopto/Zoom recording setup, group
     whiteboards in McConnell 404, AND whether they'll install the
     `format_tiles` Moodle course format (Collapsed Topics is the
-    fallback, already installed).
+    fallback, already installed). Also confirm the core Feedback
+    activity is enabled (it's the anonymous-comments channel; Gillian
+    never used one, so her backup can't confirm it).
 25. Ask math dept: does MTH 212 still deliver the negotiated topics
     (Gary's listening-session memo says commitment != reality on
     cyl/sph coords and div/curl).

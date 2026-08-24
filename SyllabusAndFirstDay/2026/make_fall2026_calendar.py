@@ -193,7 +193,10 @@ WHWS = [
      "Arbitrary constants: 1.60. Separation of variables: 1.105"),
     (3, "Guess and check, superposition (1.6); linear operators (10.2)",
      "Guess and check: 1.108, 1.109",
-     "Guess and check: 1.111, 1.113, 1.117, 1.122, 1.29. "
+     # 1.129 (linearity/homogeneity/superposition tester), NOT 1.29 (a
+     # slope-fields problem from cut section 1.4) -- transcription fix
+     # 2026-08-24 from the S26 form screenshots.
+     "Guess and check: 1.111, 1.113, 1.117, 1.122, 1.129. "
      "Sec 10.2: 10.13, 10.26, 10.31",
      "Guess and check: 1.125, 1.131. Sec 10.2: 10.32, 10.33"),
     (4, "ODEs in Python; Heaviside, Dirac, Laplace (10.10)",

@@ -22,9 +22,11 @@ S26 failed to do (her calendar was empty; WHW 03+ had no due dates).
 
 0. **General / Course Information** -- syllabus PDF; link to the
    schedule Google Sheet (embed up top); posit.smith.edu pointer;
-   office-hours info; anonymous feedback form link (rebuild as
-   Michael's own Google Form -- the ONE surviving Google artifact);
-   week-1 office-hours scheduling poll (temporary).
+   office-hours info; anonymous feedback via a Moodle Feedback
+   activity (anonymous mode, "allow multiple submissions" on, one
+   open-ended textarea question; matches the syllabus's "anonymous
+   Moodle comments" channel); week-1 office-hours scheduling poll
+   (temporary).
 1. **Homework (WHW)** -- standing section, Will-style: the 13 WHW
    assignments + the WHW problem lists (paste each week's tiers into
    the assignment description; the xlsx WHW tab is the source).
@@ -124,7 +126,8 @@ demos fold into class decks instead.
 
 ## Deliberately NOT doing
 
-- No restore of Gillian's .mbz (reference only). No Google Forms for
-  WHWs. No posted full-textbook scan, no instructor-solutions-manual
+- No restore of Gillian's .mbz (reference only). No Google Forms at
+  all -- WHWs and anonymous feedback are both native Moodle
+  activities. No posted full-textbook scan, no instructor-solutions-manual
   excerpts (copyright; see the 317 lesson). No extension-request form
   (late passes are declared by email, per the syllabus).

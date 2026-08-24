@@ -153,8 +153,9 @@ WHW after them -- the final's practice set covers that material.
 26. SUPERSEDED 2026-08-18 by MoodleBuildSpec.md: we build our own
     course rather than restoring Gillian's backup (which stays as a
     reference archive). No Google links to re-point -- the WHWs are
-    native assignments and the only surviving Google artifact is our
-    own anonymous-feedback form.
+    native assignments and anonymous feedback is a Moodle Feedback
+    activity (decided 2026-08-24; was briefly a Google Form). The
+    only surviving Google artifact is the schedule Sheet embed.
 27. Notebooks: delete %pip cells; swap in the fixed
     apply_initial_conditions() (tested replacement in the inventory
     outputs); add narration to Symmetry/FourierSeries; confirm posit

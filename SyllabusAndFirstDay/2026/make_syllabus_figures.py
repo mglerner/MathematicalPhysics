@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """Margin figures for the F2026 PHY 210 syllabus (tufte-handout).
 
-  coupled_oscillators.pdf : two coupled SHOs trading energy (beats);
+  coupled_oscillators.pdf : the Felder Sec 6.9 worked example (p. 337);
                             the week 7-9 eigenvector/normal-mode payoff.
   heat_equation.pdf       : heat-equation relaxation of a hot bar;
                             the week 15 PDE finale.
@@ -23,18 +23,19 @@ plt.rcParams.update({
 
 
 def coupled_oscillators():
-    # Equal masses/outer springs with weak coupling: x1(0)=1, x2(0)=0,
-    # released from rest -> energy slowly trades between the two masses.
-    w1, w2 = 9.0, 10.0
-    t = np.linspace(0, 12.5, 2000)
-    x1 = 0.5 * (np.cos(w1 * t) + np.cos(w2 * t))
-    x2 = 0.5 * (np.cos(w1 * t) - np.cos(w2 * t))
+    # The worked example on p. 337 (Felder & Felder Sec 6.9): the
+    # coupled system xddot1 = -3x1 - 2x2, xddot2 = -x1 - 2x2 with
+    # x1(0)=3, x2(0)=-9, released from rest. Normal modes (1, 1/2) at
+    # omega=2 and (1, -1) at omega=1.
+    t = np.linspace(0, 4 * np.pi, 2000)
+    x1 = -4 * np.cos(2 * t) + 7 * np.cos(t)
+    x2 = -2 * np.cos(2 * t) - 7 * np.cos(t)
     # Colors validated (dataviz six-checks, light surface): CVD-safe pair.
     fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(2.1, 1.5), sharex=True)
     for ax, x, lab, c in ((ax1, x1, "$x_1$", "#4C72B0"),
                           (ax2, x2, "$x_2$", "#C44E52")):
         ax.plot(t, x, color=c, lw=0.7)
-        ax.set_ylim(-1.25, 1.25)
+        ax.set_ylim(-11.5, 11.5)
         ax.set_xticks([])
         ax.set_yticks([])
         for s in ("top", "right", "left", "bottom"):

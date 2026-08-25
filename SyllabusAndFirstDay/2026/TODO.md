@@ -123,6 +123,13 @@ WHW after them -- the final's practice set covers that material.
 
 ## External / verify / find
 
+17a. Mid-semester feedback on Moodle (decided 2026-08-25, BOTH
+    courses): anonymous Feedback activity, open around fall break, >=
+    three questions (working well / not working + how can the
+    instructor improve / what can you as the student do). Encoded in
+    MoodleBuildSpec.md section 0; mirror in the 317 build when that
+    course's Moodle gets set up.
+
 18. VERIFY with registrar: add (Sep 14) / drop (Sep 22) deadlines,
     autumn recess Oct 10-13, Cromwell Day Nov 10, reading period +
     exam window. (MWF pattern + time/room VERIFIED 2026-08-17 via the

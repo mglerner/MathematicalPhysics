@@ -90,15 +90,16 @@ edit) -- see TODO.
 
 ## Gradebook (mirrors the 1000-point scheme, natively)
 
-Categories (aggregation: Natural):
-- Participation & PCCIs -- 35 pts. PCCIs are graded on PAPER; enter
+Categories (aggregation: Natural; participation weight raised
+2026-08-25 -- 2 pts/day):
+- Participation & PCCIs -- 70 pts. PCCIs are graded on PAPER; enter
   into Moodle as manual grade item(s). Simplest: two manual items
-  ("Participation through fall break" ~ /17, "Participation after" ~
-  /18) entered twice a semester; drops handled on paper tally.
+  ("Participation through fall break" ~ /34, "Participation after" ~
+  /36) entered twice a semester; drops handled on paper tally.
 - WHW -- 13 x 25, **droplow = 1** set on the category.
 - Non-Newtonian -- 25.
-- Quizzes -- 3 manual items @ 150 (paper quizzes).
-- Final -- manual item @ 190.
+- Quizzes -- 3 manual items @ 140 (paper quizzes).
+- Final -- manual item @ 185.
 Total 1000; verify against the Grade Categories sheet from the
 generator.
 

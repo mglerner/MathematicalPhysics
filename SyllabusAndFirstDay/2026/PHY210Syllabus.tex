@@ -19,6 +19,21 @@
 \usepackage{units}
 \usepackage{multicol}
 
+% Underline every link (hyperref is loaded by tufte-handout).
+% \uline (ulem, normalem so \emph stays italic) breaks at spaces, so
+% \href text wraps fine; wrapped \url loses url.sty's mid-URL break
+% points, so keep URLs short or pre-broken if the margin overflows.
+\usepackage[normalem]{ulem}
+% \uline text can't hyphenate, so give TeX slack to loosen lines
+% instead of overflowing into the margin.
+\setlength{\emergencystretch}{1.5em}
+\AtBeginDocument{%
+  \let\syllabushref\href
+  \renewcommand{\href}[2]{\syllabushref{#1}{\uline{#2}}}%
+  \let\syllabusurl\url
+  \renewcommand{\url}[1]{\uline{\syllabusurl{#1}}}%
+}
+
 \newcommand{\todonote}[1]{{\color{red} \textbf{[TODO: #1]}}}
 
 \title{PHY 210: Mathematical Methods of Physical Sciences and
@@ -37,7 +52,7 @@
   \textbf{Class:} MWF 9:25--10:40, McConnell 404\\
   First meeting Wed Sep 9\\
   Last meeting Mon Dec 14\\[4pt]
-  \textbf{Office hours:} {\color{red}\textbf{TO BE SET} after the
+  \textbf{Help Sessions (Office hours):} {\color{red}\textbf{TO BE SET} after the
   week-1 scheduling
   \href{https://www.when2meet.com/?38080171-R99td}{poll}}. I also
   have an open-door policy: stop in
@@ -45,7 +60,7 @@
   \textbf{Text:} Felder \& Felder, \textit{Mathematical Methods in
   Engineering and Physics} (some sections and all answers to odd
   problems are free at
-  \url{https://www.felderbooks.com/mathmethods/})\\[4pt]
+  \href{https://www.felderbooks.com/mathmethods/}{felderbooks.com/mathmethods})\\[4pt]
   \textbf{Website:} Moodle\\
   \textbf{Python:} \url{https://posit.smith.edu} -- nothing to
   install or buy
@@ -172,7 +187,7 @@ through Feynman's physical, geometric definitions before we see the
 formulas in Felder.\sidenote{This part of Feynman is extremely
 conversational and readable, and you can read the whole thing free,
 with beautiful typesetting, at
-\url{https://www.feynmanlectures.caltech.edu/}.}
+\href{https://www.feynmanlectures.caltech.edu/}{feynmanlectures.caltech.edu}.}
 
 \section{How the course works}\label{sec:machinery}
 
@@ -187,11 +202,11 @@ equally.
     \textbf{Category} & \textbf{Number} & \textbf{Drop} &
     \textbf{Each} & \textbf{Total}\\
     \midrule
-    Participation \& pre-class check-ins (PCCIs) & 39 & 4 & 1 & 35\\
+    Participation \& pre-class check-ins (PCCIs) & 39 & 4 & 2 & 70\\
     Weekly homework (WHW) & 13 & 1 & 25 & 300\\
     Non-Newtonian Scientist & 1 & 0 & 25 & 25\\
-    Quizzes (in class) & 3 & 0 & 150 & 450\\
-    Final exam & 1 & 0 & 190 & 190\\
+    Quizzes (in class) & 3 & 0 & 140 & 420\\
+    Final exam & 1 & 0 & 185 & 185\\
     \midrule
     \textbf{Course total} & & & & \textbf{1000}\\
     \bottomrule
@@ -251,7 +266,8 @@ you find you need practice on. If it starts to be too easy, that's a
 good sign that you're comfortable with it! If it remains challenging,
 reach out to me or go to tutoring hours for some
 help.\sidenote{Answers to odd problems are in the book's Appendix M,
-free at \url{https://www.felderbooks.com/mathmethods/}.}
+free at
+\href{https://www.felderbooks.com/mathmethods/}{felderbooks.com/mathmethods}.}
 
 Most weeks, one problem on the list is \textbf{required and
 computational} (Python, on \url{https://posit.smith.edu}); everything
@@ -556,7 +572,7 @@ help you succeed in this course and in your college career:
         \href{https://www.smith.edu/your-campus/offices-services/equity-inclusion}{Office
         for Equity and Inclusion} in general.
   \item \href{https://www.smith.edu/discover-smith/governance/institutional-policies/title-ix-smith-college}{Where
-        to report sexual misconduct and other forms of
+        to report sexual misconduct and other
         discrimination}. Please note that your instructors are
         \href{https://www.smith.edu/discover-smith/governance/title-ix-smith-college/responsible-reporters}{Responsible
         Reporters}.

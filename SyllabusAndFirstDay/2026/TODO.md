@@ -81,9 +81,10 @@ WHW after them -- the final's practice set covers that material.
    MTH 212 & PHY 111/117/119. Office filled: McConnell 303. Remaining
    red [TODO] markers: office hours, tutor names, WHW turn-in
    structure confirm, calculator policy confirm, recording policy.
-8. Grading table = the 1000-point scheme (attendance 39 drop 4 @ 1;
-   WHW 13 drop 1 @ 25 = 300; Non-Newtonian 25; quizzes 3 @ 150; final
-   190). Decide where PCCI credit lives -- candidate: PCCI turn-in IS
+8. Grading table = the 1000-point scheme (UPDATED 2026-08-25, more
+   participation credit: attendance 39 drop 4 @ 2 = 70; WHW 13 drop 1
+   @ 25 = 300; Non-Newtonian 25; quizzes 3 @ 140 = 420; final 185).
+   Decide where PCCI credit lives -- candidate: PCCI turn-in IS
    the attendance/participation artifact (no new category needed).
 9. DECIDED 2026-08-18: WHW turn-in = native Moodle assignment, photo
    of worked problem(s) as file upload + reflection questions answered

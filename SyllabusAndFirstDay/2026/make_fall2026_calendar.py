@@ -415,15 +415,17 @@ def build(outpath):
     for cell in gc[1]:
         cell.font = header_font
         cell.fill = header_fill
-    # Michael's decided scheme (2026-08-11). Course total must be exactly
-    # 1000 points. pts_cell, when set, is the formula written to the sheet
-    # (Non-Newtonian Scientist is worth one homework, by reference).
+    # Michael's decided scheme (2026-08-11; participation weight raised
+    # 2026-08-25: 2 pts/day, quizzes 150->140, final 190->185). Course
+    # total must be exactly 1000 points. pts_cell, when set, is the
+    # formula written to the sheet (Non-Newtonian Scientist is worth one
+    # homework, by reference).
     cats = [
-        ("Attendance/participation", 39, 4, 1, None),
+        ("Attendance/participation", 39, 4, 2, None),
         ("Written Homework (WHW)", 13, 1, 25, None),
         ("Non-Newtonian Scientist", 1, 0, 25, "=D3"),
-        ("Quizzes", 3, 0, 150, None),
-        ("Final exam", 1, 0, 190, None),
+        ("Quizzes", 3, 0, 140, None),
+        ("Final exam", 1, 0, 185, None),
     ]
     total = sum((num - drop) * pts for _, num, drop, pts, _ in cats)
     assert total == 1000, f"grade categories sum to {total}, not 1000"

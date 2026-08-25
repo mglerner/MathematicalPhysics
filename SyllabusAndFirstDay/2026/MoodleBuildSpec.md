@@ -27,6 +27,15 @@ S26 failed to do (her calendar was empty; WHW 03+ had no due dates).
    open-ended textarea question; matches the syllabus's "anonymous
    Moodle comments" channel); week-1 office-hours scheduling poll
    (temporary).
+
+   Also a SECOND Feedback activity (decided 2026-08-25, both
+   courses): **mid-semester feedback**, anonymous, hidden until
+   mid-October (open it around fall break, before Quiz 2), at least
+   these three questions as textareas:
+   1. What's working well?
+   2. What's not working well, and how can the instructor make
+      things better?
+   3. What can you, as the student, do to make the class better?
 1. **Homework (WHW)** -- standing section, Will-style: the 13 WHW
    assignments + the WHW problem lists (paste each week's tiers into
    the assignment description; the xlsx WHW tab is the source).

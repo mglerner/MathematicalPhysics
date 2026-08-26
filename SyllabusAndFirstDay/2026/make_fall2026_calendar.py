@@ -382,6 +382,32 @@ def build(outpath):
             col = openpyxl.utils.get_column_letter(1 + b * 9 + j)
             ws.column_dimensions[col].width = w
 
+    # ------------------------------------------- Schedule (web), single
+    # block: one continuous table that fits Moodle's ~830px content
+    # column when the tab is embedded via Publish-to-web (the
+    # two-block Schedule sheet is ~1600px wide and can't fit).
+    wsw = wb.create_sheet("Schedule (web)")
+    for j, h in enumerate(headers, start=1):
+        cell = wsw.cell(row=1, column=j, value=h)
+        cell.font = header_font
+        cell.fill = header_fill
+        cell.border = border
+    for i, (wk, cn, d, topic, reading, pcci, hw, exam) in enumerate(
+            rows, start=2):
+        vals = [wk, cn, d.strftime("%a %b %-d"), topic, reading,
+                pcci, hw, exam]
+        for j, v in enumerate(vals, start=1):
+            cell = wsw.cell(row=i, column=j, value=v)
+            cell.border = border
+            cell.alignment = wrap
+            if cn is None:
+                cell.fill = break_fill
+            elif exam:
+                cell.fill = exam_fill
+    for j, w in enumerate([5, 5, 10, 34, 11, 18, 10, 14]):
+        col = openpyxl.utils.get_column_letter(1 + j)
+        wsw.column_dimensions[col].width = w
+
     # ----------------------------------------------- WHW problem lists
     whw = wb.create_sheet("WHW Problem Lists")
     note = ("The following problems are useful practice for the week. "

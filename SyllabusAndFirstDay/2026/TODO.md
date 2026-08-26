@@ -154,6 +154,10 @@ WHW after them -- the final's practice set covers that material.
     fallback, already installed). Also confirm the core Feedback
     activity is enabled (it's the anonymous-comments channel; Gillian
     never used one, so her backup can't confirm it).
+    RESOLVED 2026-08-26 during the build: no format_tiles (Collapsed
+    Topics confirmed as the format) and the Feedback module IS
+    available with anonymous mode -- both Moodle questions closed.
+    Remaining ITS asks: recording setup, McConnell 404 whiteboards.
 25. Ask math dept: does MTH 212 still deliver the negotiated topics
     (Gary's listening-session memo says commitment != reality on
     cyl/sph coords and div/curl).

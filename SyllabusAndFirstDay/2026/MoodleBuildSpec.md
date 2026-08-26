@@ -21,7 +21,13 @@ S26 failed to do (her calendar was empty; WHW 03+ had no due dates).
 ## Sections (~12 collapsed topics)
 
 0. **General / Course Information** -- syllabus PDF; link to the
-   schedule Google Sheet (embed up top); posit.smith.edu pointer;
+   schedule Google Sheet (embed up top; built 2026-08-26 as a Page
+   with a Publish-to-web iframe -- full-bleed CSS to escape Boost's
+   ~830px column: width:96vw + left:50% + translateX(-50%). CAUTION:
+   the Sheet is a COPY of the generator's xlsx -- after any calendar
+   regeneration, re-import via File -> Import -> Replace spreadsheet
+   or the embed drifts from the plan of record); posit.smith.edu
+   pointer;
    office-hours info; anonymous feedback via a Moodle Feedback
    activity (anonymous mode, "allow multiple submissions" on, one
    open-ended textarea question; matches the syllabus's "anonymous

@@ -65,3 +65,6 @@ JSAnimation
 #    Dropbox-synced dir pointing at another Dropbox dir confuses sync)
 private
 privateEarlham
+
+# Emacs AUCTeX parse caches
+auto/

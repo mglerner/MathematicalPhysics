@@ -386,18 +386,32 @@ def build(outpath):
     # block: one continuous table that fits Moodle's ~830px content
     # column when the tab is embedded via Publish-to-web (the
     # two-block Schedule sheet is ~1600px wide and can't fit).
+    # Written as TWO CHUNKS, each starting with its own header row,
+    # split at fall break: the Moodle Page embeds chunk 1's range
+    # until fall break, then chunk 2's (one URL-parameter edit; see
+    # MoodleBuildSpec.md). The ranges are printed on every run.
     wsw = wb.create_sheet("Schedule (web)")
-    for j, h in enumerate(headers, start=1):
-        cell = wsw.cell(row=1, column=j, value=h)
-        cell.font = header_font
-        cell.fill = header_fill
-        cell.border = border
-    for i, (wk, cn, d, topic, reading, pcci, hw, exam) in enumerate(
-            rows, start=2):
+    chunk2_start = date(2026, 10, 14)  # first class after autumn recess
+
+    def web_header(r):
+        for j, h in enumerate(headers, start=1):
+            cell = wsw.cell(row=r, column=j, value=h)
+            cell.font = header_font
+            cell.fill = header_fill
+            cell.border = border
+
+    web_header(1)
+    r, split_row = 1, None
+    for (wk, cn, d, topic, reading, pcci, hw, exam) in rows:
+        if split_row is None and d >= chunk2_start:
+            r += 1
+            web_header(r)
+            split_row = r
+        r += 1
         vals = [wk, cn, d.strftime("%a %b %-d"), topic, reading,
                 pcci, hw, exam]
         for j, v in enumerate(vals, start=1):
-            cell = wsw.cell(row=i, column=j, value=v)
+            cell = wsw.cell(row=r, column=j, value=v)
             cell.border = border
             cell.alignment = wrap
             if cn is None:
@@ -407,6 +421,8 @@ def build(outpath):
     for j, w in enumerate([5, 5, 10, 34, 11, 18, 10, 14]):
         col = openpyxl.utils.get_column_letter(1 + j)
         wsw.column_dimensions[col].width = w
+    print(f"Schedule (web) embed ranges: chunk 1 = A1:H{split_row - 1}, "
+          f"chunk 2 = A{split_row}:H{r}")
 
     # ----------------------------------------------- WHW problem lists
     whw = wb.create_sheet("WHW Problem Lists")

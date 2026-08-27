@@ -199,3 +199,9 @@ WHW after them -- the final's practice set covers that material.
     load-bearing course content (Ch 5 + the Feynman unit) -- no
     action needed there. Each seed pays off in PHY 317's Liouville
     aside and the eventual FT module.
+
+33. AT FALL BREAK (Tue Oct 13, no class): switch the Moodle schedule
+    embed to the 2nd half -- edit the Course Calendar Page, range
+    `A1:H16` -> `A17:H45`. Also: open the mid-semester feedback
+    activity the same week. Carry this into the class-15 (Wed Oct 14)
+    prep pack when it gets built.

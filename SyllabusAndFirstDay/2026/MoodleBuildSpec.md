@@ -94,9 +94,10 @@ chunk 1 = A1:H16 (Sep 9 - Oct 12), chunk 2 = A17:H45 (Oct 14 on).
   `&range=A1:H16`, width:100%, height ~800, border 0. Below it, a
   plain link to the unranged published URL labeled "full-semester
   calendar".
-- AT FALL BREAK (course-level Moodle calendar event, Tue Oct 13:
-  "switch schedule embed to 2nd half"): edit the Page, change the
-  range parameter to `A17:H45`. 30 seconds.
+- AT FALL BREAK: edit the Page, change the range parameter to
+  `A17:H45`. 30 seconds. Reminder lives in Michael's own planning
+  (TODO item + the class-15 prep pack when built), NOT as a Moodle
+  calendar event -- course-level events are student-visible.
 - After ANY calendar regeneration: re-import (above) AND check the
   printed ranges still match the Page's range parameter.
 

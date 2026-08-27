@@ -67,7 +67,9 @@ packs) get attached to the topic sections; 10 are plain book
 problems; 3 are one-line authored instructions. Students turn in
 their own paper at the start of class -- there is no worksheet.
 Gillian never ran PCCIs at all (S26 tree has zero mentions), so
-Gary's decade of practice is the only, and sufficient, precedent. Section summaries carry a one-line "when we're here" note
+Gary's decade of practice is the only, and sufficient, precedent.
+
+Section summaries carry a one-line "when we're here" note
 instead of week numbers (topic sections age better than week sections
 when the schedule slips).
 

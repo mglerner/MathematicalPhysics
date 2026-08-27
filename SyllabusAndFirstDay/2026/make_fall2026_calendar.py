@@ -1,8 +1,11 @@
 """Generate the Fall 2026 PHY 210 (Mathematical Physics, Smith) course calendar.
 
-Format follows EarlhamArtifacts/P125 F2025 Calendar.xlsx: a "Schedule" sheet
-with Week | Class | Date | Topics | Reading Due | HW Due | Exams, in two
-side-by-side half-semester blocks, plus a "Grade Categories" sheet skeleton.
+Layout (2026-08-27): a single-block "Schedule" sheet with
+Week | Class | Date | Topics | Reading Due | PCCI | HW Due | Exams,
+written as two chunks (header row repeated) split at fall break for
+the half-semester Moodle embed, plus "WHW Problem Lists" and a
+"Grade Categories" sheet skeleton. The old two-side-by-side-blocks
+print layout (P125 style) lives in git history before this date.
 Content follows the previous Smith professor's Spring '26 PHY 210 sequence
 (Felder & Felder), remapped onto the Smith Fall 2026 academic calendar.
 
@@ -353,44 +356,13 @@ def build(outpath):
 
     headers = ["Week", "Class", "Date", "Topics", "Reading Due", "PCCI",
                "HW Due", "Exams"]
-    # two side-by-side blocks, like the P125 calendar: cols A-H and J-Q
-    half = (len(rows) + 1) // 2
-    blocks = [rows[:half], rows[half:]]
-    for b, block in enumerate(blocks):
-        c0 = 1 + b * 9  # A=1, J=10
-        for j, h in enumerate(headers):
-            cell = ws.cell(row=1, column=c0 + j, value=h)
-            cell.font = header_font
-            cell.fill = header_fill
-            cell.border = border
-        for i, (wk, cn, d, topic, reading, pcci, hw, exam) in enumerate(
-                block, start=2):
-            vals = [wk, cn, d.strftime("%a %b %-d"), topic, reading,
-                    pcci, hw, exam]
-            for j, v in enumerate(vals):
-                cell = ws.cell(row=i, column=c0 + j, value=v)
-                cell.border = border
-                cell.alignment = wrap
-                if cn is None:
-                    cell.fill = break_fill
-                elif exam:
-                    cell.fill = exam_fill
-
-    widths = [6, 6, 11, 40, 12, 20, 12, 20]
-    for b in range(2):
-        for j, w in enumerate(widths):
-            col = openpyxl.utils.get_column_letter(1 + b * 9 + j)
-            ws.column_dimensions[col].width = w
-
-    # ------------------------------------------- Schedule (web), single
-    # block: one continuous table that fits Moodle's ~830px content
-    # column when the tab is embedded via Publish-to-web (the
-    # two-block Schedule sheet is ~1600px wide and can't fit).
-    # Written as TWO CHUNKS, each starting with its own header row,
-    # split at fall break: the Moodle Page embeds chunk 1's range
-    # until fall break, then chunk 2's (one URL-parameter edit; see
-    # MoodleBuildSpec.md). The ranges are printed on every run.
-    wsw = wb.create_sheet("Schedule (web)")
+    # Single canonical block (the old two-block print layout is in git
+    # history; superseded 2026-08-27). Written as TWO CHUNKS, each
+    # starting with its own header row, split at fall break: the
+    # Moodle Page embeds chunk 1's range until fall break, then chunk
+    # 2's (one URL-parameter edit; see MoodleBuildSpec.md). The
+    # ranges are printed on every run.
+    wsw = ws
     chunk2_start = date(2026, 10, 14)  # first class after autumn recess
 
     def web_header(r):
@@ -399,6 +371,7 @@ def build(outpath):
             cell.font = header_font
             cell.fill = header_fill
             cell.border = border
+            cell.alignment = wrap
 
     web_header(1)
     r, split_row = 1, None
@@ -418,10 +391,10 @@ def build(outpath):
                 cell.fill = break_fill
             elif exam:
                 cell.fill = exam_fill
-    for j, w in enumerate([5, 5, 10, 34, 11, 18, 10, 14]):
+    for j, w in enumerate([7, 7, 10, 34, 12, 18, 10, 14]):
         col = openpyxl.utils.get_column_letter(1 + j)
         wsw.column_dimensions[col].width = w
-    print(f"Schedule (web) embed ranges: chunk 1 = A1:H{split_row - 1}, "
+    print(f"Schedule embed ranges: chunk 1 = A1:H{split_row - 1}, "
           f"chunk 2 = A{split_row}:H{r}")
 
     # ----------------------------------------------- WHW problem lists

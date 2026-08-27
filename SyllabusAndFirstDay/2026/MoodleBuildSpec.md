@@ -73,7 +73,9 @@ when the schedule slips).
 
 ## Schedule embed (decided 2026-08-27, revives Michael's old design)
 
-The xlsx's "Schedule (web)" tab is written as TWO CHUNKS, each with
+The xlsx's "Schedule" tab (the single canonical tab as of
+2026-08-27; the old two-block print layout is in git history) is
+written as TWO CHUNKS, each with
 its own header row, split at fall break -- so the embed always shows
 the currently-relevant part of the semester without scrolling. The
 generator prints the ranges on every run; for the current build:
@@ -83,7 +85,7 @@ chunk 1 = A1:H16 (Sep 9 - Oct 12), chunk 2 = A17:H45 (Oct 14 on).
   updated ONLY via File -> Import -> Upload -> "Replace spreadsheet"
   with the regenerated xlsx. NEVER re-convert a fresh upload -- that
   mints a new document and orphans the published URLs.
-- Publish to web -> Embed -> "Schedule (web)" tab; auto-republish ON;
+- Publish to web -> Embed -> "Schedule" tab; auto-republish ON;
   access restriction OFF (restricted iframes break for students
   whose browsers block third-party cookies).
 - The Course Calendar Page's iframe = published URL +

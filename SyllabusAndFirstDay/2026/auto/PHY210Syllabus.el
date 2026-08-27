@@ -6,7 +6,7 @@
    (TeX-add-to-alist 'LaTeX-provided-class-options
                      '(("tufte-handout" "")))
    (TeX-add-to-alist 'LaTeX-provided-package-options
-                     '(("amsmath" "") ("graphicx" "") ("booktabs" "") ("units" "") ("multicol" "")))
+                     '(("amsmath" "") ("graphicx" "") ("booktabs" "") ("units" "") ("multicol" "") ("ulem" "normalem")))
    (TeX-run-style-hooks
     "latex2e"
     "tufte-handout"
@@ -15,9 +15,14 @@
     "graphicx"
     "booktabs"
     "units"
-    "multicol")
+    "multicol"
+    "ulem")
    (TeX-add-symbols
-    '("todonote" 1))
+    '("todonote" 1)
+    '("url" 1)
+    '("href" 2)
+    "syllabushref"
+    "syllabusurl")
    (LaTeX-add-labels
     "fig:coupled"
     "sec:prereqs"

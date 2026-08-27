@@ -20,13 +20,8 @@ S26 failed to do (her calendar was empty; WHW 03+ had no due dates).
 
 ## Sections (~12 collapsed topics)
 
-0. **General / Course Information** -- syllabus PDF; link to the
-   schedule Google Sheet (embed up top; built 2026-08-26 as a Page
-   with a Publish-to-web iframe -- full-bleed CSS to escape Boost's
-   ~830px column: width:96vw + left:50% + translateX(-50%). CAUTION:
-   the Sheet is a COPY of the generator's xlsx -- after any calendar
-   regeneration, re-import via File -> Import -> Replace spreadsheet
-   or the embed drifts from the plan of record); posit.smith.edu
+0. **General / Course Information** -- syllabus PDF; the Course
+   Calendar Page (see "Schedule embed" below); posit.smith.edu
    pointer;
    office-hours info; anonymous feedback via a Moodle Feedback
    activity (anonymous mode, "allow multiple submissions" on, one
@@ -75,6 +70,31 @@ Gillian never ran PCCIs at all (S26 tree has zero mentions), so
 Gary's decade of practice is the only, and sufficient, precedent. Section summaries carry a one-line "when we're here" note
 instead of week numbers (topic sections age better than week sections
 when the schedule slips).
+
+## Schedule embed (decided 2026-08-27, revives Michael's old design)
+
+The xlsx's "Schedule (web)" tab is written as TWO CHUNKS, each with
+its own header row, split at fall break -- so the embed always shows
+the currently-relevant part of the semester without scrolling. The
+generator prints the ranges on every run; for the current build:
+chunk 1 = A1:H16 (Sep 9 - Oct 12), chunk 2 = A17:H45 (Oct 14 on).
+
+- The Google Sheet (converted once; document ID is permanent) gets
+  updated ONLY via File -> Import -> Upload -> "Replace spreadsheet"
+  with the regenerated xlsx. NEVER re-convert a fresh upload -- that
+  mints a new document and orphans the published URLs.
+- Publish to web -> Embed -> "Schedule (web)" tab; auto-republish ON;
+  access restriction OFF (restricted iframes break for students
+  whose browsers block third-party cookies).
+- The Course Calendar Page's iframe = published URL +
+  `&range=A1:H16`, width:100%, height ~800, border 0. Below it, a
+  plain link to the unranged published URL labeled "full-semester
+  calendar".
+- AT FALL BREAK (course-level Moodle calendar event, Tue Oct 13:
+  "switch schedule embed to 2nd half"): edit the Page, change the
+  range parameter to `A17:H45`. 30 seconds.
+- After ANY calendar regeneration: re-import (above) AND check the
+  printed ranges still match the Page's range parameter.
 
 ## Assignments (all native Moodle; this IS the calendar)
 

@@ -1,9 +1,15 @@
-# PHY 210 F2026: required weekly computational problems (DRAFT)
+# PHY 210 F2026: required weekly computational problems
 
-Drafted 2026-08-24. **Not yet folded into `make_fall2026_calendar.py`** --
-these are for Michael's review first (per the TODO build task). Once
-approved, each problem becomes a fourth block in the WHW description
-(Warm-up / Essentials / Depth / **Computational**, the last one required).
+Drafted 2026-08-24. **APPROVED by Michael 2026-08-28** (nine problems; WHW13
+stays where it is; no separate point split -- see Resolved questions below).
+Folded into `private/MoodleBuild/whw-descriptions.html` the same day as a
+fourth block in each WHW description (Warm-up / Essentials / Depth /
+**Computational**, the last one required). Solution sketches were split out
+to `private/ComputationalProblemSolutions.md` on 2026-08-28 -- this repo is
+public and those are the predictions students are graded on making
+themselves. Deliberately NOT added to
+`make_fall2026_calendar.py`: the generator drives the xlsx problem-list tab,
+which stays tiers-only; the descriptions HTML is the student-facing text.
 
 Decisions this draft implements:
 
@@ -48,13 +54,14 @@ written that way.
 
 > **Computational problem (required).** Unlike the practice lists above,
 > this one is turned in. It should take 20-40 minutes. Three moves are
-> always part of the grade: (1) **predict** -- write down what you expect
+> what make it count: (1) **predict** -- write down what you expect
 > *before* you run anything, and leave the wrong prediction in your
 > writeup; (2) **interpret** -- two or three sentences on what the output
 > actually shows; (3) **report a dead end** -- one sentence on something
-> you tried that did not work. A polished notebook with no prediction and
-> no dead end scores lower than a messy one with both. That is the point:
-> the record of your own thinking is the assignment.
+> you tried that did not work. This is graded the same good-faith way as the
+> rest of the WHW, and those three moves are what good faith looks like here:
+> a messy writeup that has all three is a complete submission, and a polished
+> one missing them is not. The record of your own thinking is the assignment.
 
 ## Tooling notes
 
@@ -98,11 +105,7 @@ predict-then-check spine. Note 1.38 is already on this week's Essentials
 list, so the required item is a deepening of a problem they may already
 have started, not a new one.
 
-**Solution sketch:** a nested family of Gaussian bumps, all peaked at
-x = 0 with height C, all flattening to zero as |x| grows, and *no two
-curves ever crossing*; every point (x0, y0) of the plane is on exactly
-one member, C = y0 exp(x0^2). The usual wrong sketch has the curves
-crossing somewhere, or has the C = 0 solution missing.
+**Solution sketch:** in `private/ComputationalProblemSolutions.md` (kept out of this public repo).
 
 ---
 
@@ -134,12 +137,7 @@ problem was a numerical ODE solve (Felder 1.165). Written against
 forward Euler rather than a black-box solver so it needs no scipy and so
 that the failure mode is visible.
 
-**Solution sketch:** exact solution exp(-3t). h = 0.1 tracks it closely;
-h = 0.5 gives an *alternating-sign* decay (the numerical solution flips
-sign every step but still shrinks); h = 0.8 alternates *and grows without
-bound*. The Euler map is y_{n+1} = (1 - 3h) y_n, so decay requires
-|1 - 3h| < 1, i.e. h < 2/3 -- which is exactly where the h = 0.5 and
-h = 0.8 behaviors split.
+**Solution sketch:** in `private/ComputationalProblemSolutions.md` (kept out of this public repo).
 
 ---
 
@@ -169,12 +167,7 @@ x'(0)=-2 and plot the functions from t=0 to t=5"
 (`private/GaryS22/Math Methods/22S/hw/Weekly Homework 04.docx`). The
 predict-which-is-fastest hook is added.
 
-**Solution sketch:** roots of r^2 + br + 4 = 0; discriminant b^2 - 16.
-b = 1 underdamped (complex roots, ringing), b = 4 critically damped,
-b = 6 overdamped. The surprise: **critical damping returns fastest** --
-the overdamped case is slower, not faster. Imaginary part sets the
-oscillation frequency, real part sets the decay envelope; the boundary is
-b = 4.
+**Solution sketch:** in `private/ComputationalProblemSolutions.md` (kept out of this public repo).
 
 ---
 
@@ -200,13 +193,7 @@ computational problem (Felder 2.24, "you can use either the Series
 function or the Derivative function, or both to assess the answer") and
 as Michael's own `PowerSeries/Taylor Series.ipynb` in this repo.
 
-**Solution sketch:** each partial sum hugs sin(x) near the origin and
-then peels away violently, the odd-degree tails running off to
-+/- infinity (hence the `ylim`). The 0.1-accuracy radius for the x^9 sum
-is about |x| = 4: the first neglected term is x^11/11!, and
-x^11/39916800 = 0.1 gives x ~ 4.0. The log-error plot is the payoff --
-a nearly flat low-error floor, then a steep rise whose slope is the power
-of the first omitted term.
+**Solution sketch:** in `private/ComputationalProblemSolutions.md` (kept out of this public repo).
 
 ---
 
@@ -236,12 +223,7 @@ matrix problem (Felder 6.15,
 `private/GaryS22/Math Methods/22S/hw/Weekly Homework 06.docx`) and his
 handout "Chapter 06 - The Case of the Fatal Transformation.doc".
 
-**Solution sketch:** A stretches x by 2 (area doubles, det = 2); B shears
-the top edge right (area unchanged, det = 1); C rotates 90 degrees (area
-unchanged, det = 1). AB and BA are both area-doubling (det = 2 each, since
-det is multiplicative) but produce *different parallelograms* -- matrix
-multiplication does not commute, and the determinant sees only the area
-scale factor, not the shape or the orientation of the deformation.
+**Solution sketch:** in `private/ComputationalProblemSolutions.md` (kept out of this public repo).
 
 ---
 
@@ -270,15 +252,7 @@ oscillator day (Felder 6.9) and matches Gary's S22 WHW07 extra-credit
 Mathematica problem (Felder 6.87). Michael's `CoupledDEs/` notebooks in
 this repo cover the same picture.
 
-**Solution sketch:** eigenvalues 1 and 3; eigenvectors (1, 1) -- masses
-in phase, spring between them never stretches, omega = sqrt(k/m) -- and
-(1, -1) -- masses out of phase, middle spring worked hardest,
-omega = sqrt(3k/m). Starting on a pure eigenvector gives one clean
-sinusoid on each mass. Starting at (1, 0) = (1/2)[(1,1) + (1,-1)] excites
-both modes; the sum of two sinusoids at omega = 1 and omega = sqrt(3)
-gives the beat envelope. Expect students to be thrown by NumPy returning
-unit-normalized eigenvectors like (0.707, 0.707) and in an order they did
-not choose.
+**Solution sketch:** in `private/ComputationalProblemSolutions.md` (kept out of this public repo).
 
 ---
 
@@ -313,13 +287,7 @@ Stage-0 seed (a) from TODO item 31 (source:
 `../../../FluctuationTheorems/ROADMAP.md`), parked here because this is
 the integration week.
 
-**Solution sketch:** exact answer 1/8 (polar: the theta integral of
-cos sin over 0 to pi/2 is 1/2, times the r integral of r^3 from 0 to 1,
-which is 1/4). The log-log error slope is about **-1, not -2**: the
-integrand is smooth, but the *region* is not aligned with the grid, so
-the staircase approximation of the circular boundary dominates the error
-and the whole scheme drops to first order. That is the lesson -- geometry,
-not smoothness, sets the convergence rate here.
+**Solution sketch:** in `private/ComputationalProblemSolutions.md` (kept out of this public repo).
 
 ---
 
@@ -351,13 +319,7 @@ write out Feynman's flux-through-a-tiny-cube derivation in their own
 words. Also absorbs the gradient/field-visualization content of WHW11,
 which is skipped for Quiz 3.
 
-**Solution sketch:** div F1 = 2, curl F1 = 0 (pure outflow, no swirl);
-div F2 = 0, curl F2 = 2 (pure swirl, no outflow); div F3 = 0,
-curl F3 = 0 (a saddle -- in along y, out along x, and the two cancel).
-F3 is the hard one to eyeball: it clearly *does* something, and students
-routinely predict a nonzero divergence for it. Flux of F1 through the
-side-2 square: each edge contributes 2 (the normal component is 1 all
-along it, times length 2), total 8, matching div * area = 2 * 4 = 8.
+**Solution sketch:** in `private/ComputationalProblemSolutions.md` (kept out of this public repo).
 
 ---
 
@@ -386,44 +348,38 @@ Mathematica problem (Felder & Felder 9.13,
 Python3.ipynb` in this repo cover the same construction and are the
 natural things to post alongside it.
 
-**Solution sketch:** b_n = 4/(n pi) for odd n, zero for even n. The
-partial sums converge pointwise everywhere except at the jumps, but the
-**overshoot next to the jump does not shrink** -- it settles at about 9%
-of the jump height and merely migrates closer to the discontinuity as N
-grows. That is the Gibbs phenomenon, and the second plot (overshoot vs N
-flattening out instead of going to zero) is the whole point. At x = 0 the
-series sums to 0, the average of the two one-sided limits, which is not
-either value of f.
+**Solution sketch:** in `private/ComputationalProblemSolutions.md` (kept out of this public repo).
 
 ---
 
-## Open questions for Michael
+## Resolved 2026-08-28
 
-1. **Nine or ten?** WHW11 (Fri Nov 20, Quiz 3) was skipped to keep the
-   "no computational problem on a quiz Friday" rule clean, and its
-   gradient/field content was folded into the WHW12 problem. If you would
-   rather have ten, WHW11 is the natural add-back: a `quiver` plot of
-   -grad V for a two-charge potential, predict-the-field-lines-first.
-2. **WHW13 is the drop-eligible week.** The Fourier/Gibbs problem is the
-   single best computational item in the set and it lands on the WHW most
-   likely to be dropped. Options: move it earlier and shuffle, or accept
-   it, or make WHW13's item ungradeable-but-required.
-3. **Does posit have scipy?** Everything here is deliberately
-   scipy-free (TODO item 27 still lists posit provisioning as
-   unconfirmed). If scipy *is* there, WHW04 could use `solve_ivp` -- but
-   I would keep hand-rolled Euler anyway, since the h = 0.8 blowup is the
+1. **Nine, not ten.** WHW11 (Fri Nov 20, Quiz 3) stays skipped so the rule
+   holds without exception: *no required computational problem on a quiz
+   Friday, and none in week 1.* Its gradient/field content is carried by the
+   WHW12 problem.
+2. **WHW13 keeps the Fourier/Gibbs problem**, accepted as-is even though
+   WHW13 is the week most likely to be dropped (droplow = 1 on the WHW
+   category). Not moved, not made ungraded.
+3. **No point split.** The computational item is required but carries no
+   separate point value; the existing all-or-nothing good-faith rubric
+   absorbs it. The standing preamble above was rewritten to match -- it no
+   longer says the three moves "score lower" when missing, it says they are
+   what a complete submission looks like.
+
+## Still open (non-blocking)
+
+4. **Does posit have scipy?** Everything here is deliberately scipy-free
+   (TODO item 27 still lists posit provisioning as unconfirmed), so nothing
+   is blocked either way. If scipy *is* there, WHW04 could use `solve_ivp`
+   -- but keep hand-rolled Euler regardless, since the h = 0.8 blowup is the
    lesson.
-4. **Points.** These are required but the WHW is good-faith/effort
-   graded at 25 points. Do you want an explicit split (e.g. 5 of the 25
-   are the computational item), or does the existing all-or-nothing
-   good-faith rubric just absorb it? The "prediction and dead end are
-   part of the grade" language in the preamble assumes a rubric exists.
 5. **Textbook problem numbers.** Gary's S22 numbering and Gillian's S26
-   numbering agree in places (1.38, 1.108, 9.62) and diverge in others,
-   so I did **not** cite any Felder problem number inside the student-
-   facing text -- every problem above is self-contained. Worth confirming
-   the edition before any of these get re-anchored to book numbers.
-6. **AI norms wording.** The standing preamble asserts that a polished
-   notebook with no prediction scores lower than a messy one with both.
-   That should probably be phrased identically in the syllabus AI policy
-   (TODO item 10, Will Raven's F2025 version) so the two do not drift.
+   numbering agree in places (1.38, 1.108, 9.62) and diverge in others, so
+   no Felder problem number is cited inside the student-facing text -- every
+   problem above is self-contained. Confirm the edition before any of these
+   get re-anchored to book numbers.
+6. **AI norms wording.** The standing preamble asserts that the prediction
+   and the dead end are what make a submission complete. That should be
+   phrased compatibly in the syllabus AI policy (TODO item 10, still to be
+   rewritten from Will Raven's F2025 version) so the two do not drift.

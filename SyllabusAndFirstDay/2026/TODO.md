@@ -158,6 +158,36 @@ WHW after them -- the final's practice set covers that material.
     Topics confirmed as the format) and the Feedback module IS
     available with anonymous mode -- both Moodle questions closed.
     Remaining ITS asks: recording setup, McConnell 404 whiteboards.
+    CLASSROOM TEST 2026-08-28 (both teaching rooms, iPad Pro 13"):
+    - Projection is AirPlay in BOTH rooms -- no cable needed, and the
+      iPad stays untethered (good for walking the room during group
+      problems).
+    - Back-row legibility of Goodnotes pages: FINE everywhere in the
+      room. No deck redesign needed; keep building packs as-is.
+    - Google Sheets iOS APP is out of the workflow for good: no
+      drag-to-fill handle (workaround is Copy cell -> select range ->
+      Paste), plus the old projection flakiness. Author the schedule on
+      the Mac in a browser (File -> Import -> Replace spreadsheet);
+      project the Moodle Page iframe, never the app.
+    - Zoom recurring MWF meeting: the iPad Zoom app CANNOT set
+      per-weekday recurrence. Use the web portal (smith.zoom.us ->
+      Schedule -> Recurring -> Weekly -> Occurs on Mon/Wed/Fri), and
+      set Options -> Record automatically -> In the cloud there. Zoom
+      caps recurring meetings at 50 occurrences (39 slots fit).
+      Fallback: Recurring -> No Fixed Time (one permanent link, no
+      occurrence cap, survives schedule changes).
+    STILL OPEN after the test:
+    - Create the recurring meeting; confirm cloud recording AUTO-starts
+      when joining from the iPad (no badge = silent failure; a muted
+      mic is the other silent failure -- check both every class).
+    - Confirm Panopto auto-posts the recording to the Moodle course,
+      and whether that requires scheduling from inside Moodle.
+    - Test AirPlay mirroring + Zoom screen broadcast SIMULTANEOUSLY for
+      a full period -- they were tested separately, not together.
+    - Is there an HDMI cable fallback in each room? Podium power?
+    - Zoom cloud storage quota / recording expiry policy.
+    - Apple TV PIN-pairing on? (else students can AirPlay in.)
+    - McConnell 404 group whiteboards (original ask, still unanswered).
 25. Ask math dept: does MTH 212 still deliver the negotiated topics
     (Gary's listening-session memo says commitment != reality on
     cyl/sph coords and div/curl).

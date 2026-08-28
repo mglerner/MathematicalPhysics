@@ -44,10 +44,14 @@ which has the full materials map, item banks, and privacy-cleanup list).
 - **Python assessed weekly, Gary-style** (2026-08-18): a required
   small computational problem (Python, not Mathematica) on most WHWs
   (~8-10 of 13), plus the Sep 28 onboarding class run as a full class
-  (bring laptops). BUILD TASK: draft the per-week computational items
-  (sources: Michael's Earlham notebooks, Gary's purple-tier problems,
-  the S26 ODE_basics notebook) and add them to the generator's WHW
-  lists; adjust WHW point/grading language if needed.
+  (bring laptops). BUILD TASK DONE 2026-08-28: nine problems drafted in
+  `ComputationalProblems.md` (sources: Michael's Earlham notebooks, Gary's
+  purple-tier problems, the S26 ODE_basics notebook), approved, and folded
+  into `private/MoodleBuild/whw-descriptions.html` as a fourth block on
+  WHW 02, 04, 05, 06, 08, 09, 10, 12, 13. Skip rule: none on a quiz
+  Friday, none in week 1. No separate point value -- the all-or-nothing
+  good-faith rubric absorbs it; the turn-in line on those nine weeks now
+  asks for three uploads instead of two.
 - **AI-aware assignment design** (2026-08-18): an early-semester class
   discussion (~15 min chunk, week 1-2) on how/whether AI belongs in
   homework and computational work; norms co-written with students and
@@ -209,7 +213,8 @@ WHW after them -- the final's practice set covers that material.
 29. Fix Manbir-deck errata before reusing any page (list in the report).
 30. Privacy cleanup pass over inherited trees (list in the report).
 
-31. WHW02's Moodle description needs a correction note for Felder
+31. DONE 2026-08-28 (added to `private/MoodleBuild/whw-descriptions.html`).
+    WHW02's Moodle description needs a correction note for Felder
     problem 1.43 (in its warm-up list): the book misprints
     multiplications that should be divisions -- dy/dx = (1-2xy)/(x^2+1)
     with solution y = (C+x)/(x^2+1). Verified against the publisher

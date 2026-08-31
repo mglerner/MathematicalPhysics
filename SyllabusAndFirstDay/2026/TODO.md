@@ -90,10 +90,13 @@ WHW after them -- the final's practice set covers that material.
    @ 25 = 300; Non-Newtonian 25; quizzes 3 @ 140 = 420; final 185).
    Decide where PCCI credit lives -- candidate: PCCI turn-in IS
    the attendance/participation artifact (no new category needed).
-9. DECIDED 2026-08-18: WHW turn-in = native Moodle assignment, photo
-   of worked problem(s) as file upload + reflection questions answered
-   in the online-text box, good-faith graded. Encoded in
-   MoodleBuildSpec.md; syllabus updated.
+9. DECIDED 2026-08-18, REVISED 2026-08-31: WHW turn-in = native Moodle
+   assignment, **a single PDF, max 1 file, `.pdf` only, Online text
+   DISABLED** (Michael's call when building the exemplar: easier to
+   grade, and it stops students uploading unopenable files). Written
+   work AND the computational problem AND the reflection answers all go
+   in that one PDF. Good-faith graded. Encoded in MoodleBuildSpec.md and
+   in private/MoodleBuild/whw-descriptions.html; syllabus updated.
 10. AI policy: start from Will Raven's F2025 version
     (`SmithPreMichaelArtifacts/PHY317 F2025 Syllabus.pdf`), not the
     older S26 copy; refresh the dated ChatGPT anecdotes with current
@@ -212,6 +215,22 @@ WHW after them -- the final's practice set covers that material.
     (Math Review/Message to students.docx + attachments).
 29. Fix Manbir-deck errata before reusing any page (list in the report).
 30. Privacy cleanup pass over inherited trees (list in the report).
+
+34. Assignments BUILT 2026-08-31: all 19 (WHW01-13, Math Pretest,
+    Non-Newtonian, Quiz 1-3, Final) in a merge-only mbz,
+    `private/MoodleBuild/PHY210-F2026-assignments.mbz`, from
+    `build_assignments.py`. Quizzes and the final are now ASSIGNMENTS
+    carrying their own points (the four manual quiz/final grade items
+    get deleted); participation stays manual. Course total verified
+    = 1000. Four adversarial audits run; the packaging bugs they found
+    (stale .ARCHIVE_INDEX, macOS AppleDouble) are fixed and guarded.
+    READ private/MoodleBuild/README.md BEFORE RESTORING -- the mbz is
+    single-target (course 57078 only), must not be rehearsed in a
+    sandbox, and must be restored exactly once.
+    STILL TO DO after the restore: attach the pretest PDF and unhide it;
+    write the Felder-adapted Non-Newtonian prompt (item 19) and unhide
+    it; hand-edit section 1's summary (merge cannot change a non-empty
+    section summary).
 
 31. DONE 2026-08-28 (added to `private/MoodleBuild/whw-descriptions.html`).
     WHW02's Moodle description needs a correction note for Felder

@@ -103,13 +103,17 @@ chunk 1 = A1:H16 (Sep 9 - Oct 12), chunk 2 = A17:H45 (Oct 14 on).
 
 ## Assignments (all native Moodle; this IS the calendar)
 
-Common settings: file submissions (max 20) + ONLINE TEXT enabled;
-feedback = comments + annotate PDF; no cutoff date;
-`submissiondrafts=0`; grade category per below.
+Common settings (REVISED 2026-08-31 when Michael built the exemplar):
+**file submissions ONLY -- max 1 file, `.pdf` accepted, Online text
+DISABLED.** One PDF per turn-in: easier to grade, and it stops students
+submitting unopenable files. Feedback = comments + annotate PDF + file;
+no cutoff date; `submissiondrafts=0`; grade category per below.
+Reflection answers therefore go INSIDE the PDF, not in a text box --
+the WHW descriptions say so.
 
 | Assignment              | Due                                                       | Pts                    | Notes                                                                                                                            |
 | ----------------------- | --------------------------------------------------------- | ---------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| Math Pretest            | Fri Sep 18, 22:00                                         | (participation credit) | PDF attached; graded for completion                                                                                              |
+| Math Pretest            | Fri Sep 18, 22:00                                         | 0 (ungraded)           | Graded for completion; carries NO gradebook item so the 1000 total holds. Ships hidden until the PDF is attached.                |
 | WHW01..WHW13            | Fridays 22:00 (WHW11 -> check calendar; WHW13 Fri Dec 11) | 25 each                | description = that week's tier list + reflection questions; submission = photo of work (file) + reflection answers (online text) |
 | Non-Newtonian Scientist | Mon Oct 26, 22:00                                         | 25                     | prompt adapted from shared/NonNewtonianPhysicist/                                                                                |
 
@@ -132,10 +136,21 @@ notebooks (ODE_basics is the keeper). Sep 28 = the onboarding class
 per-week computational items and add them to the WHW lists (generator
 edit) -- see TODO.
 
-## Calendar events (course-level, so they appear without assignments)
+## Calendar events
+
+SUPERSEDED 2026-08-31 for the quizzes and the final: they are now
+**assignments with no submission types enabled**, not manual grade items
+plus course calendar events. An assignment puts its due date on every
+student's calendar automatically, which was the only reason for the
+events; and it carries the points itself, so the four manual grade items
+(Quiz 1/2/3, Final exam) were DELETED. Participation stays manual.
 
 - Quiz 1 Fri Sep 25, Quiz 2 Fri Oct 23, Quiz 3 Fri Nov 20 (in class,
-  full period)
+  full period), due at 09:25 = class start
+- Final exam Tue Dec 22 15:00 -- Smith finals are SELF-SCHEDULED across
+  Dec 19-22, so that timestamp is the end of the window, not a slot.
+  Required part = Ch 8, 9, 11 only; the rest is optional redemption
+  problems (syllabus "Final exam, with redemption problems")
 - Flex day Fri Oct 9; no class Mon Oct 12, Wed Nov 25, Fri Nov 27
 - Final exam period Dec 19-22 (update when registrar schedules)
 

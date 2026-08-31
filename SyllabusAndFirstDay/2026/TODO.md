@@ -90,12 +90,14 @@ WHW after them -- the final's practice set covers that material.
    @ 25 = 300; Non-Newtonian 25; quizzes 3 @ 140 = 420; final 185).
    Decide where PCCI credit lives -- candidate: PCCI turn-in IS
    the attendance/participation artifact (no new category needed).
-9. DECIDED 2026-08-18, REVISED 2026-08-31: WHW turn-in = native Moodle
-   assignment, **a single PDF, max 1 file, `.pdf` only, Online text
-   DISABLED** (Michael's call when building the exemplar: easier to
+9. DECIDED 2026-08-18, REVISED TWICE 2026-08-31: WHW turn-in = native
+   Moodle assignment, one submission with TWO parts -- **a single PDF
+   (max 1 file, `.pdf` only) for the worked problems, plus Online text
+   for the reflection answers** (Michael's call when building the exemplar: easier to
    grade, and it stops students uploading unopenable files). Written
    work AND the computational problem AND the reflection answers all go
-   in that one PDF. Good-faith graded. Encoded in MoodleBuildSpec.md and
+   in the PDF; the reflections are typed in the text box so they can be
+   counted (see item 35). Good-faith graded. Encoded in MoodleBuildSpec.md and
    in private/MoodleBuild/whw-descriptions.html; syllabus updated.
 10. AI policy: start from Will Raven's F2025 version
     (`SmithPreMichaelArtifacts/PHY317 F2025 Syllabus.pdf`), not the
@@ -215,6 +217,19 @@ WHW after them -- the final's practice set covers that material.
     (Math Review/Message to students.docx + attachments).
 29. Fix Manbir-deck errata before reusing any page (list in the report).
 30. Privacy cleanup pass over inherited trees (list in the report).
+
+35. Reflection statistics (2026-08-31): the reflection questions were
+    restructured so the first two aggregate -- "Reading: didn't /
+    skimmed / read and took notes" and "Problems attempted: <number>",
+    each on its own line -- and moved from inside the PDF into the
+    assignment's Online text box. This keeps the turn-in to a single
+    submission (Michael's hard constraint: no friction, nothing extra to
+    remember) while making the answers machine-readable.
+    `private/reflection_stats.py` parses a "Download all submissions"
+    zip and prints the weekly distribution plus a per-student CSV,
+    flagging anything unparsed rather than dropping it. This restores
+    the one thing Gillian's Google Forms gave her that native Moodle
+    assignments did not.
 
 34. Assignments BUILT 2026-08-31: all 19 (WHW01-13, Math Pretest,
     Non-Newtonian, Quiz 1-3, Final) in a merge-only mbz,

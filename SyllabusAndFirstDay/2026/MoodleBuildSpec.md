@@ -103,13 +103,28 @@ chunk 1 = A1:H16 (Sep 9 - Oct 12), chunk 2 = A17:H45 (Oct 14 on).
 
 ## Assignments (all native Moodle; this IS the calendar)
 
-Common settings (REVISED 2026-08-31 when Michael built the exemplar):
-**file submissions ONLY -- max 1 file, `.pdf` accepted, Online text
-DISABLED.** One PDF per turn-in: easier to grade, and it stops students
-submitting unopenable files. Feedback = comments + annotate PDF + file;
+Common settings (REVISED TWICE on 2026-08-31): **file submissions
+(max 1 file, `.pdf` only) AND Online text, both enabled.** Still ONE
+submission with one Submit button -- upload the PDF of your work, type
+the reflections in the box. Feedback = comments + annotate PDF + file;
 no cutoff date; `submissiondrafts=0`; grade category per below.
-Reflection answers therefore go INSIDE the PDF, not in a text box --
-the WHW descriptions say so.
+
+Why online text came back: reflection answers buried in a PDF cannot be
+counted. Gillian could see the class-wide distribution of "did you do
+the reading" because her WHWs were Google Forms feeding a spreadsheet;
+native Moodle assignments gave us the student calendar back but took the
+spreadsheet away. Online text gets it back without adding a second thing
+to submit -- Moodle's "Download all submissions" yields one
+`onlinetext.html` per student, and `private/reflection_stats.py` parses
+those into the weekly distribution.
+
+The two reflection questions were restructured to be countable and now
+come first, in a fixed format students are asked to preserve:
+
+    Reading: didn't / skimmed / read and took notes
+    Problems attempted: <number>
+
+The remaining three stay free prose.
 
 | Assignment              | Due                                                       | Pts                    | Notes                                                                                                                            |
 | ----------------------- | --------------------------------------------------------- | ---------------------- | -------------------------------------------------------------------------------------------------------------------------------- |

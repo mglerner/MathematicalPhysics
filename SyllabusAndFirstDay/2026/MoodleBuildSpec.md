@@ -118,13 +118,35 @@ to submit -- Moodle's "Download all submissions" yields one
 `onlinetext.html` per student, and `private/reflection_stats.py` parses
 those into the weekly distribution.
 
-The two reflection questions were restructured to be countable and now
-come first, in a fixed format students are asked to preserve:
+Questions = **Gillian's S26 set of 7, restored in full** (2026-09-02,
+after comparing against her actual WHW01 form). An earlier draft of mine
+had silently trimmed them to 4 and turned her attempted-problems buckets
+into a raw number; both were reverted. Her wording is kept verbatim so
+the weekly numbers stay directly comparable to her S26 data:
 
-    Reading: didn't / skimmed / read and took notes
-    Problems attempted: <number>
+1. Did you do the reading this week?
+   I didn't read it / I skimmed it / I read it and took some notes
+2. How many practice problems did you attempt?
+   None / Less than half / More than half / All of them
+3. What was your reasoning for the number of problems you attempted?
+4. If you struggled, what did you do to seek help? If you didn't, how did
+   you help your classmates or stretch your own understanding?
+5. What did you do this week to support your learning goals?
+6. What got in the way of your learning goals this week?
+7. Anything you still need more practice with, or want resources for?
 
-The remaining three stay free prose.
+Q1 and Q2 are asked on their own lines in a fixed format so they parse.
+**Buckets, not a raw count** -- the WHW lists run from 8 problems
+(WHW01) to ~25 (WHW05), so "6" is not comparable week to week, while
+"More than half" is. That is exactly what made Gillian's data readable:
+"more than half or all" was the majority only in weeks 1, 2, 4, 5, 6, 8;
+from week 7 on, "Less than half"/"None" dominated.
+
+DEPENDENCY: Q5 and Q6 reference "your learning goals". In S26 those sat
+inside a Growth Mindset bundle with SMART goal-setting. TODO item 14 has
+not settled whether we run that. If we do not, students need at least a
+week-1 goal-setting activity or those two questions ask about goals
+nobody set.
 
 | Assignment              | Due                                                       | Pts                    | Notes                                                                                                                            |
 | ----------------------- | --------------------------------------------------------- | ---------------------- | -------------------------------------------------------------------------------------------------------------------------------- |

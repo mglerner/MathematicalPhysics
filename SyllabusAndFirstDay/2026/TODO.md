@@ -223,6 +223,42 @@ WHW after them -- the final's practice set covers that material.
 29. Fix Manbir-deck errata before reusing any page (list in the report).
 30. Privacy cleanup pass over inherited trees (list in the report).
 
+36. COVERAGE AUDIT APPLIED 2026-09-02. All 250 assigned problem-slots were
+    checked against the date their section is actually taught, using the
+    printed textbook's problem-block headings for section membership.
+    Result: 162 taught by Monday, 88 by Wednesday, **zero taught on or after
+    the due date**. Changes made:
+    - WHW06 keeps only 2.1-2.2 (autumn recess leaves it one content day);
+      its Maclaurin problems moved to WHW07, and its computational item was
+      rewritten as the pendulum small-angle problem (the old one was
+      Maclaurin, taught the morning it was due).
+    - WHW07 covers 2.3-2.5; 2.41/2.47/2.49/2.53 relabelled Maclaurin (they
+      are section 2.3, not 2.4); 6.6 added because 6.7 depends on it.
+    - WHW09 gained 6.174 and, crucially, 6.193 + 6.191 -- section 6.9's
+      problem block starts at 6.191, so the list previously had NO
+      coupled-oscillator problems despite covering 6.9.
+    - WHW11 gained 8.69 (section 8.5 had zero practice; it is on the final).
+    - WHW12 gained 8.113, 8.114 (section 8.7 had zero practice).
+    - WHW13 gained 9.44 (9.47 depends on it); WHW10 gained 5.222 (5.223
+      depends on it).
+    - 8.163 and 8.181 DROPPED: both need curl in cylindrical coordinates
+      (section 8.8 / Appendix F), which the Feynman unit deliberately
+      replaces and which is never assigned.
+    - WHW01 moved to Mon Sep 14 (week 1 has no Monday); the assignment text
+      says explicitly that this is a one-off.
+    - Assignments are hidden from students until 1.5 weeks before they are
+      due, via a Restrict-access date condition, so a pacing change does not
+      leave a stale problem list on display.
+
+37. AT THE class-25 PREP PACK (Mon Nov 30) -- RE-FLAG THIS: Chapter 11
+    (11.1-11.4, taught Dec 11 and Dec 14) and Fourier transforms (9.6,
+    taught Dec 14) have NO homework practice at all, by calendar design.
+    TODO 78's stated mitigation ("the final's practice set covers that
+    material") does not exist as an artifact, and the Exams section no
+    longer promises practice materials. Decide by Nov 30 whether to build a
+    practice set for Ch 11 + 9.6, or to accept that they are examined
+    without homework. Two weeks' lead, as requested 2026-09-02.
+
 35. Reflection statistics (2026-08-31, revised 2026-09-02): the
     reflection form is Gillian's full S26 set of 7, with her exact
     wording and her four attempted-problems BUCKETS (None / Less than

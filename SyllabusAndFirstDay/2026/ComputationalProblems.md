@@ -173,27 +173,44 @@ predict-which-is-fastest hook is added.
 
 ## WHW 06 -- due Fri Oct 16
 
-**Covers:** linear approximations (2.1-2.2); Maclaurin series (2.3)
+**Covers:** linear approximations (2.1-2.2)
+
+REPLACED 2026-09-02. The original item here was Maclaurin partial sums of
+sin(x), but the 2026-09-02 coverage audit found that WHW06 cannot assign
+Maclaurin at all: autumn recess (Mon Oct 12) leaves the week one content day,
+and 2.3 is not taught until Fri Oct 16 -- the morning this is due. The
+Maclaurin textbook problems moved to WHW07, but WHW07 is Quiz 2 Friday and
+carries no computational item under the skip rule, so this slot needed a
+genuine 2.1-2.2 problem instead.
 
 ### Problem text
 
-Build the Maclaurin partial sums of sin(x) through x^1, x^5, x^9, and
-x^13 (SymPy's `series` is fine; so is your own factorial loop). Before
-plotting, predict one number and write it down: on -8 <= x <= 8, how far
-out from the origin do you expect the partial sum through x^9 to stay
-within 0.1 of sin(x)? Then plot sin(x) and all four partial sums on
--8 <= x <= 8 with the y-axis clamped to [-2, 2], and make a second plot
-of |sin(x) - S_N(x)| on a logarithmic y-axis. Compare with your predicted
-number, and explain in two or three sentences why the partial sums fail
-*suddenly* rather than gradually as x grows, and what the first neglected
-term has to do with it. Note one thing that went wrong on the way.
+The pendulum equation theta'' = -(g/L) sin(theta) only becomes the simple
+harmonic oscillator theta'' = -(g/L) theta because sin(theta) is approximately
+theta. Before computing anything, write down a prediction: **how large can
+theta get, in degrees, before sin(theta) = theta is wrong by more than 1%?**
+Write your number down -- most people guess far too small.
 
-**Provenance:** fresh. Same territory as Gary's S22 WHW03 series
-computational problem (Felder 2.24, "you can use either the Series
-function or the Derivative function, or both to assess the answer") and
-as Michael's own `PowerSeries/Taylor Series.ipynb` in this repo.
+Now check it. Plot sin(theta) and theta together on 0 <= theta <= pi/2, then
+plot the relative error |theta - sin(theta)| / sin(theta) and read off where it
+crosses 1%. Compare with your prediction.
 
-**Solution sketch:** in `private/ComputationalProblemSolutions.md` (kept out of this public repo).
+Then one more prediction before you plot: on log-log axes, plot the absolute
+error |sin(theta) - theta| against theta, and **predict the slope of that line
+first**. Explain in two or three sentences what the slope tells you about how
+fast a linear approximation degrades, and what you think the *next* correction
+term must look like.
+
+Finish with one sentence on something that did not work.
+
+**Provenance:** fresh, written 2026-09-02 to replace the Maclaurin item. The
+small-angle approximation is the reason the day-1 SHO class works at all, so
+this closes a loop opened in class 01, and its second prediction hands the
+students the Maclaurin unit (Mon Oct 19) as the answer to a question they
+generated themselves.
+
+**Solution sketch:** in `private/ComputationalProblemSolutions.md`
+(kept out of this public repo).
 
 ---
 

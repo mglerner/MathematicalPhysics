@@ -148,7 +148,23 @@ WHW after them -- the final's practice set covers that material.
     autumn recess Oct 10-13, Cromwell Day Nov 10, reading period +
     exam window. (MWF pattern + time/room VERIFIED 2026-08-17 via the
     course schedule listing: MWF 9:25-10:40, McConnell 404.)
-19. RESOLVED 2026-08-18: Non-Newtonian Physicist prompt recovered
+19. CLOSED 2026-09-02. The prompt is written and in the mbz. Two things
+    changed the plan: (a) a MUCH more recent version exists than the F2023
+    one we had been working from -- PHYS-125 Fall 2025 (Earlham Moodle
+    backup course 2878, `phys-125-0202610`), and (b) that version dropped
+    the web tool entirely. It is now just "make one slide", so there is no
+    dependency on TextbookAnnotater or on the new app. Michael's F2025 text
+    is used essentially verbatim, including the note that the assignment
+    runs in several classes and the Modern-Physics caution aimed at the
+    intro sections. Submission is .pptx/.ppt/.key WITH PRESENTER NOTES (not
+    PDF -- a slide-to-PDF export drops the notes), and online text is off
+    for this one activity since everything lives in the file.
+    NOTE on the rewritten app at `~/coding/nonnewtonian`: it is M6 of 8,
+    `deploy/` holds only backup tooling, and its built-in textbooks are
+    mandi-4th / knight-calc-3rd / knight-college-2nd -- no Felder. Pointing
+    PHY 210 at it would need M7 plus a Felder TOC; not on the Oct 26 path.
+
+19a. SUPERSEDED 2026-08-18: Non-Newtonian Physicist prompt recovered
     verbatim from the F2023 PHYS-125 Moodle backup (it was
     Moodle-only, as suspected) -- now at
     `../../../shared/NonNewtonianPhysicist/` with its screenshots and

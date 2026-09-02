@@ -146,11 +146,11 @@ PCCI = {
     date(2026, 9, 14): "DE 1.3.1 Part 1",
     date(2026, 9, 16): "DE 1.5.1 Parts 1-5",
     date(2026, 9, 18): "DE 1.6.1 Parts 1-3",
-    date(2026, 9, 21): "1.166",
+    date(2026, 9, 21): "DE 1.6.1 Parts 4-6",
     date(2026, 9, 23): "10.1, 10.3",
     date(2026, 9, 28): "Log into posit.smith.edu and open a blank "
                        "Jupyter notebook; bring your laptop",
-    date(2026, 9, 30): "10.5, 10.8",
+    date(2026, 9, 30): "DE 10.10.1 Parts 1-9",
     date(2026, 10, 2): "10.216",
     date(2026, 10, 5): "DE 3.2.1",
     date(2026, 10, 7): "DE 3.4.1",
@@ -169,9 +169,10 @@ PCCI = {
     date(2026, 11, 13): "DE 5.7.1 Parts 1-4",
     date(2026, 11, 16): "DE 8.2.1 Parts 5-6",
     date(2026, 11, 18): "DE 8.4.1",
-    date(2026, 11, 23): "Read Feynman II Ch 2; write one sentence on "
-                        "what the gradient of temperature means "
-                        "physically",
+    date(2026, 11, 23): "Read Feynman II Ch 3 sections 3-1 to 3-6; in one "
+                        "or two sentences, what does the flux of a vector "
+                        "field out of a tiny box measure, and what does the "
+                        "circulation around a tiny loop measure?",
     date(2026, 11, 30): "DE 8.6.1 Parts 1-9",
     date(2026, 12, 2): "DE 8.9.1",
     date(2026, 12, 4): "DE 8.11.1 Parts 1-2, 4-5, 7-8",

@@ -211,7 +211,7 @@ WHWS = [
      "Sec 10.2: 10.13, 10.26, 10.31",
      "Guess and check: 1.125, 1.131. Sec 10.2: 10.32, 10.33"),
     (4, "ODEs in Python; Heaviside, Dirac, Laplace (10.10)",
-     "10.217, 10.218",
+     "Sec 10.10: 10.217, 10.218",
      "Sec 10.10: 10.219, 10.223, 10.230, 10.242",
      "Redo the class notebook's exercises from scratch in a fresh "
      "notebook on posit.smith.edu"),
@@ -265,8 +265,8 @@ WHWS = [
      "Eigenvectors & eigenvalues: 6.171, 6.173, 6.177. "
      "Coupled oscillators: 6.191",
      "Eigenvectors & eigenvalues: 6.179, 6.181, 6.185"),
-    (10, "Setting up integrals; Cartesian doubles, polar; line and "
-         "surface integrals (5.1-5.4, 5.6, 5.8, 5.10)",
+    (10, "Setting up integrals; Cartesian doubles; line and "
+         "surface integrals (5.1-5.4, 5.8, 5.10)",
      "Setting up 1D integrals: 5.2, 5.3. Single integrals in multiple "
      "dimensions: 5.25, 5.27, 5.29, 5.31. Cartesian rectangular double "
      "integrals: 5.61, 5.63. Line integrals: 5.197. Surface integrals: "
@@ -277,17 +277,19 @@ WHWS = [
      "non-rectangular: 5.83, 5.85, 5.97, 5.101. Line integrals: 5.199, "
      "5.201, 5.215, 5.217, 5.229. Surface integrals: 5.256, 5.257, 5.263",
      "Line integrals: 5.222, 5.223, 5.225, 5.235"),
-    (11, "Cylindrical and spherical coordinates (5.5, 5.7); fields, "
-         "potential, gradient (8.1-8.5)",
+    (11, "Polar, cylindrical and spherical coordinates (5.6, 5.5, 5.7); "
+         "fields, potential, gradient (8.1-8.5)",
      "Spherical coordinates: 5.167, 5.174. Scalar and vector fields: "
      "8.1. Potential in 1D: DE 8.3.1, 8.29, 8.35. From "
      "potential to gradients: 8.53, 8.55",
      "Spherical coordinates: 5.181, 5.187. Polar and cylindrical: "
-     "5.129, 5.137, 5.147, 5.153. Scalar and vector fields: 8.5, 8.7, "
+     "5.129, 5.137, 5.147. Jacobians and change of variables: 5.153. "
+     "Scalar and vector fields: 8.5, 8.7, "
      "8.9, 8.17, 8.19, 8.21, 8.25. Potential in 1D: 8.37, 8.41, 8.43. "
      "From potential to gradients: 8.57, 8.59, 8.65. "
      "From gradient to potential: 8.69",
-     "Polar and cylindrical: 5.157, 5.169, 5.171, 5.193. "
+     "Jacobians and change of variables: 5.157. "
+     "Polar and cylindrical: 5.169, 5.171, 5.193. "
      "All coordinates: 5.165"),
     (12, "Divergence and curl, Feynman and Felder (Feynman II 2-3, "
          "8.6-8.7); divergence theorem and Stokes' theorem (8.9-8.10)",

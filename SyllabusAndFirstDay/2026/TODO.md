@@ -118,6 +118,11 @@ WHW after them -- the final's practice set covers that material.
 13. Late/extension policy: S26 extension Google Form? Earlham late
     passes? Gillian's late-WHW amnesty (-5/week, better than zero)?
 14. Growth-mindset bundle: keep pretest + goal-setting/reflections?
+    NOW LOAD-BEARING (2026-09-02): the WHW reflection form restores
+    Gillian's Q5/Q6, which both ask about "your learning goals". Either
+    run a goal-setting activity (week 1, plus a mid-semester check-in)
+    or those two questions reference goals that were never set. Decide
+    before WHW01 is due Fri Sep 11.
     (S26: hard deadlines on these, 10%.) Align the pretest's "graded
     for completion" sentence with the final scheme.
 15. Learning goals: draft from Casey Berger's 14 rubric tables
@@ -218,9 +223,13 @@ WHW after them -- the final's practice set covers that material.
 29. Fix Manbir-deck errata before reusing any page (list in the report).
 30. Privacy cleanup pass over inherited trees (list in the report).
 
-35. Reflection statistics (2026-08-31): the reflection questions were
-    restructured so the first two aggregate -- "Reading: didn't /
-    skimmed / read and took notes" and "Problems attempted: <number>",
+35. Reflection statistics (2026-08-31, revised 2026-09-02): the
+    reflection form is Gillian's full S26 set of 7, with her exact
+    wording and her four attempted-problems BUCKETS (None / Less than
+    half / More than half / All of them) rather than a raw count --
+    buckets self-normalise across weeks whose lists run 8 to ~25
+    problems, which is what made her S26 data readable. Q1 and Q2 are
+    asked on their own lines so they parse,
     each on its own line -- and moved from inside the PDF into the
     assignment's Online text box. This keeps the turn-in to a single
     submission (Michael's hard constraint: no friction, nothing extra to

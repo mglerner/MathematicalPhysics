@@ -111,6 +111,14 @@ CONTENT = [
      "11.3, 9.6"),
 ]
 
+# WHW01 is due MONDAY Sep 14, not Friday Sep 11 (decided 2026-09-02).
+# Every other WHW covers the Mon+Wed of its due week. Week 1 has no Monday --
+# the semester opens on a Wednesday -- so under the normal rule WHW01 would be
+# due the same day its material is taught (Fri Sep 11, "Generating ODEs from
+# physical situations"). Shifting it to Monday is the smallest fix; the
+# assignment text says explicitly that this is a one-off.
+WHW_DUE_OVERRIDE = {1: date(2026, 9, 14)}
+
 # Extra (non-WHW) due dates shown in the HW Due column.
 # Non-Newtonian Scientist: mid-semester (decision 2026-08-17); Mon Oct 26
 # is the calendar midpoint and has no competing WHW deadline.
@@ -215,17 +223,29 @@ WHWS = [
      "Complex numbers: 3.49, 3.54. Euler / complex ODE: 3.77, 3.94, 3.95",
      "Sec 10.11: 10.270, 10.272, 10.274. Complex numbers: 3.45, 3.56. "
      "Euler / complex ODE: 3.85, 3.107"),
-    (6, "Linear approximations (2.1-2.2); Maclaurin series (2.3)",
-     "Linear approximations: 2.6, 2.7, 2.16",
-     "Maclaurin series: 2.31, 2.35, 2.37",
-     "Maclaurin series: 2.86, 2.87"),
-    (7, "Taylor series (2.4-2.5); matrices and the three-spring "
-        "problem (6.1-6.2)",
-     "Taylor series: 2.41. Normal modes: 6.3. Matrices: 6.19",
-     "Maclaurin/Taylor: 2.47, 2.49, 2.53, 2.55, 2.57, 2.67. "
-     "The three-spring problem: 6.7, 6.17. Normal modes: 6.9. "
+    # Autumn recess (Mon Oct 12) leaves this week ONE content day, Wed Oct 14.
+    # Maclaurin (2.3) is not taught until Fri Oct 16 -- the morning this is due
+    # -- and 2.86/2.87 are section 2.5, taught Mon Oct 19, three days AFTER.
+    # Both moved to WHW07 (2026-09-02 coverage audit). A light week here is
+    # correct, not a defect: it is the only week with a single content day.
+    (6, "Linear approximations (2.1-2.2)",
+     "Linear approximations: 2.6, 2.7",
+     "Linear approximations: 2.9, 2.16, 2.19",
+     "Linear approximations: 2.23"),
+    # 2026-09-02: absorbs the Maclaurin block rolled forward from WHW06.
+    # 2.41/2.47/2.49/2.53 are section 2.3 (verified against the textbook's
+    # problem-block headings), so they are labelled Maclaurin, not Taylor.
+    # 6.6 added because 6.7 opens "Problem 6.6 described the initial
+    # conditions..." and 6.6 was assigned nowhere.
+    (7, "Maclaurin series (2.3); Taylor series (2.4-2.5); matrices and "
+        "the three-spring problem (6.1-6.2)",
+     "Maclaurin series: 2.31, 2.41. Normal modes: 6.3. Matrices: 6.19",
+     "Maclaurin series: 2.35, 2.37, 2.47, 2.49, 2.53. "
+     "Taylor series: 2.55, 2.57, 2.67. "
+     "The three-spring problem: 6.6, 6.7, 6.17. Normal modes: 6.9. "
      "Matrices: 6.21, 6.23",
-     "Taylor series: 2.71, 2.94"),
+     "Taylor series: 2.71, 2.94. Finding one series from another: "
+     "2.86, 2.87"),
     (8, "Matrix times column, basis, matrix times matrix, identity, "
         "inverse, determinants (6.3-6.7)",
      "Matrix times column: 6.27, 6.29, 6.31. Matrix-matrix: 6.69. "
@@ -235,9 +255,15 @@ WHWS = [
      "6.121, 6.123. Determinants: 6.133, 6.139",
      "Basis and transformations: 6.45, 6.53, 6.55, 6.57, 6.61. "
      "Determinants: 6.147, 6.161"),
+    # 2026-09-02: section 6.9's problem block starts at 6.191, so this list
+    # previously had ZERO coupled-oscillator problems despite covering 6.9
+    # (6.185 is section 6.8). Added 6.193 (the 6.9 walk-through) and 6.191.
+    # 6.174 is the 6.8 walk-through, whose method 6.175/6.177 already assume.
     (9, "Eigenvalues and eigenvectors (6.8); coupled oscillators (6.9)",
-     "Eigenvectors & eigenvalues: 6.170, 6.172",
-     "Eigenvectors & eigenvalues: 6.171, 6.173, 6.177",
+     "Eigenvectors & eigenvalues: 6.170, 6.172, 6.174. "
+     "Coupled oscillators: 6.193",
+     "Eigenvectors & eigenvalues: 6.171, 6.173, 6.177. "
+     "Coupled oscillators: 6.191",
      "Eigenvectors & eigenvalues: 6.179, 6.181, 6.185"),
     (10, "Setting up integrals; Cartesian doubles, polar; line and "
          "surface integrals (5.1-5.4, 5.6, 5.8, 5.10)",
@@ -250,7 +276,7 @@ WHWS = [
      "Cartesian rectangular: 5.71, 5.75, 5.77. Cartesian "
      "non-rectangular: 5.83, 5.85, 5.97, 5.101. Line integrals: 5.199, "
      "5.201, 5.215, 5.217, 5.229. Surface integrals: 5.256, 5.257, 5.263",
-     "Line integrals: 5.223, 5.225, 5.235"),
+     "Line integrals: 5.222, 5.223, 5.225, 5.235"),
     (11, "Cylindrical and spherical coordinates (5.5, 5.7); fields, "
          "potential, gradient (8.1-8.5)",
      "Spherical coordinates: 5.167, 5.174. Scalar and vector fields: "
@@ -259,22 +285,24 @@ WHWS = [
      "Spherical coordinates: 5.181, 5.187. Polar and cylindrical: "
      "5.129, 5.137, 5.147, 5.153. Scalar and vector fields: 8.5, 8.7, "
      "8.9, 8.17, 8.19, 8.21, 8.25. Potential in 1D: 8.37, 8.41, 8.43. "
-     "From potential to gradients: 8.57, 8.59, 8.65",
+     "From potential to gradients: 8.57, 8.59, 8.65. "
+     "From gradient to potential: 8.69",
      "Polar and cylindrical: 5.157, 5.169, 5.171, 5.193. "
      "All coordinates: 5.165"),
     (12, "Divergence and curl, Feynman and Felder (Feynman II 2-3, "
          "8.6-8.7); divergence theorem and Stokes' theorem (8.9-8.10)",
      "Divergence and curl by inspection: 8.84, 8.86",
      "Divergence and curl: 8.88, 8.90, 8.94, 8.98, 8.102, 8.110. "
+     "The math behind divergence and curl: 8.113, 8.114. "
      "Divergence theorem: 8.147, 8.151, 8.155, 8.157. "
-     "Stokes' theorem: 8.159, 8.163, 8.165, 8.169, 8.171",
+     "Stokes' theorem: 8.159, 8.165, 8.169, 8.171",
      "8.106. Write out Feynman's flux-through-a-tiny-cube derivation "
      "of the divergence theorem in your own words, with pictures"),
     (13, "Conservative fields (8.11); Fourier series (9.1-9.5)",
-     "Fourier series: 9.5, 9.7, 9.9",
+     "Fourier series: 9.5, 9.7, 9.9. Different periods and finite domains: 9.44",
      "Conservative fields: 8.178. Fourier series: 9.15, 9.17, 9.23, "
      "9.27, 9.29, 9.33",
-     "Conservative fields: 8.173, 8.177, 8.179, 8.181. Different "
+     "Conservative fields: 8.173, 8.177, 8.179. Different "
      "periods and finite domains: 9.38, 9.41, 9.47. Complex Fourier "
      "series: 9.60, 9.62, 9.66"),
 ]
@@ -299,6 +327,7 @@ def build(outpath):
     last_week = None
     class_no = 0
     hw_no = 0
+    pending_hw = {}
     content_i = 0
     breaks_seen = set()
     whw_due = {}   # WHW number -> due date, for the WHW sheet
@@ -320,11 +349,15 @@ def build(outpath):
             topic, reading = CONTENT[content_i]
             exam = ""
             content_i += 1
-        hw = ""
+        hw = pending_hw.pop(d, "")
         if d.weekday() == 4 and slot_i > 0:  # Fridays (incl. quiz days,
             hw_no += 1                       # matching the previous prof)
-            hw = f"WHW{hw_no:02d}"
-            whw_due[hw_no] = d
+            due_d = WHW_DUE_OVERRIDE.get(hw_no, d)
+            whw_due[hw_no] = due_d
+            if due_d == d:
+                hw = f"WHW{hw_no:02d}"
+            else:                            # lands on a later class day
+                pending_hw[due_d] = f"WHW{hw_no:02d}"
         if d in EXTRA_DUE:
             hw = f"{hw}; {EXTRA_DUE[d]}" if hw else EXTRA_DUE[d]
         class_no += 1

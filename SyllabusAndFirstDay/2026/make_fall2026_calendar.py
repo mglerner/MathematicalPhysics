@@ -218,9 +218,9 @@ WHWS = [
     (5, "Solving ODEs with Laplace transforms (10.11); "
         "complex numbers and Euler (3.1-3.5)",
      "Sec 10.11: 10.246, 10.248. Complex numbers: 3.17, 3.19, 3.47. "
-     "Euler / complex ODE: 3.59, 3.65, 3.92",
+     "Euler / complex ODE: 3.59, 3.65, 3.77",
      "Sec 10.11: 10.252, 10.261, 10.263, 10.264. "
-     "Complex numbers: 3.49, 3.54. Euler / complex ODE: 3.77, 3.94, 3.95",
+     "Complex numbers: 3.49, 3.54. Euler / complex ODE: 3.92, 3.94, 3.95",
      "Sec 10.11: 10.270, 10.272, 10.274. Complex numbers: 3.45, 3.56. "
      "Euler / complex ODE: 3.85, 3.107"),
     # Autumn recess (Mon Oct 12) leaves this week ONE content day, Wed Oct 14.
@@ -279,27 +279,38 @@ WHWS = [
      "Line integrals: 5.222, 5.223, 5.225, 5.235"),
     (11, "Polar, cylindrical and spherical coordinates (5.6, 5.5, 5.7); "
          "fields, potential, gradient (8.1-8.5)",
-     "Spherical coordinates: 5.167, 5.174. Scalar and vector fields: "
+     "Spherical coordinates: 5.167. Cylindrical and spherical: 5.169. "
+     "Scalar and vector fields: "
      "8.1. Potential in 1D: DE 8.3.1, 8.29, 8.35. From "
      "potential to gradients: 8.53, 8.55",
-     "Spherical coordinates: 5.181, 5.187. Polar and cylindrical: "
+     "Spherical coordinates: 5.174, 5.181, 5.187. Polar and cylindrical: "
      "5.129, 5.137, 5.147. Jacobians and change of variables: 5.153. "
      "Scalar and vector fields: 8.5, 8.7, "
      "8.9, 8.17, 8.19, 8.21, 8.25. Potential in 1D: 8.37, 8.41, 8.43. "
      "From potential to gradients: 8.57, 8.59, 8.65. "
      "From gradient to potential: 8.69",
      "Jacobians and change of variables: 5.157. "
-     "Polar and cylindrical: 5.169, 5.171, 5.193. "
+     "Polar and cylindrical: 5.171, 5.193. "
      "All coordinates: 5.165"),
     (12, "Divergence and curl, Feynman and Felder (Feynman II 2-3, "
          "8.6-8.7); divergence theorem and Stokes' theorem (8.9-8.10)",
-     "Divergence and curl by inspection: 8.84, 8.86",
+     # Retiered 2026-09-02. Depth used to be 8.106 plus the writing task,
+     # and 8.106's whole published solution is "the divergence is a scalar,
+     # and you can't take the curl of a scalar field" -- the easiest item on
+     # the sheet, sitting above 8.169 and 8.171 (two derivations) in
+     # Essentials. Also, neither theorem had a warm-up: the ramp went from
+     # div/curl pictures straight to the divergence theorem. 8.147 (predict
+     # the flux is zero, then verify both sides) is that ramp.
+     "Divergence and curl by inspection: 8.84, 8.86. "
+     "Which operators even make sense: 8.106. "
+     "Divergence theorem: 8.147",
      "Divergence and curl: 8.88, 8.90, 8.94, 8.98, 8.102, 8.110. "
      "The math behind divergence and curl: 8.113, 8.114. "
-     "Divergence theorem: 8.147, 8.151, 8.155, 8.157. "
-     "Stokes' theorem: 8.159, 8.165, 8.169, 8.171",
-     "8.106. Write out Feynman's flux-through-a-tiny-cube derivation "
-     "of the divergence theorem in your own words, with pictures"),
+     "Divergence theorem: 8.151, 8.155, 8.157. "
+     "Stokes' theorem: 8.159, 8.165",
+     "Why the theorems work: 8.169, 8.171. Write out Feynman's "
+     "flux-through-a-tiny-cube derivation of the divergence theorem in "
+     "your own words, with pictures"),
     (13, "Conservative fields (8.11); Fourier series (9.1-9.5)",
      "Fourier series: 9.5, 9.7, 9.9. Different periods and finite domains: 9.44",
      "Conservative fields: 8.178. Fourier series: 9.15, 9.17, 9.23, "

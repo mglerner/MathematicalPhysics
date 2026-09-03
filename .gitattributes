@@ -1,0 +1,3 @@
+# nbstripout clean filter, scoped to the 2026 notebooks only. The older
+# Earlham-era notebooks elsewhere keep their committed outputs on purpose.
+Notebooks2026/**/*.ipynb filter=nbstripout diff=ipynb

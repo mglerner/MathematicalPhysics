@@ -32,15 +32,14 @@ FIRST_CLASS = date(2026, 9, 9)
 # The bring / set-up list is checklist material (a checkbox, not prose),
 # so it lives here as data rather than in the hand-written prep notes.
 EVERY_DAY = [
-    "iPad charged; AirPlay to the room display; GoodNotes instructor + class decks open",
-    "Zoom recurring meeting joined from the iPad: recording badge showing, mic unmuted",
-    "PCCI collection at the door; four-color voting cards for the comfort poll",
+    "iPad",
+    "Four-color voting cards",
 ]
 # date -> items specific to that day
 DAY_LOGISTICS = {
     date(2026, 9, 9): ["Printed syllabus, one per student + spares",
                        "Printed math pretest (Pretest/MathPretest-student.pdf), one per student",
-                       "Four-color voting cards, one set per student (shared/VotingCardLandscape.pdf)"],
+                       "PRINT the four-color voting cards, one set per student (shared/VotingCardLandscape.pdf)"],
     date(2026, 9, 25): ["Quiz 1: printed copies, both versions, + spares; per-problem score sheet"],
     date(2026, 9, 28): ["MacBook (HDMI) for the Python onboarding class; students bring laptops"],
     date(2026, 10, 23): ["Quiz 2: printed copies, both versions, + spares; per-problem score sheet"],
@@ -134,6 +133,8 @@ def checklist(row, all_rows, whws):
     for item in DAY_LOGISTICS.get(d, []):
         lines.append(f"- [ ] **{item}**")
     for item in EVERY_DAY:
+        if any(item.lower() in x.lower() for x in DAY_LOGISTICS.get(d, [])):
+            continue          # a bold day-specific line already covers it
         lines.append(f"- [ ] {item}")
     return "\n".join(lines) + "\n"
 

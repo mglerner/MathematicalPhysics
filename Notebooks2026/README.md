@@ -1,8 +1,12 @@
 # Notebooks2026
 
 Class and homework notebooks for the Smith PHY 210 offerings (Fall 2026
-on), meant to run on posit.smith.edu (JupyterLab) and interactive via
-ipywidgets. Committed **without outputs**: `nbstripout` is a git clean
+on), meant to run on **jupyterhub.smith.edu** (not posit.smith.edu: no
+working sessions, no packages -- switched 2026-09-07; off campus the hub
+needs the Smith VPN) and interactive via ipywidgets (8.1 there, verified).
+The hub's default matplotlib backend is ipympl, so every notebook's first
+code cell starts with `%matplotlib inline`; ipympl stacks figures inside
+`interact` callbacks otherwise. Committed **without outputs**: `nbstripout` is a git clean
 filter scoped to this directory only (see `.gitattributes` at the repo
 root); the older Earlham-era notebooks elsewhere in the repo keep their
 outputs, which are part of the record of those classes.

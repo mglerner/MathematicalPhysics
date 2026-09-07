@@ -44,5 +44,8 @@ ipympl, which stacks figures inside `interact`); short named functions
 rather than lambdas; time in seconds on every axis (no normalized units
 such as t/T0); one or two sliders, not five; one idea per cell; no
 try/except scaffolding. Every cell has an `id` (nbformat >= 4.5).
-Commit without outputs (nbstripout filter); keep a stripped copy for
-Moodle in `private/MoodleBuild/attachments/`.
+Commit without outputs (nbstripout filter). Moodle never gets an
+uploaded copy: link the GitHub page of the notebook
+(`https://github.com/mglerner/MathematicalPhysics/blob/main/Notebooks2026/...`),
+which is always the clean, current version; students use its download
+button and upload to jupyterhub.

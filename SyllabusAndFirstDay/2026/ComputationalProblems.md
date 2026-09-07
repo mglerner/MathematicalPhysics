@@ -18,7 +18,9 @@ Decisions this draft implements:
 - "AI-aware assignment design" (TODO/MoodleBuildSpec, 2026-08-18): every
   problem asks for a **prediction before running**, an **interpretation
   after**, and (on most) **"what did you try that didn't work"**.
-- Python only (numpy / sympy / matplotlib), run on posit.smith.edu.
+- Python only (numpy / sympy / matplotlib; scipy is available too, see
+  below), run on jupyterhub.smith.edu (was posit.smith.edu until
+  2026-09-07).
 
 ## The count and the skip rule
 
@@ -47,7 +49,7 @@ to students and easy to keep when the calendar drifts:
 Due dates above are read off `make_fall2026_calendar.py`, which is
 authoritative: WHWs land every Friday including quiz Fridays, so WHW01-03
 all precede the Mon Sep 28 Python onboarding class. Only WHW02 therefore
-needs to be runnable with no posit account and no Python, and it is
+needs to be runnable with no hub account and no Python, and it is
 written that way.
 
 ## Standing preamble (goes once in each WHW description)
@@ -66,8 +68,10 @@ written that way.
 ## Tooling notes
 
 - Every problem below uses only `numpy`, `sympy`, `matplotlib`. **No
-  scipy** -- posit provisioning of scipy is unconfirmed (TODO item 27),
-  so where a numerical ODE solver would be natural (WHW04) the students
+  scipy** -- written before the platform was settled; jupyterhub.smith.edu
+  DOES have scipy 1.14 (verified 2026-09-07), but the nine problems stay
+  scipy-free as drafted: where a numerical ODE solver would be natural
+  (WHW04) the students
   write forward Euler themselves, which is better pedagogy here anyway.
 - The sympy idioms match the S26 notebooks students will have seen on
   Sep 28 (`dsolve`, `checkodesol`, `laplace_transform`,
@@ -386,9 +390,9 @@ natural things to post alongside it.
 
 ## Still open (non-blocking)
 
-4. **Does posit have scipy?** Everything here is deliberately scipy-free
-   (TODO item 27 still lists posit provisioning as unconfirmed), so nothing
-   is blocked either way. If scipy *is* there, WHW04 could use `solve_ivp`
+4. **Does the hub have scipy?** YES, 1.14 (verified 2026-09-07 on
+   jupyterhub.smith.edu). Everything here is scipy-free anyway, so nothing
+   is blocked either way. WHW04 could use `solve_ivp`
    -- but keep hand-rolled Euler regardless, since the h = 0.8 blowup is the
    lesson.
 5. **Textbook problem numbers.** Gary's S22 numbering and Gillian's S26

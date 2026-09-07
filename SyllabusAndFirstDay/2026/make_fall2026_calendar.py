@@ -148,7 +148,7 @@ PCCI = {
     date(2026, 9, 18): "DE 1.6.1 Parts 1-3",
     date(2026, 9, 21): "DE 1.6.1 Parts 4-6",
     date(2026, 9, 23): "10.1, 10.3",
-    date(2026, 9, 28): "Log into posit.smith.edu and open a blank "
+    date(2026, 9, 28): "Log into jupyterhub.smith.edu and open a blank "
                        "Jupyter notebook; bring your laptop",
     date(2026, 9, 30): "DE 10.10.1 Parts 1-9",
     date(2026, 10, 2): "10.216",
@@ -215,7 +215,7 @@ WHWS = [
      "Sec 10.10: 10.217, 10.218",
      "Sec 10.10: 10.219, 10.223, 10.230, 10.242",
      "Redo the class notebook's exercises from scratch in a fresh "
-     "notebook on posit.smith.edu"),
+     "notebook on jupyterhub.smith.edu"),
     (5, "Solving ODEs with Laplace transforms (10.11); "
         "complex numbers and Euler (3.1-3.5)",
      "Sec 10.11: 10.246, 10.248. Complex numbers: 3.17, 3.19, 3.47. "

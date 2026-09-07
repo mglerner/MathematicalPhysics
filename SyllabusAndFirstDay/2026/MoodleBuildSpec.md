@@ -21,7 +21,7 @@ S26 failed to do (her calendar was empty; WHW 03+ had no due dates).
 ## Sections (~12 collapsed topics)
 
 0. **General / Course Information** -- syllabus PDF; the Course
-   Calendar Page (see "Schedule embed" below); posit.smith.edu
+   Calendar Page (see "Schedule embed" below); jupyterhub.smith.edu
    pointer;
    office-hours info; anonymous feedback via a Moodle Feedback
    activity (anonymous mode, "allow multiple submissions" on, one
@@ -169,7 +169,7 @@ Gary's "purple tier" model, in Python: a REQUIRED small computational
 item on most WHWs (~8-10 of 13). Sources to draft from: Michael's
 Earlham notebooks, Gary's purple problems (ported), the S26 guided
 notebooks (ODE_basics is the keeper). Sep 28 = the onboarding class
-(full class, bring laptops, posit.smith.edu). BUILD TASK: draft the
+(full class, bring laptops, jupyterhub.smith.edu). BUILD TASK: draft the
 per-week computational items and add them to the WHW lists (generator
 edit) -- see TODO.
 
@@ -208,10 +208,21 @@ generator.
 
 ## Notebooks posted to Moodle
 
+PLATFORM (decided 2026-09-07, both courses): **jupyterhub.smith.edu**,
+not posit.smith.edu. Posit's Workbench could not start sessions (ITS
+ticket open) and its Python had almost no packages; the hub has numpy
+1.26, scipy 1.14, sympy 1.14, matplotlib 3.9, ipywidgets 8.1, ipympl 0.9,
+and an `interact` slider test passed. Off campus the hub needs the Smith
+VPN (instructor concern; students are on campus). The hub's default
+matplotlib backend is ipympl, so every notebook we post pins
+`%matplotlib inline` in its first code cell (the ipympl backend stacks
+figures inside `interact` callbacks). Notebooks live in `Notebooks2026/`
+and commit output-free (nbstripout filter).
+
 Post FIXED copies only (never Gillian's originals verbatim): delete
 the %pip cells; swap in the corrected apply_initial_conditions();
 keep the intentional NameError in Sympy_Basics. Post as force-download
-(students run them on posit). Keepers: Sympy_Basics, Sympy_ODE_basics,
+(students run them on jupyterhub.smith.edu). Keepers: Sympy_Basics, Sympy_ODE_basics,
 ODE_Laplace (fixed), MacLaurin/Series pair. Symmetry + FourierSeries
 demos fold into class decks instead.
 

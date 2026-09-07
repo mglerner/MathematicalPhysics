@@ -232,7 +232,11 @@ WHW after them -- the final's practice set covers that material.
     only surviving Google artifact is the schedule Sheet embed.
 27. Notebooks: delete %pip cells; swap in the fixed
     apply_initial_conditions() (tested replacement in the inventory
-    outputs); add narration to Symmetry/FourierSeries; confirm posit
+    outputs); add narration to Symmetry/FourierSeries; RESOLVED 2026-09-07: the
+    platform is jupyterhub.smith.edu (posit abandoned -- no sessions, no
+    packages); the hub has numpy/scipy/sympy/matplotlib/ipywidgets, so
+    posted notebooks may use scipy, and each pins `%matplotlib inline`
+    (hub default is ipympl). Formerly: confirm posit
     provisioning of numpy/sympy/matplotlib.
 28. Pre-semester email to registrants: adapt Gary's Math Review packet
     (Math Review/Message to students.docx + attachments).

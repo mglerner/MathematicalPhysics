@@ -41,6 +41,8 @@ EVERY_DAY = [
 DAY_LOGISTICS = {
     date(2026, 9, 9): ["Printed syllabus, one per student + spares",
                        "Printed math pretest (Pretest/MathPretest-student.pdf), one per student",
+                       "Extra copies of Felder and Felder",
+                       "Extra copies of The Mathematics Companion",
                        "PRINT the four-color voting cards, one set per student (shared/VotingCardLandscape.pdf)"],
     date(2026, 9, 25): ["Quiz 1: printed copies, both versions, + spares; per-problem score sheet"],
     date(2026, 9, 28): ["MacBook (HDMI) for the Python onboarding class; students bring laptops"],

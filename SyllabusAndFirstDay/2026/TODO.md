@@ -351,5 +351,7 @@ WHW after them -- the final's practice set covers that material.
     manual by `private/Solutions/make_whw_solutions.py`, plus our own
     computational solutions). They double as Michael's review copy
     under the finalize-before-go-live rule. Release timing on Moodle
-    still to set: after the due date + late-pass window (next class
-    period) is the natural choice.
+    still to set: the next class period after the due date is the
+    natural choice. BUILT 2026-09-08: all 13 packets exist (9-49 pp
+    each); 1.38 (WHW02) and 10.33 (WHW03) are absent from the manual
+    and need our own write-ups; 5.2 (WHW10) leans on 5.1, a PCCI.

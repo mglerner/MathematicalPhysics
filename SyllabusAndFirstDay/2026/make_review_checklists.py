@@ -120,7 +120,8 @@ def checklist(row, all_rows, whws):
                       f"MANDATORY by class today** (due {fmt(due)}). Covers {covers}.",
                       f"      Warm-up: {warm}",
                       f"      Essentials: {ess}",
-                      f"      Depth: {depth}"]
+                      f"      Depth: {depth}",
+                      f"      Packet to review: private/Solutions/WHW{hw:02d}/WHW{hw:02d}-solutions.pdf"]
             if hw in COMPUTATIONAL:
                 lines.append(f"      Computational: the required Python problem for WHW{hw:02d}"
                              " (ComputationalProblems.md) -- run it end to end on jupyterhub")
@@ -128,7 +129,8 @@ def checklist(row, all_rows, whws):
             any_hw = True
             lines += [f"- [ ] WHW{hw:02d} goes live {fmt(vis)}, before the next class: finalize and "
                       f"hand-review its solutions NOW (the ideal deadline). Covers {covers}.",
-                      f"      Warm-up: {warm}", f"      Essentials: {ess}", f"      Depth: {depth}"]
+                      f"      Warm-up: {warm}", f"      Essentials: {ess}", f"      Depth: {depth}",
+                      f"      Packet to review: private/Solutions/WHW{hw:02d}/WHW{hw:02d}-solutions.pdf"]
         if due == d:
             any_hw = True
             lines.append(f"- WHW{hw:02d} is DUE today 10:00 PM.")

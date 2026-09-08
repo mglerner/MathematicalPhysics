@@ -243,6 +243,9 @@ demos fold into class decks instead.
 
 - No restore of Gillian's .mbz (reference only). No Google Forms at
   all -- WHWs and anonymous feedback are both native Moodle
-  activities. No posted full-textbook scan, no instructor-solutions-manual
-  excerpts (copyright; see the 317 lesson). No extension-request form
-  (late passes are declared by email, per the syllabus).
+  activities. No posted full-textbook scan. Solutions from the
+  instructor's manual MAY be posted (the author, a Smith colleague,
+  gave permission 2026-09-08; per-set PDFs are built under
+  `private/Solutions/`). No extension-request form: the late policy
+  (2026-09-08, same as 317) is half credit at most unless approved
+  beforehand, nothing after one week; approvals are by email.

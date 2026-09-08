@@ -339,3 +339,13 @@ WHW after them -- the final's practice set covers that material.
     `A1:H16` -> `A17:H45`. Also: open the mid-semester feedback
     activity the same week. Carry this into the class-15 (Wed Oct 14)
     prep pack when it gets built.
+34. WHW solutions (open, 2026-09-08). Gillian and Manbir posted none
+    (effort grading). The publisher's manual is now in
+    `private/Solutions to Felder and Felder/` (all 13 chapters), which
+    makes the review-before-go-live rule cheap for the book problems;
+    the computational problems still need our own
+    (`private/ComputationalProblemSolutions.md`). Michael: "we might
+    consider posting solutions for some." If so: our own write-ups or
+    excerpts with a note, not the manual's PDFs; the natural candidates
+    are the Essentials tier of each set, released after the due date +
+    late-pass window (next class period).

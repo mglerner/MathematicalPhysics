@@ -344,8 +344,12 @@ WHW after them -- the final's practice set covers that material.
     `private/Solutions to Felder and Felder/` (all 13 chapters), which
     makes the review-before-go-live rule cheap for the book problems;
     the computational problems still need our own
-    (`private/ComputationalProblemSolutions.md`). Michael: "we might
-    consider posting solutions for some." If so: our own write-ups or
-    excerpts with a note, not the manual's PDFs; the natural candidates
-    are the Essentials tier of each set, released after the due date +
-    late-pass window (next class period).
+    (`private/ComputationalProblemSolutions.md`). DECIDED 2026-09-08:
+    the author (a Smith colleague) says we may post anything from the
+    book or manual, so FULL solution sets get built for every WHW
+    (`private/Solutions/WHWNN/WHWNN-solutions.pdf`, assembled from the
+    manual by `private/Solutions/make_whw_solutions.py`, plus our own
+    computational solutions). They double as Michael's review copy
+    under the finalize-before-go-live rule. Release timing on Moodle
+    still to set: after the due date + late-pass window (next class
+    period) is the natural choice.

@@ -35,22 +35,29 @@ TITLES = {   # Felder & Felder, Mathematical Methods in Engineering and Physics
     13: "Calculus with Complex Numbers",
 }
 CSS = """
-body { background: #fff; margin: 0; padding: 24px; font-family: Calibri, Carlito, Helvetica, Arial, sans-serif; color: #000; }
-.slide { width: 1000px; padding: 28px 36px; box-sizing: border-box; }
-h1 { color: #c00000; font-weight: normal; font-size: 32px; margin: 0 0 14px 0; }
-h2 { font-size: 22px; font-weight: normal; margin: 14px 0 6px 0; }
-table { border-collapse: collapse; font-size: 19px; }
-td { padding: 2px 14px 2px 0; vertical-align: top; }
-td.day { white-space: nowrap; color: #444; }
-.hw { font-size: 19px; margin: 4px 0 8px 0; }
-.hw .name { font-weight: bold; }
-.hw .tier { color: #444; display: block; margin-top: 4px; }
-.tiers { display: flex; gap: 28px; }
-.tiers > div { flex: 1; }
-.grp { color: #666; font-size: 17px; margin-top: 4px; }
-ul { margin: 0 0 4px 0; padding-left: 22px; }
-li { margin: 1px 0; }
-.foot { font-size: 18px; margin-top: 14px; color: #333; }
+body { background: #fffff8; margin: 0; padding: 28px; color: #111;
+       font-family: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+       font-variant-numeric: tabular-nums oldstyle-nums; }
+.slide { width: 1040px; padding: 30px 40px 26px 40px; box-sizing: border-box; background: #fffff8; }
+header { display: flex; align-items: baseline; justify-content: space-between;
+         border-bottom: 1px solid #999; padding-bottom: 10px; margin-bottom: 20px; }
+header .num { font-size: 40px; font-weight: normal; margin: 0; letter-spacing: .01em; }
+header .name { font-size: 22px; font-style: italic; color: #444; margin-left: 14px; }
+header .when { font-size: 17px; color: #6b6b6b; font-style: italic; }
+.cols { display: grid; grid-template-columns: 1fr 1fr 1.15fr; column-gap: 44px; }
+h2 { font-size: 15px; font-weight: normal; letter-spacing: .12em; text-transform: uppercase;
+     color: #6b6b6b; margin: 0 0 10px 0; }
+.day, .grp { font-size: 16px; font-style: italic; color: #6b6b6b; margin: 10px 0 2px 0; }
+.day:first-of-type, .grp:first-of-type { margin-top: 0; }
+ul { list-style: none; margin: 0; padding: 0; }
+li { font-size: 21px; line-height: 1.35; padding-left: 1.1em; text-indent: -1.1em; }
+li.note { font-size: 17px; color: #444; font-style: italic; }
+b.pcci { font-weight: normal; border-bottom: 2px solid #b33; padding-bottom: 1px; }
+.hwhead { font-size: 21px; margin: 12px 0 2px 0; }
+.hwhead:first-of-type { margin-top: 0; }
+.hwhead .due { font-size: 16px; font-style: italic; color: #6b6b6b; margin-left: 6px; }
+footer { margin-top: 22px; font-size: 16px; color: #6b6b6b; font-style: italic; }
+footer .key { border-bottom: 2px solid #b33; color: #111; font-style: normal; }
 """
 
 
@@ -91,7 +98,7 @@ def tier_lines(text):
     """'Label: a, b, c. Other: d' -> one problem per line under its label;
     a tier with no problem numbers (a sentence) stays one line."""
     if not re.search(r"\b\d{1,2}\.\d+", text):
-        return f"<ul><li>{text}</li></ul>"
+        return f"<ul><li class=note>{text}</li></ul>"
     out = []
     for seg in re.split(r"\.\s+(?=[A-Z])", text.strip().rstrip(".")):
         label, _, probs = seg.partition(":")
@@ -103,25 +110,32 @@ def tier_lines(text):
 
 
 def slide(ch, days, whws):
+    span = (f"{fmt(days[0][0])} to {fmt(days[-1][0])}" if len(days) > 1
+            else fmt(days[0][0]) if days else "")
     h = [f"<!doctype html><meta charset=utf-8><title>Ch {ch} card</title><style>{CSS}</style>",
-         "<div class=slide>", f"<h1>Chapter {ch}: {TITLES[ch]}</h1>",
-         "<h2>Class days and PCCIs (on paper, at the start of class)</h2><table>"]
+         "<div class=slide>",
+         f"<header><div><span class=num>Chapter {ch}</span><span class=name>{TITLES[ch]}</span></div>"
+         f"<div class=when>{span}</div></header>",
+         "<div class=cols>"]
+    h.append("<div><h2>Class days</h2>")
     for d, topic, reading in days:
+        h.append(f"<div class=day>{fmt(d)}</div><ul><li>{topic} <span style='color:#6b6b6b'>({reading})</span></li></ul>")
+    h.append("</div>")
+    h.append("<div><h2>Pre-class check-ins</h2>")
+    for d, _topic, _reading in days:
         pcci = CAL.PCCI.get(d, "") or "none"
-        h.append(f"<tr><td class=day>{fmt(d)}</td><td>{topic} <span style='color:#666'>({reading})</span></td>"
-                 f"<td><b>PCCI:</b> {pcci}</td></tr>")
-    h.append("</table>")
-    h.append("<h2>Written homework drawing on this chapter</h2>")
+        h.append(f"<div class=day>{fmt(d)}</div><ul><li>{pcci}</li></ul>")
+    h.append("</div>")
+    h.append("<div><h2>Written homework</h2>")
     for hw, due, covers, warm, ess, depth in whws:
-        comp = " (plus the required Python problem)" if hw in CHK.COMPUTATIONAL else ""
-        h.append(f"<div class=hw><span class=name>WHW{hw:02d}</span>, due {fmt(due)} 10:00 PM{comp}. Covers {covers}."
-                 f"<div class=tiers>"
-                 f"<div><span class=tier>Warm-up</span>{tier_lines(warm)}</div>"
-                 f"<div><span class=tier>Essentials</span>{tier_lines(ess)}</div>"
-                 f"<div><span class=tier>Depth</span>{tier_lines(depth)}</div>"
-                 f"</div></div>")
+        comp = " + Python" if hw in CHK.COMPUTATIONAL else ""
+        h.append(f"<div class=hwhead>WHW{hw:02d}{comp}<span class=due>due {fmt(due)}, 10 PM</span></div>")
+        for tier, text in (("Warm-up", warm), ("Essentials", ess), ("Depth", depth)):
+            h.append(f"<div class=day>{tier}</div>{tier_lines(text)}")
+    h.append("</div></div>")
     q = quizzes_for(ch)
-    h.append("<div class=foot>" + ("; ".join(q) + "." if q else "Not on a quiz.") + "</div>")
+    h.append("<footer>" + ("; ".join(q) + "." if q else "Not on a quiz.") +
+             " PCCIs are on paper at the start of class; WHWs upload to Moodle.</footer>")
     h.append("</div>")
     return "\n".join(h) + "\n"
 

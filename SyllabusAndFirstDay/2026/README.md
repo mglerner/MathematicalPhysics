@@ -85,3 +85,12 @@ paper turn-in at the start of class + four-color-card comfort poll).
 - Private materials (solutions, exams, grades, other professors' files) go
   in `../../private/` -> `~/Dropbox/__Smith/Classes/210-MathMethods/private/`
   (gitignored symlink; Dropbox is the backup).
+
+## Chapter-opening cards
+
+`make_chapter_slides.py` writes `private/Decks/ChapterSlides/ChNN.html`,
+one per Felder chapter: the chapter's class days with each day's PCCI,
+every WHW that draws on the chapter (tiers, due date, computational
+flag), and the quiz that covers it, all from the generator. Open in a
+browser, screenshot the card, paste into the chapter's GoodNotes deck.
+Rerun after any generator change, with the xlsx and the checklists.

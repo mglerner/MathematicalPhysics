@@ -44,7 +44,12 @@ td { padding: 2px 14px 2px 0; vertical-align: top; }
 td.day { white-space: nowrap; color: #444; }
 .hw { font-size: 19px; margin: 4px 0 8px 0; }
 .hw .name { font-weight: bold; }
-.hw .tier { color: #444; }
+.hw .tier { color: #444; display: block; margin-top: 4px; }
+.tiers { display: flex; gap: 28px; }
+.tiers > div { flex: 1; }
+.grp { color: #666; font-size: 17px; margin-top: 4px; }
+ul { margin: 0 0 4px 0; padding-left: 22px; }
+li { margin: 1px 0; }
 .foot { font-size: 18px; margin-top: 14px; color: #333; }
 """
 
@@ -82,6 +87,21 @@ def quizzes_for(ch):
     return hits
 
 
+def tier_lines(text):
+    """'Label: a, b, c. Other: d' -> one problem per line under its label;
+    a tier with no problem numbers (a sentence) stays one line."""
+    if not re.search(r"\b\d{1,2}\.\d+", text):
+        return f"<ul><li>{text}</li></ul>"
+    out = []
+    for seg in re.split(r"\.\s+(?=[A-Z])", text.strip().rstrip(".")):
+        label, _, probs = seg.partition(":")
+        if not probs:
+            label, probs = "", seg
+        lis = "".join(f"<li>{x.strip()}</li>" for x in probs.split(",") if x.strip())
+        out.append((f"<div class=grp>{label.strip()}</div>" if label else "") + f"<ul>{lis}</ul>")
+    return "".join(out)
+
+
 def slide(ch, days, whws):
     h = [f"<!doctype html><meta charset=utf-8><title>Ch {ch} card</title><style>{CSS}</style>",
          "<div class=slide>", f"<h1>Chapter {ch}: {TITLES[ch]}</h1>",
@@ -94,10 +114,12 @@ def slide(ch, days, whws):
     h.append("<h2>Written homework drawing on this chapter</h2>")
     for hw, due, covers, warm, ess, depth in whws:
         comp = " (plus the required Python problem)" if hw in CHK.COMPUTATIONAL else ""
-        h.append(f"<div class=hw><span class=name>WHW{hw:02d}</span>, due {fmt(due)} 10:00 PM{comp}. Covers {covers}.<br>"
-                 f"<span class=tier>Warm-up:</span> {warm}<br>"
-                 f"<span class=tier>Essentials:</span> {ess}<br>"
-                 f"<span class=tier>Depth:</span> {depth}</div>")
+        h.append(f"<div class=hw><span class=name>WHW{hw:02d}</span>, due {fmt(due)} 10:00 PM{comp}. Covers {covers}."
+                 f"<div class=tiers>"
+                 f"<div><span class=tier>Warm-up</span>{tier_lines(warm)}</div>"
+                 f"<div><span class=tier>Essentials</span>{tier_lines(ess)}</div>"
+                 f"<div><span class=tier>Depth</span>{tier_lines(depth)}</div>"
+                 f"</div></div>")
     q = quizzes_for(ch)
     h.append("<div class=foot>" + ("; ".join(q) + "." if q else "Not on a quiz.") + "</div>")
     h.append("</div>")

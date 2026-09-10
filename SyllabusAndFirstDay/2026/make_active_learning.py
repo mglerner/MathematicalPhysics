@@ -92,6 +92,23 @@ def check_rows(rows, path, date):
         fail(f"{path}: last Stop is {clock(prev)}, want {clock(CLASS_START[weekday] + PERIOD)}")
 
 
+def longest_stretch(rows):
+    """Longest run of consecutive non-Active minutes: (minutes, start, stop).
+    Smith's norm is no more than 15 instructor-led minutes at a time."""
+    best, cur, start = (0, None, None), 0, None
+    for a, b, m, mode in rows + [(None, None, 0, "Active")]:
+        if mode != "Active":
+            if cur == 0:
+                start = a
+            cur += m
+            end = b
+        else:
+            if cur > best[0]:
+                best = (cur, start, end)
+            cur = 0
+    return best
+
+
 def totals(rows):
     return {mode: sum(m for _, _, m, md in rows if md == mode) for mode in MODES}
 
@@ -167,6 +184,9 @@ def header_lines():
         "1. Start/Stop are wall-clock times; rows run contiguously from the",
         "   class start (syllabus) for 75 minutes, Min = Stop - Start, and no row",
         "   exceeds 15 minutes; the script hard-fails otherwise.",
+        "   The 'Longest non-Active' column is the longest run of back-to-back",
+        "   Lecture / Interactive / Logistics minutes; Smith's norm is no more",
+        "   than 15 instructor-led minutes at a time, so a '!' marks a day over it.",
         "2. Every row's minutes land in exactly one mode. A chunk that mixes",
         "   modes is split into rows at the plan's own sentence boundaries, and",
         "   the split is named in that day's Ambiguities line.",
@@ -187,7 +207,7 @@ def header_lines():
 
 
 def main():
-    table_rows, raises, sums, days = [], [], {m: 0 for m in MODES}, 0
+    table_rows, raises, sums, days, over = [], [], {m: 0 for m in MODES}, 0, 0
     for n, date, path in pack_files():
         if not path.exists():
             fail(f"{path}: missing 00-prep-notes.md")
@@ -196,19 +216,23 @@ def main():
         check_rows(rows, path, date)
         t = totals(rows)
         rewrite_totals(path, lines, totals_line(t))
+        ls = longest_stretch(rows)
+        over += ls[0] > 15
         table_rows.append([f"{n:02d}", date, topic(lines, path)]
                           + [str(t[m]) for m in MODES]
-                          + [f"{round(100 * t['Active'] / PERIOD)}%"])
+                          + [f"{round(100 * t['Active'] / PERIOD)}%",
+                             f"{ls[0]} ({clock(ls[1])}-{clock(ls[2])}){' !' if ls[0] > 15 else ''}"])
         raises.append(f"{n}. **Class {n:02d} ({date}).** {cheapest_raise(lines, path)}")
         for m in MODES:
             sums[m] += t[m]
         days += 1
     out = header_lines()
-    out += render_table(["Class", "Date", "Topic"] + MODES + ["% Active"], table_rows)
+    out += render_table(["Class", "Date", "Topic"] + MODES + ["% Active", "Longest non-Active"], table_rows)
     total = PERIOD * days
     out += ["", "Semester so far: " + ", ".join(
         f"{m} {sums[m]} min ({round(100 * sums[m] / total)}%)" for m in MODES)
-        + f", of {total} min across {days} class days.", "",
+        + f", of {total} min across {days} class days. Days with an instructor-led"
+        f" stretch over 15 minutes (Lecture + Interactive + Logistics back to back): {over} of {days}.", "",
         "## Cheapest raises", "",
         "The one change to each day's plan that buys the most Active minutes.",
         ""] + raises

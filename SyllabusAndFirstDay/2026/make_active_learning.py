@@ -12,6 +12,7 @@ plan:
 Both the `Totals:` lines and `ACTIVE-LEARNING.md` are generated; edit
 the plan tables, never the derived numbers.
 """
+import datetime
 import re
 import sys
 from pathlib import Path
@@ -20,6 +21,19 @@ PACKS = Path.home() / "coding/courses/MathematicalPhysics/private/F2026PrepPacks
 COURSE = "PHY 210"
 MODES = ["Active", "Interactive", "Lecture", "Logistics"]
 PERIOD = 75
+# Wall-clock class start by weekday (Mon=0), from the syllabus.
+CLASS_START = {0: 9 * 60 + 25, 2: 9 * 60 + 25, 4: 9 * 60 + 25}   # MWF 9:25
+
+
+def to_minutes(text):
+    """'1:40' or '9:25' -> minutes since midnight; hours below 8 are PM."""
+    h, m = (int(x) for x in text.split(":"))
+    return (h + 12 if h < 8 else h) * 60 + m
+
+
+def clock(minutes):
+    h = minutes // 60
+    return f"{h - 12 if h > 12 else h}:{minutes % 60:02d}"
 
 
 def fail(msg):
@@ -37,7 +51,7 @@ def pack_files():
 
 
 def plan_rows(lines, path):
-    """Parse the Plan table into [(start, stop, min, mode)]."""
+    """Parse the Plan table into [(start, stop, min, mode)], minutes since midnight."""
     try:
         start = next(i for i, l in enumerate(lines) if l.strip() == "## Plan (75 min)")
     except StopIteration:
@@ -51,19 +65,22 @@ def plan_rows(lines, path):
         if len(cells) != 5:
             fail(f"{path}: plan row has {len(cells)} columns, want 5: {line.strip()}")
         try:
-            a, b, m = (int(cells[i]) for i in range(3))
+            a, b, m = to_minutes(cells[0]), to_minutes(cells[1]), int(cells[2])
         except ValueError:
-            fail(f"{path}: non-integer Start/Stop/Min: {line.strip()}")
+            fail(f"{path}: Start/Stop must be wall-clock h:mm and Min an integer: {line.strip()}")
         rows.append((a, b, m, cells[3]))
     return rows
 
 
-def check_rows(rows, path):
-    prev = 0
+def check_rows(rows, path, date):
+    weekday = datetime.date.fromisoformat(date).weekday()
+    if weekday not in CLASS_START:
+        fail(f"{path}: {date} is not a class weekday")
+    prev = CLASS_START[weekday]
     for a, b, m, mode in rows:
-        where = f"{path}: row {a}-{b}"
+        where = f"{path}: row {clock(a)}-{clock(b)}"
         if a != prev:
-            fail(f"{where}: starts at {a}, previous row stops at {prev}")
+            fail(f"{where}: starts at {clock(a)}, previous row stops at {clock(prev)}")
         if m != b - a:
             fail(f"{where}: Min {m} != Stop - Start ({b - a})")
         if m > 15:
@@ -71,8 +88,8 @@ def check_rows(rows, path):
         if mode not in MODES:
             fail(f"{where}: unknown Mode {mode!r}; want one of {', '.join(MODES)}")
         prev = b
-    if prev != PERIOD:
-        fail(f"{path}: last Stop is {prev}, want {PERIOD}")
+    if prev != CLASS_START[weekday] + PERIOD:
+        fail(f"{path}: last Stop is {clock(prev)}, want {clock(CLASS_START[weekday] + PERIOD)}")
 
 
 def totals(rows):
@@ -147,7 +164,8 @@ def header_lines():
         "",
         "## Rules the tables follow",
         "",
-        "1. Rows are contiguous from 0 to 75, Min = Stop - Start, and no row",
+        "1. Start/Stop are wall-clock times; rows run contiguously from the",
+        "   class start (syllabus) for 75 minutes, Min = Stop - Start, and no row",
         "   exceeds 15 minutes; the script hard-fails otherwise.",
         "2. Every row's minutes land in exactly one mode. A chunk that mixes",
         "   modes is split into rows at the plan's own sentence boundaries, and",
@@ -175,7 +193,7 @@ def main():
             fail(f"{path}: missing 00-prep-notes.md")
         lines = path.read_text().splitlines()
         rows = plan_rows(lines, path)
-        check_rows(rows, path)
+        check_rows(rows, path, date)
         t = totals(rows)
         rewrite_totals(path, lines, totals_line(t))
         table_rows.append([f"{n:02d}", date, topic(lines, path)]

@@ -39,7 +39,8 @@ EVERY_DAY = [
 ]
 # date -> items specific to that day
 DAY_LOGISTICS = {
-    date(2026, 9, 9): ["Printed syllabus, one per student + spares",
+    date(2026, 9, 9): ["Printed photo roster (private/Roster/PHY210-F2026-roster.pdf)",
+                       "Printed syllabus, one per student + spares",
                        "Printed math pretest (Pretest/MathPretest-student.pdf), one per student",
                        "Extra copies of Felder and Felder",
                        "Extra copies of The Mathematics Companion",

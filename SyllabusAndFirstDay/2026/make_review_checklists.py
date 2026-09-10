@@ -44,6 +44,7 @@ DAY_LOGISTICS = {
                        "Extra copies of Felder and Felder",
                        "Extra copies of The Mathematics Companion",
                        "PRINT the four-color voting cards, one set per student (shared/VotingCardLandscape.pdf)"],
+    date(2026, 9, 11): ["Chalk and whiteboard markers (board work: mass-spring, bacteria, rabbits)"],
     date(2026, 9, 25): ["Quiz 1: printed copies, both versions, + spares; per-problem score sheet"],
     date(2026, 9, 28): ["MacBook (HDMI) for the Python onboarding class; students bring laptops"],
     date(2026, 10, 23): ["Quiz 2: printed copies, both versions, + spares; per-problem score sheet"],

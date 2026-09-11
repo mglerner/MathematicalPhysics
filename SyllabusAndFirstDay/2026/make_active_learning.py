@@ -21,6 +21,27 @@ PACKS = Path.home() / "coding/courses/MathematicalPhysics/private/F2026PrepPacks
 COURSE = "PHY 210"
 MODES = ["Active", "Interactive", "Lecture", "Logistics"]
 PERIOD = 75
+CSS = '''
+body { background: #fffff8; margin: 0; padding: 20px; color: #111;
+       font-family: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+       font-variant-numeric: tabular-nums; }
+.card { width: 1100px; padding: 22px 30px 18px 30px; box-sizing: border-box; background: #fffff8; }
+header { display: flex; align-items: baseline; justify-content: space-between;
+         border-bottom: 1px solid #999; padding-bottom: 6px; margin-bottom: 10px; }
+header .num { font-size: 26px; }
+header .name { font-size: 17px; font-style: italic; color: #444; margin-left: 12px; }
+header .when { font-size: 14px; color: #6b6b6b; font-style: italic; }
+table { border-collapse: collapse; width: 100%; font-size: 15px; line-height: 1.3; }
+th { font-size: 11px; font-weight: normal; letter-spacing: .12em; text-transform: uppercase;
+     color: #6b6b6b; text-align: left; padding: 0 10px 4px 0; }
+td { vertical-align: top; padding: 4px 10px 4px 0; border-top: 1px solid #e4e2d8; }
+td.time { white-space: nowrap; width: 88px; }
+td.min { width: 30px; text-align: right; color: #6b6b6b; }
+td.mode { width: 84px; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: #6b6b6b; padding-top: 7px; }
+tr.active td { border-left: 3px solid #b33; padding-left: 8px; }
+tr td:first-child { padding-left: 8px; }
+footer { margin-top: 10px; font-size: 13px; color: #6b6b6b; font-style: italic; }
+'''
 # Wall-clock class start by weekday (Mon=0), from the syllabus.
 CLASS_START = {0: 9 * 60 + 25, 2: 9 * 60 + 25, 4: 9 * 60 + 25}   # MWF 9:25
 
@@ -51,7 +72,7 @@ def pack_files():
 
 
 def plan_rows(lines, path):
-    """Parse the Plan table into [(start, stop, min, mode)], minutes since midnight."""
+    """Parse the Plan table into [(start, stop, min, mode, text)], minutes since midnight."""
     try:
         start = next(i for i, l in enumerate(lines) if l.strip() == "## Plan (75 min)")
     except StopIteration:
@@ -68,7 +89,7 @@ def plan_rows(lines, path):
             a, b, m = to_minutes(cells[0]), to_minutes(cells[1]), int(cells[2])
         except ValueError:
             fail(f"{path}: Start/Stop must be wall-clock h:mm and Min an integer: {line.strip()}")
-        rows.append((a, b, m, cells[3]))
+        rows.append((a, b, m, cells[3], cells[4]))
     return rows
 
 
@@ -77,7 +98,7 @@ def check_rows(rows, path, date):
     if weekday not in CLASS_START:
         fail(f"{path}: {date} is not a class weekday")
     prev = CLASS_START[weekday]
-    for a, b, m, mode in rows:
+    for a, b, m, mode, _ in rows:
         where = f"{path}: row {clock(a)}-{clock(b)}"
         if a != prev:
             fail(f"{where}: starts at {clock(a)}, previous row stops at {clock(prev)}")
@@ -96,7 +117,7 @@ def longest_stretch(rows):
     """Longest run of consecutive non-Active minutes: (minutes, start, stop).
     Smith's norm is no more than 15 instructor-led minutes at a time."""
     best, cur, start = (0, None, None), 0, None
-    for a, b, m, mode in rows + [(None, None, 0, "Active")]:
+    for a, b, m, mode, _ in rows + [(None, None, 0, "Active", "")]:
         if mode != "Active":
             if cur == 0:
                 start = a
@@ -109,8 +130,38 @@ def longest_stretch(rows):
     return best
 
 
+def droppable(lines):
+    for l in lines:
+        if l.startswith("Droppable tail:"):
+            return l[len("Droppable tail:"):].strip()
+    return ""
+
+
+def html_escape(s):
+    return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+
+
+def write_plan_html(path, n, date, title, rows, t, tail):
+    """One-slide card of the day's plan, derived from the table (never edit
+    the HTML; edit the table and rerun). Sized for a landscape GoodNotes page."""
+    out = [f"<!doctype html><meta charset=utf-8><title>{COURSE} class {n:02d} plan</title><style>{CSS}</style>",
+           "<div class=card>",
+           f"<header><div><span class=num>{COURSE}, class {n:02d}</span><span class=name>{html_escape(title)}</span></div>"
+           f"<div class=when>{datetime.date.fromisoformat(date).strftime('%A %B %-d')}, {clock(rows[0][0])}-{clock(rows[-1][1])}</div></header>",
+           "<table><tr><th>Time</th><th>Min</th><th>Mode</th><th>What happens</th></tr>"]
+    for a, b, m, mode, text in rows:
+        cls = " class=active" if mode == "Active" else ""
+        out.append(f"<tr{cls}><td class=time>{clock(a)}-{clock(b)}</td><td class=min>{m}</td>"
+                   f"<td class=mode>{mode}</td><td>{html_escape(text)}</td></tr>")
+    pct = round(100 * t["Active"] / PERIOD)
+    out.append("</table>")
+    out.append(f"<footer>Active {t['Active']} min ({pct}%), Interactive {t['Interactive']}, Lecture {t['Lecture']}, "
+               f"Logistics {t['Logistics']}. Droppable tail: {html_escape(tail) or 'none'}</footer></div>")
+    (path.parent / "02-plan.html").write_text("\n".join(out) + "\n")
+
+
 def totals(rows):
-    return {mode: sum(m for _, _, m, md in rows if md == mode) for mode in MODES}
+    return {mode: sum(m for _, _, m, md, _ in rows if md == mode) for mode in MODES}
 
 
 def totals_line(t):
@@ -220,6 +271,7 @@ def main():
         check_rows(rows, path, date)
         t = totals(rows)
         rewrite_totals(path, lines, totals_line(t))
+        write_plan_html(path, n, date, topic(lines, path), rows, t, droppable(lines))
         ls = longest_stretch(rows)
         over += ls[0] > 15
         table_rows.append([f"{n:02d}", date, topic(lines, path)]

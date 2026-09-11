@@ -24,7 +24,7 @@ PERIOD = 75
 CSS = '''
 body { background: #fff; margin: 0; padding: 10px; color: #000;
        font-family: Helvetica, Arial, sans-serif; font-variant-numeric: tabular-nums; }
-.card { width: 1100px; box-sizing: border-box; }
+.card { width: 100%; box-sizing: border-box; }
 header { font-size: 15px; margin: 0 0 6px 0; }
 header .name { color: #333; margin-left: 8px; }
 header .when { color: #555; margin-left: 8px; }

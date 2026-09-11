@@ -1,3 +1,4 @@
+import re
 """Generate the Fall 2026 PHY 210 (Mathematical Physics, Smith) course calendar.
 
 Layout (2026-08-27): a single-block "Schedule" sheet with
@@ -119,6 +120,13 @@ CONTENT = [
 # assignment text says explicitly that this is a one-off.
 WHW_DUE_OVERRIDE = {1: date(2026, 9, 14)}
 
+# Felder problems whose text says "by computer" / "have a computer ...".
+# None of these may sit on a WHW due before the Python class (Mon Sep
+# 28); 1.36 slipped onto WHW01 in F2026 (caught 2026-09-11). Problems that
+# merely say "graph" or "sketch" (1.38, 1.102) are fine by hand.
+COMPUTER_PROBLEMS = {"1.36", "1.76", "3.86", "10.268"}
+PYTHON_CLASS = date(2026, 9, 28)
+
 # Extra (non-WHW) due dates shown in the HW Due column.
 # Non-Newtonian Scientist: mid-semester (decision 2026-08-17); Mon Oct 26
 # is the calendar midpoint and has no competing WHW deadline.
@@ -196,7 +204,9 @@ WHWS = [
     (1, "Intro to ODEs (1.1-1.2)",
      "ODEs: 1.17, 1.19",
      "ODEs: 1.18, 1.20, 1.21, 1.25",
-     "ODEs: 1.33, 1.36"),
+     # 1.36 (compound interest BY COMPUTER) was here until 2026-09-11;
+     # it now sits on WHW04, the first set after the Python class.
+     "ODEs: 1.33"),
     (2, "Arbitrary constants (1.3); separation of variables (1.5)",
      "Arbitrary constants: 1.39, 1.41, 1.43. "
      "Separation of variables: 1.90, 1.91, 1.93, 1.95",
@@ -215,7 +225,8 @@ WHWS = [
      "Sec 10.10: 10.217, 10.218",
      "Sec 10.10: 10.219, 10.223, 10.230, 10.242",
      "Redo the class notebook's exercises from scratch in a fresh "
-     "notebook on jupyterhub.smith.edu"),
+     "notebook on jupyterhub.smith.edu. Sec 1.2: 1.36 (compound interest, "
+     "by computer; moved here from WHW01)"),
     (5, "Solving ODEs with Laplace transforms (10.11); "
         "complex numbers and Euler (3.1-3.5)",
      "Sec 10.11: 10.246, 10.248. Complex numbers: 3.17, 3.19, 3.47. "
@@ -367,6 +378,11 @@ def build(outpath):
         if d.weekday() == 4 and slot_i > 0:  # Fridays (incl. quiz days,
             hw_no += 1                       # matching the previous prof)
             due_d = WHW_DUE_OVERRIDE.get(hw_no, d)
+            if due_d <= PYTHON_CLASS:
+                text = " ".join(WHWS[hw_no - 1][2:5])
+                bad = sorted(p for p in COMPUTER_PROBLEMS
+                             if re.search(r"(^|[^\d.])" + re.escape(p) + r"($|[^\d])", text))
+                assert not bad, f"WHW{hw_no:02d} (due {due_d}) is before the Python class but holds by-computer problems {bad}"
             whw_due[hw_no] = due_d
             if due_d == d:
                 hw = f"WHW{hw_no:02d}"

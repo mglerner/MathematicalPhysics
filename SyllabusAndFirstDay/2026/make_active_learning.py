@@ -22,25 +22,22 @@ COURSE = "PHY 210"
 MODES = ["Active", "Interactive", "Lecture", "Logistics"]
 PERIOD = 75
 CSS = '''
-body { background: #fffff8; margin: 0; padding: 20px; color: #111;
-       font-family: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
-       font-variant-numeric: tabular-nums; }
-.card { width: 1100px; padding: 22px 30px 18px 30px; box-sizing: border-box; background: #fffff8; }
-header { display: flex; align-items: baseline; justify-content: space-between;
-         border-bottom: 1px solid #999; padding-bottom: 6px; margin-bottom: 10px; }
-header .num { font-size: 26px; }
-header .name { font-size: 17px; font-style: italic; color: #444; margin-left: 12px; }
-header .when { font-size: 14px; color: #6b6b6b; font-style: italic; }
-table { border-collapse: collapse; width: 100%; font-size: 15px; line-height: 1.3; }
-th { font-size: 11px; font-weight: normal; letter-spacing: .12em; text-transform: uppercase;
-     color: #6b6b6b; text-align: left; padding: 0 10px 4px 0; }
-td { vertical-align: top; padding: 4px 10px 4px 0; border-top: 1px solid #e4e2d8; }
-td.time { white-space: nowrap; width: 88px; }
-td.min { width: 30px; text-align: right; color: #6b6b6b; }
-td.mode { width: 84px; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: #6b6b6b; padding-top: 7px; }
-tr.active td { border-left: 3px solid #b33; padding-left: 8px; }
-tr td:first-child { padding-left: 8px; }
-footer { margin-top: 10px; font-size: 13px; color: #6b6b6b; font-style: italic; }
+body { background: #fff; margin: 0; padding: 10px; color: #000;
+       font-family: Helvetica, Arial, sans-serif; font-variant-numeric: tabular-nums; }
+.card { width: 1100px; box-sizing: border-box; }
+header { font-size: 15px; margin: 0 0 6px 0; }
+header .name { color: #333; margin-left: 8px; }
+header .when { color: #555; margin-left: 8px; }
+table { border-collapse: collapse; width: 100%; font-size: 13.5px; line-height: 1.25; }
+th, td { border: 1px solid #888; padding: 3px 6px; vertical-align: top; text-align: left; }
+th { background: #e8e8e8; font-weight: bold; font-size: 12px; }
+td.time { white-space: nowrap; }
+td.min { text-align: right; }
+tr.active td { background: #dff0d8; }
+tr.interactive td { background: #fff3cd; }
+tr.lecture td { background: #f8d7da; }
+tr.logistics td { background: #e2e3e5; }
+footer { margin-top: 5px; font-size: 12px; color: #333; }
 '''
 # Wall-clock class start by weekday (Mon=0), from the syllabus.
 CLASS_START = {0: 9 * 60 + 25, 2: 9 * 60 + 25, 4: 9 * 60 + 25}   # MWF 9:25
@@ -146,11 +143,11 @@ def write_plan_html(path, n, date, title, rows, t, tail):
     the HTML; edit the table and rerun). Sized for a landscape GoodNotes page."""
     out = [f"<!doctype html><meta charset=utf-8><title>{COURSE} class {n:02d} plan</title><style>{CSS}</style>",
            "<div class=card>",
-           f"<header><div><span class=num>{COURSE}, class {n:02d}</span><span class=name>{html_escape(title)}</span></div>"
-           f"<div class=when>{datetime.date.fromisoformat(date).strftime('%A %B %-d')}, {clock(rows[0][0])}-{clock(rows[-1][1])}</div></header>",
+           f"<header><b>{COURSE} class {n:02d}</b><span class=name>{html_escape(title)}</span>"
+           f"<span class=when>{datetime.date.fromisoformat(date).strftime('%a %b %-d')}, {clock(rows[0][0])}-{clock(rows[-1][1])}</span></header>",
            "<table><tr><th>Time</th><th>Min</th><th>Mode</th><th>What happens</th></tr>"]
     for a, b, m, mode, text in rows:
-        cls = " class=active" if mode == "Active" else ""
+        cls = f" class={mode.lower()}"
         out.append(f"<tr{cls}><td class=time>{clock(a)}-{clock(b)}</td><td class=min>{m}</td>"
                    f"<td class=mode>{mode}</td><td>{html_escape(text)}</td></tr>")
     pct = round(100 * t["Active"] / PERIOD)

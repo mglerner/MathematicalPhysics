@@ -355,3 +355,12 @@ WHW after them -- the final's practice set covers that material.
     natural choice. BUILT 2026-09-08: all 13 packets exist (9-49 pp
     each); 1.38 (WHW02) and 10.33 (WHW03) are absent from the manual
     and need our own write-ups; 5.2 (WHW10) leans on 5.1, a PCCI.
+35. 1.36 (Felder, "compound interest BY COMPUTER") was on WHW01 (due Mon
+    Sep 14), two weeks before the Python class. Moved 2026-09-11 to WHW04
+    Depth in the generator, with a guard (COMPUTER_PROBLEMS /
+    PYTHON_CLASS) so no by-computer problem can land on a set due before
+    Sep 28; audit of WHW01-03 found no other such problem (1.60(g) says
+    "calculator or computer, but easy by hand"; 1.38 is graphing by
+    hand). STILL TO DO BY HAND on Moodle: remove 1.36 from WHW01's Depth
+    line and add it to WHW04's; tell the class 1.36 is not part of WHW01
+    (anyone who did it gets it counted toward WHW04).

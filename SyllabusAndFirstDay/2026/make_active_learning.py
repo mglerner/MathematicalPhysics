@@ -38,6 +38,7 @@ tr.interactive td { background: #fff3cd; }
 tr.lecture td { background: #f8d7da; }
 tr.logistics td { background: #e2e3e5; }
 footer { margin-top: 5px; font-size: 12px; color: #333; }
+.frame { font-size: 14px; margin: 0 0 8px 0; line-height: 1.3; }
 '''
 # Wall-clock class start by weekday (Mon=0), from the syllabus.
 CLASS_START = {0: 9 * 60 + 25, 2: 9 * 60 + 25, 4: 9 * 60 + 25}   # MWF 9:25
@@ -127,6 +128,19 @@ def longest_stretch(rows):
     return best
 
 
+def frame_text(lines):
+    """The 'Frame:' paragraph of the plan preamble (up to the next blank line)."""
+    out, on = [], False
+    for l in lines:
+        if l.startswith("Frame:"):
+            on = True; out.append(l[len("Frame:"):].strip()); continue
+        if on:
+            if not l.strip() or l.startswith("|") or l.startswith("#"):
+                break
+            out.append(l.strip())
+    return " ".join(out)
+
+
 def droppable(lines):
     for l in lines:
         if l.startswith("Droppable tail:"):
@@ -138,13 +152,14 @@ def html_escape(s):
     return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
 
 
-def write_plan_html(path, n, date, title, rows, t, tail):
+def write_plan_html(path, n, date, title, rows, t, tail, frame=""):
     """One-slide card of the day's plan, derived from the table (never edit
     the HTML; edit the table and rerun). Sized for a landscape GoodNotes page."""
     out = [f"<!doctype html><meta charset=utf-8><title>{COURSE} class {n:02d} plan</title><style>{CSS}</style>",
            "<div class=card>",
            f"<header><b>{COURSE} class {n:02d}</b><span class=name>{html_escape(title)}</span>"
            f"<span class=when>{datetime.date.fromisoformat(date).strftime('%a %b %-d')}, {clock(rows[0][0])}-{clock(rows[-1][1])}</span></header>",
+           (f"<p class=frame><b>Frame.</b> {html_escape(frame)}</p>" if frame else ""),
            "<table><tr><th>Time</th><th>Min</th><th>Mode</th><th>What happens</th></tr>"]
     for a, b, m, mode, text in rows:
         cls = f" class={mode.lower()}"
@@ -268,7 +283,7 @@ def main():
         check_rows(rows, path, date)
         t = totals(rows)
         rewrite_totals(path, lines, totals_line(t))
-        write_plan_html(path, n, date, topic(lines, path), rows, t, droppable(lines))
+        write_plan_html(path, n, date, topic(lines, path), rows, t, droppable(lines), frame_text(lines))
         ls = longest_stretch(rows)
         over += ls[0] > 15
         table_rows.append([f"{n:02d}", date, topic(lines, path)]

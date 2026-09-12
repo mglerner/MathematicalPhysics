@@ -149,7 +149,7 @@ def write_plan_html(path, n, date, title, rows, t, tail):
     for a, b, m, mode, text in rows:
         cls = f" class={mode.lower()}"
         out.append(f"<tr{cls}><td class=time>{clock(a)}-{clock(b)}</td><td class=min>{m}</td>"
-                   f"<td class=mode>{mode}</td><td>{html_escape(text)}</td></tr>")
+                   f"<td class=mode>{mode}</td><td>{html_escape(text).replace('&lt;br&gt;', '<br>')}</td></tr>")
     pct = round(100 * t["Active"] / PERIOD)
     out.append("</table>")
     out.append(f"<footer>Active {t['Active']} min ({pct}%), Interactive {t['Interactive']}, Lecture {t['Lecture']}, "

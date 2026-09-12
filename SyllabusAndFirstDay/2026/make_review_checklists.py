@@ -36,7 +36,6 @@ FIRST_CLASS = date(2026, 9, 9)
 EVERY_DAY = [
     "iPad",
     "Four-color voting cards",
-    "Small whiteboards + markers (seated group work)",
 ]
 # date -> items specific to that day
 DAY_LOGISTICS = {

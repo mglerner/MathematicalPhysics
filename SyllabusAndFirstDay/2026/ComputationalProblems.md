@@ -54,11 +54,14 @@ written that way.
 
 ## Standing preamble (goes once in each WHW description)
 
+Wording as Michael set it on the live WHW02 page, 2026-09-14 (the earlier
+"three moves are what make it count" lead-in read as machine-written).
+
 > **Computational problem (required).** Unlike the practice lists above,
-> this one is turned in. It should take 20-40 minutes. Three moves are
-> what make it count: (1) **predict** -- write down what you expect
-> *before* you run anything, and leave the wrong prediction in your
-> writeup; (2) **interpret** -- two or three sentences on what the output
+> this one is turned in. It should take 20-40 minutes. There are three
+> main parts: (1) **predict** -- write down what you expect *before* you
+> run anything, and leave the prediction (especially if it's wrong!) in
+> your writeup; (2) **interpret** -- two or three sentences on what the output
 > actually shows; (3) **report a dead end** -- one sentence on something
 > you tried that did not work. This is graded the same good-faith way as the
 > rest of the WHW, and those three moves are what good faith looks like here:

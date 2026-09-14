@@ -144,6 +144,8 @@ def checklist(row, all_rows, whws):
         lines.append("- nothing new goes live or comes due today")
     # ---- bring / set up
     lines += ["", "## Bring / set up", ""]
+    if d in CAL.LAPTOP_DAYS:
+        lines.append("- [ ] **Students bring LAPTOPS today (tagged on the Moodle schedule)**")
     for item in DAY_LOGISTICS.get(d, []):
         lines.append(f"- [ ] **{item}**")
     for item in EVERY_DAY:

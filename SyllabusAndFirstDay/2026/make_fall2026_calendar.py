@@ -127,6 +127,11 @@ WHW_DUE_OVERRIDE = {1: date(2026, 9, 14)}
 COMPUTER_PROBLEMS = {"1.36", "1.76", "3.86", "10.268"}
 PYTHON_CLASS = date(2026, 9, 28)
 
+# Days students must bring a laptop. The schedule sheet (embedded in Moodle)
+# tags the topic "[BRING LAPTOP]" and the review checklist repeats it, so one
+# list drives both (a student asked not to carry a laptop every day, 2026-09-14).
+LAPTOP_DAYS = {date(2026, 9, 28)}
+
 # Extra (non-WHW) due dates shown in the HW Due column.
 # Non-Newtonian Scientist: mid-semester (decision 2026-08-17); Mon Oct 26
 # is the calendar midpoint and has no competing WHW deadline.
@@ -444,7 +449,7 @@ def build(outpath):
             web_header(r)
             split_row = r
         r += 1
-        vals = [wk, cn, d.strftime("%a %b %-d"), topic, reading,
+        vals = [wk, cn, d.strftime("%a %b %-d"), topic + (" [BRING LAPTOP]" if d in LAPTOP_DAYS else ""), reading,
                 pcci, hw, exam]
         for j, v in enumerate(vals, start=1):
             cell = wsw.cell(row=r, column=j, value=v)

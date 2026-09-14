@@ -36,6 +36,7 @@ FIRST_CLASS = date(2026, 9, 9)
 EVERY_DAY = [
     "iPad",
     "Four-color voting cards",
+    "PRINT the board-block problem sheet (and the PCCI page if it goes to the boards): the screen is unusable while students are at the boards",
 ]
 # date -> items specific to that day
 DAY_LOGISTICS = {

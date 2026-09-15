@@ -110,7 +110,7 @@ def checklist(row, all_rows, whws):
     later = [r for r in all_rows if r[1] > d and CAL.PCCI.get(r[1])]
     if later:
         nd = later[0][1]
-        lines.append(f"- [ ] Next PCCI (announce today, due {fmt(nd)}): {CAL.PCCI[nd]}")
+        lines.append(f"- [ ] Next PCCI (on the Moodle schedule, due {fmt(nd)}; review it now): {CAL.PCCI[nd]}")
     lines += ["", "## Homework (solutions finalized + hand-reviewed: ideally before go-live, MANDATORY by the first class after)", ""]
     next_class = min([r[1] for r in all_rows if r[1] > d], default=None)
     prev_class = max([r[1] for r in all_rows if r[1] < d], default=None)

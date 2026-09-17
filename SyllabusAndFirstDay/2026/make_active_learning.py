@@ -1,8 +1,12 @@
 """Active-learning totals and semester roll-up for the prep packs (PHY 210).
 
 Each `00-prep-notes.md` carries ONE timed plan: a `## Plan (75 min)`
-section whose markdown table (Start, Stop, Min, Mode, What happens) is
-the single source of truth for the day. This script validates every
+section whose markdown table (Start, Stop, Min, Mode, [Source,] What
+happens) is the single source of truth for the day. The Source column is
+optional (added 2026-09-17): a terse pointer to where the row's material
+comes from, in the playbook's notation (210: M = Manbir's pages, G =
+Gillian's slides, F = Felder book pages; 317: T = Taylor book pages, W =
+Will's slides; **N** = new material in neither), e.g. `M6-7, G4-8,10`. This script validates every
 table, rewrites that pack's `Totals:` line in place, and regenerates
 `ACTIVE-LEARNING.md` at the prep-pack root. Rerun after editing any
 plan:
@@ -33,6 +37,7 @@ th, td { border: 1px solid #888; padding: 3px 6px; vertical-align: top; text-ali
 th { background: #e8e8e8; font-weight: bold; font-size: 12px; }
 td.time { white-space: nowrap; }
 td.min { text-align: right; }
+td.src { white-space: nowrap; font-size: 12px; }
 tr.active td { background: #dff0d8; }
 tr.interactive td { background: #fff3cd; }
 tr.lecture td { background: #f8d7da; }
@@ -70,7 +75,8 @@ def pack_files():
 
 
 def plan_rows(lines, path):
-    """Parse the Plan table into [(start, stop, min, mode, text)], minutes since midnight."""
+    """Parse the Plan table into [(start, stop, min, mode, source, text)], minutes since midnight.
+    Source is "" when the table has no Source column."""
     try:
         start = next(i for i, l in enumerate(lines) if l.strip() == "## Plan (75 min)")
     except StopIteration:
@@ -78,16 +84,24 @@ def plan_rows(lines, path):
     body = [l for l in lines[start:] if l.startswith("|")]
     if len(body) < 3:
         fail(f"{path}: no Plan table under '## Plan (75 min)'")
+    header = [c.strip() for c in body[0].strip().strip("|").split("|")]
+    if header[:4] != ["Start", "Stop", "Min", "Mode"] or header[-1] != "What happens":
+        fail(f"{path}: plan header must be Start | Stop | Min | Mode | [Source |] What happens: {body[0].strip()}")
+    has_src = header == ["Start", "Stop", "Min", "Mode", "Source", "What happens"]
+    want = 6 if has_src else 5
+    if not has_src and len(header) != 5:
+        fail(f"{path}: plan header has {len(header)} columns; want 5 or 6 (with Source): {body[0].strip()}")
     rows = []
     for line in body[2:]:
         cells = [c.strip() for c in line.strip().strip("|").split("|")]
-        if len(cells) != 5:
-            fail(f"{path}: plan row has {len(cells)} columns, want 5: {line.strip()}")
+        if len(cells) != want:
+            fail(f"{path}: plan row has {len(cells)} columns, want {want}: {line.strip()}")
         try:
             a, b, m = to_minutes(cells[0]), to_minutes(cells[1]), int(cells[2])
         except ValueError:
             fail(f"{path}: Start/Stop must be wall-clock h:mm and Min an integer: {line.strip()}")
-        rows.append((a, b, m, cells[3], cells[4]))
+        src = cells[4] if has_src else ""
+        rows.append((a, b, m, cells[3], src, cells[-1]))
     return rows
 
 
@@ -96,7 +110,7 @@ def check_rows(rows, path, date):
     if weekday not in CLASS_START:
         fail(f"{path}: {date} is not a class weekday")
     prev = CLASS_START[weekday]
-    for a, b, m, mode, _ in rows:
+    for a, b, m, mode, _s, _ in rows:
         where = f"{path}: row {clock(a)}-{clock(b)}"
         if a != prev:
             fail(f"{where}: starts at {clock(a)}, previous row stops at {clock(prev)}")
@@ -115,7 +129,7 @@ def longest_stretch(rows):
     """Longest run of consecutive non-Active minutes: (minutes, start, stop).
     Smith's norm is no more than 15 instructor-led minutes at a time."""
     best, cur, start = (0, None, None), 0, None
-    for a, b, m, mode, _ in rows + [(None, None, 0, "Active", "")]:
+    for a, b, m, mode, _s, _ in rows + [(None, None, 0, "Active", "", "")]:
         if mode != "Active":
             if cur == 0:
                 start = a
@@ -152,7 +166,13 @@ def html_escape(s):
     return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
 
 
+def bold(s):
+    """Markdown **x** -> <b>x</b> (used for the **N** = new-material marker)."""
+    return re.sub(r"\*\*(.+?)\*\*", r"<b>\1</b>", s)
+
+
 def write_plan_html(path, n, date, title, rows, t, tail, frame=""):
+    has_src = any(src for _, _, _, _, src, _ in rows)
     """One-slide card of the day's plan, derived from the table (never edit
     the HTML; edit the table and rerun). Sized for a landscape GoodNotes page."""
     out = [f"<!doctype html><meta charset=utf-8><title>{COURSE} class {n:02d} plan</title><style>{CSS}</style>",
@@ -160,11 +180,13 @@ def write_plan_html(path, n, date, title, rows, t, tail, frame=""):
            f"<header><b>{COURSE} class {n:02d}</b><span class=name>{html_escape(title)}</span>"
            f"<span class=when>{datetime.date.fromisoformat(date).strftime('%a %b %-d')}, {clock(rows[0][0])}-{clock(rows[-1][1])}</span></header>",
            (f"<p class=frame><b>Frame.</b> {html_escape(frame)}</p>" if frame else ""),
-           "<table><tr><th>Time</th><th>Min</th><th>Mode</th><th>What happens</th></tr>"]
-    for a, b, m, mode, text in rows:
+           "<table><tr><th>Time</th><th>Min</th><th>Mode</th>"
+           + ("<th>Source</th>" if has_src else "") + "<th>What happens</th></tr>"]
+    for a, b, m, mode, src, text in rows:
         cls = f" class={mode.lower()}"
+        srccell = ("<td class=src>" + bold(html_escape(src)) + "</td>") if has_src else ""
         out.append(f"<tr{cls}><td class=time>{clock(a)}-{clock(b)}</td><td class=min>{m}</td>"
-                   f"<td class=mode>{mode}</td><td>{html_escape(text).replace('&lt;br&gt;', '<br>')}</td></tr>")
+                   f"<td class=mode>{mode}</td>{srccell}<td>{html_escape(text).replace('&lt;br&gt;', '<br>')}</td></tr>")
     pct = round(100 * t["Active"] / PERIOD)
     out.append("</table>")
     out.append(f"<footer>Active {t['Active']} min ({pct}%), Interactive {t['Interactive']}, Lecture {t['Lecture']}, "
@@ -173,7 +195,7 @@ def write_plan_html(path, n, date, title, rows, t, tail, frame=""):
 
 
 def totals(rows):
-    return {mode: sum(m for _, _, m, md, _ in rows if md == mode) for mode in MODES}
+    return {mode: sum(m for _, _, m, md, _s, _ in rows if md == mode) for mode in MODES}
 
 
 def totals_line(t):

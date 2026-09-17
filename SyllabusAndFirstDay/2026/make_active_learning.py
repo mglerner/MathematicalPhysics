@@ -5,8 +5,8 @@ section whose markdown table (Start, Stop, Min, Mode, [Source,] What
 happens) is the single source of truth for the day. The Source column is
 optional (added 2026-09-17): a terse pointer to where the row's material
 comes from, in the playbook's notation (210: M = Manbir's pages, G =
-Gillian's slides, FF = Felder & Felder book pages, GF = Gary Felder's
-notes; 317: T = Taylor book pages, W =
+Gillian's slides, FF = Felder & Felder book pages, GF <tag> = a named
+Gary Felder file, e.g. GF key, GF plan01 D8; 317: T = Taylor book pages, W =
 Will's slides; **N** = new material in neither), e.g. `M6-7, G4-8,10`. This script validates every
 table, rewrites that pack's `Totals:` line in place, and regenerates
 `ACTIVE-LEARNING.md` at the prep-pack root. Rerun after editing any

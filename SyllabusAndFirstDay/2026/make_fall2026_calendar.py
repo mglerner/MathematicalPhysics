@@ -126,6 +126,11 @@ WHW_DUE_OVERRIDE = {1: date(2026, 9, 14)}
 # merely say "graph" or "sketch" (1.38, 1.102) are fine by hand.
 COMPUTER_PROBLEMS = {"1.36", "1.76", "3.86", "10.268"}
 PYTHON_CLASS = date(2026, 9, 28)
+# Sets already handed to students are a historical record, not a plan, so
+# the by-computer guard skips them. WHW01 went out and was submitted with
+# 1.36 in Depth plus an explicit "skip this if you don't have computational
+# tools" clause, which is what made it survivable before the Python class.
+DELIVERED = {1}
 
 # Days students must bring a laptop. The schedule sheet (embedded in Moodle)
 # tags the topic "[BRING LAPTOP]" and the review checklist repeats it, so one
@@ -209,9 +214,14 @@ WHWS = [
     (1, "Intro to ODEs (1.1-1.2)",
      "ODEs: 1.17, 1.19",
      "ODEs: 1.18, 1.20, 1.21, 1.25",
-     # 1.36 (compound interest BY COMPUTER) was here until 2026-09-11;
-     # it now sits on WHW04, the first set after the Python class.
-     "ODEs: 1.33"),
+     # 1.36 (compound interest BY COMPUTER) was taken off this set on
+     # 2026-09-11 -- but the Moodle page was never edited, so the set that
+     # actually went out and was submitted (Mon Sep 14) still carried it,
+     # with the skip clause below. A delivered set is a record, not a plan,
+     # so the calendar shows what students got. 1.36 is ALSO on WHW04,
+     # which is the first set after the Python class.
+     "ODEs: 1.33, 1.36 (if you don't have experience with computational "
+     "tools, feel free to completely skip this)"),
     (2, "Arbitrary constants (1.3); separation of variables (1.5)",
      "Arbitrary constants: 1.39, 1.41, 1.43. "
      "Separation of variables: 1.90, 1.91, 1.93, 1.95",
@@ -231,7 +241,8 @@ WHWS = [
      "Sec 10.10: 10.219, 10.223, 10.230, 10.242",
      "Redo the class notebook's exercises from scratch in a fresh "
      "notebook on jupyterhub.smith.edu. Sec 1.2: 1.36 (compound interest, "
-     "by computer; moved here from WHW01)"),
+     "by computer; it was optional Depth on WHW01 before we had Python, "
+     "so here it is with the tools)"),
     (5, "Solving ODEs with Laplace transforms (10.11); "
         "complex numbers and Euler (3.1-3.5)",
      "Sec 10.11: 10.246, 10.248. Complex numbers: 3.17, 3.19, 3.47. "
@@ -383,7 +394,7 @@ def build(outpath):
         if d.weekday() == 4 and slot_i > 0:  # Fridays (incl. quiz days,
             hw_no += 1                       # matching the previous prof)
             due_d = WHW_DUE_OVERRIDE.get(hw_no, d)
-            if due_d <= PYTHON_CLASS:
+            if due_d <= PYTHON_CLASS and hw_no not in DELIVERED:
                 text = " ".join(WHWS[hw_no - 1][2:5])
                 bad = sorted(p for p in COMPUTER_PROBLEMS
                              if re.search(r"(^|[^\d.])" + re.escape(p) + r"($|[^\d])", text))

@@ -17,7 +17,7 @@ which has the full materials map, item banks, and privacy-cleanup list).
   quiz Fridays, day after a quiz), mostly Felder Discovery Exercises
   done BEFORE the topic; <= 15 min; good-faith-effort grading -- full
   credit for a clear description of where you're stuck; drop ~3. Turned
-  in on paper at the start of class + four-color-card comfort poll as
+  in on paper at the start of class + voting-card comfort poll as
   the class opener. Still open: where the points live (candidate: the
   PCCI turn-in IS the attendance/participation artifact).
 - **Non-Newtonian Scientist due mid-semester: Mon Oct 26** (2026-08-17;

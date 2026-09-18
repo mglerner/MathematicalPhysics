@@ -58,7 +58,7 @@ transforms (9.6) ride the finale graphically on the last day;
 2.6-2.7 convergence cut with an Appendix C pointer; Non-Newtonian
 Scientist due mid-semester (Mon Oct 26); 13 WHWs (due Fridays); PCCIs
 adopted Gary-Felder-style (most class days, good-faith-effort grading,
-paper turn-in at the start of class + four-color-card comfort poll).
+paper turn-in at the start of class + voting-card comfort poll).
 
 ## Assumptions to verify
 

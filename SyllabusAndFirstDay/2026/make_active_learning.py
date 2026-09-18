@@ -256,7 +256,7 @@ def header_lines():
         "## The four modes",
         "",
         "- **Active** -- students are doing the work: board work in groups,",
-        "  think-pair-share, four-color voting-card polls, in-class work time,",
+        "  think-pair-share, voting-card polls, in-class work time,",
         "  notebook/laptop work, students presenting their own boards.",
         "- **Interactive** -- instructor-led derivation or explanation that is",
         "  explicitly elicited (questions to the room, predictions before the",

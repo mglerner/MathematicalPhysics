@@ -35,7 +35,7 @@ FIRST_CLASS = date(2026, 9, 9)
 # so it lives here as data rather than in the hand-written prep notes.
 EVERY_DAY = [
     "iPad",
-    "Four-color voting cards",
+    "Voting cards",
     "PRINT the board-block problem sheet (and the PCCI page if it goes to the boards): the screen is unusable while students are at the boards",
 ]
 # date -> items specific to that day
@@ -45,7 +45,7 @@ DAY_LOGISTICS = {
                        "Printed math pretest (Pretest/MathPretest-student.pdf), one per student",
                        "Extra copies of Felder and Felder",
                        "Extra copies of The Mathematics Companion",
-                       "PRINT the four-color voting cards, one set per student (shared/VotingCardLandscape.pdf)"],
+                       "PRINT the voting cards, one set per student (shared/VotingCardLandscape.pdf)"],
     date(2026, 9, 11): ["Chalk and whiteboard markers (board work: mass-spring, bacteria, rabbits)"],
     date(2026, 9, 25): ["Quiz 1: printed copies, both versions, + spares; per-problem score sheet"],
     date(2026, 9, 28): ["MacBook (HDMI) for the Python onboarding class; students bring laptops"],

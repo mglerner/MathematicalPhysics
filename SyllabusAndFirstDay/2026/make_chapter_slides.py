@@ -104,7 +104,10 @@ def tier_lines(text):
         label, _, probs = seg.partition(":")
         if not probs:
             label, probs = "", seg
-        lis = "".join(f"<li>{x.strip()}</li>" for x in probs.split(",") if x.strip())
+        # Split on commas OUTSIDE parentheses only: "1.36 (compound interest,
+        # by computer)" is one problem, not two (bug found 2026-09-19).
+        parts = re.split(r",\s*(?![^()]*\))", probs)
+        lis = "".join(f"<li>{x.strip()}</li>" for x in parts if x.strip())
         out.append((f"<div class=grp>{label.strip()}</div>" if label else "") + f"<ul>{lis}</ul>")
     return "".join(out)
 

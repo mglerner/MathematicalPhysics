@@ -73,10 +73,11 @@ paper turn-in at the start of class + voting-card comfort poll).
   coverage groupings are hers; the exact dates are my placement at the
   matching points in the fall sequence. WHW is still due on quiz Fridays
   (she did the same).
-- Grading (decided 2026-08-11, total exactly 1000, asserted in the
-  generator): attendance 39 drop 4 @ 1 = 35; WHW 13 drop 1 @ 25 = 300;
-  Non-Newtonian Scientist = one HW = 25; quizzes 3 @ 150 = 450;
-  final 190. This needs to go into the syllabus when it's adapted.
+- Grading (revised 2026-08-25, total exactly 1000, asserted in the
+  generator and in the syllabus): participation/PCCIs 39 drop 4 @ 2 =
+  70; WHW 13 drop 1 @ 25 = 300; Non-Newtonian Scientist = one HW = 25;
+  quizzes 3 @ 140 = 420; final 185. (The 2026-08-11 draft was
+  35/300/25/450/190.)
 
 ## Course machinery
 

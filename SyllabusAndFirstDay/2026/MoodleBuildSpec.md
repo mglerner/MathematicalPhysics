@@ -90,7 +90,7 @@ chunk 1 = A1:H16 (Sep 9 - Oct 12), chunk 2 = A17:H45 (Oct 14 on).
 - Publish to web -> Embed -> "Schedule" tab; auto-republish ON;
   access restriction OFF (restricted iframes break for students
   whose browsers block third-party cookies).
-- The Course Calendar Page's iframe = published URL +
+- The "Course Calendar/Schedule" label's iframe (as built it is a label in the Course Information section, not a Page) = published URL +
   `&range=A1:H16`, width:100%, height ~800, border 0. Below it, a
   plain link to the unranged published URL labeled "full-semester
   calendar".

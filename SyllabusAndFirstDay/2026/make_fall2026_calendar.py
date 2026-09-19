@@ -67,8 +67,11 @@ CONTENT = [
     ("Jupyter notebook exercise: ODEs in Python", "10.2"),
     ("Heaviside, Dirac delta, and the Laplace transform", "10.10"),
     ("Using Laplace transforms to solve ODEs", "10.11"),
-    ("Complex numbers: basic properties", "3.1-3.4"),
-    ("Euler's formula; complex ODEs", "3.5"),
+    # Reading split moved 2026-09-19 (PCCI audit, playbook 6a): the Oct 7
+    # PCCI is DE 3.4.1, so 3.4 must not be read (or taught) before Oct 7.
+    # Pack 12 already teaches 3.1-3.3 on Oct 5 and 3.4-3.5 on Oct 7.
+    ("Complex numbers: basic properties", "3.1-3.3"),
+    ("Euler's formula; complex ODEs", "3.4-3.5"),
     ("Linear approximations", "2.1-2.2"),
     ("Maclaurin series", "2.3"),
     # 2.6-2.7 (convergence) deliberately cut (decision 2026-08-17);
@@ -90,8 +93,10 @@ CONTENT = [
     # and Quiz 3 can fairly test them.
     ("Coordinate systems: cylindrical and spherical (review + practice)",
      "5.5, 5.7; App. D"),
-    ("Vector and scalar fields; the gradient", "8.1-8.4"),
-    ("Work, path integrals, and the gradient theorem", "8.5"),
+    # Reading split moved 2026-09-19 (PCCI audit, playbook 6a): the Nov 18
+    # PCCI is DE 8.4.1 (potential -> gradient), so 8.4 is read for Nov 18.
+    ("Vector and scalar fields; potential", "8.1-8.3"),
+    ("The gradient; work, path integrals, and the gradient theorem", "8.4-8.5"),
     # Decision 2026-08-17: Feynman's geometric definitions of divergence
     # and curl come BEFORE Felder's treatment. Free reading edition:
     # feynmanlectures.caltech.edu (Vol II Ch 2-3).

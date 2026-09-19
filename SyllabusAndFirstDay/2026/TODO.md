@@ -335,7 +335,8 @@ WHW after them -- the final's practice set covers that material.
     aside and the eventual FT module.
 
 33. AT FALL BREAK (Tue Oct 13, no class): switch the Moodle schedule
-    embed to the 2nd half -- edit the Course Calendar Page, range
+    embed to the 2nd half -- edit the "Course Calendar/Schedule" LABEL in
+    the Course Information section (there is no Page module), range
     `A1:H16` -> `A17:H45`. Also: open the mid-semester feedback
     activity the same week. Carry this into the class-15 (Wed Oct 14)
     prep pack when it gets built.
@@ -361,6 +362,6 @@ WHW after them -- the final's practice set covers that material.
     PYTHON_CLASS) so no by-computer problem can land on a set due before
     Sep 28; audit of WHW01-03 found no other such problem (1.60(g) says
     "calculator or computer, but easy by hand"; 1.38 is graphing by
-    hand). STILL TO DO BY HAND on Moodle: remove 1.36 from WHW01's Depth
-    line and add it to WHW04's; tell the class 1.36 is not part of WHW01
-    (anyone who did it gets it counted toward WHW04).
+    hand). CLOSED 2026-09-19: WHW04's live Depth line already carries 1.36;
+    WHW01 keeps it (the generator's DELIVERED guard treats a submitted set
+    as a record, and its skip clause made it harmless). Nothing to edit.

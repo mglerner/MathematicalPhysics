@@ -26,6 +26,7 @@ PACKS = Path.home() / "coding/courses/MathematicalPhysics/private/F2026PrepPacks
 COURSE = "PHY 210"
 MODES = ["Active", "Interactive", "Lecture", "Logistics"]
 PERIOD = 75
+TWO_STAR_MIN = 20   # minutes; playbook section 4, measured 2026-09-14 and 2026-09-18
 CSS = '''
 body { background: #fff; margin: 0; padding: 10px; color: #000;
        font-family: Helvetica, Arial, sans-serif; font-variant-numeric: tabular-nums; }
@@ -124,6 +125,17 @@ def check_rows(rows, path, date):
         prev = b
     if prev != CLASS_START[weekday] + PERIOD:
         fail(f"{path}: last Stop is {clock(prev)}, want {clock(CLASS_START[weekday] + PERIOD)}")
+    # Two-star budget guard (playbook section 4; 2.4 took 25 min on
+    # 2026-09-14, 2.54(a) overran on 2026-09-18): a Taylor "(**)" problem
+    # gets 20+ minutes across the day's rows, split over two rows if the
+    # 15-minute row cap demands it. Warn, do not fail: Michael may accept a
+    # scoped-down two-star deliberately, and says so in Ambiguities.
+    for a, b, m, mode, _s, text in rows:
+        for prob in re.findall(r"(\d+\.\d+)\s*\(\*\*\)", text):
+            total = sum(r[2] for r in rows if r[3] == "Active" and re.search(rf"\b{re.escape(prob)}\b", r[5]))
+            if total < TWO_STAR_MIN:
+                print(f"WARNING {path}: {prob} (**) has {total} Active min across the day; "
+                      f"playbook budget is {TWO_STAR_MIN}+")
 
 
 def longest_stretch(rows):

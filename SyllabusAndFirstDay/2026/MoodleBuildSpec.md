@@ -115,7 +115,7 @@ the reading" because her WHWs were Google Forms feeding a spreadsheet;
 native Moodle assignments gave us the student calendar back but took the
 spreadsheet away. Online text gets it back without adding a second thing
 to submit -- Moodle's "Download all submissions" yields one
-`onlinetext.html` per student, and `private/reflection_stats.py` parses
+`onlinetext.html` per student, and `private/Grading/whw_report.py` parses
 those into the weekly distribution.
 
 Questions = **Gillian's S26 set of 7, restored in full** (2026-09-02,

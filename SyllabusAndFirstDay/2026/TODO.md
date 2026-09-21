@@ -365,3 +365,14 @@ WHW after them -- the final's practice set covers that material.
     hand). CLOSED 2026-09-19: WHW04's live Depth line already carries 1.36;
     WHW01 keeps it (the generator's DELIVERED guard treats a submitted set
     as a record, and its skip clause made it harmless). Nothing to edit.
+
+## Grading actions
+
+36. **Email Kiku Nagai-Velasquez about WHW01 and WHW02 reflections**
+    (2026-09-20). She submitted the PDF both weeks but no online-text
+    reflection either week -- the pattern reads like a misunderstanding
+    of what the submission box is for, not disengagement. Offer makeup
+    on both. Under the two-column average a missing reflection costs
+    half the set, so this is 12.5/25 twice until she does. Nobody else
+    missed a reflection in WHW02; Lucy Spooner missed WHW01 only and
+    submitted in WHW02, so she appears to have worked it out herself.

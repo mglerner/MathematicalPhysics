@@ -51,7 +51,7 @@ DAY_LOGISTICS = {
     # because they ran two sections; we run one, so there is nothing to
     # alternate. Applies to all three quizzes.
     date(2026, 9, 25): ["Quiz 1: printed copies + spares; per-problem score sheet"],
-    date(2026, 9, 28): ["MacBook (AirPlay to the room display) for the Python onboarding class; students bring laptops"],
+    date(2026, 9, 28): ["iPad with the folio keyboard (AirPlay as usual) for the Python onboarding class; test the GitHub-download-to-hub-upload step in Safari beforehand; students bring laptops"],
     date(2026, 10, 23): ["Quiz 2: printed copies + spares; per-problem score sheet"],
     date(2026, 11, 20): ["Quiz 3: printed copies + spares; per-problem score sheet"],
 }

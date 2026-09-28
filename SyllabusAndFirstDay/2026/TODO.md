@@ -99,7 +99,9 @@ WHW after them -- the final's practice set covers that material.
    in the PDF; the reflections are typed in the text box so they can be
    counted (see item 35). Good-faith graded. Encoded in MoodleBuildSpec.md and
    in private/MoodleBuild/whw-descriptions.html; syllabus updated.
-10. AI policy: start from Will Raven's F2025 version
+10. DONE (verified 2026-09-23: `\section{Use of artificial intelligence}`
+    is in the distributed syllabus). AI policy: start from Will Raven's
+    F2025 version
     (`SmithPreMichaelArtifacts/PHY317 F2025 Syllabus.pdf`), not the
     older S26 copy; refresh the dated ChatGPT anecdotes with current
     failure examples; add a line that effort-graded work (PCCI/WHW) is
@@ -111,13 +113,20 @@ WHW after them -- the final's practice set covers that material.
     internet devices, documented accommodations always met. Still to
     build: the actual quiz instruments (v1/v2 variants; item banks in
     the inventory report).
-12. Final redemption rules: S26 model = original quiz problems verbatim,
+12. DONE (verified 2026-09-23: `\subsection{Final exam, with redemption
+    problems}` is in the distributed syllabus). Final redemption rules:
+    S26 model = original quiz problems verbatim,
     improvement retroactively restores quiz points. KEEP PER-PROBLEM
     QUIZ RECORDS (Gillian had to beg students for photos of their own
     scores). Write the rules into the syllabus (currently "TBD").
-13. Late/extension policy: S26 extension Google Form? Earlham late
+13. DONE (verified 2026-09-23: `\subsection{Late policy}` is in the
+    distributed syllabus). Late/extension policy: S26 extension Google
+    Form? Earlham late
     passes? Gillian's late-WHW amnesty (-5/week, better than zero)?
-14. Growth-mindset bundle: keep pretest + goal-setting/reflections?
+14. DONE (verified 2026-09-23: the Math Pretest is a live Moodle
+    assignment, and the weekly reflection questions carry the
+    goal-setting). Growth-mindset bundle: keep pretest +
+    goal-setting/reflections?
     NOW LOAD-BEARING (2026-09-02): the WHW reflection form restores
     Gillian's Q5/Q6, which both ask about "your learning goals". Either
     run a goal-setting activity (week 1, plus a mid-semester check-in)
@@ -125,12 +134,20 @@ WHW after them -- the final's practice set covers that material.
     before WHW01 is due Fri Sep 11.
     (S26: hard deadlines on these, 10%.) Align the pretest's "graded
     for completion" sentence with the final scheme.
-15. Learning goals: draft from Casey Berger's 14 rubric tables
+15. STILL OPEN, and overtaken (checked 2026-09-23: the syllabus has no
+    learning-goals section and has already been distributed, so this is
+    now an add-mid-semester-or-drop decision, not a pre-semester task).
+    Learning goals: draft from Casey Berger's 14 rubric tables
     (S23 Assessments/*.tex) + CU Phys 2210 goals (Pedagogy/, attribute).
-16. Course description: Gary's catalog copy (Other/Catalog copy
+16. STILL OPEN, and overtaken (checked 2026-09-23: no course-description
+    section in the distributed syllabus; the Moodle course summary may
+    already carry one -- check there before writing anything).
+    Course description: Gary's catalog copy (Other/Catalog copy
     post-multivariate.docx) -- "a review of multivariate calculus" is
     already in the catalog language.
-17. Boilerplate to lift from the S26 syllabus: ARC accommodations
+17. DONE (verified 2026-09-23: accommodations/ARC language appears in the
+    distributed syllabus). Boilerplate to lift from the S26 syllabus:
+    ARC accommodations
     paragraph, Honor Code, land acknowledgment, resources list, the
     15-min course-feedback-window sentence. Fix their bundle-numbering
     typo pattern; don't inherit it.
@@ -144,7 +161,9 @@ WHW after them -- the final's practice set covers that material.
     MoodleBuildSpec.md section 0; mirror in the 317 build when that
     course's Moodle gets set up.
 
-18. VERIFY with registrar: add (Sep 14) / drop (Sep 22) deadlines,
+18. EXPIRED 2026-09-23: both deadlines have passed (add Sep 14, drop
+    Sep 22), so there is nothing left to verify in advance. Close it.
+    VERIFY with registrar: add (Sep 14) / drop (Sep 22) deadlines,
     autumn recess Oct 10-13, Cromwell Day Nov 10, reading period +
     exam window. (MWF pattern + time/room VERIFIED 2026-08-17 via the
     course schedule listing: MWF 9:25-10:40, McConnell 404.)
@@ -230,7 +249,8 @@ WHW after them -- the final's practice set covers that material.
     native assignments and anonymous feedback is a Moodle Feedback
     activity (decided 2026-08-24; was briefly a Google Form). The
     only surviving Google artifact is the schedule Sheet embed.
-27. Notebooks: delete %pip cells; swap in the fixed
+27. DONE (verified 2026-09-23: no `%pip` cell remains in Notebooks2026/
+    or InClassNotebooks/). Notebooks: delete %pip cells; swap in the fixed
     apply_initial_conditions() (tested replacement in the inventory
     outputs); add narration to Symmetry/FourierSeries; RESOLVED 2026-09-07: the
     platform is jupyterhub.smith.edu (posit abandoned -- no sessions, no
@@ -238,7 +258,8 @@ WHW after them -- the final's practice set covers that material.
     posted notebooks may use scipy, and each pins `%matplotlib inline`
     (hub default is ipympl). Formerly: confirm posit
     provisioning of numpy/sympy/matplotlib.
-28. Pre-semester email to registrants: adapt Gary's Math Review packet
+28. EXPIRED 2026-09-23: the semester began Sep 9. Close it.
+    Pre-semester email to registrants: adapt Gary's Math Review packet
     (Math Review/Message to students.docx + attachments).
 29. Fix Manbir-deck errata before reusing any page (list in the report).
 30. Privacy cleanup pass over inherited trees (list in the report).
@@ -340,7 +361,15 @@ WHW after them -- the final's practice set covers that material.
     `A1:H16` -> `A17:H45`. Also: open the mid-semester feedback
     activity the same week. Carry this into the class-15 (Wed Oct 14)
     prep pack when it gets built.
-34. WHW solutions (open, 2026-09-08). Gillian and Manbir posted none
+34. WHW solutions -- BUILT; RELEASE SETTLED 2026-09-23. Separate files,
+    one per week, released at the WHW due time (10:00 PM, Friday for
+    all but WHW01). Posted to Moodle BY HAND, all 13 in one sitting
+    with a Restrict-access date each: `build_assignments.py` emits
+    only assignments and labels, so shipping file resources would
+    mean new module XML for a one-off run, and the course is
+    midstream with graded work in it. Still to write before WHW02
+    and WHW03 go up: 1.38 and 10.33 (absent from the manual).
+    Gillian and Manbir posted none
     (effort grading). The publisher's manual is now in
     `private/Solutions to Felder and Felder/` (all 13 chapters), which
     makes the review-before-go-live rule cheap for the book problems;
@@ -368,11 +397,39 @@ WHW after them -- the final's practice set covers that material.
 
 ## Grading actions
 
-36. **Email Kiku Nagai-Velasquez about WHW01 and WHW02 reflections**
-    (2026-09-20). She submitted the PDF both weeks but no online-text
-    reflection either week -- the pattern reads like a misunderstanding
-    of what the submission box is for, not disengagement. Offer makeup
-    on both. Under the two-column average a missing reflection costs
-    half the set, so this is 12.5/25 twice until she does. Nobody else
-    missed a reflection in WHW02; Lucy Spooner missed WHW01 only and
-    submitted in WHW02, so she appears to have worked it out herself.
+36. **Kiku Nagai-Velasquez and Lucy Spooner: reflections were in the PDF**
+    (CORRECTED 2026-09-23; this item said the opposite on 2026-09-20).
+    Both did the reflection; both typed it into the PDF instead of the
+    online-text box, which the scripts cannot read (phone photos, no text
+    layer). Verified by reading the pages: Kiku WHW01 p3 and WHW02 p4,
+    Lucy WHW01 p1. All three are Full/Full, 25.0 -- NOT 12.5, and there
+    is no makeup to offer. Corrections live in
+    `private/Grading/analysis/reflection-in-pdf.csv` and are applied by
+    both `whw_report.py` and `whw_page.py`.
+    STILL WORTH AN EMAIL, but a different one: ask them to use the
+    online box so the weekly "did you do the reading" counts include
+    them. Two of eighteen in the first fortnight suggests the
+    instruction is not landing; consider restating it on the assignment
+    page rather than chasing it every week.
+
+37. **WHW review is a human job, not a script's** (Michael, 2026-09-23,
+    after reading WHW01 and WHW02 by hand). The scripts settle arrival
+    facts -- did a PDF come, did reflection text come, what did the
+    reading/problems distributions look like -- and they stop there by
+    design. What they cannot do is the part that matters: students pose
+    extra questions inside their worked problems (Liz on whether there
+    is a better method for 1.33, Kiku on what an unstable equilibrium
+    means for the rabbit population, Lucy on why dx/dy = x + y was
+    marked separable), and those deserve answers and want reading across
+    the set for patterns.
+    DIVISION OF LABOUR (Michael, 2026-09-23): he READS AND GRADES ON
+    MOODLE -- no tooling wanted for that, and none should be built. What
+    scripts and Claude sessions are for is the layer above: extracting
+    what the answers say, summarising it with statistics, and looking for
+    patterns across the set and across weeks. `whw_page.py --themes`
+    already does the pattern half (claude -p over the reflection corpus,
+    with every quote verified verbatim against a student's text before it
+    reaches the page); `whw_report.py` does the statistics half. The gap
+    closed 2026-09-23: a reflection written inside a PDF can now carry a
+    hand transcription in reflection-in-pdf.csv so it joins that corpus
+    instead of being invisible to it.

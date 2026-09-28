@@ -47,10 +47,13 @@ DAY_LOGISTICS = {
                        "Extra copies of The Mathematics Companion",
                        "PRINT the voting cards, one set per student (shared/VotingCardLandscape.pdf)"],
     date(2026, 9, 11): ["Chalk and whiteboard markers (board work: mass-spring, bacteria, rabbits)"],
-    date(2026, 9, 25): ["Quiz 1: printed copies, both versions, + spares; per-problem score sheet"],
-    date(2026, 9, 28): ["MacBook (HDMI) for the Python onboarding class; students bring laptops"],
-    date(2026, 10, 23): ["Quiz 2: printed copies, both versions, + spares; per-problem score sheet"],
-    date(2026, 11, 20): ["Quiz 3: printed copies, both versions, + spares; per-problem score sheet"],
+    # One version per quiz (Michael, 2026-09-22): S26 alternated two forms
+    # because they ran two sections; we run one, so there is nothing to
+    # alternate. Applies to all three quizzes.
+    date(2026, 9, 25): ["Quiz 1: printed copies + spares; per-problem score sheet"],
+    date(2026, 9, 28): ["MacBook (AirPlay to the room display) for the Python onboarding class; students bring laptops"],
+    date(2026, 10, 23): ["Quiz 2: printed copies + spares; per-problem score sheet"],
+    date(2026, 11, 20): ["Quiz 3: printed copies + spares; per-problem score sheet"],
 }
 # WHWs carrying a required computational problem (decided 2026-08-28;
 # the problem text lives in private/MoodleBuild/whw-descriptions.html and
@@ -102,7 +105,8 @@ def checklist(row, all_rows, whws):
     pcci = CAL.PCCI.get(d)
     lines.append(f"- [ ] PCCI due today: **{pcci}**" if pcci else "- [ ] PCCI due today: none")
     if is_quiz:
-        lines.append("- [ ] QUIZ DAY: the instrument, both versions, worked through end to end")
+        lines.append("- [ ] QUIZ DAY: the instrument worked through end to end,"
+                     " every version you are printing")
     else:
         lines.append("- [ ] In-class / group problems today: every problem named in this pack's"
                      " `00-prep-notes.md` plan (the generator does not hold 210's in-class"

@@ -107,6 +107,12 @@ def segments(text):
     return [s.strip() for s in text.split("<br>") if s.strip()]
 
 
+# A textbook problem number, e.g. 1.54 -- NOT the "10.10" inside Discovery Exercise "DE 10.10.1"
+# (2026-09-29: that match put the manual's unrelated problems 10.10 and 6.4 on packs 10 and 20).
+PROB = r"(?<![\d.])(\d+\.\d+)(?![\d]|\.\d)"
+DE = r"DE \d+\.\d+\.\d+"
+
+
 def row_entries(rows):
     """[(problem-or-None, when, task, [checks], row_text, all_probs)]."""
     out = []
@@ -116,12 +122,14 @@ def row_entries(rows):
         if not checks:
             continue
         body = [s for s in segs if not s.startswith(SKIP_AS_TASK)]
-        probs = [q for s in body for q in re.findall(r"\b(\d+\.\d+)\b", s)]
+        probs = [q for s in body for q in re.findall(PROB, s)]
         if not probs:   # "Check 10.1: ..." can be the only place a number appears
-            probs = [q for s in checks for q in re.findall(r"\b(\d+\.\d+)\b", s)]
-        task = next((s for s in body if re.search(r"\b\d+\.\d+\b", s)),
+            probs = [q for s in checks for q in re.findall(PROB, s)]
+        de = next((m.group(0) for s in body if (m := re.search(DE, s))), None)
+        task = next((s for s in body if re.search(PROB, s) or re.search(DE, s)),
                     body[0] if body else "")
-        out.append((probs[0] if probs else None, M.clock(a), task, checks,
+        # A Discovery Exercise row is labelled "DE 8.2.1"; it has no manual page, so it is not in probs.
+        out.append((probs[0] if probs else de, M.clock(a), task, checks,
                     text, probs))
     return out
 
@@ -135,7 +143,7 @@ def pcci_problems(rows):
     for _a, _b, _m, _mode, _src, text in rows:
         first = text.split("<br>")[0]
         if "PCCI" in first and "Collect" in first:
-            return set(re.findall(r"\b(\d+\.\d+)\b", first))
+            return set(re.findall(PROB, first)) | set(re.findall(DE, first))
     return set()
 
 
@@ -347,7 +355,7 @@ def render(n, date, topic, rows, pages, smap, crops, claimed, gary, fcrops):
     pnums = pcci_problems(rows)
     pcci, other = [], []
     for prob, when, task, checks, text, probs in row_entries(rows):
-        is_pcci = "PCCI" in text or (pnums and set(probs) & pnums)
+        is_pcci = "PCCI" in text or (pnums and (set(probs) | {prob}) & pnums)
         (pcci if is_pcci else other).append((prob, when, task, checks))
 
     o = ["<!doctype html><meta charset=utf-8>",

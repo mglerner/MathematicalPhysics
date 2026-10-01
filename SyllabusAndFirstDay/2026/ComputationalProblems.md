@@ -150,6 +150,8 @@ that the failure mode is visible.
 
 ## WHW 05 -- due Fri Oct 9
 
+> **Since 2026-10-01 the working text of this problem lives in the starter notebook [`Notebooks2026/WHW05_damped_oscillator_starter.ipynb`](https://github.com/mglerner/MathematicalPhysics/blob/master/Notebooks2026/WHW05_damped_oscillator_starter.ipynb)**, which teaches each new Python tool on a different example first; Moodle carries a short "three goals" paragraph that links it. The text below is the original design, kept as the record.
+
 **Covers:** solving ODEs with Laplace transforms (10.11); complex numbers
 and Euler's formula (3.1-3.5)
 
@@ -179,6 +181,8 @@ predict-which-is-fastest hook is added.
 ---
 
 ## WHW 06 -- due Fri Oct 16
+
+> **Since 2026-10-01 the working text of this problem lives in the starter notebook [`Notebooks2026/WHW06_small_angle_starter.ipynb`](https://github.com/mglerner/MathematicalPhysics/blob/master/Notebooks2026/WHW06_small_angle_starter.ipynb)**, which teaches each new Python tool on a different example first; Moodle carries a short "three goals" paragraph that links it. The text below is the original design, kept as the record.
 
 **Covers:** linear approximations (2.1-2.2)
 
@@ -223,6 +227,8 @@ generated themselves.
 
 ## WHW 08 -- due Fri Oct 30
 
+> **Since 2026-10-01 the working text of this problem lives in the starter notebook [`Notebooks2026/WHW08_matrix_transformations_starter.ipynb`](https://github.com/mglerner/MathematicalPhysics/blob/master/Notebooks2026/WHW08_matrix_transformations_starter.ipynb)**, which teaches each new Python tool on a different example first; Moodle carries a short "three goals" paragraph that links it. The text below is the original design, kept as the record.
+
 **Covers:** matrix times column, basis, matrix times matrix, identity,
 inverse, determinants (6.3-6.7)
 
@@ -253,6 +259,8 @@ handout "Chapter 06 - The Case of the Fatal Transformation.doc".
 
 ## WHW 09 -- due Fri Nov 6
 
+> **Since 2026-10-01 the working text of this problem lives in the starter notebook [`Notebooks2026/WHW09_coupled_oscillators_starter.ipynb`](https://github.com/mglerner/MathematicalPhysics/blob/master/Notebooks2026/WHW09_coupled_oscillators_starter.ipynb)**, which teaches each new Python tool on a different example first; Moodle carries a short "three goals" paragraph that links it. The text below is the original design, kept as the record.
+
 **Covers:** eigenvalues and eigenvectors (6.8); coupled oscillators (6.9)
 
 ### Problem text
@@ -281,6 +289,8 @@ this repo cover the same picture.
 ---
 
 ## WHW 10 -- due Fri Nov 13
+
+> **Since 2026-10-01 the working text of this problem lives in the starter notebook [`Notebooks2026/WHW10_double_integral_starter.ipynb`](https://github.com/mglerner/MathematicalPhysics/blob/master/Notebooks2026/WHW10_double_integral_starter.ipynb)**, which teaches each new Python tool on a different example first; Moodle carries a short "three goals" paragraph that links it. The text below is the original design, kept as the record.
 
 **Covers:** setting up integrals; Cartesian doubles and polar; line and
 surface integrals (5.1-5.4, 5.6, 5.8, 5.10)
@@ -317,6 +327,8 @@ the integration week.
 
 ## WHW 12 -- due Fri Dec 4
 
+> **Since 2026-10-01 the working text of this problem lives in the starter notebook [`Notebooks2026/WHW12_vector_fields_starter.ipynb`](https://github.com/mglerner/MathematicalPhysics/blob/master/Notebooks2026/WHW12_vector_fields_starter.ipynb)**, which teaches each new Python tool on a different example first; Moodle carries a short "three goals" paragraph that links it. The text below is the original design, kept as the record.
+
 **Covers:** divergence and curl, Feynman and Felder (Feynman II 2-3,
 8.6-8.7); divergence theorem and Stokes' theorem (8.9-8.10)
 
@@ -348,6 +360,8 @@ which is skipped for Quiz 3.
 ---
 
 ## WHW 13 -- due Fri Dec 11
+
+> **Since 2026-10-01 the working text of this problem lives in the starter notebook [`Notebooks2026/WHW13_fourier_gibbs_starter.ipynb`](https://github.com/mglerner/MathematicalPhysics/blob/master/Notebooks2026/WHW13_fourier_gibbs_starter.ipynb)**, which teaches each new Python tool on a different example first; Moodle carries a short "three goals" paragraph that links it. The text below is the original design, kept as the record.
 
 **Covers:** conservative fields (8.11); Fourier series (9.1-9.5)
 

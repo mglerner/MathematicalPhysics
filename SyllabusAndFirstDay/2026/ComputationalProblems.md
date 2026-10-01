@@ -123,18 +123,18 @@ have started, not a new one.
 
 ### Problem text
 
-Use SymPy's `dsolve` to solve dy/dt = -3y with y(0) = 1, and confirm the
-answer with `checkodesol`. Now write your own forward-Euler loop in
-NumPy -- y_{n+1} = y_n + h f(t_n, y_n) -- and run it on 0 <= t <= 2 with
-step sizes h = 0.1, h = 0.5, and h = 0.8. Before you run it, write down
-a prediction: as h grows, does the numerical solution just get *less
-accurate*, or can it go qualitatively wrong, and if so, in what way?
-Plot all three Euler solutions together with the exact curve on one set
-of axes and say in two or three sentences which prediction the picture
-supports. Then work out algebraically the largest h for which your Euler
-solution still decays toward zero, and check that number against your
-plot. Finish with one sentence on something that did not work along the
-way (an off-by-one in the loop, an empty plot, a shape mismatch).
+We have three goals: first, we want to use SymPy's `dsolve` to solve
+dy/dt = -3y with y(0) = 1, and confirm the answer with `checkodesol`. Then
+we want to plot it. Then we want to compare to a numerical solution. We
+have *not* developed the tools to do all of that on our own yet, so I made
+a helper notebook that walks you through it. Load up
+[the notebook](https://github.com/mglerner/MathematicalPhysics/blob/master/Notebooks2026/WHW04_Euler_starter.ipynb)
+in JupyterHub and give it a go!
+
+(Rewritten 2026-10-01 to match the Moodle description: the starter notebook
+`Notebooks2026/WHW04_Euler_starter.ipynb` carries the forward-Euler loop, the
+h = 0.1, 0.5, 0.8 runs and the prediction; the algebraic largest-h question
+was dropped because the class has not built the tools for it.)
 
 **Provenance:** fresh, but the design is Gary's -- his Mathematica-and-
 numerics class plan (`private/GaryS22/Math Methods/22S/lectures/extra01-mathematica and numerics.docx`)

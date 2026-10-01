@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Write 03-answers.html: one answer sheet per prep pack (PHY 210).
+"""Write _gen/answers.html (embedded in class-NN.html by shared/make_pack_html.py): one answer sheet per prep pack (PHY 210).
 
 Michael's own sheet: the day's PCCI answer first, then every other problem
 the plan carries an answer for, then the worked solutions cropped out of
@@ -233,8 +233,8 @@ def crop_felder(pack_dir, prob, bands):
         from PIL import Image
     except ImportError:
         return []
-    out_dir = pack_dir / "03-answers-files"
-    out_dir.mkdir(exist_ok=True)
+    out_dir = pack_dir / "_gen" / "answer-images"
+    out_dir.mkdir(parents=True, exist_ok=True)
     got = []
     for i, (pdf, page, top, bot) in enumerate(spans, 1):
         src_pdf = FELDER_DIR / pdf
@@ -255,7 +255,7 @@ def crop_felder(pack_dir, prob, bands):
             im.crop((int(FELDER_X[0] * w), max(0, int(top * h)),
                      int(FELDER_X[1] * w), min(h, int(bot * h)))).save(dst)
             raw[0].unlink()
-        got.append((f"03-answers-files/{dst.name}",
+        got.append((f"answer-images/{dst.name}",
                     f"Felder {pdf[:3]} solutions, {prob}"
                     + (f" (page {i} of {len(spans)})" if len(spans) > 1 else "")))
     return got
@@ -270,8 +270,8 @@ def crop_gary(pack_dir, de, bands):
         from PIL import Image
     except ImportError:
         return []
-    out_dir = pack_dir / "03-answers-files"
-    out_dir.mkdir(exist_ok=True)
+    out_dir = pack_dir / "_gen" / "answer-images"
+    out_dir.mkdir(parents=True, exist_ok=True)
     got = []
     for i, (page, top, bot) in enumerate(spans, 1):
         tag = f"gary-de-{de.replace('.', '_')}-{i}"
@@ -288,7 +288,7 @@ def crop_gary(pack_dir, de, bands):
             w, h = im.size
             im.crop((0, max(0, int(top * h)), w, min(h, int(bot * h)))).save(src)
             raw[0].unlink()
-        got.append((f"03-answers-files/{src.name}",
+        got.append((f"answer-images/{src.name}",
                     f"Gary's PCCI key, DE {de}"
                     + (f" (page {i} of {len(spans)})" if len(spans) > 1 else "")))
     return got
@@ -301,17 +301,17 @@ def render_pages(pack_dir, smap):
     subs = {sub for sub, _ in smap}
     pdfs = sorted({p for p in pack_dir.glob("*.pdf")
                    if any(s in p.name.lower() for s in subs)})
-    out_dir = pack_dir / "03-answers-files"
+    out_dir = pack_dir / "_gen" / "answer-images"
     pages = []
     for pdf in pdfs:
         stem = re.sub(r"[^A-Za-z0-9]+", "-", pdf.stem).strip("-").lower()[:48]
-        out_dir.mkdir(exist_ok=True)
+        out_dir.mkdir(parents=True, exist_ok=True)
         subprocess.run(["pdftoppm", "-png", "-r", str(SOL_DPI), str(pdf),
                         str(out_dir / stem)], check=True, capture_output=True)
         for png in sorted(out_dir.glob(stem + "-*.png")):
             n = re.search(r"-(\d+)\.png$", png.name)
             if n:
-                pages.append({"path": png, "src": f"03-answers-files/{png.name}",
+                pages.append({"path": png, "src": f"answer-images/{png.name}",
                               "file": pdf.name, "stem": stem, "page": int(n.group(1))})
     return pages
 
@@ -346,7 +346,7 @@ def crop_problems(pages, smap):
             name = f"{pg['stem']}-p{pg['page']}-{prob.replace('.', '_')}.png"
             im.crop((0, y0, w, y1)).save(pg["path"].parent / name)
             crops.setdefault(prob, []).append(
-                (f"03-answers-files/{name}", f"{pg['file']}, p{pg['page']}"))
+                (f"answer-images/{name}", f"{pg['file']}, p{pg['page']}"))
             claimed.add(id(pg))
     return crops, claimed
 
@@ -448,7 +448,7 @@ def main(only=None):
         crops, claimed = crop_problems(pages, smap)
         cropped += len(crops)
         withsol += bool(smap)
-        (path.parent / "03-answers.html").write_text(
+        (path.parent / "_gen" / "answers.html").write_text(
             render(n, date, M.topic(lines, path), rows, pages, smap, crops,
                    claimed, gary, fcrops))
         wrote += 1

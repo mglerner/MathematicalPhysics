@@ -25,6 +25,14 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
 import make_fall2026_calendar as CAL  # noqa: E402
+sys.path.insert(0, str(Path.home() / "coding/courses/shared"))
+import coverage_gate as GATE              # noqa: E402
+
+# Coverage gate (2026-10-01): a week before each set goes live, the checklist asks for
+# /coverage-check; at go-live it prints the mechanical gate (verdict on file, links exist,
+# notebook linked when the set needs a computer). See shared/coverage_gate.py.
+DESCRIPTIONS = GATE.description_blocks(Path.home() / "coding/courses/MathematicalPhysics/private/MoodleBuild/whw-descriptions.html")
+SOLUTIONS = Path.home() / "coding/courses/MathematicalPhysics/private/Solutions"
 
 PACKS = Path.home() / "coding/courses/MathematicalPhysics/private/F2026PrepPacks"
 AVAILABLE_DAYS_BEFORE = 10.5          # build_assignments.py
@@ -119,6 +127,12 @@ def checklist(row, all_rows, whws):
     next_class = min([r[1] for r in all_rows if r[1] > d], default=None)
     prev_class = max([r[1] for r in all_rows if r[1] < d], default=None)
     any_hw = False
+    class_dates = [r[1] for r in all_rows]
+    for hw, vis, due, *_ in whws:
+        if vis >= GATE.GATE_START and GATE.coverage_day(vis, class_dates) == d and vis > d:
+            any_hw = True
+            lines += GATE.checklist_lines(f"WHW{hw:02d}", vis, due, d, DESCRIPTIONS.get(hw, ""),
+                                          SOLUTIONS / f"WHW{hw:02d}", hw in COMPUTATIONAL, fmt)
     for hw, vis, due, (wn, covers, warm, ess, depth) in whws:
         goes_live_now = (prev_class is None and vis <= d) or (prev_class is not None and prev_class < vis <= d)
         if goes_live_now:
@@ -129,6 +143,8 @@ def checklist(row, all_rows, whws):
                       f"      Essentials: {ess}",
                       f"      Depth: {depth}",
                       f"      Packet to review: private/Solutions/WHW{hw:02d}/WHW{hw:02d}-solutions.pdf"]
+            if vis >= GATE.GATE_START:
+                lines += GATE.golive_lines(f"WHW{hw:02d}", DESCRIPTIONS.get(hw, ""), SOLUTIONS / f"WHW{hw:02d}", hw in COMPUTATIONAL)
             if hw in COMPUTATIONAL:
                 lines.append(f"      Computational: the required Python problem for WHW{hw:02d}"
                              " (ComputationalProblems.md) -- run it end to end on jupyterhub")

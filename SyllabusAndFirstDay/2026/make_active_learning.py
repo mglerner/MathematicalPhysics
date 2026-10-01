@@ -204,7 +204,8 @@ def write_plan_html(path, n, date, title, rows, t, tail, frame=""):
     out.append("</table>")
     out.append(f"<footer>Active {t['Active']} min ({pct}%), Interactive {t['Interactive']}, Lecture {t['Lecture']}, "
                f"Logistics {t['Logistics']}. Droppable tail: {html_escape(tail) or 'none'}</footer></div>")
-    (path.parent / "02-plan.html").write_text("\n".join(out) + "\n")
+    (path.parent / "_gen").mkdir(exist_ok=True)
+    (path.parent / "_gen" / "plan.html").write_text("\n".join(out) + "\n")
 
 
 def totals(rows):

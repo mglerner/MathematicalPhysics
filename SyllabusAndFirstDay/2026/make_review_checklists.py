@@ -191,7 +191,8 @@ def main():
         text = checklist(row, rows, whws)
         n = row[0]
         if n in packs:
-            (packs[n] / "01-review-checklist.md").write_text(text)
+            (packs[n] / "_gen").mkdir(exist_ok=True)
+            (packs[n] / "_gen" / "review-checklist.md").write_text(text)
             written += 1
         body = text.split("\n", 9)[9]
         sched += [f"## Class {n:02d} -- {fmt(row[1])} -- {row[2]}", "", body.strip(), ""]

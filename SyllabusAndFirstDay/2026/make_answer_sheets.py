@@ -224,6 +224,9 @@ def felder_bands():
     return out
 
 
+MANUAL_BODY_TOP = 0.155    # the solutions manual's running head and crop marks end above this
+
+
 def crop_felder(pack_dir, prob, bands):
     """Cut one Felder problem's worked solution out of its manual."""
     spans = bands.get(prob)
@@ -236,6 +239,11 @@ def crop_felder(pack_dir, prob, bands):
     out_dir = pack_dir / "_gen" / "answer-images"
     out_dir.mkdir(parents=True, exist_ok=True)
     got = []
+    # A band that runs onto the next page starts at its top edge: skip the manual's running head
+    # and crop marks (they end at 0.147 of the page), and drop a piece that is only that head
+    # (the solution ended at the bottom of the previous page; 2.233, 2026-10-01).
+    spans = [(pdf, page, max(top, MANUAL_BODY_TOP), bot) for pdf, page, top, bot in spans
+             if bot - max(top, MANUAL_BODY_TOP) > 0.02]
     for i, (pdf, page, top, bot) in enumerate(spans, 1):
         src_pdf = FELDER_DIR / pdf
         if not src_pdf.exists():

@@ -31,6 +31,14 @@ NO_CLASS = {
     date(2026, 11, 27): "Thanksgiving",
 }
 
+# Cancelled meetings keep their slot (and so their class number: packs, logs and the course
+# map are keyed by it) but nothing is taught. Mountain Day 2026 fell on Wed Sep 23 (announced
+# that morning). This calendar was NOT updated at the time (317's was); found and fixed
+# 2026-10-01. Class 07's Felder 10.2 (linear operators) is DROPPED, not rescheduled: no S26
+# quiz or final asks about it. Its PCCI (10.1, 10.3) was collected from whoever had done it.
+CANCELLED = {date(2026, 9, 23): "Mountain Day (no class)"}
+
+
 def class_days():
     d = FIRST_DAY
     while d <= LAST_DAY:
@@ -50,9 +58,14 @@ def class_days():
 # matching her 39 spring slots. The calendar is FULL: the flex day is the
 # only buffer left (the old practice/review day is now the coordinate-
 # systems day), so adding anything else means displacing content.
+# REBUILT 2026-10-01 (Michael approved): from Oct 2 on, each meeting is Manbir's S26 meeting as
+# her section ACTUALLY delivered it (her day N and N+1 notes; Gillian's decks where Manbir's
+# stop is unknown), one for one, with quiz dates fixed. Mountain Day spent the flex day (her
+# snow day's twin), so there is no buffer left. Feynman (Vol II Ch 2-3) is woven into the six
+# vector-calculus days instead of having a day of its own; Dec 14 is Michael's fixed finale.
 SPECIALS = {
+    6: (CANCELLED[date(2026, 9, 23)], False),           # Wed Sep 23
     7: ("Quiz 1 (Ch 1)", True),                          # Fri Sep 25
-    13: ("Flex day (snow / Mountain Day buffer)", False),  # Fri Oct 9
     18: ("Quiz 2 (Ch 10, 3, 2)", True),                  # Fri Oct 23
     30: ("Quiz 3 (Ch 6, 5)", True),                      # Fri Nov 20
 }
@@ -63,7 +76,6 @@ CONTENT = [
     ("Separation of variables", "1.5"),
     ("Guess and check", "1.6"),
     ("Linearity, homogeneity, superposition", "1.6"),
-    ("Methods of solving ODEs: guess and check", "10.2"),
     ("Jupyter notebook exercise: ODEs in Python", "10.2"),
     ("Heaviside, Dirac delta, and the Laplace transform", "10.10"),
     ("Using Laplace transforms to solve ODEs", "10.11"),
@@ -72,47 +84,37 @@ CONTENT = [
     # Pack 12 already teaches 3.1-3.3 on Oct 5 and 3.4-3.5 on Oct 7.
     ("Complex numbers: basic properties", "3.1-3.3"),
     ("Euler's formula; complex ODEs", "3.4-3.5"),
-    ("Linear approximations", "2.1-2.2"),
-    ("Maclaurin series", "2.3"),
+    # Manbir's S26 meeting for each slot is in the comment (her section's actual reach).
+    ("Linear approximations", "2.1-2.2"),                                   # Feb 27
+    ("Maclaurin series", "2.3"),                                            # Mar 2
     # 2.6-2.7 (convergence) deliberately cut (decision 2026-08-17);
     # Appendix C is the pointed-to substitute.
-    ("Taylor series; finding one series from another", "2.4-2.5 (convergence: App. C)"),
-    ("Properties of matrices", "6.1-6.2"),
-    ("Matrix x column; vector transformations", "6.3-6.4"),
-    ("Matrix multiplication; identity, determinant, inverse", "6.5-6.7"),
-    ("Finding eigenvalues and eigenvectors", "6.8"),
-    ("Eigenvalues and eigenvectors, continued", "6.8"),
-    ("The two-coupled-oscillator problem", "6.9"),
-    ("Setting up 1D and 2D integrals", "5.1-5.2"),
-    # Polar double integrals are Felder 5.6, not 5.3-5.4 (verified against the
-    # textbook TOC 2026-08-17; the S26 grid this row was copied from mislabels it).
-    ("Cartesian 2D integrals; polar coordinates", "5.3-5.4, 5.6"),
-    ("Line integrals and surface integrals", "5.8, 5.10"),
-    # Decision 2026-08-17: the review day IS the coordinate-systems day
-    # (how the S26 sections actually used it); 5.5/5.7 get real coverage
-    # and Quiz 3 can fairly test them.
-    ("Coordinate systems: cylindrical and spherical (review + practice)",
-     "5.5, 5.7; App. D"),
-    # Reading split moved 2026-09-19 (PCCI audit, playbook 6a): the Nov 18
-    # PCCI is DE 8.4.1 (potential -> gradient), so 8.4 is read for Nov 18.
-    ("Vector and scalar fields; potential", "8.1-8.3"),
-    ("The gradient; work, path integrals, and the gradient theorem", "8.4-8.5"),
-    # Decision 2026-08-17: Feynman's geometric definitions of divergence
-    # and curl come BEFORE Felder's treatment. Free reading edition:
-    # feynmanlectures.caltech.edu (Vol II Ch 2-3).
-    ("Divergence and curl, geometrically", "Feynman Vol II Ch 2-3"),
-    ("Divergence, curl, and the Laplacian", "8.6-8.7"),
-    ("Divergence theorem; Stokes' theorem", "8.9-8.10; Feynman Vol II Ch 3"),
-    ("Conservative vector fields", "8.11"),
-    # Decisions 2026-08-17: Fourier series in 2 days; PDEs protected with
-    # 2 days; Fourier transforms ride the finale (graphical treatment +
-    # exoplanets / image compression as the closing demos, a la Gary
-    # Felder's last-day design).
-    ("Introduction to Fourier series", "9.1-9.3"),
-    ("Fourier series: different periods, finite domains, complex exponentials",
-     "9.4-9.5"),
+    ("Taylor series; finding one series from another", "2.4-2.5 (convergence: App. C)"),  # Mar 4
+    ("Properties of matrices", "6.1-6.2"),                                  # Mar 6
+    ("Matrix x column; vector transformations", "6.3-6.4"),                 # Mar 9
+    ("Matrix multiplication; identity and inverse", "6.5-6.6"),             # Mar 13
+    ("Determinants; finding eigenvalues and eigenvectors", "6.7-6.8"),      # Mar 23
+    ("Eigenvectors; the two-coupled-oscillator problem", "6.8-6.9"),        # Mar 25
+    ("Setting up 1D and 2D integrals", "5.1-5.2"),                          # Mar 27
+    ("Cartesian 2D integrals", "5.3-5.4"),                                  # Mar 30
+    ("Polar coordinates", "5.6"),                                           # Apr 1
+    ("Line integrals and surface integrals", "5.8, 5.10"),                  # Apr 3
+    # S26's "practice/review" day actually taught cylindrical and spherical coordinates new.
+    ("Cylindrical and spherical coordinates", "5.5, 5.7; App. D"),          # Apr 6
+    ("Vector and scalar fields; potential", "8.1-8.3"),                     # Apr 8
+    ("The gradient; equipotentials", "8.4"),                                # Apr 13
+    ("Potential from a field; the gradient theorem; divergence and curl (Feynman)",
+     "8.5-8.6; Feynman Vol II Ch 3"),                                       # Apr 15
+    ("Divergence, curl, and the Laplacian; the divergence theorem",
+     "8.6-8.7, 8.9; Feynman Vol II Ch 2"),                                  # Apr 17
+    ("Divergence theorem; Stokes' theorem", "8.9-8.10"),                    # Apr 20
+    ("Conservative vector fields", "8.11"),                                 # Apr 22
+    ("Introduction to Fourier series", "9.1-9.3"),                          # Apr 24
+    ("Fourier series: different periods, finite domains", "9.4"),           # Apr 27
+    ("Fourier series with complex exponentials", "9.5"),                    # Apr 29
     ("Intro to PDEs: the heat equation; separation of variables",
-     "11.1-11.2, 11.4"),
+     "11.1-11.2, 11.4"),                                                    # May 1
+    # Michael's fixed finale (not in S26, which never reached Fourier transforms).
     ("Normal modes of the wave equation; Fourier transforms",
      "11.3, 9.6"),
 ]
@@ -177,30 +179,31 @@ PCCI = {
     date(2026, 10, 2): "10.216",
     date(2026, 10, 5): "DE 3.2.1",
     date(2026, 10, 7): "DE 3.4.1",
-    date(2026, 10, 14): "DE 2.2.1 Parts 1-5",
-    date(2026, 10, 16): "DE 2.3.1 Parts 1-3",
-    date(2026, 10, 19): "2.209",
-    date(2026, 10, 21): "6.2",
-    date(2026, 10, 26): "DE 6.3.1",
-    date(2026, 10, 28): "DE 6.5.1",
-    date(2026, 10, 30): "DE 6.8.1 Parts 1-3",
-    date(2026, 11, 2): "6.166",
-    date(2026, 11, 4): "6.175",
-    date(2026, 11, 6): "5.1",
-    date(2026, 11, 9): "DE 5.4.1",
-    date(2026, 11, 11): "5.163 parts a and d",
-    date(2026, 11, 13): "DE 5.7.1 Parts 1-4",
-    date(2026, 11, 16): "DE 8.2.1 Parts 5-6",
-    date(2026, 11, 18): "DE 8.4.1",
-    date(2026, 11, 23): "Read Feynman II Ch 3 sections 3-1 to 3-6; in one "
+    # Re-keyed 2026-10-01 with the rebuild: each PCCI moved with its topic. Dropped: 6.175
+    # (its eigen day merged). No PCCI on Nov 6 (polar) or Dec 9 (complex Fourier), new days.
+    date(2026, 10, 9): "DE 2.2.1 Parts 1-5",
+    date(2026, 10, 14): "DE 2.3.1 Parts 1-3",
+    date(2026, 10, 16): "2.209",
+    date(2026, 10, 19): "6.2",
+    date(2026, 10, 21): "DE 6.3.1",
+    date(2026, 10, 26): "DE 6.5.1",
+    date(2026, 10, 28): "DE 6.8.1 Parts 1-3",
+    date(2026, 10, 30): "6.166",
+    date(2026, 11, 2): "5.1",
+    date(2026, 11, 4): "DE 5.4.1",
+    date(2026, 11, 9): "5.163 parts a and d",
+    date(2026, 11, 11): "DE 5.7.1 Parts 1-4",
+    date(2026, 11, 13): "DE 8.2.1 Parts 5-6",
+    date(2026, 11, 16): "DE 8.4.1",
+    date(2026, 11, 18): "Read Feynman II Ch 3 sections 3-1 to 3-6; in one "
                         "or two sentences, what does the flux of a vector "
                         "field out of a tiny box measure, and what does the "
                         "circulation around a tiny loop measure?",
-    date(2026, 11, 30): "DE 8.6.1 Parts 1-9",
-    date(2026, 12, 2): "DE 8.9.1",
-    date(2026, 12, 4): "DE 8.11.1 Parts 1-2, 4-5, 7-8",
-    date(2026, 12, 7): "DE 9.2.1 Parts 1-3",
-    date(2026, 12, 9): "DE 9.4.1 Part 1",
+    date(2026, 11, 23): "DE 8.6.1 Parts 1-9",
+    date(2026, 11, 30): "DE 8.9.1",
+    date(2026, 12, 2): "DE 8.11.1 Parts 1-2, 4-5, 7-8",
+    date(2026, 12, 4): "DE 9.2.1 Parts 1-3",
+    date(2026, 12, 7): "DE 9.4.1 Part 1",
     date(2026, 12, 11): "DE 11.2.1 Parts 1-2",
     date(2026, 12, 14): "DE 11.3.1 Part 1",
 }
@@ -359,8 +362,8 @@ def build(outpath):
     assert len(CONTENT) + len(SPECIALS) == n, (
         f"{len(CONTENT)} content + {len(SPECIALS)} specials "
         f"for {n} class meetings")
-    assert all(days[i].weekday() == 4 for i in SPECIALS), (
-        "quiz/flex day not on a Friday")
+    assert all(days[i].weekday() == 4 for i in SPECIALS if days[i] not in CANCELLED), (
+        "quiz day not on a Friday")
     special_days = {days[i] for i in SPECIALS}
     assert all(d in days for d in PCCI), "PCCI assigned to a non-class day"
     assert not any(d in PCCI for i, d in enumerate(days)

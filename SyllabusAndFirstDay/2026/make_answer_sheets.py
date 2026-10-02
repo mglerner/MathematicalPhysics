@@ -113,6 +113,11 @@ PROB = r"(?<![\d.])(\d+\.\d+)(?![\d]|\.\d)"
 DE = r"DE \d+\.\d+\.\d+"
 
 
+def nomath(s):
+    """Drop $...$ spans: problem numbers are never written in TeX, and values like $i = 1.56$ A are not problems."""
+    return re.sub(r"\$[^$]*\$", "", s)
+
+
 def row_entries(rows):
     """[(problem-or-None, when, task, [checks], row_text, all_probs)]."""
     out = []
@@ -122,11 +127,11 @@ def row_entries(rows):
         if not checks:
             continue
         body = [s for s in segs if not s.startswith(SKIP_AS_TASK)]
-        probs = [q for s in body for q in re.findall(PROB, s)]
+        probs = [q for s in body for q in re.findall(PROB, nomath(s))]
         if not probs:   # "Check 10.1: ..." can be the only place a number appears
-            probs = [q for s in checks for q in re.findall(PROB, s)]
+            probs = [q for s in checks for q in re.findall(PROB, nomath(s))]
         de = next((m.group(0) for s in body if (m := re.search(DE, s))), None)
-        task = next((s for s in body if re.search(PROB, s) or re.search(DE, s)),
+        task = next((s for s in body if re.search(PROB, nomath(s)) or re.search(DE, s)),
                     body[0] if body else "")
         # A Discovery Exercise row is labelled "DE 8.2.1"; it has no manual page, so it is not in probs.
         out.append((probs[0] if probs else de, M.clock(a), task, checks,

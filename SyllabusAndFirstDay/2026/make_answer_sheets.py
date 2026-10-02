@@ -109,7 +109,8 @@ def segments(text):
 
 # A textbook problem number, e.g. 1.54 -- NOT the "10.10" inside Discovery Exercise "DE 10.10.1"
 # (2026-09-29: that match put the manual's unrelated problems 10.10 and 6.4 on packs 10 and 20).
-PROB = r"(?<![\d.])(\d+\.\d+)(?![\d]|\.\d)"
+# Chapters run 1-12 and problems from 1, so a leading zero (0.2, 1.0986) is a decimal, not a problem.
+PROB = r"(?<![\d.])([1-9]\d?\.[1-9]\d*)(?![\d]|\.\d)"
 DE = r"DE \d+\.\d+\.\d+"
 
 
@@ -409,7 +410,7 @@ def render(n, date, topic, rows, pages, smap, crops, claimed, gary, fcrops):
     pcci, other = [], []
     for prob, when, task, checks, text, probs in row_entries(rows):
         is_pcci = "PCCI" in text or (pnums and (set(probs) | {prob}) & pnums)
-        (pcci if is_pcci else other).append((prob, when, task, checks))
+        (pcci if is_pcci else other).append((prob, when, task, checks, probs))
 
     o = ["<!doctype html><meta charset=utf-8>",
          f"<title>PHY 210 answers -- class {n:02d}</title><style>{CSS}</style>",
@@ -422,20 +423,24 @@ def render(n, date, topic, rows, pages, smap, crops, claimed, gary, fcrops):
         if not items:
             o.append(f"<p class=none>{empty}</p>")
             return
-        for prob, when, task, checks in items:
-            o.append(f'<div class=prob><div class=num>{prob or "&mdash;"}'
+        for prob, when, task, checks, probs in items:
+            # A row can work two problems (pack 14's 2.11 and 2.13): label and crop every one of them.
+            nums = list(dict.fromkeys(probs)) or [prob]
+            label = ", ".join(q for q in nums if q) or "&mdash;"
+            o.append(f'<div class=prob><div class=num>{label}'
                      f'<span class=when>{when}</span></div>')
             if task and task != prob:
                 o.append(f"<div class=task>{esc(task)}</div>")
             o.append("<ul>" + "".join(f"<li>{esc(c)}</li>" for c in checks) + "</ul>")
-            imgs = list(crops.get(prob, [])) + list(fcrops.get(prob, []))
-            if imgs and prob not in seen:
-                seen.add(prob)
-                o.append("<div class=worked>")
-                for src, cap in imgs:
-                    o.append(f'<p class=cap>worked solution &middot; {esc(cap)}</p>'
-                             f'<img src="{esc(src)}" alt="{esc(prob)}">')
-                o.append("</div>")
+            for q in nums:
+                imgs = list(crops.get(q, [])) + list(fcrops.get(q, []))
+                if imgs and q not in seen:
+                    seen.add(q)
+                    o.append("<div class=worked>")
+                    for src, cap in imgs:
+                        o.append(f'<p class=cap>worked solution &middot; {esc(cap)}</p>'
+                                 f'<img src="{esc(src)}" alt="{esc(q)}">')
+                    o.append("</div>")
             o.append("</div>")
 
     # The heading never claims a day HAS no PCCI: class 09's PCCI 7 is

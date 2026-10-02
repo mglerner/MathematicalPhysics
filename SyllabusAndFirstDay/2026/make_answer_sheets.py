@@ -238,6 +238,23 @@ def trim_blank(im, pad=12):
     return im.crop((0, max(0, rows[0] - pad), w, min(h, rows[-1] + pad)))
 
 
+def snap_to_gaps(im, top, bot, bottom_up=False):
+    """Pixel rows for a band, moved so neither cut lands inside a line of ink: a cut inside a
+    line moves to the end of that line (bottom) or its start (top). The band map comes from the
+    manual's poor text layer, and a page-2 band could stop mid-matrix (6.32, 2026-10-01)."""
+    import numpy as np
+    a = np.asarray(im.convert("L"))
+    h, w = a.shape
+    ink = (a[:, int(FELDER_X[0] * w):int(FELDER_X[1] * w)] < 160).sum(axis=1) >= 3
+    y0, y1 = max(0, int(top * h)), min(h, int(bot * h))
+    while y0 > 0 and ink[y0]:
+        y0 -= 1
+    step = -1 if bottom_up else 1          # a continuation piece never reaches into the next problem
+    while 0 < y1 < h - 1 and ink[y1 - 1]:
+        y1 += step
+    return y0, y1
+
+
 MANUAL_BODY_TOP = 0.155    # the solutions manual's running head and crop marks end above this
 
 
@@ -256,9 +273,11 @@ def crop_felder(pack_dir, prob, bands):
     # A band that runs onto the next page starts at its top edge: skip the manual's running head
     # and crop marks (they end at 0.147 of the page), and drop a piece that is only that head
     # (the solution ended at the bottom of the previous page; 2.233, 2026-10-01).
-    spans = [(pdf, page, max(top, MANUAL_BODY_TOP), bot) for pdf, page, top, bot in spans
-             if bot - max(top, MANUAL_BODY_TOP) > 0.02]
-    for i, (pdf, page, top, bot) in enumerate(spans, 1):
+    # A continuation piece with under 3% of a page left below the head holds only the NEXT
+    # problem's first line (the band map's text layer runs about 0.01 low): 6.32, 6.128.
+    spans = [(pdf, page, max(top, MANUAL_BODY_TOP), bot, top < MANUAL_BODY_TOP)
+             for pdf, page, top, bot in spans if bot - max(top, MANUAL_BODY_TOP) > 0.03]
+    for i, (pdf, page, top, bot, continued) in enumerate(spans, 1):
         src_pdf = FELDER_DIR / pdf
         if not src_pdf.exists():
             continue
@@ -274,12 +293,19 @@ def crop_felder(pack_dir, prob, bands):
                 continue
             im = Image.open(raw[0])
             w, h = im.size
-            trim_blank(im.crop((int(FELDER_X[0] * w), max(0, int(top * h)),
-                                int(FELDER_X[1] * w), min(h, int(bot * h))))).save(dst)
+            y0, y1 = snap_to_gaps(im, top, bot, bottom_up=continued)
+            piece = trim_blank(im.crop((int(FELDER_X[0] * w), y0, int(FELDER_X[1] * w), y1)))
             raw[0].unlink()
+            # a continuation that is shorter than two lines is the next problem's label (9.81's "f(x)")
+            if continued and piece.size[1] < 2 * SOL_DPI * 0.25:
+                continue
+            piece.save(dst)
         got.append((f"answer-images/{dst.name}",
                     f"Felder {pdf[:3]} solutions, {prob}"
                     + (f" (page {i} of {len(spans)})" if len(spans) > 1 else "")))
+    # number the pieces actually kept (a dropped continuation must not leave "page 1 of 2")
+    got = [(src, re.sub(r" \(page \d+ of \d+\)$", "", cap)
+            + (f" (page {k} of {len(got)})" if len(got) > 1 else "")) for k, (src, cap) in enumerate(got, 1)]
     return got
 
 

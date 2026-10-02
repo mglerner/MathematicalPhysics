@@ -224,6 +224,20 @@ def felder_bands():
     return out
 
 
+def trim_blank(im, pad=12):
+    """Cut blank space off the bottom (and top) of a crop: a page's last solution runs to the
+    page foot (10.216, 2026-10-01). Thin marks at the side edges (crop marks, a stray tick) are
+    ignored; a row counts as ink only if it has a few dark pixels away from the edges."""
+    import numpy as np
+    a = np.asarray(im.convert("L"))
+    h, w = a.shape
+    inner = a[:, int(0.06 * w):int(0.94 * w)]
+    rows = np.flatnonzero((inner < 160).sum(axis=1) >= 3)
+    if not len(rows):
+        return im
+    return im.crop((0, max(0, rows[0] - pad), w, min(h, rows[-1] + pad)))
+
+
 MANUAL_BODY_TOP = 0.155    # the solutions manual's running head and crop marks end above this
 
 
@@ -260,8 +274,8 @@ def crop_felder(pack_dir, prob, bands):
                 continue
             im = Image.open(raw[0])
             w, h = im.size
-            im.crop((int(FELDER_X[0] * w), max(0, int(top * h)),
-                     int(FELDER_X[1] * w), min(h, int(bot * h)))).save(dst)
+            trim_blank(im.crop((int(FELDER_X[0] * w), max(0, int(top * h)),
+                                int(FELDER_X[1] * w), min(h, int(bot * h))))).save(dst)
             raw[0].unlink()
         got.append((f"answer-images/{dst.name}",
                     f"Felder {pdf[:3]} solutions, {prob}"

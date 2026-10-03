@@ -1,43 +1,32 @@
 #!/usr/bin/env python3
-"""Write _gen/answers.html (embedded in class-NN.html by shared/make_pack_html.py): one answer sheet per prep pack (PHY 210).
+"""Write _gen/crops.json per prep pack (PHY 210): the solution crops the pack page shows.
 
-Michael's own sheet: the day's PCCI answer first, then every other problem
-the plan carries an answer for, then the worked solutions cropped out of
-the pack's Felder/Gary solution PDFs.
+The PCCI's solution from Gary's key (a Discovery Exercise) or Felder's manual (a numbered
+problem); Felder's worked solution for every problem named in the notes' In-class problems
+section; whatever the `Solutions:` line maps out of the pack's own PDFs; and the solution
+pages nothing claimed. shared/make_pack_html.py places each crop under its problem.
 
-Same idea as the PHY 317 generator, with two differences that matter:
-
-1. NO FILE GLOB. 317's solution PDFs are named "Will ChN in-class problem
-   solutions ...", so a `*olution*.pdf` glob finds them. 210's are named in
-   prose -- "Manbir 1.30 Day 3 (arbitrary constants, SHO general solution,
-   ICs).pdf" is a DECK, not a solution set, and a glob picks it up. So here
-   the `Solutions:` line is the only source of truth for which PDFs are
-   solution sets; nothing is included unless it is named there.
-
-2. PCCI FIRST, and groupwork is not assumed. Every 210 day has a PCCI;
-   in-class problems come and go. So the sheet leads with the PCCI and
-   falls back to "everything else with an answer", rather than 317's
-   Groupwork/other split.
-
-The `Solutions:` line goes under `Totals:` in 00-prep-notes.md:
+NO FILE GLOB: 210's solution PDFs are named in prose ("Manbir 1.30 Day 3 (...).pdf" is a
+DECK), so the `Solutions:` line is the only source of truth for which PDFs are solution sets.
 
     Solutions: 10.1 and 10.3#2 = 10.1@.118-.474; 10.1 and 10.3#5 = 10.3@.083-.392
 
-The key before `#` is any substring of the PDF's filename that picks it out
-uniquely; `#N` is the page; `@a-b` is the problem's band as a fraction of
-page height. A problem spanning a page break gets one entry per page. A
-problem listed without a band labels the page without cropping it.
+The key before `#` is any substring of the PDF's filename that picks it out uniquely; `#N` is
+the page; `@a-b` the problem's band as a fraction of page height. A problem spanning a page
+break gets one entry per page; one listed without a band labels the page without cropping it.
 
-    python make_answer_sheets.py            # all packs
+    python make_answer_sheets.py            # all packs in the current format
     python make_answer_sheets.py 06 07      # just these
 """
+import json
 import re
 import shutil
 import subprocess
 import sys
 from pathlib import Path
 
-import make_active_learning as M
+sys.path.insert(0, str(Path.home() / "coding/courses/shared"))
+import packnotes as P  # noqa: E402
 
 SOL_DPI = 110
 PAD = 0.004
@@ -61,127 +50,10 @@ FELDER_DIR = (Path.home() / "coding/courses/MathematicalPhysics/private"
               / "Solutions to Felder and Felder")
 FELDER_X = (0.085, 0.925)
 
-CSS = """
-body { background: #fff; margin: 0; padding: 16px 18px; color: #111;
-       font-family: "Iowan Old Style", Palatino, Georgia, serif;
-       font-variant-numeric: tabular-nums; }
-h1 { font-size: 19px; margin: 0 0 2px 0; font-weight: normal; }
-h1 .when { font-size: 14px; font-style: italic; color: #666; margin-left: 10px; }
-h2 { font-size: 12px; letter-spacing: .12em; text-transform: uppercase;
-     color: #6b6b6b; margin: 16px 0 6px 0; font-weight: normal;
-     border-bottom: 1px solid #ccc; padding-bottom: 3px; }
-.prob { margin: 0 0 14px 0; break-inside: avoid; }
-.num { font-weight: bold; font-size: 15px; }
-.num .when { font-weight: normal; font-style: italic; color: #777;
-             font-size: 12.5px; margin-left: 6px; }
-.task { font-size: 13.5px; color: #333; margin: 1px 0 2px 0; }
-ul { margin: 0; padding-left: 17px; }
-li { font-size: 14.5px; line-height: 1.4; }
-.none { font-size: 13.5px; color: #777; font-style: italic; }
-.worked { margin: 5px 0 0 0; }
-.worked img { width: 100%; border: 1px solid #ddd; display: block;
-              margin: 3px 0 0 0; }
-.cap { font-size: 12.5px; color: #666; font-style: italic; margin: 0; }
-.sol { margin: 0 0 20px 0; break-inside: avoid; }
-.sol img { width: 100%; border: 1px solid #ccc; display: block; }
-.warn { background: #fff3cd; border: 1px solid #e0cd8a; padding: 7px 10px;
-        font-size: 13px; margin: 14px 0 0 0; }
-@media print { body { padding: 0; } h2 { break-after: avoid; } }
-"""
 
-SKIP_AS_TASK = ("Check:", "Check ", "Read back:", "Next:")
-
-
-def esc(s):
-    return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
-
-
-def tagged_line(lines, label):
-    for l in lines:
-        if l.startswith(label):
-            return l[len(label):].strip()
-    return None
-
-
-def segments(text):
-    return [s.strip() for s in text.split("<br>") if s.strip()]
-
-
-# A textbook problem number, e.g. 1.54 -- NOT the "10.10" inside Discovery Exercise "DE 10.10.1"
-# (2026-09-29: that match put the manual's unrelated problems 10.10 and 6.4 on packs 10 and 20).
-# Chapters run 1-12 and problems from 1, so a leading zero (0.2, 1.0986) is a decimal, not a problem.
-PROB = r"(?<![\d.])([1-9]\d?\.[1-9]\d*)(?![\d]|\.\d)"
-DE = r"DE \d+\.\d+\.\d+"
-
-
-def nomath(s):
-    """Drop $...$ spans: problem numbers are never written in TeX, and values like $i = 1.56$ A are not problems."""
-    return re.sub(r"\$[^$]*\$", "", s)
-
-
-def row_entries(rows):
-    """[(problem-or-None, when, task, [checks], row_text, all_probs)]."""
-    out = []
-    for a, b, m, mode, _src, text in rows:
-        segs = segments(text)
-        checks = [s for s in segs if s.startswith("Check")]
-        if not checks:
-            continue
-        body = [s for s in segs if not s.startswith(SKIP_AS_TASK)]
-        probs = [q for s in body for q in re.findall(PROB, nomath(s))]
-        if not probs:   # "Check 10.1: ..." can be the only place a number appears
-            probs = [q for s in checks for q in re.findall(PROB, nomath(s))]
-        de = next((m.group(0) for s in body if (m := re.search(DE, s))), None)
-        task = next((s for s in body if re.search(PROB, nomath(s)) or re.search(DE, s)),
-                    body[0] if body else "")
-        # A Discovery Exercise row is labelled "DE 8.2.1"; it has no manual page, so it is not in probs.
-        out.append((probs[0] if probs else de, M.clock(a), task, checks,
-                    text, probs))
-    return out
-
-
-def pcci_problems(rows):
-    """Problem numbers named on the collection row, e.g. {"10.1", "10.3"}.
-
-    Needed because the row that WORKS the PCCI does not always say "PCCI":
-    class 07's is "Compare 10.1 and 10.3 and agree on the step ...".
-    """
-    for _a, _b, _m, _mode, _src, text in rows:
-        first = text.split("<br>")[0]
-        if "PCCI" in first and "Collect" in first:
-            return set(re.findall(PROB, first)) | set(re.findall(DE, first))
-    return set()
-
-
-def pcci_label(rows):
-    """The PCCI this day COLLECTS, from the plan's collection row.
-
-    Only a row that says "Collect ... PCCI" counts. Every pack also carries
-    a `PCCI (on Moodle): ...` line announcing the NEXT one, and day 1 carries
-    "PCCI 1 -- read the syllabus"; matching those would label a day with a
-    PCCI it does not collect. Two phrasings are in use:
-    "Collect PCCI 6, problems 10.1 and 10.3." and
-    "Collect the PCCI, DE 10.10.1 parts 1-9."
-    """
-    for _a, _b, _m, _mode, _src, text in rows:
-        first = text.split("<br>")[0]
-        if "PCCI" not in first or "Collect" not in first:
-            continue
-        m = re.search(r"Collect\s+(?:the\s+)?PCCI\s*(\d+)?\s*[,(]?\s*"
-                      r"(.{0,60}?)(?=\.(?!\d)|\)|<br>|$)", first)
-        if not m:
-            continue
-        num, what = m.group(1), (m.group(2) or "").strip().rstrip(",.")
-        if len(what) > 55 or what.lower().startswith("the first collection"):
-            what = ""
-        label = "PCCI" + (f" {num}" if num else "")
-        return label + (f" -- {what}" if what else "")
-    return None
-
-
-def solutions_map(lines):
+def solutions_map(notes):
     """-> {(filename-substring, page): [(problem, band-or-None)]}."""
-    raw = tagged_line(lines, "Solutions:")
+    raw = notes.tagged_line("Solutions:")
     out = {}
     if not raw:
         return out
@@ -404,115 +276,52 @@ def crop_problems(pages, smap):
             claimed.add(id(pg))
     return crops, claimed
 
-
-def render(n, date, topic, rows, pages, smap, crops, claimed, gary, fcrops):
-    pnums = pcci_problems(rows)
-    pcci, other = [], []
-    for prob, when, task, checks, text, probs in row_entries(rows):
-        is_pcci = "PCCI" in text or (pnums and (set(probs) | {prob}) & pnums)
-        (pcci if is_pcci else other).append((prob, when, task, checks, probs))
-
-    o = ["<!doctype html><meta charset=utf-8>",
-         f"<title>PHY 210 answers -- class {n:02d}</title><style>{CSS}</style>",
-         f"<h1>Class {n:02d} answers<span class=when>{date} &middot; "
-         f"{esc(topic)}</span></h1>"]
-    seen = set()
-
-    def block(title, items, empty):
-        o.append(f"<h2>{title}</h2>")
-        if not items:
-            o.append(f"<p class=none>{empty}</p>")
-            return
-        for prob, when, task, checks, probs in items:
-            # A row can work two problems (pack 14's 2.11 and 2.13): label and crop every one of them.
-            nums = list(dict.fromkeys(probs)) or [prob]
-            label = ", ".join(q for q in nums if q) or "&mdash;"
-            o.append(f'<div class=prob><div class=num>{label}'
-                     f'<span class=when>{when}</span></div>')
-            if task and task != prob:
-                o.append(f"<div class=task>{esc(task)}</div>")
-            o.append("<ul>" + "".join(f"<li>{esc(c)}</li>" for c in checks) + "</ul>")
-            for q in nums:
-                imgs = list(crops.get(q, [])) + list(fcrops.get(q, []))
-                if imgs and q not in seen:
-                    seen.add(q)
-                    o.append("<div class=worked>")
-                    for src, cap in imgs:
-                        o.append(f'<p class=cap>worked solution &middot; {esc(cap)}</p>'
-                                 f'<img src="{esc(src)}" alt="{esc(q)}">')
-                    o.append("</div>")
-            o.append("</div>")
-
-    # The heading never claims a day HAS no PCCI: class 09's PCCI 7 is
-    # "log in to the hub", which is collected but has no answer to print.
-    # State what is actually known -- whether the plan has a collection row.
-    label = pcci_label(rows)
-    block(label or "PCCI", pcci,
-          "the plan's PCCI row carries no Check: line"
-          if label else
-          "no <code>Collect ... PCCI</code> row in this day's plan")
-    if gary:
-        o.append("<div class=worked>")
-        for src, cap in gary:
-            o.append(f'<p class=cap>{esc(cap)}</p>'
-                     f'<img src="{esc(src)}" alt="{esc(cap)}">')
-        o.append("</div>")
-    block("Everything else with an answer", other, "none")
-
-    left = [p for p in pages if id(p) not in claimed]
-    if left:
-        o.append("<h2>Other solution pages</h2>")
-        o.append("<p class=warn>Shown whole because no problem on them is "
-                 "cropped for today.</p>")
-        for pg in sorted(left, key=lambda g: (g["file"], g["page"])):
-            listed = None
-            for (sub, page), items in smap.items():
-                if sub in pg["file"].lower() and page == pg["page"]:
-                    listed = [q for q, _ in items]
-            bits = ("on this page: " + esc(", ".join(listed))) if listed else \
-                   "not listed on the <code>Solutions:</code> line"
-            o.append(f'<div class=sol><p class=cap>{bits}</p>'
-                     f'<p class=cap>{esc(pg["file"])}, page {pg["page"]}</p>'
-                     f'<img src="{esc(pg["src"])}" alt="{esc(pg["file"])}"></div>')
-    elif not smap:
-        o.append("<h2>Worked solutions</h2>")
-        o.append("<p class=none>no <code>Solutions:</code> line in the prep "
-                 "notes, so no solution PDF is claimed for this day</p>")
-
-    o.append("<footer>Generated by make_answer_sheets.py from the plan table "
-             "in 00-prep-notes.md -- edit the plan, not this file.</footer>")
-    return "\n".join(o)
-
-
 def main(only=None):
-    wrote = cropped = withsol = withkey = felder = 0
+    """Write _gen/crops.json per pack: the PCCI's solution from Gary's key (a Discovery Exercise)
+    or Felder's manual (a numbered problem), Felder's worked solution for every problem named
+    in the In-class problems section, the crops the Solutions: line maps, and the solution pages
+    nothing claimed. shared/make_pack_html.py places them under the problems on the pack page."""
+    wrote = withkey = felder = cropped = 0
     bands, fbands = gary_bands(), felder_bands()
-    for n, date, path in M.pack_files():
+    for n, date, path in P.pack_files("210"):
         if only and f"{n:02d}" not in only:
             continue
-        lines = path.read_text().split("\n")
-        rows = M.plan_rows(lines, path)
-        if not rows:
+        if not path.exists():
             continue
-        smap = solutions_map(lines)
-        de = re.search(r"DE\s+(\d+\.\d+\.\d+)", pcci_label(rows) or "")
-        gary = crop_gary(path.parent, de.group(1), bands) if de else []
-        withkey += bool(gary)
-        wanted = {q for *_ , probs in row_entries(rows) for q in probs}
-        fcrops = {q: c for q in sorted(wanted)
-                  if (c := crop_felder(path.parent, q, fbands))}
-        felder += len(fcrops)
-        pages = render_pages(path.parent, smap)
+        notes = P.Notes(path)
+        if notes.old_format:
+            continue
+        pack = path.parent
+        smap = solutions_map(notes)
+        de = notes.pcci_de()
+        pcci_imgs = crop_gary(pack, de, bands) if de else []
+        withkey += bool(pcci_imgs)
+        problems = {}
+        for q in notes.all_problems():
+            fc = crop_felder(pack, q, fbands)
+            if fc:
+                felder += 1
+                problems.setdefault(q, {})["worked"] = fc
+        pages = render_pages(pack, smap)
         crops, claimed = crop_problems(pages, smap)
         cropped += len(crops)
-        withsol += bool(smap)
-        (path.parent / "_gen" / "answers.html").write_text(
-            render(n, date, M.topic(lines, path), rows, pages, smap, crops,
-                   claimed, gary, fcrops))
+        for q, lst in crops.items():
+            problems.setdefault(q, {}).setdefault("worked", []).extend(lst)
+        unclaimed = []
+        for pg in pages:
+            if id(pg) in claimed:
+                continue
+            listed = next((", ".join(q for q, _ in lst) for (sub, page), lst in smap.items()
+                           if sub in pg["file"].lower() and page == pg["page"]), "")
+            unclaimed.append({"src": pg["src"], "file": pg["file"], "page": pg["page"],
+                              "note": f"on this page: {listed}" if listed else "not on the Solutions: line"})
+        (pack / "_gen").mkdir(exist_ok=True)
+        json.dump({"pcci": {"id": notes.pcci_id(), "images": pcci_imgs},
+                   "problems": problems, "unclaimed": unclaimed},
+                  open(pack / "_gen" / "crops.json", "w"), indent=1)
         wrote += 1
-    print(f"wrote {wrote} answer sheets; {withkey} carry the PCCI solution from "
-          f"Gary's key; {felder} Felder worked solutions; {withsol} have a "
-          f"Solutions: line; {cropped} problem crops")
+    print(f"wrote {wrote} crops.json; {withkey} PCCI solutions from Gary's key; "
+          f"{felder} Felder worked solutions; {cropped} Solutions:-line crops")
 
 
 if __name__ == "__main__":

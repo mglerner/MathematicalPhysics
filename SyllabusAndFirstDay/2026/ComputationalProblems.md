@@ -281,8 +281,9 @@ eigenvectors.
 
 **Provenance:** fresh; the system is the course's own two-coupled-
 oscillator day (Felder 6.9) and matches Gary's S22 WHW07 extra-credit
-Mathematica problem (Felder 6.87). Michael's `CoupledDEs/` notebooks in
-this repo cover the same picture.
+Mathematica problem (Felder 6.87). The starter notebook
+`Notebooks2026/WHW09_coupled_oscillators_starter.ipynb` carries the Python and
+teaches beating (section 4).
 
 **Solution sketch:** in `private/ComputationalProblemSolutions.md` (kept out of this public repo).
 

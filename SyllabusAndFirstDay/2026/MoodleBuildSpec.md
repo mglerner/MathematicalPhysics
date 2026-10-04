@@ -199,7 +199,7 @@ events; and it carries the points itself, so the four manual grade items
   from make_quiz_gradebook.py) reports the two numbers separately.
 - Quiz redos (syllabus 2026-10-03): when each quiz is handed back, add a
   "Quiz N redo" assignment (file submission, one PDF, due one week after
-  the hand-back, 0 points of its own) so the deadline lands on every
+  the hand-back rounded to the next class day -- Michael 2026-10-04 -- 0 points of its own) so the deadline lands on every
   student's calendar. Per-problem quiz scores live in a private
   spreadsheet (one check-scale mark per problem, scaled to 28/56/56 on
   Quiz 1); a redo raises that score (check- -> 85%, X -> 75%) and the

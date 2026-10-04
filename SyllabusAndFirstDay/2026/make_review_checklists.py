@@ -15,7 +15,7 @@ pack's plan. Rerun after any generator edit:
 
     python make_review_checklists.py
 
-Writes `01-review-checklist.md` into every existing prep-pack folder and
+Writes `_gen/review-checklist.md` into every existing prep-pack folder and
 `REVIEW-SCHEDULE.md` at the prep-pack root. Generated files; do not edit.
 """
 import re

@@ -25,18 +25,20 @@ from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
 # the Dec 15 last-day-of-classes Tuesday don't hit a MWF pattern.
 FIRST_DAY = date(2026, 9, 9)   # first MWF meeting (classes open Tue Sep 8)
 LAST_DAY = date(2026, 12, 14)  # last MWF meeting
+# NO_CLASS values are the calendar row's text (as in 317's generator): Mountain Day is a
+# Smith holiday, not an absence, and Michael wants it to read as one.
+# Mountain Day 2026 fell on Wed Sep 23 (announced that morning). This calendar was NOT
+# updated at the time (317's was); found 2026-10-01. Its Felder 10.2 (linear operators) is
+# DROPPED, not rescheduled: no S26 quiz or final asks about it. Its PCCI (10.1, 10.3) was
+# collected from whoever had done it. Until 2026-10-04 the lost meeting kept its slot and
+# class number (a cancelled "class 07"); since then class numbers count meetings HELD, as in
+# 317, so Sep 25 is class 07 and the packs/logs were renumbered to match.
 NO_CLASS = {
-    date(2026, 10, 12): "Autumn recess",
-    date(2026, 11, 25): "Thanksgiving",
-    date(2026, 11, 27): "Thanksgiving",
+    date(2026, 9, 23): "Mountain Day!!",
+    date(2026, 10, 12): "No class - Autumn recess",
+    date(2026, 11, 25): "No class - Thanksgiving",
+    date(2026, 11, 27): "No class - Thanksgiving",
 }
-
-# Cancelled meetings keep their slot (and so their class number: packs, logs and the course
-# map are keyed by it) but nothing is taught. Mountain Day 2026 fell on Wed Sep 23 (announced
-# that morning). This calendar was NOT updated at the time (317's was); found and fixed
-# 2026-10-01. Class 07's Felder 10.2 (linear operators) is DROPPED, not rescheduled: no S26
-# quiz or final asks about it. Its PCCI (10.1, 10.3) was collected from whoever had done it.
-CANCELLED = {date(2026, 9, 23): "Mountain Day (no class)"}
 
 
 def class_days():
@@ -52,22 +54,20 @@ def class_days():
 # column mirrors the P125 calendar's read-before-class convention.
 #
 # Quizzes are dedicated in-class days (as on the previous prof's calendar),
-# pinned to Friday slot indices; the flex day sits where her Spring '26
-# snow day fell (week 5) and absorbs snow / Mountain Day / drift.
-# 35 content slots + 3 quiz days + 1 flex day = 39 MWF meetings, exactly
-# matching her 39 spring slots. The calendar is FULL: the flex day is the
-# only buffer left (the old practice/review day is now the coordinate-
-# systems day), so adding anything else means displacing content.
+# keyed by DATE (not slot index, so a lost meeting cannot shift them; 317's
+# EXAMS work the same way). 35 content days + 3 quiz days = 38 MWF meetings
+# held (39 scheduled minus Mountain Day). The calendar is FULL: the flex day
+# that absorbed snow / Mountain Day / drift was spent on Mountain Day, so
+# adding anything else means displacing content.
 # REBUILT 2026-10-01 (Michael approved): from Oct 2 on, each meeting is Manbir's S26 meeting as
 # her section ACTUALLY delivered it (her day N and N+1 notes; Gillian's decks where Manbir's
 # stop is unknown), one for one, with quiz dates fixed. Mountain Day spent the flex day (her
 # snow day's twin), so there is no buffer left. Feynman (Vol II Ch 2-3) is woven into the six
 # vector-calculus days instead of having a day of its own; Dec 14 is Michael's fixed finale.
-SPECIALS = {
-    6: (CANCELLED[date(2026, 9, 23)], False),           # Wed Sep 23
-    7: ("Quiz 1 (Ch 1)", True),                          # Fri Sep 25
-    18: ("Quiz 2 (Ch 10, 3, 2)", True),                  # Fri Oct 23
-    30: ("Quiz 3 (Ch 6, 5)", True),                      # Fri Nov 20
+QUIZZES = {
+    date(2026, 9, 25): "Quiz 1 (Ch 1)",
+    date(2026, 10, 23): "Quiz 2 (Ch 10, 3, 2)",
+    date(2026, 11, 20): "Quiz 3 (Ch 6, 5)",
 }
 CONTENT = [
     ("Syllabus; SHO and overview of differential equations", "1.1-1.2"),
@@ -127,6 +127,11 @@ CONTENT = [
 # assignment text says explicitly that this is a one-off.
 WHW_DUE_OVERRIDE = {1: date(2026, 9, 14)}
 
+# PCCIs that were assigned for a meeting that was then lost (Mountain Day). Collected from
+# whoever had done them, not in the gradebook; their solution Pages stay on Moodle, so the
+# Moodle builders (pcci_crops_210.py, build_210_content.py) read this table too.
+PCCI_LOST = {date(2026, 9, 23): "10.1, 10.3"}
+
 # Felder problems whose text says "by computer" / "have a computer ...".
 # None of these may sit on a WHW due before the Python class (Mon Sep
 # 28); 1.36 slipped onto WHW01 in F2026 (caught 2026-09-11). Problems that
@@ -172,7 +177,7 @@ PCCI = {
     date(2026, 9, 16): "DE 1.5.1 Parts 1-5",
     date(2026, 9, 18): "DE 1.6.1 Parts 1-3",
     date(2026, 9, 21): "DE 1.6.1 Parts 4-6",
-    date(2026, 9, 23): "10.1, 10.3",
+    # Sep 23 (Mountain Day) had "10.1, 10.3": see PCCI_LOST below.
     date(2026, 9, 28): "Log into jupyterhub.smith.edu and open a blank "
                        "Jupyter notebook; bring your laptop",
     date(2026, 9, 30): "DE 10.10.1 Parts 1-9",
@@ -359,16 +364,13 @@ WHWS = [
 def build(outpath):
     days = list(class_days())
     n = len(days)
-    assert len(CONTENT) + len(SPECIALS) == n, (
-        f"{len(CONTENT)} content + {len(SPECIALS)} specials "
+    assert len(CONTENT) + len(QUIZZES) == n, (
+        f"{len(CONTENT)} content + {len(QUIZZES)} quizzes "
         f"for {n} class meetings")
-    assert all(days[i].weekday() == 4 for i in SPECIALS if days[i] not in CANCELLED), (
-        "quiz day not on a Friday")
-    special_days = {days[i] for i in SPECIALS}
+    assert all(d in days for d in QUIZZES), "quiz on a non-class day"
+    assert all(d.weekday() == 4 for d in QUIZZES), "quiz day not on a Friday"
     assert all(d in days for d in PCCI), "PCCI assigned to a non-class day"
-    assert not any(d in PCCI for i, d in enumerate(days)
-                   if i in SPECIALS and SPECIALS[i][1]), (
-        "PCCI assigned to a quiz day")
+    assert not any(d in PCCI for d in QUIZZES), "PCCI assigned to a quiz day"
 
     # rows: one per class meeting; insert break markers
     rows = []      # (week, class_no, date, topic, reading, pcci, hw, exam)
@@ -389,11 +391,9 @@ def build(outpath):
         for bd, why in NO_CLASS.items():
             if bd not in breaks_seen and bd < d:
                 breaks_seen.add(bd)
-                rows.append((None, None, bd, f"No class - {why}",
-                             "", "", "", ""))
-        if slot_i in SPECIALS:
-            label, is_quiz = SPECIALS[slot_i]
-            topic, reading, exam = label, "", (label if is_quiz else "")
+                rows.append((None, None, bd, why, "", "", "", ""))
+        if d in QUIZZES:
+            topic, reading, exam = QUIZZES[d], "", QUIZZES[d]
         else:
             topic, reading = CONTENT[content_i]
             exam = ""
@@ -419,8 +419,7 @@ def build(outpath):
                      PCCI.get(d, ""), hw, exam))
     for bd, why in NO_CLASS.items():
         if bd not in breaks_seen:
-            rows.append((None, None, bd, f"No class - {why}",
-                         "", "", "", ""))
+            rows.append((None, None, bd, why, "", "", "", ""))
     rows.sort(key=lambda r: r[2])
     rows.append((None, None, date(2026, 12, 19),
                  "Final exam period Dec 19-22 (registrar schedules)",
@@ -522,6 +521,10 @@ def build(outpath):
     # total must be exactly 1000 points. pts_cell, when set, is the
     # formula written to the sheet (Non-Newtonian Scientist is worth one
     # homework, by reference).
+    # FLAG (2026-10-04): 39 is the number of meetings SCHEDULED; 38 were held
+    # after Mountain Day. The syllabus promises 39 - 4 = 35 days x 2 points
+    # (build_skeleton.py says the same); whether that becomes 38 - 3 or stays
+    # as written is Michael's call. Left as written until he decides.
     cats = [
         ("Attendance/participation", 39, 4, 2, None),
         ("Written Homework (WHW)", 13, 1, 25, None),

@@ -90,9 +90,8 @@ def class_rows():
     content = iter(CAL.CONTENT)
     rows = []
     for i, d in enumerate(days):
-        if i in CAL.SPECIALS:
-            label, is_quiz = CAL.SPECIALS[i]
-            rows.append((i + 1, d, label, "", is_quiz))
+        if d in CAL.QUIZZES:          # keyed by date since 2026-10-04 (as 317's EXAMS)
+            rows.append((i + 1, d, CAL.QUIZZES[d], "", True))
         else:
             topic, reading = next(content)
             rows.append((i + 1, d, topic, reading, False))

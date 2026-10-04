@@ -67,7 +67,13 @@ DAY_LOGISTICS = {
                         "a correct solution plus the reflection) go on Moodle as one PDF, due Wed Oct 14 at the start of class "
                         "(the 'Quiz 1 redo' item). Scores unhide on Moodle at 11:00."],
     date(2026, 10, 23): ["Quiz 2: printed copies + spares; per-problem score sheet"],
+    date(2026, 10, 26): ["Hand back the graded Quiz 2 papers. Say: redos go on Moodle as one PDF, due Mon Nov 2 at the start "
+                         "of class. The 'Quiz 2 redo' Moodle item must already exist (build_add_210.py quiz2-redo, a "
+                         "restore-only merge); edit its dates if this hand-back moved."],
     date(2026, 11, 20): ["Quiz 3: printed copies + spares; per-problem score sheet"],
+    date(2026, 11, 23): ["Hand back the graded Quiz 3 papers. Say: redos go on Moodle as one PDF, due Mon Nov 30 at the start "
+                         "of class (no class Nov 25/27). The 'Quiz 3 redo' Moodle item must already exist (build_add_210.py "
+                         "quiz3-redo); edit its dates if this hand-back moved."],
 }
 # WHWs carrying a required computational problem (decided 2026-08-28;
 # the problem text lives in private/MoodleBuild/whw-descriptions.html and

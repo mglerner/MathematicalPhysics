@@ -188,6 +188,15 @@ events; and it carries the points itself, so the four manual grade items
   Dec 19-22, so that timestamp is the end of the window, not a slot.
   Required part = Ch 8, 9, 11 only; the rest is optional redemption
   problems (syllabus "Final exam, with redemption problems")
+- Quiz extra credit (decided 2026-10-03): the quiz item stays at 140. The
+  printed Problem 0 (5 paper points, granted for any answer) goes in a
+  separate manual grade item "Quiz N extra credit", max 7 (5 x 140/100),
+  in the Quizzes category with the **Extra credit** box ticked. Under
+  Natural aggregation that adds to the category total without raising
+  its maximum, so a student without it is not capped below 100%. Do NOT
+  make the quiz out of 147: that puts the bonus in everyone's
+  denominator. The grading sheet (private/Grading/PHY210-Quizzes.xlsx,
+  from make_quiz_gradebook.py) reports the two numbers separately.
 - Quiz redos (syllabus 2026-10-03): when each quiz is handed back, add a
   "Quiz N redo" assignment (file submission, one PDF, due one week after
   the hand-back, 0 points of its own) so the deadline lands on every

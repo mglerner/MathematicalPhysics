@@ -81,7 +81,7 @@ CONTENT = [
     ("Using Laplace transforms to solve ODEs", "10.11"),
     # Reading split moved 2026-09-19 (PCCI audit, playbook 6a): the Oct 7
     # PCCI is DE 3.4.1, so 3.4 must not be read (or taught) before Oct 7.
-    # Pack 12 already teaches 3.1-3.3 on Oct 5 and 3.4-3.5 on Oct 7.
+    # Pack 11 teaches 3.1-3.3 on Oct 5 and pack 12 teaches 3.4-3.5 on Oct 7.
     ("Complex numbers: basic properties", "3.1-3.3"),
     ("Euler's formula; complex ODEs", "3.4-3.5"),
     # Manbir's S26 meeting for each slot is in the comment (her section's actual reach).

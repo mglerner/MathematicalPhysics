@@ -291,7 +291,7 @@ WHW after them -- the final's practice set covers that material.
       due, via a Restrict-access date condition, so a pacing change does not
       leave a stale problem list on display.
 
-37. AT THE class-25 PREP PACK (Mon Nov 30) -- RE-FLAG THIS: Chapter 11
+37. AT THE class-32 PREP PACK (Mon Nov 30) -- RE-FLAG THIS: Chapter 11
     (11.1-11.4, taught Dec 11 and Dec 14) and Fourier transforms (9.6,
     taught Dec 14) have NO homework practice at all, by calendar design.
     TODO 78's stated mitigation ("the final's practice set covers that
@@ -359,7 +359,7 @@ WHW after them -- the final's practice set covers that material.
     embed to the 2nd half -- edit the "Course Calendar/Schedule" LABEL in
     the Course Information section (there is no Page module), range
     `A1:H16` -> `A17:H45`. Also: open the mid-semester feedback
-    activity the same week. Carry this into the class-15 (Wed Oct 14)
+    activity the same week. Carry this into the class-14 (Wed Oct 14)
     prep pack when it gets built.
 34. WHW solutions -- BUILT; RELEASE SETTLED 2026-09-23. Separate files,
     one per week, released at the WHW due time (10:00 PM, Friday for

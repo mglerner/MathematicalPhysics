@@ -148,11 +148,11 @@ not settled whether we run that. If we do not, students need at least a
 week-1 goal-setting activity or those two questions ask about goals
 nobody set.
 
-| Assignment              | Due                                                       | Pts                    | Notes                                                                                                                            |
-| ----------------------- | --------------------------------------------------------- | ---------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| Math Pretest            | Fri Sep 18, 22:00                                         | 0 (ungraded)           | Graded for completion; carries NO gradebook item so the 1000 total holds. Ships hidden until the PDF is attached.                |
-| WHW01..WHW13            | Fridays 22:00 (WHW11 -> check calendar; WHW13 Fri Dec 11) | 25 each                | description = that week's tier list + reflection questions; submission = photo of work (file) + reflection answers (online text) |
-| Non-Newtonian Scientist | Mon Oct 26, 22:00                                         | 25                     | prompt adapted from shared/NonNewtonianPhysicist/                                                                                |
+| Assignment              | Due                                                       | Pts          | Notes                                                                                                                            |
+| ----------------------- | --------------------------------------------------------- | ------------ | -------------------------------------------------------------------------------------------------------------------------------- |
+| Math Pretest            | Fri Sep 18, 22:00                                         | 0 (ungraded) | Graded for completion; carries NO gradebook item so the 1000 total holds. Ships hidden until the PDF is attached.                |
+| WHW01..WHW13            | Fridays 22:00 (WHW11 -> check calendar; WHW13 Fri Dec 11) | 25 each      | description = that week's tier list + reflection questions; submission = photo of work (file) + reflection answers (online text) |
+| Non-Newtonian Scientist | Mon Oct 26, 22:00                                         | 25           | prompt adapted from shared/NonNewtonianPhysicist/                                                                                |
 
 One due TIME everywhere: 22:00 (Gillian's drifted; Will's drifted;
 pick one, keep it).
@@ -188,6 +188,14 @@ events; and it carries the points itself, so the four manual grade items
   Dec 19-22, so that timestamp is the end of the window, not a slot.
   Required part = Ch 8, 9, 11 only; the rest is optional redemption
   problems (syllabus "Final exam, with redemption problems")
+- Quiz redos (syllabus 2026-10-03): when each quiz is handed back, add a
+  "Quiz N redo" assignment (file submission, one PDF, due one week after
+  the hand-back, 0 points of its own) so the deadline lands on every
+  student's calendar. Per-problem quiz scores live in a private
+  spreadsheet (one check-scale mark per problem, scaled to 28/56/56 on
+  Quiz 1); a redo raises that score (check- -> 85%, X -> 75%) and the
+  Moodle quiz item is edited to the new sum. The redo assignment itself
+  is not graded.
 - Flex day Fri Oct 9; no class Mon Oct 12, Wed Nov 25, Fri Nov 27
 - Final exam period Dec 19-22 (update when registrar schedules)
 

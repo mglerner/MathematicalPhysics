@@ -86,11 +86,10 @@ def whws_by_chapter():
 
 
 def quizzes_for(ch):
-    days = list(CAL.class_days())
     hits = []
-    for i, (label, is_quiz) in CAL.SPECIALS.items():
-        if is_quiz and re.search(r"\bCh\b[^)]*\b%d\b" % ch, label):
-            hits.append(f"{label.split(' (')[0]} on {fmt(days[i])}")
+    for d, label in CAL.QUIZZES.items():
+        if re.search(r"\bCh\b[^)]*\b%d\b" % ch, label):
+            hits.append(f"{label.split(' (')[0]} on {fmt(d)}")
     return hits
 
 

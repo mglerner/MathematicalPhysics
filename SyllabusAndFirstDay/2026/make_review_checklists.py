@@ -64,7 +64,7 @@ DAY_LOGISTICS = {
     # Quiz hand-backs (Michael, 2026-10-04): the redo is a single PDF on Moodle (syllabus), due
     # "one week after the hand-back" rounded to the next class day.
     date(2026, 10, 5): ["Hand back the graded Quiz 1 papers. Say: redos (check-minus and X problems: "
-                        "a correct solution plus the reflection) go on Moodle as one PDF, due Wed Oct 14 "
+                        "a correct solution plus the reflection) go on Moodle as one PDF, due Wed Oct 14 at the start of class "
                         "(the 'Quiz 1 redo' item). Scores unhide on Moodle at 11:00."],
     date(2026, 10, 23): ["Quiz 2: printed copies + spares; per-problem score sheet"],
     date(2026, 11, 20): ["Quiz 3: printed copies + spares; per-problem score sheet"],

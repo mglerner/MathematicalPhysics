@@ -61,6 +61,11 @@ DAY_LOGISTICS = {
     # alternate. Applies to all three quizzes.
     date(2026, 9, 25): ["Quiz 1: printed copies + spares; per-problem score sheet"],
     date(2026, 9, 28): ["iPad with the folio keyboard (AirPlay as usual) for the Python onboarding class; test the GitHub-download-to-hub-upload step in Safari beforehand; students bring laptops"],
+    # Quiz hand-backs (Michael, 2026-10-04): the redo is due IN CLASS one week after the
+    # hand-back; the Moodle "Quiz N redo" item exists only to put the date on the calendar.
+    date(2026, 10, 5): ["Hand back the graded Quiz 1 papers. Say: redos (check-minus and X problems: "
+                        "a correct solution plus the reflection) are due IN CLASS Wed Oct 14; "
+                        "the Moodle 'Quiz 1 redo' item only carries the date. Scores unhide on Moodle at 11:00."],
     date(2026, 10, 23): ["Quiz 2: printed copies + spares; per-problem score sheet"],
     date(2026, 11, 20): ["Quiz 3: printed copies + spares; per-problem score sheet"],
 }

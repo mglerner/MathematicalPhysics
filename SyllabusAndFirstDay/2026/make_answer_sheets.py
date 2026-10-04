@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Write _gen/crops.json per prep pack (PHY 210): the solution crops the pack page shows.
+"""Write crops.json (in the pack's build folder) per prep pack (PHY 210): the solution crops the pack page shows.
 
 The PCCI's solution from Gary's key (a Discovery Exercise) or Felder's manual (a numbered
 problem); Felder's worked solution for every problem named in the notes' In-class problems
@@ -163,7 +163,7 @@ def crop_felder(pack_dir, prob, bands):
         from PIL import Image
     except ImportError:
         return []
-    out_dir = pack_dir / "_gen" / "answer-images"
+    out_dir = P.layout(pack_dir)["build"] / "answer-images"
     out_dir.mkdir(parents=True, exist_ok=True)
     got = []
     # A band that runs onto the next page starts at its top edge: skip the manual's running head
@@ -214,7 +214,7 @@ def crop_gary(pack_dir, de, bands):
         from PIL import Image
     except ImportError:
         return []
-    out_dir = pack_dir / "_gen" / "answer-images"
+    out_dir = P.layout(pack_dir)["build"] / "answer-images"
     out_dir.mkdir(parents=True, exist_ok=True)
     got = []
     for i, (page, top, bot) in enumerate(spans, 1):
@@ -243,9 +243,9 @@ def render_pages(pack_dir, smap):
     if not shutil.which("pdftoppm") or not smap:
         return []
     subs = {sub for sub, _ in smap}
-    pdfs = sorted({p for p in pack_dir.glob("*.pdf")
+    pdfs = sorted({p for p in P.pdfs(pack_dir)
                    if any(s in p.name.lower() for s in subs)})
-    out_dir = pack_dir / "_gen" / "answer-images"
+    out_dir = P.layout(pack_dir)["build"] / "answer-images"
     pages = []
     for pdf in pdfs:
         stem = re.sub(r"[^A-Za-z0-9]+", "-", pdf.stem).strip("-").lower()[:48]
@@ -295,7 +295,7 @@ def crop_problems(pages, smap):
     return crops, claimed
 
 def main(only=None):
-    """Write _gen/crops.json per pack: the PCCI's solution from Gary's key (a Discovery Exercise)
+    """Write crops.json (in the pack's build folder) per pack: the PCCI's solution from Gary's key (a Discovery Exercise)
     or Felder's manual (a numbered problem), Felder's worked solution for every problem named
     in the In-class problems section, the crops the Solutions: line maps, and the solution pages
     nothing claimed. shared/make_pack_html.py places them under the problems on the pack page."""
@@ -309,7 +309,7 @@ def main(only=None):
         notes = P.Notes(path)
         if notes.old_format:
             continue
-        pack = path.parent
+        pack = P.pack_of(path)
         smap = solutions_map(notes)
         de = notes.pcci_de()
         pcci_imgs = crop_gary(pack, de, bands) if de else []
@@ -333,10 +333,10 @@ def main(only=None):
                            if sub in pg["file"].lower() and page == pg["page"]), "")
             unclaimed.append({"src": pg["src"], "file": pg["file"], "page": pg["page"],
                               "note": f"on this page: {listed}" if listed else "not on the Solutions: line"})
-        (pack / "_gen").mkdir(exist_ok=True)
+        P.layout(pack)["build"].mkdir(exist_ok=True)
         json.dump({"pcci": {"id": notes.pcci_id(), "images": pcci_imgs},
                    "problems": problems, "unclaimed": unclaimed},
-                  open(pack / "_gen" / "crops.json", "w"), indent=1)
+                  open(P.layout(pack)["build"] / "crops.json", "w"), indent=1)
         wrote += 1
     print(f"wrote {wrote} crops.json; {withkey} PCCI solutions from Gary's key; "
           f"{felder} Felder worked solutions; {cropped} Solutions:-line crops")

@@ -27,6 +27,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 import make_fall2026_calendar as CAL  # noqa: E402
 sys.path.insert(0, str(Path.home() / "coding/courses/shared"))
 import coverage_gate as GATE              # noqa: E402
+import packnotes as PN                    # noqa: E402
 
 # Coverage gate (2026-10-01): a week before each set goes live, the checklist asks for
 # /coverage-check; at go-live it prints the mechanical gate (verdict on file, links exist,
@@ -191,8 +192,9 @@ def main():
         text = checklist(row, rows, whws)
         n = row[0]
         if n in packs:
-            (packs[n] / "_gen").mkdir(exist_ok=True)
-            (packs[n] / "_gen" / "review-checklist.md").write_text(text)
+            build = PN.layout(packs[n])["build"]
+            build.mkdir(exist_ok=True)
+            (build / "review-checklist.md").write_text(text)
             written += 1
         body = text.split("\n", 9)[9]
         sched += [f"## Class {n:02d} -- {fmt(row[1])} -- {row[2]}", "", body.strip(), ""]

@@ -9,7 +9,9 @@ worked solution for any Felder problem a plan mentions can be cropped out.
 The manuals carry a real text layer, so the bands are MEASURED rather than
 read off by eye: `pdftotext -bbox-layout` gives the position of every line,
 each problem opens with its own number as the first word of a line near the
-top of a page, and a problem runs until the next one starts. A problem
+top of a page, and a problem runs until the next one starts. Only numbers in
+the manual's own chapter count (figures in c04 and c13 carry labels such as
+"0.3" and "1.2", which would otherwise end the problem above them early). A problem
 spanning a page break gets one band per page.
 
 The bbox XML is not well-formed (the manuals' encoding emits raw control
@@ -35,7 +37,8 @@ TOP = 0.30        # a problem header sits in the top third of its page
 PAD = 0.010
 
 
-def headers(xml_path):
+def headers(xml_path, ch):
+    """-> ([(page, y/H, problem)], npages): lines near a page top that open with `ch.N`."""
     raw = xml_path.read_text(encoding="utf8", errors="replace")
     marks = [(m.start(), float(m.group(2))) for m in PAGE.finditer(raw)]
     marks.append((len(raw), 0.0))
@@ -46,7 +49,7 @@ def headers(xml_path):
             ws = [w.strip() for w in WORD.findall(lm.group(3))]
             if not ws:
                 continue
-            m = re.fullmatch(r"(\d+\.\d+)", ws[0])
+            m = re.fullmatch(rf"({ch}\.\d+)", ws[0])
             if m and float(lm.group(2)) / H < TOP:
                 out.append((i + 1, float(lm.group(2)) / H, m.group(1)))
     return out, len(marks) - 1
@@ -62,7 +65,7 @@ def main():
             xml = Path(td) / "b.xml"
             subprocess.run(["pdftotext", "-bbox-layout", str(pdf), str(xml)],
                            check=True, capture_output=True)
-            hits, npages = headers(xml)
+            hits, npages = headers(xml, int(name[1:3]))
 
         # keep the first appearance of each problem, in reading order
         seen, ordered = set(), []

@@ -7,14 +7,19 @@
                             the week 15 PDE finale.
 
 Tufte-ish: black/gray, thin lines, no boxes, minimal axes.
-Run from this directory: ../../../.venv/bin/python make_syllabus_figures.py
+Writes next to this script, wherever it is run from:
+  ../../../.venv/bin/python make_syllabus_figures.py
 """
+
+from pathlib import Path
 
 import numpy as np
 import matplotlib
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+
+HERE = Path(__file__).parent   # PHY210Syllabus.tex includes the PDFs from here
 
 plt.rcParams.update({
     "font.size": 8,
@@ -46,7 +51,7 @@ def coupled_oscillators():
                  fontsize=7, color="#555555")
     fig.subplots_adjust(left=0.12, right=0.99, top=0.98, bottom=0.08,
                         hspace=0.25)
-    fig.savefig("coupled_oscillators.pdf")
+    fig.savefig(HERE / "coupled_oscillators.pdf")
     plt.close(fig)
 
 
@@ -87,11 +92,11 @@ def heat_equation():
                 arrowprops=dict(arrowstyle="->", lw=0.5, color="#555555"))
     ax.text(0.63, 0.5, "time", fontsize=7, color="#555555")
     fig.subplots_adjust(left=0.10, right=0.99, top=0.97, bottom=0.06)
-    fig.savefig("heat_equation.pdf")
+    fig.savefig(HERE / "heat_equation.pdf")
     plt.close(fig)
 
 
 if __name__ == "__main__":
     coupled_oscillators()
     heat_equation()
-    print("wrote coupled_oscillators.pdf, heat_equation.pdf")
+    print(f"wrote coupled_oscillators.pdf, heat_equation.pdf in {HERE}")

@@ -23,13 +23,22 @@ import re
 import shutil
 import subprocess
 import sys
+import tempfile
 from pathlib import Path
+
+# Imported here, not per function: without Pillow the crops used to come back empty and every
+# crops.json was overwritten with no crops, silently (2026-10-05).
+import numpy as np
+from PIL import Image
 
 sys.path.insert(0, str(Path.home() / "coding/courses/shared"))
 import packnotes as P  # noqa: E402
 
 SOL_DPI = 110
 PAD = 0.004
+# Raw page renders of Gary's key and Felder's manuals, kept across runs as 317 keeps Taylor's.
+# Only the render is cached: every crop is re-cut from it on every run.
+PAGE_CACHE = Path(tempfile.gettempdir()) / "phy210-solution-pages"
 
 # Gary's PCCI solution key: one shared document covering the Discovery
 # Exercises, so its band map is shared too rather than copied per pack.
@@ -106,7 +115,6 @@ def trim_margins(im, pad=14, edge=0.03):
     """Cut blank margin off all four sides of a crop (Michael, 2026-10-03: the key crop had wide
     white margins). Ink = a few dark pixels in a row or column, ignoring the outer edges where
     crop marks and scan borders live."""
-    import numpy as np
     a = np.asarray(im.convert("L"))
     h, w = a.shape
     inner = a[int(edge * h):h - int(edge * h), int(edge * w):w - int(edge * w)]
@@ -124,7 +132,6 @@ def trim_blank(im, pad=12):
     """Cut blank space off the bottom (and top) of a crop: a page's last solution runs to the
     page foot (10.216, 2026-10-01). Thin marks at the side edges (crop marks, a stray tick) are
     ignored; a row counts as ink only if it has a few dark pixels away from the edges."""
-    import numpy as np
     a = np.asarray(im.convert("L"))
     h, w = a.shape
     inner = a[:, int(0.06 * w):int(0.94 * w)]
@@ -138,7 +145,6 @@ def snap_to_gaps(im, top, bot, bottom_up=False):
     """Pixel rows for a band, moved so neither cut lands inside a line of ink: a cut inside a
     line moves to the end of that line (bottom) or its start (top). The band map comes from the
     manual's poor text layer, and a page-2 band could stop mid-matrix (6.32, 2026-10-01)."""
-    import numpy as np
     a = np.asarray(im.convert("L"))
     h, w = a.shape
     ink = (a[:, int(FELDER_X[0] * w):int(FELDER_X[1] * w)] < 160).sum(axis=1) >= 3
@@ -154,14 +160,25 @@ def snap_to_gaps(im, top, bot, bottom_up=False):
 MANUAL_BODY_TOP = 0.155    # the solutions manual's running head and crop marks end above this
 
 
+def raw_page(pdf, page):
+    """Path to one page of `pdf` rendered at SOL_DPI, from PAGE_CACHE when it is there. The
+    key carries the PDF's mtime, so a replaced key or manual is rendered afresh."""
+    PAGE_CACHE.mkdir(exist_ok=True)
+    stem = re.sub(r"[^A-Za-z0-9]+", "-", pdf.stem).strip("-").lower()
+    out = PAGE_CACHE / f"{stem}-{int(pdf.stat().st_mtime)}-p{page}.png"
+    if not out.exists():
+        tmp = out.with_name(out.stem + "-tmp")
+        subprocess.run(["pdftoppm", "-png", "-r", str(SOL_DPI), "-singlefile",
+                        "-f", str(page), "-l", str(page), str(pdf), str(tmp)],
+                       check=True, capture_output=True)
+        tmp.with_name(tmp.name + ".png").rename(out)
+    return out
+
+
 def crop_felder(pack_dir, prob, bands):
     """Cut one Felder problem's worked solution out of its manual."""
     spans = bands.get(prob)
     if not spans or not shutil.which("pdftoppm"):
-        return []
-    try:
-        from PIL import Image
-    except ImportError:
         return []
     out_dir = P.layout(pack_dir)["build"] / "answer-images"
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -177,25 +194,18 @@ def crop_felder(pack_dir, prob, bands):
         src_pdf = FELDER_DIR / pdf
         if not src_pdf.exists():
             continue
-        tag = f"felder-{prob.replace('.', '_')}-{i}"
-        dst = out_dir / f"{tag}.png"
-        if not dst.exists():
-            subprocess.run(["pdftoppm", "-png", "-r", str(SOL_DPI),
-                            "-f", str(page), "-l", str(page),
-                            str(src_pdf), str(out_dir / (tag + "-raw"))],
-                           check=True, capture_output=True)
-            raw = sorted(out_dir.glob(tag + "-raw-*.png"))
-            if not raw:
-                continue
-            im = Image.open(raw[0])
-            w, h = im.size
-            y0, y1 = snap_to_gaps(im, top, bot, bottom_up=continued)
-            piece = trim_margins(trim_blank(im.crop((int(FELDER_X[0] * w), y0, int(FELDER_X[1] * w), y1))))
-            raw[0].unlink()
-            # a continuation that is shorter than two lines is the next problem's label (9.81's "f(x)")
-            if continued and piece.size[1] < 2 * SOL_DPI * 0.25:
-                continue
-            piece.save(dst)
+        dst = out_dir / f"felder-{prob.replace('.', '_')}-{i}.png"
+        # cut fresh every run (no "already cropped" shortcut), so a regenerated band file or a
+        # changed crop rule reaches packs built earlier
+        im = Image.open(raw_page(src_pdf, page))
+        w, h = im.size
+        y0, y1 = snap_to_gaps(im, top, bot, bottom_up=continued)
+        piece = trim_margins(trim_blank(im.crop((int(FELDER_X[0] * w), y0, int(FELDER_X[1] * w), y1))))
+        # a continuation that is shorter than two lines is the next problem's label (9.81's "f(x)")
+        if continued and piece.size[1] < 2 * SOL_DPI * 0.25:
+            dst.unlink(missing_ok=True)        # an earlier run may have kept it
+            continue
+        piece.save(dst)
         got.append((f"answer-images/{dst.name}",
                     f"Felder {pdf[:3]} solutions, {prob}"
                     + (f" (page {i} of {len(spans)})" if len(spans) > 1 else "")))
@@ -210,32 +220,24 @@ def crop_gary(pack_dir, de, bands):
     spans = bands.get(de)
     if not spans or not GARY_KEY.exists() or not shutil.which("pdftoppm"):
         return []
-    try:
-        from PIL import Image
-    except ImportError:
-        return []
     out_dir = P.layout(pack_dir)["build"] / "answer-images"
     out_dir.mkdir(parents=True, exist_ok=True)
     got = []
     for i, (page, top, bot) in enumerate(spans, 1):
-        tag = f"gary-de-{de.replace('.', '_')}-{i}"
-        src = out_dir / f"{tag}.png"
-        if not src.exists():
-            subprocess.run(["pdftoppm", "-png", "-r", str(SOL_DPI),
-                            "-f", str(page), "-l", str(page),
-                            str(GARY_KEY), str(out_dir / (tag + "-raw"))],
-                           check=True, capture_output=True)
-            raw = sorted(out_dir.glob(tag + "-raw-*.png"))
-            if not raw:
-                continue
-            im = Image.open(raw[0])
-            w, h = im.size
-            trim_margins(im.crop((0, max(0, int(top * h)), w, min(h, int(bot * h))))).save(src)
-            raw[0].unlink()
-        got.append((f"answer-images/{src.name}",
-                    f"Gary's PCCI key, DE {de}"
-                    + (f" (page {i} of {len(spans)})" if len(spans) > 1 else "")))
-    return got
+        src = out_dir / f"gary-de-{de.replace('.', '_')}-{i}.png"
+        im = Image.open(raw_page(GARY_KEY, page))      # cut fresh every run, as crop_felder
+        w, h = im.size
+        piece = im.crop((0, max(0, int(top * h)), w, min(h, int(bot * h))))
+        # a continuation band can hold only the next page's blank top margin (DE 5.4.1 p3,
+        # DE 9.2.1 p8): no row with ink, so it is not a page of the solution
+        if not ((np.asarray(piece.convert("L")) < 160).sum(axis=1) >= 3).any():
+            src.unlink(missing_ok=True)        # an earlier run may have kept it
+            continue
+        trim_margins(piece).save(src)
+        got.append((f"answer-images/{src.name}", f"Gary's PCCI key, DE {de}"))
+    # number the pieces actually kept (a dropped blank piece must not leave "page 1 of 2")
+    return [(src, cap + (f" (page {k} of {len(got)})" if len(got) > 1 else ""))
+            for k, (src, cap) in enumerate(got, 1)]
 
 
 def render_pages(pack_dir, smap):
@@ -248,12 +250,14 @@ def render_pages(pack_dir, smap):
     out_dir = P.layout(pack_dir)["build"] / "answer-images"
     pages = []
     for pdf in pdfs:
-        stem = re.sub(r"[^A-Za-z0-9]+", "-", pdf.stem).strip("-").lower()[:48]
+        # the full slug, and only this PDF's own page files: a 48-char cut gave Gary's sample PDE
+        # test and its SOLUTIONS the same stem, and a prefix glob also matches longer stems
+        stem = re.sub(r"[^A-Za-z0-9]+", "-", pdf.stem).strip("-").lower()
         out_dir.mkdir(parents=True, exist_ok=True)
         subprocess.run(["pdftoppm", "-png", "-r", str(SOL_DPI), str(pdf),
                         str(out_dir / stem)], check=True, capture_output=True)
         for png in sorted(out_dir.glob(stem + "-*.png")):
-            n = re.search(r"-(\d+)\.png$", png.name)
+            n = re.fullmatch(rf"{re.escape(stem)}-(\d+)\.png", png.name)
             if n:
                 pages.append({"path": png, "src": f"answer-images/{png.name}",
                               "file": pdf.name, "stem": stem, "page": int(n.group(1))})
@@ -261,10 +265,6 @@ def render_pages(pack_dir, smap):
 
 
 def crop_problems(pages, smap):
-    try:
-        from PIL import Image
-    except ImportError:
-        return {}, set()
     crops, claimed = {}, set()
     for pg in pages:
         items = []

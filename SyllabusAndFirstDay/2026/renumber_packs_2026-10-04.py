@@ -1,6 +1,7 @@
 """One-shot: renumber PHY 210 F2026 prep packs so class numbers count meetings held.
 Sep 23 (Mountain Day) was slot 07; it moves to retired-...; packs 08..39 become 07..38.
-Usage: renumber_210_packs.py [--apply]   (default: dry run)"""
+Usage: renumber_packs_2026-10-04.py [--apply]   (default: dry run)
+(APPLIED 2026-10-04, do not re-run; the old-07 assert below now stops it.)"""
 import re, shutil, sys
 from pathlib import Path
 PACKS = Path("/Users/mglerner/coding/courses/MathematicalPhysics/private/F2026PrepPacks")

@@ -1,0 +1,1126 @@
+[
+ {
+  "id": "spring-motion-sensor-damping",
+  "name": "Mass on a spring over a motion sensor, with and without a drag card",
+  "classes": [
+   1,
+   5
+  ],
+  "fit": "The SHO and damped oscillator as the course's first ODEs (F&F 1.1-1.2, 1.6): position is a sinusoid; with damping it is a sinusoid times a decaying exponential.",
+  "duration_min": 6,
+  "tier": "good",
+  "materials": [
+   "Spring + ~200-500 g hanging mass from a ring stand",
+   "PASCO or Vernier motion detector on the floor beneath (or phyphox on a phone taped to the mass)",
+   "Index card / paper plate taped under the mass for air drag",
+   "Projector for the live graph"
+  ],
+  "pira": "3A20 (damped oscillators), 3A10 family",
+  "prediction": "I tape a big card to the mass to add air drag. Compared with no card, the time for one oscillation becomes: (A) noticeably longer, (B) noticeably shorter, (C) about the same, while the amplitude dies away.",
+  "observe": "Period essentially unchanged (shift well under 1%) while the amplitude decays exponentially.",
+  "explain": "x'' + 2 gamma x' + w0^2 x = 0 gives w = sqrt(w0^2 - gamma^2); for light damping the shift is ~ gamma^2/(2 w0^2), second order in a small number, while the decay e^{-gamma t} is first order.",
+  "pitfalls": [
+   "Card too big = big damping and visible period change; that is fine as a follow-up.",
+   "Motion sensors need ~15 cm minimum distance."
+  ],
+  "refs": [
+   {
+    "title": "phyphox (free phone sensor app)",
+    "url": "https://phyphox.org/",
+    "note": "accelerometer-based pendulum / spring experiments if no motion sensor"
+   }
+  ],
+  "video": null,
+  "image": null,
+  "diy": "phyphox accelerometer on a phone hung as the mass.",
+  "notes": "Past for 2026; for next year, class 01 or 05.",
+  "status": "next-year",
+  "buy": []
+ },
+ {
+  "id": "rc-step-scope",
+  "name": "Square wave (repeated Heaviside step) into an RC circuit on a scope",
+  "classes": [
+   10,
+   9
+  ],
+  "fit": "Step-driven first-order ODE (F&F 1.2 setup, 10.10-10.11 Laplace): V_C = V0 (1 - e^{-t/RC}) after each step.",
+  "duration_min": 5,
+  "tier": "good",
+  "materials": [
+   "Function generator (square wave), resistor + capacitor, two-channel scope (or the UT Austin-style RC push-button board)"
+  ],
+  "pira": "5F30.20",
+  "prediction": "The square wave's half-period is 20 times SHORTER than RC. The capacitor voltage looks like: (A) the same square wave, (B) rounded exponential steps, (C) a small triangle wave hovering at half the source amplitude, (D) flat zero.",
+  "observe": "(C) a small-amplitude triangle wave around V0/2; lengthening the period morphs it into (B) exponential charge/discharge curves.",
+  "explain": "For t << RC the exponential is linear (Taylor: 1 - e^{-x} ~ x), so each half-cycle is a straight ramp; the average settles at V0/2. Ties the Heaviside solution to the later linear-approximation chapter.",
+  "pitfalls": [
+   "Use a generator offset so the square wave runs 0 to V0, or the mean is 0, not V0/2."
+  ],
+  "refs": [
+   {
+    "title": "UT Austin 5F30.20 RC Time Constant on Scope",
+    "url": "https://lecturedemos.ph.utexas.edu/demo/215",
+    "note": "330 uF board with four resistors and a push button"
+   }
+  ],
+  "video": null,
+  "image": null,
+  "diy": "Breadboard RC.",
+  "notes": "Past for 2026; for next year class 09-10. Shares the board with rc-phasor-scope.",
+  "status": "next-year",
+  "buy": []
+ },
+ {
+  "id": "spring-step-and-impulse",
+  "name": "Step and impulse response of a mass on a spring: add a weight suddenly; tap it with a hammer",
+  "classes": [
+   9,
+   10
+  ],
+  "fit": "Heaviside step and Dirac delta forcing (F&F 10.10-10.11): Laplace predicts x = (F/k)(1 - cos w t) for a step and x = (J/m w) sin w t for an impulse.",
+  "duration_min": 7,
+  "tier": "good",
+  "materials": [
+   "Spring + hanger mass over a motion detector (as in spring-motion-sensor-damping)",
+   "A slotted mass to drop onto the hanger (the step)",
+   "Small rubber mallet or a ruler flick (the impulse)"
+  ],
+  "pira": "",
+  "prediction": "Step: the mass hangs at rest; I suddenly add a weight that would stretch the spring 5 cm more if lowered gently. The lowest point it reaches is: (A) 5 cm below, (B) 10 cm below, (C) 2.5 cm below, (D) it sinks slowly to 5 cm. Impulse: I tap the mass sharply upward from rest. The position graph starts: (A) at a peak (cosine), (B) at equilibrium, rising (sine), (C) with a sudden jump in position.",
+  "observe": "Step: oscillates between 0 and 10 cm below, about the new equilibrium at 5 cm. Impulse: starts at equilibrium with maximum velocity (sine); no position jump.",
+  "explain": "Step: X(s) = (F/m)/(s (s^2 + w^2)) -> (F/k)(1 - cos w t), max 2F/k. Impulse: X(s) = (J/m)/(s^2 + w^2) -> (J/(m w)) sin w t; a delta force makes a jump in velocity, not position.",
+  "pitfalls": [
+   "Placing the weight must be a release, not a lowering (hold it just touching, then let go).",
+   "A tap with a horizontal component makes the mass swing; tap from directly below."
+  ],
+  "refs": [
+   {
+    "title": "phyphox (free phone sensor app)",
+    "url": "https://phyphox.org/",
+    "note": "alternative sensor"
+   }
+  ],
+  "video": null,
+  "image": null,
+  "diy": "No purchase needed.",
+  "notes": "No catalog entry found for this exact pairing; constructed from standard parts. Past for 2026; for next year classes 09-10. The step version is the better vote.",
+  "status": "next-year",
+  "buy": []
+ },
+ {
+  "id": "lissajous-scope",
+  "name": "Lissajous figures / phasor on an oscilloscope in XY mode with two signal generators",
+  "classes": [
+   12
+  ],
+  "fit": "Second option for Euler's formula (F&F 3.4): x = cos w t on one axis, y = sin w t on the other traces the unit circle, i.e. e^{i w t} drawn live.",
+  "duration_min": 5,
+  "tier": "good",
+  "materials": [
+   "Oscilloscope with XY mode (any digital scope), projected via document camera or the scope's USB/screen output",
+   "Two function generators, OR one two-channel generator with phase control (much better: the phase is set, not drifting)",
+   "BNC cables"
+  ],
+  "pira": "3A80.10, 3A80.20",
+  "prediction": "Both channels get sine waves of the SAME frequency and amplitude, one on x and one on y. The trace is: (A) a diagonal line, (B) a circle, (C) an ellipse, (D) it depends on something you haven't told me. Follow-up: I now set the y frequency to exactly twice the x frequency; the trace has how many lobes?",
+  "observe": "With two separate generators the figure slowly morphs line -> ellipse -> circle -> ellipse -> line (the other diagonal) as the phase drifts; with phase control at 90 deg it is a circle, at 0 deg a line. 2:1 gives a figure-eight (or a parabola-like arc at special phase).",
+  "explain": "x = cos(w t), y = cos(w t + phi). At phi = -90 deg, (x, y) = (cos w t, sin w t), the point e^{i w t} going around the unit circle; at phi = 0 it is a line, in between an ellipse. So the answer is (D): it depends on the relative phase. Slowly drifting generators are a nice live version of a phase phi(t) changing slowly, which is also the beat picture used in class 21.",
+  "pitfalls": [
+   "Two independent generators are never exactly the same frequency, so the figure will not sit still; either use that (it is the answer to D) or use one dual-channel generator.",
+   "Older analog scopes are easier to see; on a digital scope turn on persistence / high-res and set equal V/div on both channels so the circle is round.",
+   "Visibility in a 40-seat room needs a projected view."
+  ],
+  "refs": [
+   {
+    "title": "Rutgers 3A80.10 Lissajous figures on oscilloscope",
+    "url": "https://demos.physics.rutgers.edu/index.php?d=677",
+    "note": "two generators, equal then 0.5x / 1.5x / 2x frequencies"
+   },
+   {
+    "title": "UMass 3A80.20 Lissajous Figure",
+    "url": "https://physicslectureprep.umasscreate.net/3a80-xx-lissajous-figure/",
+    "note": "digital-scope settings: XY on, 1000 Hz, 0.2 V"
+   }
+  ],
+  "video": null,
+  "image": {
+   "url": "https://upload.wikimedia.org/wikipedia/commons/1/1f/Lissajous_curve_3by2.svg",
+   "credit": "Alessio Damato (Alejo2083), Wikimedia Commons",
+   "license": "CC BY-SA 3.0 / GFDL"
+  },
+  "diy": "No scope: the same plot is two lines of Python on jupyterhub (plot cos(t) vs sin(t + phi) with an ipywidgets slider), but that is a simulation, not a demo.",
+  "notes": "Alternative to the turntable for class 12, not an addition. Use instead of, not in addition to, the turntable on class 12 unless the turntable is impossible. The AC-phasor variant is the separate rc-phasor-scope entry.",
+  "status": "option",
+  "buy": []
+ },
+ {
+  "id": "turntable-shadow",
+  "name": "Circular motion vs. SHM: shadow of a peg on a turntable beside a pendulum (or mass on a spring)",
+  "classes": [
+   12
+  ],
+  "fit": "Euler's formula (F&F 3.4): the peg is e^{i w t} moving around the complex plane, its shadow is Re e^{i w t} = cos w t, and an SHO is exactly that shadow; a second peg 90 deg ahead shows that multiplying by i is a quarter-turn (3.3).",
+  "duration_min": 8,
+  "tier": "must",
+  "materials": [
+   "Any turntable with a steady speed: a record player (33 1/3 or 45 rpm), a variable-speed lab rotator, or PASCO ME-8951 rotating platform + ME-8955 rotational motor drive",
+   "Peg on the platter near the rim: a ping-pong ball or golf tee hot-glued / taped on a short dowel (radius r ~ 8-12 cm)",
+   "Optional second peg 90 deg ahead of the first (different color) for the multiply-by-i question",
+   "Pendulum: string + bob from a ring stand with a boom, hung beside the platter so its shadow lands next to the peg's shadow (geometry in notes)",
+   "Point-ish light source well off to the side: LED flashlight, phone flashlight, or an overhead / slide projector",
+   "White wall or whiteboard for the shadows",
+   "Optional: document camera or phone looking straight DOWN on the platter, shown on the projector (that view is the complex plane)"
+  ],
+  "pira": "3A40.10 (vs. mass on spring), 3A40.20 / 3A40.21 (vs. pendulum)",
+  "prediction": "Q1: The shadow of the peg and the shadow of the pendulum bob start together. After 20 turns of the platter they will be: (A) still exactly in step, (B) slowly drifting apart, (C) way out of step, the peg's shadow moves at constant speed while the bob slows at the ends. Q2 (the Euler one): Peg B sits 90 deg ahead of peg A on the platter. At the instant A's shadow is at its far-right extreme, B's shadow is: (A) also at the far-right extreme, (B) at the center, (C) at the center but moving the other way from (B) -- i.e. ask 'extreme, center, or opposite extreme', (D) at the far-left extreme. Q3 (if the speed is adjustable): double the turntable speed; the peg's shadow (A) moves twice as far, (B) oscillates twice as often over the same width, (C) both.",
+  "observe": "The two shadows move together: the peg's shadow slows at the ends and is fastest in the middle, just like the bob, and stays locked for many cycles. Peg B's shadow is at the center, a quarter period away from A's (which way it is moving depends on the rotation sense and which side you view from); doubling the speed doubles the frequency at the same amplitude.",
+  "explain": "The peg's position is r e^{i w t} in the plane of the platter (F&F 3.4); a shadow keeps one component, r cos w t, which is the SHO solution x'' = -w^2 x. Peg B is r e^{i(w t + pi/2)} = i r e^{i w t}, and its shadow is -r sin w t: multiplying by i rotates by 90 deg, which is why sin and cos are a quarter period apart and why x = A e^{i w t} solves the SHO ODE (3.5). The pendulum only matches because sin theta ~ theta; that small-angle caveat is the hook into class 13.",
+  "pitfalls": [
+   "Tuning: a 1% error in pendulum length is a 0.5% period error, i.e. a quarter-period slip after ~50 turns (about 1.5 min at 33 rpm). Fine for a 1-2 min observe; trim the string by eye if it drifts.",
+   "Keep the pendulum amplitude small (r/L <~ 0.2 rad): at 13 deg the pendulum is ~0.3% slow, so a large peg radius on a short pendulum drifts faster.",
+   "Release the bob from the peg's extreme-shadow position exactly when the peg passes that point (hold the bob next to the peg, let go as the peg leaves it).",
+   "The pendulum must swing in the plane perpendicular to the light so its shadow moves along the wall, same direction as the peg's shadow.",
+   "Room needs to be dim enough for the shadows; a phone flashlight at 2-3 m works in a half-lit room. Far light = sharper shadows.",
+   "Setup and tuning ~20 min the first time; do it before class.",
+   "A cheap record player can stall if the peg is heavy or off-balance; use a ping-pong ball."
+  ],
+  "refs": [
+   {
+    "title": "ASU PIRT 3A40.10 Circular motion vs. mass on a spring",
+    "url": "https://pirt.asu.edu/demos/3A40.10",
+    "note": "PIRA catalog entry, shadow projection of ball on rotating disk vs. spring"
+   },
+   {
+    "title": "ASU PIRT 3A40.20 Circular motion vs. pendulum",
+    "url": "https://pirt.asu.edu/demos/3A40.20",
+    "note": "pendulum version, the one recommended here"
+   },
+   {
+    "title": "SFU 3A40.10 Circular Motion vs. Mass on a Spring",
+    "url": "https://sfu.ca/physics/demos/demos-experiments/circular-motion-shm-burnaby.html",
+    "note": "equipment list: turntable + ping-pong ball, PASCO spring, 100 g, DC supply tuned to ~15.5 V, desk lamp, screen"
+   },
+   {
+    "title": "CU Boulder: Linear and Rotating Motion",
+    "url": "https://physicslabs.colorado.edu/demos/oscillations-and-waves/oscillations/simple-harmonic-motion/linear-and-rotating-motion/",
+    "note": "motorized ball (5:1 motor) synchronized with mass-spring, fiber-optic lamp"
+   },
+   {
+    "title": "Iowa State: Shadows of Simple Harmonic Motion",
+    "url": "https://learning.physics.iastate.edu/shadows-simple-harmonic-motion",
+    "note": "notes that 'phase errors accumulate' -- the drift in Q1"
+   },
+   {
+    "title": "Virginia Tech M83: Reference Circle in SHM",
+    "url": "https://www1.phys.vt.edu/~demo/demos/m83.html",
+    "note": "bicycle-wheel version viewed EDGE-ON, no light needed"
+   },
+   {
+    "title": "WWU: Simple Harmonic and Uniform Circular Motion - Spring",
+    "url": "https://physics.wwu.edu/simple-harmonic-and-uniform-circular-motion-spring",
+    "note": "slide-projector version"
+   },
+   {
+    "title": "YouTube: SHM and Circular Motion (The Demo Guy Cal Poly SLO)",
+    "url": "https://www.youtube.com/watch?v=df_HKs0BcFk",
+    "note": "spring version"
+   },
+   {
+    "title": "YouTube: SHM of a shadow (PhysicsatLutonsfc)",
+    "url": "https://www.youtube.com/watch?v=tCuD_KAxDfc",
+    "note": "short clip of the shadow alone"
+   }
+  ],
+  "video": {
+   "youtube_id": "J2gpEgjy1qg",
+   "title": "1D10.50 Simple Harmonic Motion and Uniform Circular Motion (Brown Physics Demos)"
+  },
+  "image": {
+   "url": "https://upload.wikimedia.org/wikipedia/commons/e/ea/Simple_Harmonic_Motion_Orbit.gif",
+   "credit": "Mazemaster, Wikimedia Commons",
+   "license": "Public domain"
+  },
+  "diy": "Stockroom-only version for tomorrow: record player or any steady rotator, ping-pong ball on a dowel near the rim, pendulum from a ring stand and boom with L = 0.805 m (33 1/3 rpm) or 0.442 m (45 rpm) to the bob's center, phone flashlight 2-3 m away, shadows on the whiteboard. Zero-light version (VT M83): put the turntable at students' eye level, or point a phone camera at it edge-on and project; the peg itself is seen moving in SHM. If no turntable exists at all: play the Brown video (J2gpEgjy1qg), which is exactly the pendulum version, and still ask Q2 with two pegs drawn on a paper disk spun by hand under a document camera.",
+  "notes": "Tomorrow (Wed Oct 7). The 'diy' line is the stockroom-only setup. Geometry: platter horizontal; light off to one side at platter height pointing along a diameter direction; wall behind the turntable, opposite the class. Hang the bob just in front of (or beside) the platter so the bob's shadow and the peg's shadow land at the same height on the wall but are vertically separated (bob slightly higher) so the class sees two dots moving side by side; the bob's equilibrium is lined up with the platter's axis and its amplitude equals r. A document camera looking down on the platter, on the projector, gives the 'complex plane' view next to the 'real part' shadow on the wall -- that pairing is the whole point of class 12. Q3 needs a variable-speed drive; a record player's 33 -> 45 switch is not a doubling (ratio 1.35), so with a record player ask instead 'switch to 45: what does the bob do relative to the peg?' (drifts out of step within a few turns).",
+  "status": "planned",
+  "buy": [
+   "nothing if a record player / lab rotator exists; else PASCO ME-8951 rotating platform + ME-8955 motor drive"
+  ]
+ },
+ {
+  "id": "pendulum-amplitude-race",
+  "name": "Two identical pendula released at small and large amplitude (period vs. amplitude; photogate variant)",
+  "classes": [
+   13,
+   15
+  ],
+  "fit": "Linear approximation sin theta ~ theta (F&F 2.1-2.2) and the next Taylor term (2.3-2.5): the small-angle SHO period is amplitude-independent only to first order.",
+  "duration_min": 6,
+  "tier": "must",
+  "materials": [
+   "Two identical simple pendula side by side, L ~ 1 m (T ~ 2 s), same bob, hung from one rod or two ring stands with booms",
+   "Protractor or a cardboard angle template for 10 deg and 60 deg release",
+   "Optional photogate + timer in pendulum mode (PASCO / Vernier) for the quantitative 10 deg vs 20 deg version",
+   "Optional rigid-rod pendulum (3A95.32) if you want to go past 90 deg"
+  ],
+  "pira": "3A10.10 (simple pendulum), 3A95.32 (large-amplitude pendulum)",
+  "prediction": "Main: Pendulum A is released from 10 deg, pendulum B from 60 deg, at the same instant. After about 7 full swings, B is: (A) exactly in step with A, (B) a little behind, (C) about half a swing behind -- swinging opposite to A, (D) ahead of A. Photogate variant: going from 10 deg to 20 deg changes the period by: (A) nothing, (B) less than 1%, (C) ~5%, (D) ~20%.",
+  "observe": "Main: B's period is ~7% longer, so after ~7 swings the two are swinging in opposite directions (visible from the back row with no instruments). Photogate: 10 -> 20 deg lengthens T by ~0.6% (about 11 ms on a 2 s period), measurable but small.",
+  "explain": "theta'' = -(g/L) sin theta. Linearizing (sin theta ~ theta, 2.1) gives T0 = 2 pi sqrt(L/g), independent of amplitude. Keeping the cubic Taylor term gives T ~ T0 (1 + theta0^2/16 + 11 theta0^4/3072 + ...): +0.19% at 10 deg, +0.77% at 20 deg, +7.3% at 60 deg, +18% at 90 deg. So the linear approximation is excellent where the correction is quadratic in a small number and fails where it is not; also explains why the class 12 turntable/pendulum match needs a small amplitude.",
+  "pitfalls": [
+   "Release both at the same instant: one person, two hands, or hold both bobs against a ruler and pull the ruler away.",
+   "String pendulum at 60 deg is fine (string stays taut); above ~90 deg it goes slack -- use a rod pendulum for that.",
+   "Bobs must not collide: separate the pendula sideways by > 2x bob diameter, swinging in parallel planes.",
+   "Photogate variant: the 0.6% effect at 10 vs 20 deg is comparable to timing jitter from a sloppy release; average 5 periods and keep L fixed. The 60-deg race is the robust version.",
+   "Setup ~10 min."
+  ],
+  "refs": [
+   {
+    "title": "HyperPhysics: Simple Pendulum (large-amplitude series)",
+    "url": "http://hyperphysics.gsu.edu/hbase/pendl.html",
+    "note": "series for the period; error < 1% below ~22 deg"
+   },
+   {
+    "title": "Wesleyan 3A95.32 Large Amplitude Pendulum",
+    "url": "https://physicsdemos.site.wesleyan.edu/home/ow/3a/3a95-32-large-amplitude-pendulum",
+    "note": "rod pendulum to 180 deg; rotary motion sensor version for T vs amplitude"
+   }
+  ],
+  "video": null,
+  "image": null,
+  "diy": "Two strings, two identical masses (e.g. 200 g hooked masses), one horizontal rod. No purchase needed.",
+  "notes": "Best on class 13 (the day sin x ~ x is introduced); the theta0^2/16 correction is a natural class 15 Taylor-series problem, so the same demo can be referenced again without re-running it. Numbers above are from the elliptic-integral series; exact T/T0 at 60 deg is 1.0732.",
+  "status": "recommended",
+  "buy": []
+ },
+ {
+  "id": "air-track-normal-modes",
+  "name": "Two air-track gliders and three springs: normal modes and beats",
+  "classes": [
+   21,
+   16
+  ],
+  "fit": "The two-coupled-oscillator problem (F&F 6.9): the eigenvectors (1,1) and (1,-1) are motions that stay pure, the eigenvalues set their frequencies, and any other start is a superposition (beats).",
+  "duration_min": 10,
+  "tier": "must",
+  "materials": [
+   "Air track + blower, two gliders of equal mass, three matched springs (glider-wall, glider-glider, glider-wall), two fixed end posts / bumpers",
+   "Alternative without air: PASCO dynamics carts on an aluminum track with three springs (CU Boulder version)",
+   "Stopwatch or a phone video to time 10 periods of each mode"
+  ],
+  "pira": "3A75.08, 3A75.10",
+  "prediction": "Q1: Pull both gliders the same distance in the SAME direction and release (mode 1); then pull them equal distances in OPPOSITE directions and release (mode 2). The frequency of mode 2 compared with mode 1 is: (A) the same, (B) a little higher, (C) about 1.7 times higher, (D) 3 times higher. Q2: Now pull only glider 1 and release with glider 2 at rest. Eventually: (A) both settle to the same steady amplitude, (B) glider 1 nearly stops while glider 2 swings fully, then back, (C) the motion becomes irregular.",
+  "observe": "Each mode stays pure for as long as it runs; mode 2 is visibly faster, ratio close to sqrt(3) ~ 1.73 with three equal springs. Starting one glider gives energy trading back and forth, with glider 1 nearly stopping.",
+  "explain": "m x'' = -K x with K = k [[2, -1], [-1, 2]]. Eigenvalues k and 3k, eigenvectors (1,1) and (1,-1) (6.8), so w1 = sqrt(k/m), w2 = sqrt(3k/m): the frequency ratio is sqrt(eigenvalue ratio), which is why (D) is wrong. Starting at (1,0) = [(1,1) + (1,-1)]/2 runs both modes at once; they dephase and rephase, which is the beating (energy exchange) in Q2. The in-phase mode does not stretch the middle spring at all, which students can see.",
+  "pitfalls": [
+   "Springs must be matched (same k) or the modes are not (1,1) and (1,-1); check by hanging the same mass on each.",
+   "With w2/w1 = 1.73 the beat in Q2 is fast and only partial-looking; complete transfer needs weak coupling (soft middle spring). Use a soft middle spring for Q2, or use the coupled-pendula entry for the beats.",
+   "Air-track friction is low but springs' own mass and sag shift the ratio a few %; quote 'about 1.7'.",
+   "Setup ~15 min; air tracks are loud."
+  ],
+  "refs": [
+   {
+    "title": "UMD Lecture-Demo G2-26 Coupled Air Track Gliders",
+    "url": "https://lecdem.physics.umd.edu/g/g2/1736-g2-26.html",
+    "note": "exact apparatus: two gliders, three springs, in-phase / out-of-phase release"
+   },
+   {
+    "title": "CU Boulder 3A75.10 Oscillating Carts",
+    "url": "https://physicslabs.colorado.edu/demos/oscillations-and-waves/oscillations/normal-modes/oscillating-carts/",
+    "note": "PASCO dynamics carts on aluminum track, no air supply needed"
+   }
+  ],
+  "video": {
+   "youtube_id": "XXtG5iCP53U",
+   "title": "3A75.08 Normal Modes Two Air Track Gliders (Undriven) (Brown Physics Demos)"
+  },
+  "image": null,
+  "diy": "PASCO carts + track + three springs from the intro lab (CU Boulder version) if no air track.",
+  "notes": "Gary's demo for this course; ask what he uses. Class 16 = optional 2-minute preview of the two modes when the three-spring system first appears. Gary Felder runs coupled-oscillator demos in this course; ask the lab manager what he uses -- likely this or coupled pendula, already set up. Class 16 introduces the same three-spring, two-mass system as the motivating example for matrices: showing the two pure modes there (2 min, no explanation) and paying it off in class 21 is an option if time allows. Check the spring arrangement against F&F 6.9 and match it (equal springs gives the clean sqrt(3)).",
+  "status": "recommended",
+  "buy": []
+ },
+ {
+  "id": "coupled-pendula-beats",
+  "name": "Two pendula coupled by a weak spring: normal modes and complete energy exchange",
+  "classes": [
+   21
+  ],
+  "fit": "Same eigenvector story as the air track (F&F 6.8-6.9), but with weak coupling so the beats are dramatic: one pendulum stops completely.",
+  "duration_min": 7,
+  "tier": "good",
+  "materials": [
+   "Two identical pendula (rods or strings with equal bobs) from a common support",
+   "Soft spring (or a rubber band) connecting them partway down; adjustable height changes coupling",
+   "Commercial coupled-pendulum sets exist in most demo collections (3A70.27)"
+  ],
+  "pira": "3A70.27",
+  "prediction": "Pull pendulum A aside, hold B at rest, release. After a while: (A) A keeps swinging, B picks up a small wiggle, (B) both end up swinging at half amplitude forever, (C) A comes completely to rest while B swings with the full amplitude, then it reverses, (D) it becomes chaotic. Follow-up: start them swinging together (in phase) -- does any energy transfer?",
+  "observe": "(C): A stops completely, B swings fully, and it repeats. In-phase start: no transfer at all, the spring never stretches. Out-of-phase start: also no transfer, slightly faster swing.",
+  "explain": "Normal modes (1,1) at w1 = sqrt(g/L) and (1,-1) at w2 = sqrt(g/L + 2k/m). Start (1,0) = half of each. x_A = cos((w2 - w1)t/2) cos((w1 + w2)t/2): the slow envelope is the beat, and A reaches zero exactly when the modes are half a cycle apart. Raising the spring weakens coupling and lengthens the beat period 2 pi/(w2 - w1).",
+  "pitfalls": [
+   "Pendula must be truly identical (same L and bob) or the transfer is incomplete.",
+   "Coupling too strong makes the beat too fast to read; too weak makes it take minutes. Aim for a beat of ~10-20 swings.",
+   "Release cleanly, no sideways component."
+  ],
+  "refs": [
+   {
+    "title": "CU Boulder 3A70.27 Coupled Pendula",
+    "url": "https://physicslabs.colorado.edu/demos/oscillations-and-waves/oscillations/coupled-oscillations/coupled-pendula/",
+    "note": "commercial frame, spring near bottom"
+   },
+   {
+    "title": "UCSC Coupled Pendulum",
+    "url": "https://ucscphysicsdemo.sites.ucsc.edu/?p=831",
+    "note": "gives w1 = sqrt(g/l), w2 = sqrt(g/l + 2k/m)"
+   },
+   {
+    "title": "UW-Madison Ingersoll Museum: Coupled Pendulums",
+    "url": "https://physics.wisc.edu/ingersollmuseum/exhibits/mechanics/coupledpendulums",
+    "note": "plain-language explanation via the two modes"
+   },
+   {
+    "title": "YouTube: Coupled Pendulums (GenerallyRelative)",
+    "url": "https://www.youtube.com/watch?v=KIH6LU9GDRY",
+    "note": "spring-coupled pendula, beat pattern"
+   }
+  ],
+  "video": {
+   "youtube_id": "izy4a5erom8",
+   "title": "Coupled Pendulums - Sixty Symbols"
+  },
+  "image": null,
+  "diy": "Two identical string pendula from one rod, coupled by a rubber band or a light spring tied between the strings; slide it up/down to tune the coupling.",
+  "notes": "Alternative to the air track for class 21 (more dramatic beats, less setup). Pick this OR air-track-normal-modes for class 21, not both. Air track matches the book's matrix exactly; pendula give the more dramatic beat with less setup.",
+  "status": "option",
+  "buy": []
+ },
+ {
+  "id": "wilberforce",
+  "name": "Wilberforce pendulum (bounce <-> twist energy exchange)",
+  "classes": [
+   21
+  ],
+  "fit": "Coupled oscillators where the two coordinates are not even the same kind (z and theta): the normal modes are mixtures of bounce and twist (F&F 6.9).",
+  "duration_min": 4,
+  "tier": "good",
+  "materials": [
+   "PASCO ME-8091 Wilberforce pendulum (or demo-collection equivalent)",
+   "Tall stand / rod (~2 m of clearance)"
+  ],
+  "pira": "3A70.10",
+  "prediction": "I pull the bob straight down and release it -- no twist. A minute from now it will be: (A) still just bouncing, a bit smaller, (B) just twisting, not bouncing at all, (C) bouncing and twisting equally forever, (D) spinning continuously in one direction.",
+  "observe": "(B): the bounce dies out completely into a pure twist, then returns to a pure bounce, repeating (period ~1 s, exchange every ~10-20 s).",
+  "explain": "The spring couples stretch to twist. With the two uncoupled frequencies tuned equal (adjust the nuts on the bob), the normal modes are bounce-plus-twist and bounce-minus-twist with slightly split frequencies; a pure-bounce start is their sum, so it beats. Starting in a normal mode (lift AND twist the right way) gives no exchange.",
+  "pitfalls": [
+   "Must be tuned (move the nuts symmetrically; UCSC suggests ~7.5 turns as a start); 10-15 min the first time.",
+   "Normal-mode starts are hard to hit by hand; the pure-bounce start is the reliable one."
+  ],
+  "refs": [
+   {
+    "title": "UCSC Wilberforce Pendulum",
+    "url": "https://ucscphysicsdemo.sites.ucsc.edu/?p=1410",
+    "note": "tuning tips"
+   },
+   {
+    "title": "Virginia Tech M87 Wilberforce Pendulum",
+    "url": "https://www1.phys.vt.edu/~demo/demos/m87.html",
+    "note": "identifies PASCO ME-8091, period ~1 s"
+   }
+  ],
+  "video": {
+   "youtube_id": "BaGeI_mlunQ",
+   "title": "3A70.10 - Wilberforce Pendulum (UMDemoLab)"
+  },
+  "image": {
+   "url": "https://upload.wikimedia.org/wikipedia/commons/d/de/Wilberforce_pendulum.jpg",
+   "credit": "W. E. Dalby (1908), Wikimedia Commons",
+   "license": "Public domain"
+  },
+  "diy": "",
+  "notes": "4-minute coda only if class 21 has room after the air track. A crowd-pleaser and a good 'the eigenvectors don't have to be (1,1) and (1,-1)' coda, but the matrix analysis is beyond F&F 6.9; keep it to the POE.",
+  "status": "option",
+  "buy": [
+   "PASCO ME-8091 (or any demo-collection Wilberforce pendulum) if none exists"
+  ]
+ },
+ {
+  "id": "archimedes-cone-sphere-cylinder",
+  "name": "Archimedes' volumes by pouring: cone + sphere = cylinder (same radius, height = diameter)",
+  "classes": [
+   26
+  ],
+  "fit": "A volume set up as an integral in cylindrical/spherical coordinates (F&F 5.5, 5.7) checked by pouring water.",
+  "duration_min": 4,
+  "tier": "maybe",
+  "materials": [
+   "A clear fillable geometric-solids set with MATCHED dimensions: cone, sphere (or hemisphere), and cylinder of the same radius R and height 2R (hemisphere set: height R). These are common math-education items (fillable 'power solids'); check whether the math department owns one.",
+   "Colored water or dry rice/sand, funnel, tray"
+  ],
+  "pira": "",
+  "prediction": "Cylinder of radius R and height 2R; a cone and a sphere that fit exactly inside it. Pour the full cone AND the full sphere into the cylinder. The cylinder (A) overflows (B) is filled exactly (C) is filled to about 3/4 (D) is half full.",
+  "observe": "The cylinder fills exactly: cone (1/3) plus sphere (2/3) of the cylinder.",
+  "explain": "V_cyl = 2 pi R^3; V_cone = (1/3) pi R^2 (2R) = (2/3) pi R^3; V_sphere = (4/3) pi R^3; these sum to the cylinder. Students then compute the sphere in spherical coordinates (integral of r^2 sin(theta) dr dtheta dphi) and the cone in cylindrical coordinates (F&F 5.5, 5.7), and see Archimedes' slicing argument as an integral over z.",
+  "pitfalls": [
+   "Many students already know 'cone = 1/3 cylinder', so ask about the cone + sphere sum, which few have seen.",
+   "Commercial sets are not always dimensionally exact (wall thickness, rounded tips); test that it really fills before claiming 'exactly'.",
+   "Water spills; rice is cleaner and shows the same thing."
+  ],
+  "refs": [
+   {
+    "title": "Knill (Harvard): The Archimedes Proof, 3D-print exhibit",
+    "url": "https://people.math.harvard.edu/~knill/3dprinter/exhibits/archimedes/index.html",
+    "note": "3D-printed model of Archimedes' sphere = cylinder - cone slicing argument."
+   },
+   {
+    "title": "Knill & Slavkovsky, 'Thinking like Archimedes with a 3D printer' (arXiv:1301.5027)",
+    "url": "https://arxiv.org/abs/1301.5027",
+    "note": "Write-up of the 3D-printed Archimedes models."
+   }
+  ],
+  "video": null,
+  "image": null,
+  "diy": "3D-print the cone, hemisphere and cylinder as thin-walled cups with matched inner dimensions (Smith has makerspace printers); a 4 cm radius set prints in a few hours.",
+  "notes": "Only if a matched fillable-solids set already exists on campus (math department?). Honest assessment: a nice 3-minute hook, not a must. The math is easy and the 'surprise' is modest for students who know the formulas. Include only if the set already exists on campus.",
+  "status": "option",
+  "buy": [
+   "matched fillable solids set, only if the math department does not have one"
+  ]
+ },
+ {
+  "id": "potential-surface-marble",
+  "name": "3D-printed potential surface (or topographic model) with contour lines: release a marble and watch which way it starts",
+  "classes": [
+   27
+  ],
+  "fit": "The force is -grad V, perpendicular to the level curves (F&F 8.3-8.4), so 'downhill' means across the contour lines, not along the straight line to the lowest point.",
+  "duration_min": 4,
+  "tier": "maybe",
+  "materials": [
+   "A 3D-printed surface z = f(x,y) with contour lines drawn on it (e.g., the Monroe CC 3D-printed calculus surfaces, STL files free, CC BY-NC), or a 3D-printed relief model of local topography (e.g., the Holyoke Range)",
+   "Small marble or ball bearing; overhead document camera",
+   "Dry-erase marker for drawing level curves on the print"
+  ],
+  "pira": "",
+  "prediction": "The marble is released from rest at point P on the surface; the valley's lowest point is off to the side. In which direction does it START to roll? (A) straight toward the lowest point of the valley (B) along the contour line through P (C) perpendicular to the contour line through P (D) toward the steepest part of the whole surface.",
+  "observe": "It starts off perpendicular to the local contour line (C), in general not aimed at the global minimum.",
+  "explain": "The initial acceleration is along -grad V (F&F 8.4), and the gradient is perpendicular to the level curve because V does not change along it, which is why maps put 'downhill' across the contour lines.",
+  "pitfalls": [
+   "Only the INITIAL direction follows -grad V. After that, the marble's inertia carries it off the steepest-descent path (it overshoots and oscillates). Say this explicitly, or students will think the path follows the gradient, which is false for a massive ball; a gradient-flow path would need heavy damping (a ball in honey).",
+   "Small prints are hard to see in a big room; use the document camera.",
+   "Mostly redundant with equipotential-mapping on the following day; use one or the other as the gradient demo."
+  ],
+  "refs": [
+   {
+    "title": "Monroe Community College: 3D Learning Activities (3D-printed calculus surfaces)",
+    "url": "https://sites.monroecc.edu/multivariablecalculus/?p=366",
+    "note": "Free STL files and instructor notes for contour-plot, partial-derivative, and Lagrange-multiplier activities, CC BY-NC 4.0 (Seeburger)."
+   }
+  ],
+  "video": null,
+  "image": null,
+  "diy": "Print one of the Monroe CC STLs; or use a stretched spandex sheet pushed down by a heavy ball (a 'gravity well'), which is a 2D potential surface with circular contours.",
+  "notes": "Ranked below the equipotential mapping, which teaches the same idea the next day. A quick opener for class 27 (potential). Rank it below equipotential-mapping, which teaches the same idea far better on class 28.",
+  "status": "option",
+  "buy": []
+ },
+ {
+  "id": "equipotential-mapping",
+  "name": "Electric field / equipotential mapping on conductive paper (Field Mapper Kit), run as a hands-on group activity",
+  "classes": [
+   28
+  ],
+  "fit": "The gradient is perpendicular to the level curves and largest where they crowd together (F&F 8.4); students measure a real scalar field V(x,y) and draw grad V from it.",
+  "duration_min": 45,
+  "tier": "must",
+  "materials": [
+   "PASCO PK-9023 Field Mapper Kit (conductive carbon paper with a 23 x 30 cm grid, silver conductive-ink pen, corkboard, push pins, leads); about $239. Many intro labs already own it, so ask the lab manager before buying.",
+   "One DMM per group, input impedance 10 MOhm or more (any standard digital multimeter), with a banana-to-probe lead",
+   "A low-voltage DC source per group: a 6 V lantern battery, 4 x AA, or a bench supply set to 5-10 V",
+   "Pre-inked electrode sheets, 3-4 layouts (see notes); the ink needs 20 min to reach full conductivity, so ink them the day before",
+   "Colored pencils plus a printed grid template so groups can transfer their points",
+   "Optional: the document camera, to show 2-3 groups' maps side by side at the end"
+  ],
+  "pira": "5B20 (equipotential lines/fields in the PIRA electrostatics 5B series; the exact sub-number varies by catalog, so not pinned down)",
+  "prediction": "Concentric-circle electrodes: inner circle r = 1 cm held at 5 V, outer circle r = 10 cm at 0 V. What does the voltmeter read at r = 5.5 cm, halfway between them? (A) 2.5 V (B) more than 2.5 V (C) less than 2.5 V (D) 0 V, because the field is zero between conductors. Second vote, for the floating-conductor sheet: an isolated metal (inked) ring that is NOT connected to anything sits between the two electrodes. Near and on the ring, do the equipotentials (A) pass straight through as if it were not there (B) bend so the whole ring is one equipotential (C) stop at the ring's edge?",
+  "observe": "The halfway reading is about 1.3 V, well below half. The equipotentials crowd near the small inner electrode (spacing grows roughly in proportion to r), and the floating ring sits at a single voltage, with the nearby equipotentials bending to wrap around it.",
+  "explain": "On a sheet the problem is 2D, so V satisfies the 2D Laplace equation and the circularly symmetric solution is logarithmic: V(r) = V0 ln(r2/r)/ln(r2/r1), giving 5 ln(10/5.5)/ln 10 = 1.30 V. It is not 1/r: that is the 3D point charge, and conflating the two is itself a good discussion point (polar vs spherical coordinates, F&F 5.6/5.7). |grad V| = V0/(r ln(r2/r1)) is largest at small r, which is where the contour lines bunch. Groups then draw field lines as curves crossing the equipotentials at right angles, which is the defining property of the gradient (F&F 8.4). A conductor is an equipotential because no current flows along it, and that is why the floating ring forces the contours to bend.",
+  "pitfalls": [
+   "INK DRYING: silver ink needs about 20 min for full conductivity, and the electrode drawing is the step most likely to go wrong. Pre-ink and test every sheet the day before.",
+   "The meter must be high impedance (10 MOhm or more, which is fine for any DMM); an analog VOM will load the paper.",
+   "Students treat the paper as 3D and expect 1/r. That is intended, but say explicitly in the debrief that sheet = 2D = logarithm.",
+   "Edge effects: the paper is finite, so the equipotentials near the paper edges meet them at right angles (no current leaves the sheet). Keep the electrodes away from the edges, or present this as a boundary-condition bonus.",
+   "Observation day: the instructor talk cap is 15 min, so the setup slide plus the debrief must fit inside it. Each group's sheet carries its own written instructions.",
+   "Allow about 5 min per equipotential line per group. 3 lines per sheet is realistic in the time; 5 is not."
+  ],
+  "refs": [
+   {
+    "title": "PASCO PK-9023 Field Mapper Kit (product page)",
+    "url": "https://www.pasco.com/product/PK-9023",
+    "note": "Contents and price ($239 at fetch time)."
+   },
+   {
+    "title": "PASCO Field Mapper Kit PK-9023 manual (PDF)",
+    "url": "https://cdn.pasco.com/product_document/Field-Mapper-Kit-PK-9023-Manual.pdf",
+    "note": "Ink drying times, the 10 MOhm voltmeter requirement, and electrode-drawing steps; read before inking."
+   },
+   {
+    "title": "Georgia Tech PHYS 2232 Lab 2: experiments (conductive paper)",
+    "url": "https://phys2232.physics.gatech.edu/labs/lab2/experiments/experiments.html",
+    "note": "Three ready-made layouts: two circles; two circles plus a floating central conductor; concentric circles (1 cm / 10 cm) compared to theory. The concentric layout is the source for the prediction above."
+   }
+  ],
+  "video": null,
+  "image": {
+   "url": "https://upload.wikimedia.org/wikipedia/commons/d/df/VFPt_dipole_electric.svg",
+   "credit": "Geek3, Wikimedia Commons",
+   "license": "CC BY-SA 3.0"
+  },
+  "diy": "Cheaper version: graphite paper (Teledeltos), or an aluminum-foil electrode cut out and taped under a sheet of conductive paper, plus any DMM. The PASCO kit is the convenient version, not the only one. Zero-equipment fallback: the PhET 'Charges and Fields' simulation has a voltmeter tool, but it is 3D point charges, not the 2D sheet, and it loses the hands-on part that makes this an observation-day activity.",
+  "notes": "The observation day (Nov 16): run as the whole class, group work, instructor talk under 15 min. Ask whether the intro E&M lab already owns the PASCO kits. Proposed run for the observation day (instructor talk at most 15 min): 5 min framing plus the vote on the concentric-circle question, then 25-30 min of group mapping, then 10 min gallery/debrief with the document camera. Use 4 layouts, so 2-3 groups share each: (a) two dots, a 2D 'dipole' whose equipotentials are circles of Apollonius, a nice bonus; (b) two parallel bars, which give a nearly uniform field in the middle; (c) concentric circles, which carries the quantitative vote; (d) two dots plus a floating ring. Each group must report at least one quantitative check: the concentric group measures V at 3 radii and compares with the log formula; the parallel-bar group checks that V is linear in x. This is the strongest candidate in the range for the active-learning record. Ask the lab manager whether Smith's intro E&M lab already owns the kits and conductive paper; if it does, the cost is ink plus labor.",
+  "status": "recommended",
+  "buy": [
+   "PASCO PK-9023 Field Mapper Kit (~$239) and conductive paper, unless the intro E&M lab already owns them"
+  ]
+ },
+ {
+  "id": "vortex-curl-meter",
+  "name": "Vorticity meter (floating paddle wheel / marked cork) in a free (drain) vortex vs. a rigidly rotating tank",
+  "classes": [
+   29,
+   31
+  ],
+  "fit": "Curl is local spin, not 'the flow goes around' (F&F 8.6; Feynman II Ch 3): v ~ 1/r swirls but has zero curl, while rigid rotation has curl 2w everywhere.",
+  "duration_min": 7,
+  "tier": "must",
+  "materials": [
+   "Reliable path: the 1961 NCFMF film 'Vorticity' (Ascher Shapiro), which shows a vorticity meter (a small floating cross carrying an arrow) in rigid-body rotation and in a tub with a small central drain. Free on the Internet Archive.",
+   "Optional live version: a large round clear tub or a round basin about 40 cm across, with a small drain hole at the center bottom (or a siphon tube), refilled by a tangential jet from a hose so the swirl is steady",
+   "Floating vorticity meter: a 2-3 cm plastic cross, or a cork with a toothpick 'arrow', painted so its orientation is visible from the back row; or a floating paddle wheel with one colored vane",
+   "For rigid rotation: the same tub on a turntable or lazy Susan, spun steadily for several minutes before class so the water spins up",
+   "Overhead document camera or phone pointed down at the tub"
+  ],
+  "pira": "",
+  "prediction": "Water circles a central drain, with speed v ~ 1/r (faster near the middle). A small floating cross with an arrow painted on one arm orbits around the drain. As it goes around once, the arrow (A) rotates once in the same sense as the orbit, like the Moon keeping one face to Earth (B) rotates once in the opposite sense (C) keeps pointing the same direction, say toward the door, the whole time (D) spins many times. Then repeat the vote for a tank rotating like a solid body.",
+  "observe": "In the drain vortex, away from the core, the arrow keeps pointing the same way while it orbits: no spin. In the rigidly rotating tank it turns exactly once per orbit, in the same sense, at the tank's angular velocity w.",
+  "explain": "For v = (k/r) phi-hat, curl v = (1/r) d(r v_phi)/dr z-hat = 0 for r > 0: the outer side of the cross is pushed more slowly than the inner side, by exactly enough to cancel the turning of the orbit. All the curl is concentrated at the core, which is Feynman's point and why the line integral around the drain is still nonzero (preview of Stokes, F&F 8.10). For rigid rotation v = w x r, curl v = 2w z-hat everywhere, and a small paddle wheel turns at w = |curl v|/2. Flag that factor of 2 explicitly: the paddle wheel measures half the curl.",
+  "pitfalls": [
+   "A live drain vortex is finicky: the core is rotational (viscous), so a cork that drifts into the core DOES spin. Keep the meter in the outer region and make it small compared to its distance from the drain.",
+   "Spinning up a tank to true rigid rotation takes minutes (the spin-up time is set by viscosity). If students see it before it is spun up, the result is muddy.",
+   "Surface tension and the meniscus pull floats toward the wall, so use a wide tub.",
+   "Water on the floor near electronics; keep it on a tray.",
+   "Strong recommendation: show the film segment as the 'observe' step, and treat the live tub as optional color if the lab manager can make it reliable in a dry run."
+  ],
+  "refs": [
+   {
+    "title": "Vorticity (1961), Ascher H. Shapiro, NCFMF film, Internet Archive",
+    "url": "https://archive.org/details/vorticity",
+    "note": "Both reels, 44 min total. Find and cue the vorticity-meter segments (rigid rotation; tub with drain) in advance: I did not verify which reel or what timestamp."
+   },
+   {
+    "title": "MIT RES.TLL-004 'Curl' instructor guide (PDF)",
+    "url": "https://ocw.mit.edu/courses/res-tll-004-stem-concept-videos-fall-2013/94c6fc5f25af9e74e87a9a460657a76a_MITRES_TLL-004F13_Curl_IG.pdf",
+    "note": "Confirms the Shapiro film includes the vorticity meter in rigid-body rotation and in 'circulating flow in a round tub with a small drain'. MIT's own Curl video is marked 'no longer available'; only the guide remains."
+   },
+   {
+    "title": "Applied Fluid Mechanics Lab Manual (Ahmari and Kabir), Experiment 8: Free and Forced Vortices (LibreTexts)",
+    "url": "https://eng.libretexts.org/Bookshelves/Mechanical_Engineering/Applied_Fluid_Mechanics_Lab_Manual_(Ahmari_and_Kabir)/01%3A_Lab_Manual/01.8%3A_Experiment_%238%3A_Free_and_Forced_Vortices",
+    "note": "Engineering-lab version (Armfield-style apparatus) of the free/forced vortex setup, with the v ~ 1/r vs v ~ r profiles. Useful if the engineering program has one."
+   }
+  ],
+  "video": {
+   "youtube_id": "oHHWHC0LO8c",
+   "title": "Vorticity Part 2"
+  },
+  "image": null,
+  "diy": "A 5-gallon bucket with a 1 cm hole drilled in the center of the bottom, kept topped up by a garden hose aimed tangentially at the wall, gives a steady drain vortex. The float can be a cork with a toothpick. For rigid rotation, a bucket on a lazy Susan spun by hand for 3-5 min.",
+  "notes": "Film segment is the reliable observe step; a live tub only after a dry run. This is the demo named in the request, and the prediction is excellent: almost everyone votes A or D for the drain vortex. The YouTube video given is Part 2 of the Shapiro film (an unofficial upload, but the oembed title checks out); which reel holds the vorticity-meter segments is unverified, so preview both on archive.org. Put it in class 29 (where divergence and curl start) or class 31 (curl and Laplacian).",
+  "status": "recommended",
+  "buy": []
+ },
+ {
+  "id": "michelson-analyzer-video",
+  "name": "Michelson's Harmonic Analyzer (engineerguy video series): a 19th-century gear machine that sums 20 cosines",
+  "classes": [
+   34,
+   35
+  ],
+  "fit": "Fourier synthesis made mechanical (F&F 9.2-9.3), plus the historical origin of the Gibbs-phenomenon discussion.",
+  "duration_min": 6,
+  "tier": "good",
+  "materials": [
+   "Projector + audio; YouTube video 2/4 'Synthesis' (and optionally 1/4 'Intro/History')",
+   "Free companion book PDF from engineerguy.com, for Michael's prep"
+  ],
+  "pira": "",
+  "prediction": "Michelson's machine adds 20 cosine terms with the exact square-wave coefficients. Near each jump of the drawn curve we will see (A) a perfectly sharp corner (B) a smooth rounded corner (C) a small overshoot 'horn' plus ripples (D) a gap.",
+  "observe": "The pen draws the square wave with ripples and a visible overshoot near the jumps.",
+  "explain": "Twenty terms of the series still overshoot by about 9% of the jump: the Gibbs phenomenon is not a machine defect. Historically, Michelson's 1898 letter to Nature about the series' behavior near a discontinuity (from his analyzer work) is what prompted Gibbs's analysis. Ties F&F 9.2-9.3 coefficients to a physical sum.",
+  "pitfalls": [
+   "It is a video, not a live demo: cap it at one segment (about 4-6 min) and pause it for the vote right before the pen draws.",
+   "Check the exact part of video 2/4 that draws the square wave in advance; I did not timestamp it.",
+   "The historical attribution (Michelson letter -> Gibbs) is standard but I did not re-verify it from a primary source; say 'the story goes' if unsure."
+  ],
+  "refs": [
+   {
+    "title": "engineerguy: Albert Michelson's Harmonic Analyzer (book + video series)",
+    "url": "https://engineerguy.com/fourier/",
+    "note": "Four companion videos (Introduction, Synthesis, Analysis, Operation); free book PDF."
+   },
+   {
+    "title": "Albert Michelson's Harmonic Analyzer (free book PDF)",
+    "url": "https://engineerguy.com/fourier/pdfs/albert-michelsons-harmonic-analyzer.pdf",
+    "note": "Hammack, Kranz, Carpenter; photographs of the synthesized waves."
+   }
+  ],
+  "video": {
+   "youtube_id": "8KmVDxkia_w",
+   "title": "(2/4) Synthesis: A machine that uses gears, springs and levers to add sines and cosines"
+  },
+  "image": null,
+  "diy": "",
+  "notes": "Video, not a live demo; better assigned as an out-of-class watch. Alternate intro video: NAsM30MAHLg '(1/4) Intro/History: Introducing a 100-year-old mechanical computer' (verified). Good as an assigned out-of-class watch if class time is short. It pairs with, but does not replace, the live square-wave demo.",
+  "status": "option",
+  "buy": []
+ },
+ {
+  "id": "missing-fundamental",
+  "name": "The missing fundamental: delete the lowest harmonic and the pitch does not move",
+  "classes": [
+   35,
+   34
+  ],
+  "fit": "The period of a sum of harmonics n f0 is 1/f0 even if the n = 1 term is absent (F&F 9.2-9.4: period and fundamental frequency of a Fourier series).",
+  "duration_min": 4,
+  "tier": "good",
+  "materials": [
+   "Notebook or PASCO WA-9307: a 220 Hz tone with harmonics 1-6 at equal-ish amplitude",
+   "Powered speaker; optional Friture spectrum display so the class SEES the 220 Hz line vanish"
+  ],
+  "pira": "3C50.10 (apparatus); UMD H5-15",
+  "prediction": "A 220 Hz note is built from harmonics 220, 440, 660, 880, 1100, 1320 Hz. We delete the 220 Hz component entirely (watch it vanish on the spectrum). The pitch you hear (A) jumps up an octave to 440 Hz (B) stays at 220 Hz (C) becomes a chord (D) becomes noise.",
+  "observe": "Most listeners still hear a 220 Hz pitch (B); the tone just gets thinner. Sweeping f0 with the fundamental removed, the perceived pitch tracks f0.",
+  "explain": "The remaining sum sum_{n=2..6} sin(2 pi n f0 t) is still periodic with period 1/f0, because 1/f0 is the smallest common period of all the terms; the waveform on the scope repeats every 4.5 ms, not every 2.3 ms. The auditory system extracts the period, not the lowest spectral line. Ties to F&F's point that a Fourier series on period L contains only frequencies that are multiples of 1/L, but need not contain 1/L itself.",
+  "pitfalls": [
+   "Psychoacoustics is not uniform: a minority of listeners report the octave (A), and both answers should be accepted as honest observations. Explain the PERIOD argument, which is the math, rather than claim 'everyone hears 220'.",
+   "Low-quality speakers already suppress 220 Hz (they barely reproduce it), which is the real-world hook (phones do not transmit male-voice fundamentals) but can confuse the 'before' tone. Use a decent powered speaker.",
+   "Wikipedia notes the older 'ear nonlinearity' explanation was largely ruled out (Licklider 1954); do not teach it as the mechanism."
+  ],
+  "refs": [
+   {
+    "title": "UMD H5-15: Effect of Harmonic Content on Tone Quality (includes missing fundamental)",
+    "url": "https://lecdem.physics.umd.edu/h/h5/1983-h5-15.html",
+    "note": "Remove the fundamental from a pulse train; sweep the frequency to show the ear tracks the missing fundamental."
+   },
+   {
+    "title": "Wikipedia: Missing fundamental",
+    "url": "https://en.wikipedia.org/wiki/Missing_fundamental",
+    "note": "Periodicity explanation; telephone example; Licklider's masking experiment."
+   }
+  ],
+  "video": null,
+  "image": null,
+  "diy": "Notebook only; 10 lines.",
+  "notes": "Opener for class 35 ('what IS the period of this function?'). Optional add-on to the square-wave day, or a 4-min opener for class 35 (different periods): 'what IS the period of this function?'. Do not run more than two of the audio demos (square wave, phase-blind, missing fundamental, vowel spectrogram) in a single class.",
+  "status": "option",
+  "buy": []
+ },
+ {
+  "id": "square-wave-synthesis",
+  "name": "Fourier synthesis: build a square wave from odd harmonics, live on a speaker and a scope",
+  "classes": [
+   34
+  ],
+  "fit": "The first Fourier series (F&F 9.2-9.3) heard and seen as it converges, including the Gibbs overshoot at the jump.",
+  "duration_min": 8,
+  "tier": "must",
+  "materials": [
+   "Either: PASCO WA-9307 Fourier Synthesizer (440 Hz fundamental plus 8 harmonics, each with amplitude and phase control). It is an old model, probably no longer sold (not verified), but common in stockrooms, so check before buying anything.",
+   "Or (free): a Jupyter notebook on jupyterhub.smith.edu that builds sum_{n odd} (4/(n pi)) sin(n w t) for n = 1..N, plots it, and plays it with IPython.display.Audio",
+   "Powered speaker with an aux input (laptop speakers are too weak and too band-limited for the low fundamental)",
+   "Oscilloscope fed the ELECTRICAL signal (synthesizer output or the laptop line-out), not a microphone; or just the notebook plot projected",
+   "Optional: Friture (free real-time spectrum/scope app) on the classroom laptop to show the spectrum growing"
+  ],
+  "pira": "3C50.10",
+  "prediction": "Start with a pure 220 Hz sine. Now add the 3rd harmonic (660 Hz) at 1/3 the amplitude. Does the PITCH you hear (A) jump up to 660 Hz (B) land somewhere between 220 and 660 (C) stay at 220 Hz with a different tone quality (D) split, so you hear two separate notes? Follow-up vote after N = 1, 3, 5, 7, 9: as we keep adding odd harmonics with amplitude 1/n, does the little overshoot spike next to each jump (A) shrink to zero (B) get narrower but stay the same height (C) grow?",
+  "observe": "The pitch stays 220 Hz and the sound gets brighter and more 'reedy'. The trace squares up, but the overshoot next to each edge stays about 9% of the jump; it only gets narrower.",
+  "explain": "The sum of sin(wt) and sin(3wt)/3 still has period 2 pi/w, and pitch follows the period, so adding harmonics changes the shape (timbre), not the period. The square wave's coefficients b_n = 4/(n pi) for odd n, 0 for even n, come straight from F&F 9.2-9.3; the even terms vanish by the half-wave symmetry. The persistent overshoot (peak about 1.18 for a +/-1 square wave, i.e. 9% of the jump of 2) is the Gibbs phenomenon: the partial sums converge pointwise but not uniformly near a discontinuity.",
+  "pitfalls": [
+   "Do NOT put a microphone into the scope: the speaker and room have frequency-dependent phase shifts that scramble the shape, even though the ear does not care (see the phase-blind demo).",
+   "Laptop audio outputs are AC-coupled, so a low-frequency square wave sent out the headphone jack shows tilt/droop on a scope. Show the notebook plot for the shape and use the speaker only for the sound.",
+   "The PASCO unit is fixed at 440 Hz; with 8 harmonics the top one is 3.5 kHz, which is fine.",
+   "A square wave at full amplitude is LOUD and harsh. Start the speaker at low volume.",
+   "Some students have perfect pitch or musical training and will answer C immediately. Let them explain it to the room rather than going over it again."
+  ],
+  "refs": [
+   {
+    "title": "U Iowa demo: Fourier Synthesis of Waves - Pasco (3C50.10)",
+    "url": "https://instructional-resources.physics.uiowa.edu/node/4326",
+    "note": "Catalog entry with equipment list (synthesizer, 2 scopes, amp, speaker, mic)."
+   },
+   {
+    "title": "Oberlin demo catalog: Fourier Synthesizer, DCS 3C50.10",
+    "url": "https://www2.oberlin.edu/physics/catalog/demonstrations/waves/fourier.html",
+    "note": "Two 440 Hz signals plus 8 harmonics; square, sawtooth, and pulse-train recipes."
+   },
+   {
+    "title": "UW Physics lecture demo: Pasco Fourier Synthesizer (3C50.10)",
+    "url": "https://phys-office.phys.washington.edu/lectdemo/DetailPages/3/C/Pasco_Fourier_Synthesizer_(3C50.10).html",
+    "note": "Links the PASCO WA-9307A manual (includes a Gibbs phenomenon experiment) and web-applet alternatives."
+   },
+   {
+    "title": "PhET: Fourier: Making Waves",
+    "url": "https://phet.colorado.edu/en/simulations/fourier-making-waves",
+    "note": "Zero-hardware backup with sound; good for the homework follow-up."
+   },
+   {
+    "title": "Friture real-time audio analyzer",
+    "url": "https://friture.org/",
+    "note": "Free (Win/Mac/Linux); scope, live spectrum, rolling spectrogram, and a tone generator."
+   }
+  ],
+  "video": null,
+  "image": {
+   "url": "https://upload.wikimedia.org/wikipedia/commons/1/1a/Fourier_series_square_wave_circles_animation.gif",
+   "credit": "Cmglee, Wikimedia Commons",
+   "license": "CC BY-SA 3.0"
+  },
+  "diy": "The notebook version is the DIY one: about 15 lines of numpy plus IPython.display.Audio, with a slider (ipywidgets, verified on Smith's jupyterhub) for N. It runs on the platform students already use, so they can replay it themselves.",
+  "notes": "Pair with the Michelson analyzer video (the Gibbs story) only if time allows; this demo alone is the must. Class 34 is the natural slot, the day Fourier series are introduced. Lead with the pitch vote, because it is the one students actually split on.",
+  "status": "recommended",
+  "buy": [
+   "nothing: notebook + powered speaker (PASCO WA-9307 synthesizer only if already in the stockroom)"
+  ]
+ },
+ {
+  "id": "vowel-spectrogram",
+  "name": "Live spectrogram of a sung vowel: same pitch, different harmonic weights",
+  "classes": [
+   34
+  ],
+  "fit": "A real sound IS a sum of harmonics of one fundamental; the Fourier coefficients (not the frequencies) are what distinguish 'ee' from 'oo' (F&F 9.1-9.3).",
+  "duration_min": 4,
+  "tier": "good",
+  "materials": [
+   "Classroom laptop + projector running Friture (free; rolling spectrogram) or the Chrome Music Lab Spectrogram page in a browser (microphone mode)",
+   "The laptop's built-in mic is fine; an external USB mic is better in a large room",
+   "A volunteer who can hold a steady note (or Michael)"
+  ],
+  "pira": "3C50 (wave analysis)",
+  "prediction": "A singer holds one note and changes the vowel from 'ee' to 'oo' to 'ah' at the same pitch. On the spectrogram, which is evenly spaced horizontal lines, what changes? (A) the line spacing changes (B) the lowest line moves (C) the line spacing and lowest line stay put, but which lines are bright changes (D) nothing visible changes.",
+  "observe": "The ladder of evenly spaced lines (the harmonics of the sung pitch) stays fixed, while bright bands (formants) slide up and down across the ladder as the vowel changes. Changing the pitch instead spreads or squeezes the ladder.",
+  "explain": "Pitch = fundamental frequency = line spacing; vowel = the set of Fourier amplitudes |c_n| (vocal-tract resonances boost certain harmonics). It is a direct visual of 'same period, different coefficients' (F&F 9.2), and a whistle (nearly one line) vs. a hum (many lines) makes the sine vs. non-sine contrast.",
+  "pitfalls": [
+   "Room noise and the HVAC hum show up as their own lines; point them out instead of fighting them.",
+   "Use a log or mel frequency axis cautiously: on a log axis harmonics are NOT evenly spaced, which undercuts the point. Friture lets you pick linear.",
+   "Chrome Music Lab: I could verify the site but not its spectrogram page content (JavaScript-rendered); test microphone permission on the classroom machine before class."
+  ],
+  "refs": [
+   {
+    "title": "Friture real-time audio analyzer",
+    "url": "https://friture.org/",
+    "note": "Rolling 2D spectrogram, live spectrum, scope; free on macOS."
+   },
+   {
+    "title": "Chrome Music Lab: Spectrogram",
+    "url": "https://musiclab.chromeexperiments.com/Spectrogram/",
+    "note": "Browser-only, microphone input (per vendor); log-frequency display."
+   }
+  ],
+  "video": null,
+  "image": {
+   "url": "https://upload.wikimedia.org/wikipedia/commons/2/29/Spectrogram_of_violin.png",
+   "credit": "Wikimedia Commons (see file page for author)",
+   "license": "CC BY-SA 3.0"
+  },
+  "diy": "Free software only.",
+  "notes": "4-minute opener for class 34 if the square-wave demo leaves room. At most two audio demos per class. A 4-minute opener for class 34, before the formal definition. It sets up the question 'how do we find the c_n?', which the rest of the class answers. Leave the spectrogram running for the rest of the Fourier unit: it is the same tool needed for tone-burst-uncertainty in class 38.",
+  "status": "option",
+  "buy": []
+ },
+ {
+  "id": "guitar-node-harmonics",
+  "name": "Guitar (or sonometer) natural harmonics: touch the string at L/3 and pluck",
+  "classes": [
+   35,
+   38
+  ],
+  "fit": "A sine series on a finite domain, sin(n pi x/L) (F&F 9.4), with a constraint at one point that kills every mode lacking a node there.",
+  "duration_min": 4,
+  "tier": "good",
+  "materials": [
+   "Any acoustic guitar (borrow from the music department or a student), or a sonometer / monochord from the stockroom",
+   "Optional: the live spectrogram (Friture) so the class sees which harmonics survive",
+   "Tape marks at L/2 and L/3 of an open string (measured nut-to-saddle)"
+  ],
+  "pira": "3D30 (stringed-instrument acoustics; sub-number not verified)",
+  "prediction": "Lightly touch the open low E string at exactly 1/3 of its length (do not press it to the fret) and pluck. The note you hear is (A) the same as the open string (B) one octave up (2x) (C) an octave plus a fifth up (3x) (D) silence, since you are damping it. Bonus vote: pluck the open string exactly at its middle. Which harmonics are missing from the spectrum?",
+  "observe": "A clear, bell-like tone at 3x the open-string frequency (C). On the spectrogram, only the 3rd, 6th, 9th... lines remain. Plucking at the middle removes the even harmonics (2nd, 4th...).",
+  "explain": "The string's shape is sum b_n sin(n pi x/L). Touching at x = L/3 forces y(L/3) = 0, damping every mode with sin(n pi/3) != 0 and leaving n = 3, 6, 9,... The pluck-position bonus is the same calculation for the initial condition: a triangle peaked at L/2 has b_n proportional to sin(n pi/2)/n^2, which vanishes for even n (F&F 9.4 finite domain; previews the 11.3 normal modes).",
+  "pitfalls": [
+   "Touch lightly, and lift the finger right after plucking for a cleaner tone; a guitarist volunteer makes this seamless.",
+   "An acoustic guitar is quiet in a big room; use a mic + amp or the spectrogram so the back row gets something.",
+   "The 'missing even harmonics' bonus is approximate on a real string (finite finger width, stiffness); the spectrogram shows them strongly suppressed, not exactly zero. Say so."
+  ],
+  "refs": [
+   {
+    "title": "Wikipedia: Guitar harmonics",
+    "url": "https://en.wikipedia.org/wiki/Guitar_harmonics",
+    "note": "Touch at 1/2 -> 2nd harmonic (octave); at 1/3 -> 3rd harmonic (octave + just fifth); node-position table."
+   },
+   {
+    "title": "UMass Physics lecture prep 3B22.10: Standing Waves on a String",
+    "url": "https://physicslectureprep.umasscreate.net/?p=16203",
+    "note": "Same physics on a driven string: touching a node leaves the standing wave undisturbed."
+   }
+  ],
+  "video": null,
+  "image": null,
+  "diy": "If no guitar: a monochord/sonometer, or a long rubber band stretched over two pencils on a box (much weaker).",
+  "notes": "Zero setup; borrow a guitar. Cheapest 'real' Fourier demo in the unit, with zero setup. Class 35 (finite domains, sine series) is the best fit; it also works as the 'pluck' warm-up at the start of class 38.",
+  "status": "recommended",
+  "buy": []
+ },
+ {
+  "id": "phase-blind-ear",
+  "name": "Ohm's acoustic law: scramble the harmonic phases of a tone -- the scope trace changes completely, the sound does not",
+  "classes": [
+   36
+  ],
+  "fit": "In the complex series c_n e^{i n w t}, |c_n| and arg(c_n) carry different information (F&F 9.5); the ear (approximately) hears only |c_n|.",
+  "duration_min": 5,
+  "tier": "good",
+  "materials": [
+   "Same setup as square-wave-synthesis: PASCO WA-9307 (it has phase knobs) or the notebook with a 'randomize phases' button",
+   "Powered speaker; projector for the waveform plot"
+  ],
+  "pira": "3C50.10 (same apparatus); UMD catalog codes H5-15 / H5-16",
+  "prediction": "We keep the square wave's harmonic AMPLITUDES (1, 1/3, 1/5, 1/7, 1/9) but give each harmonic a random phase. The trace no longer looks anything like a square wave. Will it SOUND (A) identical (B) slightly different (C) completely different, like another instrument (D) like noise?",
+  "observe": "The waveform turns into a spiky, irregular shape, yet the sound is essentially unchanged (A or B; most listeners cannot tell). Toggle back and forth to let the class judge.",
+  "explain": "In the complex form f(t) = sum c_n e^{i n w t} (F&F 9.5), each c_n has a magnitude and a phase. The shape depends on both; the power in each harmonic (Parseval) depends only on |c_n|^2, and the ear's cochlea is to a good approximation a spectrum analyzer of |c_n|. That is Ohm's (Helmholtz's) acoustic law. It makes concrete why 'the spectrum' usually means |c_n| and why the phase information is something extra.",
+  "pitfalls": [
+   "This is an APPROXIMATE law: with low fundamentals (below about 100 Hz) and many unresolved high harmonics, trained listeners can hear phase changes as a change in 'roughness'. Say so; don't oversell 'identical'. Use a fundamental around 200-500 Hz and only a handful of harmonics (the UMD recipe) for the cleanest result.",
+   "Phase must be changed with the sound running continuously, or else the click when audio restarts gives it away; in a notebook, play two pre-rendered 2 s clips back-to-back.",
+   "The speaker's own phase response makes any mic'd scope trace meaningless (point of the demo, in a way): plot the computed waveform instead."
+  ],
+  "refs": [
+   {
+    "title": "UMD Lecture-Demonstration Facility H5-16: Ohm's Law of Hearing - Fourier Synthesizer",
+    "url": "https://lecdem.physics.umd.edu/forum/h5/1494-h5-16-ohms-law-of-hearing-fourier-synthesizer.html",
+    "note": "Recipe: fundamental plus 2nd harmonic at half amplitude, 200-500 Hz fundamental, vary the 2nd's phase."
+   },
+   {
+    "title": "UMD H5-15: Effect of Harmonic Content on Tone Quality",
+    "url": "https://lecdem.physics.umd.edu/h/h5/1983-h5-15.html",
+    "note": "Same synthesizer; covers phase independence and the missing fundamental."
+   },
+   {
+    "title": "Stony Brook lab demos: Ohm's Law of Hearing - Fourier Synthesizer",
+    "url": "https://labdemos.physics.sunysb.edu/h.-sound/h5.-the-ear/ohms-law-hearing-fourier-synthesizer.php",
+    "note": "A second catalog entry for the same demo."
+   }
+  ],
+  "video": null,
+  "image": null,
+  "diy": "Notebook: build the tone from sum A_n sin(n w t + phi_n), with phi_n either all 0 or random; play both clips one after the other and plot both.",
+  "notes": "Three extra minutes if class 34 used the notebook version of the square wave. Fits class 36 (complex exponentials) best, because it gives students a reason to care about the modulus/argument split of c_n. If class 34 runs the square-wave demo with the notebook, this costs only 3 extra minutes, since the same code adds a phase button.",
+  "status": "recommended",
+  "buy": []
+ },
+ {
+  "id": "heat-front-sqrt-t",
+  "name": "Heat front on metal bars with thermochromic (liquid-crystal) strips: does the color front move at constant speed?",
+  "classes": [
+   37
+  ],
+  "fit": "The heat equation u_t = D u_xx has no characteristic speed; a fixed temperature level spreads as x ~ sqrt(D t) (F&F 11.1-11.2).",
+  "duration_min": 7,
+  "tier": "maybe",
+  "materials": [
+   "Thermal-conductivity bar set with liquid-crystal strips (copper, aluminum, brass, steel; sold by Sargent-Welch and others; UMD I2-29 uses one), or a copper/aluminum bar with a self-adhesive liquid-crystal sheet (e.g., Arbor Scientific liquid crystal sheet) laid along it",
+   "Beaker of hot water (below 90 C) or a hot plate",
+   "Stopwatch; document camera; tape marks every 2 cm along the bar",
+   "Better if available: an IR camera (e.g., a FLIR phone attachment) for a continuous temperature profile"
+  ],
+  "pira": "4C (heat transfer: conduction); UMD catalog code I2-29",
+  "prediction": "Dip the end of a copper bar in hot water. The color change reaches the 2 cm mark after about 10 s. When does it reach the 4 cm mark? (A) about 20 s (B) about 40 s (C) about 14 s (D) never. Second vote: which metal's front moves fastest, copper or steel, and by about how much?",
+  "observe": "The front slows down: doubling the distance takes roughly 4x the time, not 2x. Copper is several times faster than steel.",
+  "explain": "The only length scale that can be made from D and t is sqrt(D t); for a semi-infinite bar whose end is held at T_hot, u depends on x and t only through x/(2 sqrt(D t)), so a fixed color (temperature) sits at x proportional to sqrt(t) (F&F 11.1-11.2). The metal-to-metal ratio of arrival times at a fixed x is the inverse ratio of thermal diffusivities (Cu about 1.1e-4 m^2/s vs. carbon steel about 1.2e-5 m^2/s, so roughly 9x).",
+  "pitfalls": [
+   "UNTESTED quantitatively. The x^2 scaling holds only at early times, before side losses to air and the far end matter, and only if the dipped end stays near water temperature. A dry run must show it before this goes in front of the class. Tier is 'maybe' until then.",
+   "Off-the-shelf bar sets use small spot thermometers, not continuous strips, so you get 1-2 arrival times per bar, which is barely enough for the scaling claim. A continuous liquid-crystal sheet or an IR camera is much better.",
+   "Hot water: keep it below 90 C (UMD safety note); keep the strips out of the water.",
+   "Copper is fast (seconds), steel is slow (minutes): pick the bar that fits the minutes available."
+  ],
+  "refs": [
+   {
+    "title": "UMD Lecture-Demonstration Facility I2-29: Thermal Conductivity - Metal Bars and Liquid Crystals",
+    "url": "https://lecdem.physics.umd.edu/i/i2/2446-i2-29.html",
+    "note": "Bars of different metals with liquid-crystal strips, tips in hot water (max 90 C)."
+   },
+   {
+    "title": "Arbor Scientific: Liquid Crystal Sheet Demos",
+    "url": "https://www.arborsci.com/blogs/cool/liquidcrystaldemos",
+    "note": "Vendor ideas for liquid-crystal sheets showing heat conduction."
+   }
+  ],
+  "video": null,
+  "image": null,
+  "diy": "Aluminum flat bar from a hardware store plus a liquid-crystal sheet or thermochromic tape; or an IR thermometer read at marked points every 10 s.",
+  "notes": "Only if the lab manager's dry run shows clean x^2 timing. Only run if the lab manager's dry run shows clean ~x^2 timing; otherwise use the notebook (numerical heat equation) instead, and say in Skips that the heat equation has no great quick demo. Its value is the scaling prediction; the 'which metal' part alone is an intro-physics demo.",
+  "status": "option",
+  "buy": [
+   "liquid-crystal sheet / thermochromic tape (Arbor Scientific) or borrow an IR camera"
+  ]
+ },
+ {
+  "id": "chladni-plate",
+  "name": "Chladni plate: sand on a vibrating plate collects on the nodal lines of 2D normal modes",
+  "classes": [
+   38
+  ],
+  "fit": "Separation of variables in 2D gives normal modes with nodal LINES (F&F 11.3-11.4 generalized beyond the 1D string).",
+  "duration_min": 5,
+  "tier": "good",
+  "materials": [
+   "Square and/or circular Chladni plate on a mechanical wave driver (e.g., PASCO SF-9324) with a function generator and amplifier, as in the UMass setup; or a violin bow for the classic manual version",
+   "Fine dry sand or table salt; a shallow tray/box to catch it",
+   "Document camera looking straight down, so the room can see the pattern"
+  ],
+  "pira": "3D40.30",
+  "prediction": "We sprinkle sand on a metal plate and drive it at a resonance. Where does the sand end up? (A) evenly spread (B) piled where the plate moves MOST (C) on lines where the plate does not move at all (D) all thrown off the plate. Follow-up: at a higher resonant frequency, will there be more or fewer sand lines?",
+  "observe": "Sand is bounced off the moving regions and collects on sharp nodal lines (C); higher resonances give more, finer lines.",
+  "explain": "Each resonance is a 2D normal mode, a product-like shape whose zero set is a set of nodal curves (for a clamped rectangle, sin(m pi x/a) sin(n pi y/b) gives a grid of lines). More nodes means a higher frequency, just as for the string. The nodal lines are the 2D analog of the string's nodes (F&F 11.3-11.4).",
+  "pitfalls": [
+   "A center-driven Chladni plate has FREE edges (and a fixed center), so its modes are NOT the textbook clamped-edge sin x sin y modes and do not follow simple integer frequency ratios. Present it as '2D normal modes exist and have nodal lines', not as a check of a specific formula.",
+   "LOUD high-pitched tones at higher modes; warn the class and keep it short.",
+   "Do not exceed the driver's current rating at high frequency (UMass note); sand gets everywhere, so use a tray.",
+   "Find and write down the 3-4 best frequencies in a dry run."
+  ],
+  "refs": [
+   {
+    "title": "UMass Physics lecture prep 3D40.30: Chladni Plates",
+    "url": "https://physicslectureprep.umasscreate.net/?p=16930",
+    "note": "Square plate on a mechanical vibrator + function generator; frequency list; containment tips."
+   },
+   {
+    "title": "UT Austin PIRA 3D40.30: Chladni Plates (manual version)",
+    "url": "https://web2.ph.utexas.edu/~phy-demo/demo-txt/3d40-30.html",
+    "note": "Bowed version, no electronics."
+   }
+  ],
+  "video": {
+   "youtube_id": "wvJAgrUBF4w",
+   "title": "Amazing Resonance Experiment!"
+  },
+  "image": {
+   "url": "https://upload.wikimedia.org/wikipedia/commons/1/14/Chladni_Plate_Pattern_2.jpg",
+   "credit": "Revisorius, Wikimedia Commons",
+   "license": "CC BY-SA 4.0"
+  },
+  "diy": "A speaker face-up with a thin plate or a stretched membrane on top, driven from a phone tone app; or the brusspup video as the zero-setup version.",
+  "notes": "Competes with the Melde string for the same idea and day; a 60-second video clip after the string is the compromise. It is spectacular but competes with the Melde string for the same idea and the same day. Choose one: the Melde string ties directly to the F&F 11.3 formula; Chladni is the 'wow' version. A fair compromise: a 60-second video clip of Chladni after the live Melde string.",
+  "status": "option",
+  "buy": []
+ },
+ {
+  "id": "melde-string-normal-modes",
+  "name": "Melde's string: an elastic cord driven by a mechanical vibrator at f1, 2f1, 3f1 (and at a non-harmonic frequency)",
+  "classes": [
+   38
+  ],
+  "fit": "Normal modes of the wave equation, y_n = sin(n pi x/L) cos(w_n t) with w_n = n w_1 (F&F 11.3), seen as discrete resonances.",
+  "duration_min": 7,
+  "tier": "must",
+  "materials": [
+   "PASCO SF-9324 Mechanical Wave Driver (or any speaker-coil string vibrator), plus a function generator with amplifier output (PASCO WA-9867 Sine Wave Generator or similar)",
+   "Elastic cord or 'bungee' string, about 1-2 m, tied from the driver to a fixed clamp (ring stand weighted with a lead brick or table clamp)",
+   "Black backdrop; optional strobe tuned to the drive frequency to freeze the pattern"
+  ],
+  "pira": "3B22.10",
+  "prediction": "We find the fundamental f1 (one loop). Now drive at exactly 3 f1. Counting both ends, how many nodes? (A) 3 (B) 4 (C) 6 (D) the string just shakes a lot with no stationary points. Follow-up: drive at 1.5 f1. What do we see? (A) 1.5 loops (B) a bigger version of the fundamental (C) a small, messy, non-stationary wiggle (D) 2 loops.",
+  "observe": "At 3 f1, three loops and 4 nodes (including both ends), with large amplitude. At 1.5 f1 the string barely moves and shows no clean pattern; sweeping up, large standing waves appear only near integer multiples of f1.",
+  "explain": "Separation of variables with y(0) = y(L) = 0 gives only X_n = sin(n pi x/L), and the time ODE then fixes w_n = n pi v/L (F&F 11.3): the allowed frequencies are discrete, the eigenvalues of the spatial problem. Driving between them excites no single mode resonantly. 'Half a loop' is impossible because it would violate the boundary condition at the far end, which is a direct check of the BC logic. A general shape is a superposition of these modes, weighted by Fourier coefficients (9.4).",
+  "pitfalls": [
+   "The driven end is not a perfect node (it moves a few mm); with large driver amplitude the resonant frequencies are not exact integer ratios. Keep the drive amplitude small.",
+   "Have the frequencies for n = 1..4 written down from a dry run (the UT Austin notes say to record and date them); sweeping live to find f1 burns minutes.",
+   "Strobe: warn the class first (photosensitivity); it is optional and the standing waves are visible without it.",
+   "A bungee cord stretched hard has nonlinear tension; tie it at moderate tension.",
+   "Setup 10 min; it can stay assembled from an intro-course reservation if the lab manager is coordinating."
+  ],
+  "refs": [
+   {
+    "title": "UT Austin lecture demos 3B22.10: Standing Waves - Melde's String Vibrator",
+    "url": "https://lecturedemos.ph.utexas.edu/demo/125",
+    "note": "Bungee cord, speaker-coil vibrator, 15-80 Hz gives 1-4 nodal points; optional strobe."
+   },
+   {
+    "title": "U Groningen physics demos 3B22.10: Melde's String Vibrator",
+    "url": "https://physicsdemos.web.rug.nl/3b22-10-meldes-string-vibrator/",
+    "note": "PASCO mechanical oscillator + variable frequency supply; PDF setup guide."
+   },
+   {
+    "title": "UMass Physics lecture prep 3B22.10: Standing Waves on a String",
+    "url": "https://physicslectureprep.umasscreate.net/?p=16203",
+    "note": "Wave driver + string; touch a node and the wave is undisturbed."
+   }
+  ],
+  "video": {
+   "youtube_id": "E20lCVxFwtE",
+   "title": "Standing Waves on a String"
+  },
+  "image": {
+   "url": "https://upload.wikimedia.org/wikipedia/commons/a/a8/Corde_de_Melde_-_fr%C3%A9quences_et_modes_propres.jpg",
+   "credit": "Phl7605, Wikimedia Commons",
+   "license": "CC BY-SA 4.0"
+  },
+  "diy": "Any old speaker with a paperclip glued to the cone, driven by a phone tone-generator app through an amplifier, works for small amplitudes.",
+  "notes": "The touch-a-node move (UMass) is a 30-second bonus: lightly pinch a node while it runs and nothing changes; pinch an antinode and the pattern dies. That is the same idea as guitar-node-harmonics, so if the guitar demo was done in class 35, refer back to it. This standard stockroom item should almost certainly be on hand.",
+  "status": "recommended",
+  "buy": [
+   "nothing if a mechanical wave driver + function generator exist (intro lab stock)"
+  ]
+ },
+ {
+  "id": "tone-burst-uncertainty",
+  "name": "Tone bursts of shrinking length: the spectrum widens as the burst shortens (time-frequency uncertainty)",
+  "classes": [
+   38
+  ],
+  "fit": "The Fourier transform (F&F 9.6): a signal of duration Delta t has spectral width of order 1/Delta t.",
+  "duration_min": 5,
+  "tier": "good",
+  "materials": [
+   "Notebook that generates 1 kHz bursts of 1 s, 50 ms, 5 ms, and 1 ms (rectangular or Gaussian envelope), plays each, and plots |FFT| of each beside it",
+   "Powered speaker; optional live spectrogram (Friture) for a finger-snap vs whistle contrast"
+  ],
+  "pira": "3C50 (wave analysis)",
+  "prediction": "We play a 1000 Hz tone for 1 s, then for 50 ms, 5 ms, 1 ms. In the spectrum, the peak around 1000 Hz (A) stays the same width (B) gets wider as the burst gets shorter (C) gets narrower as the burst gets shorter (D) moves to a different frequency. Also: will the 1 ms burst still sound like a 1000 Hz pitch?",
+  "observe": "The peak broadens roughly as 1/Delta t (about 1 kHz wide for the 1 ms burst, comparable to the carrier itself), and the shortest burst sounds like a click with no clear pitch.",
+  "explain": "A finite-duration tone is the product of a sinusoid and a window; its transform is the window's transform (width ~ 1/Delta t) shifted to the carrier frequency (F&F 9.6). For a Gaussian envelope, Delta t Delta f has its minimum; that is the same mathematics as the quantum uncertainty principle. A pitch needs several cycles: 1 ms = 1 cycle at 1 kHz.",
+  "pitfalls": [
+   "A live spectrogram has its own analysis window (Friture's FFT size), which itself imposes a time-frequency tradeoff and smears short bursts. The static |FFT| plot of each burst in the notebook is the honest display; use the spectrogram only for the qualitative snap-vs-whistle contrast.",
+   "Rectangular windows produce sidelobes (sinc) that students may read as 'extra tones'; use a Gaussian or Hann envelope, or name the sidelobes.",
+   "Very short bursts are quiet; normalize energy, not peak, or raise the volume for them."
+  ],
+  "refs": [
+   {
+    "title": "Friture real-time audio analyzer",
+    "url": "https://friture.org/",
+    "note": "Includes a 'burst' generator and a rolling spectrogram."
+   },
+   {
+    "title": "PhET: Fourier: Making Waves",
+    "url": "https://phet.colorado.edu/en/simulations/fourier-making-waves",
+    "note": "Has a wave-packet screen showing the width tradeoff; a backup if audio fails."
+   }
+  ],
+  "video": null,
+  "image": null,
+  "diy": "Notebook only.",
+  "notes": "Only if five minutes remain on the last day; otherwise it goes in the notebook homework. Class 38 is crowded (wave-equation normal modes + Fourier transforms on the last day). Run the Melde string first; this one only if there are 5 minutes left. It can also go into the notebook homework instead.",
+  "status": "option",
+  "buy": []
+ }
+]

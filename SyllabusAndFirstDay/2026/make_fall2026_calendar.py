@@ -372,17 +372,37 @@ def build(outpath):
     assert all(d in days for d in PCCI), "PCCI assigned to a non-class day"
     assert not any(d in PCCI for d in QUIZZES), "PCCI assigned to a quiz day"
 
+    # WHW due dates: one per Friday after the first class (incl. quiz days,
+    # matching the previous prof); WHW_DUE_OVERRIDE wins.
+    whw_due = {}   # WHW number -> due date, for the WHW sheet
+    fridays = [d for slot_i, d in enumerate(days) if d.weekday() == 4 and slot_i > 0]
+    for hw_no, d in enumerate(fridays, start=1):
+        due_d = WHW_DUE_OVERRIDE.get(hw_no, d)
+        if due_d <= PYTHON_CLASS and hw_no not in DELIVERED:
+            text = " ".join(WHWS[hw_no - 1][2:5])
+            bad = sorted(p for p in COMPUTER_PROBLEMS
+                         if re.search(r"(^|[^\d.])" + re.escape(p) + r"($|[^\d])", text))
+            assert not bad, f"WHW{hw_no:02d} (due {due_d}) is before the Python class but holds by-computer problems {bad}"
+        whw_due[hw_no] = due_d
+    # date -> HW Due labels, APPEND semantics as in 317's build() (2026-10-05):
+    # an override onto another WHW's date, or an EXTRA_DUE on a WHW date,
+    # shares the cell instead of overwriting it, and the assert after the
+    # row loop hard-fails on a due date that never reached a class row (it
+    # used to vanish from the Schedule sheet while the WHW sheet printed it).
+    due_on = {}
+    for hw_no, due_d in whw_due.items():
+        due_on.setdefault(due_d, []).append(f"WHW{hw_no:02d}")
+    for ed, label in EXTRA_DUE.items():
+        due_on.setdefault(ed, []).append(label)
+
     # rows: one per class meeting; insert break markers
     rows = []      # (week, class_no, date, topic, reading, pcci, hw, exam)
     week_no = 0
     last_week = None
     class_no = 0
-    hw_no = 0
-    pending_hw = {}
     content_i = 0
     breaks_seen = set()
-    whw_due = {}   # WHW number -> due date, for the WHW sheet
-    for slot_i, d in enumerate(days):
+    for d in days:
         iso_week = d.isocalendar()[1]
         if iso_week != last_week:
             week_no += 1
@@ -398,28 +418,14 @@ def build(outpath):
             topic, reading = CONTENT[content_i]
             exam = ""
             content_i += 1
-        hw = pending_hw.pop(d, "")
-        if d.weekday() == 4 and slot_i > 0:  # Fridays (incl. quiz days,
-            hw_no += 1                       # matching the previous prof)
-            due_d = WHW_DUE_OVERRIDE.get(hw_no, d)
-            if due_d <= PYTHON_CLASS and hw_no not in DELIVERED:
-                text = " ".join(WHWS[hw_no - 1][2:5])
-                bad = sorted(p for p in COMPUTER_PROBLEMS
-                             if re.search(r"(^|[^\d.])" + re.escape(p) + r"($|[^\d])", text))
-                assert not bad, f"WHW{hw_no:02d} (due {due_d}) is before the Python class but holds by-computer problems {bad}"
-            whw_due[hw_no] = due_d
-            if due_d == d:
-                hw = f"WHW{hw_no:02d}"
-            else:                            # lands on a later class day
-                pending_hw[due_d] = f"WHW{hw_no:02d}"
-        if d in EXTRA_DUE:
-            hw = f"{hw}; {EXTRA_DUE[d]}" if hw else EXTRA_DUE[d]
+        hw = "; ".join(due_on.pop(d, []))
         class_no += 1
         rows.append((week_no, class_no, d, topic, reading,
                      PCCI.get(d, ""), hw, exam))
     for bd, why in NO_CLASS.items():
         if bd not in breaks_seen:
             rows.append((None, None, bd, why, "", "", "", ""))
+    assert not due_on, f"due dates that are not class days, missing from the HW Due column: {due_on}"
     rows.sort(key=lambda r: r[2])
     rows.append((None, None, date(2026, 12, 19),
                  "Final exam period Dec 19-22 (registrar schedules)",
@@ -442,6 +448,7 @@ def build(outpath):
 
     headers = ["Week", "Class", "Date", "Topics", "Reading Due", "PCCI",
                "HW Due", "Exams"]
+    last_col = openpyxl.utils.get_column_letter(len(headers))
     # Single canonical block (the old two-block print layout is in git
     # history; superseded 2026-08-27). Written as TWO CHUNKS, each
     # starting with its own header row, split at fall break: the
@@ -480,8 +487,8 @@ def build(outpath):
     for j, w in enumerate([7, 7, 10, 34, 12, 18, 10, 14]):
         col = openpyxl.utils.get_column_letter(1 + j)
         wsw.column_dimensions[col].width = w
-    print(f"Schedule embed ranges: chunk 1 = A1:H{split_row - 1}, "
-          f"chunk 2 = A{split_row}:H{r}")
+    print(f"Schedule embed ranges: chunk 1 = A1:{last_col}{split_row - 1}, "
+          f"chunk 2 = A{split_row}:{last_col}{r}")
 
     # ----------------------------------------------- WHW problem lists
     whw = wb.create_sheet("WHW Problem Lists")

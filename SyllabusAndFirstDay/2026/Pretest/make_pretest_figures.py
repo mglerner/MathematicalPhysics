@@ -6,15 +6,20 @@ Recreations (not copies) of the figures from the S23/S26 pretest:
   - plotting_derivative.pdf: f(x) with empty axes at right for sketching df/dx
   - cosine_plot.pdf        : x(t) = 3 cos(pi t / 2)
 
-Run from this directory:  ../../../../.venv/bin/python make_pretest_figures.py
+Writes next to this script, wherever it is run from:
+  ../../../../.venv/bin/python make_pretest_figures.py
 (or any python with matplotlib+numpy)
 """
+
+from pathlib import Path
 
 import numpy as np
 import matplotlib
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+
+HERE = Path(__file__).parent
 
 BLUE = "#4C72B0"
 GRAY = "#666666"
@@ -46,7 +51,7 @@ def triangular_region():
     ax.set_yticks([2])
     ax.set_aspect(1.4)
     fig.tight_layout()
-    fig.savefig("triangular_region.pdf")
+    fig.savefig(HERE / "triangular_region.pdf")
     plt.close(fig)
 
 
@@ -67,7 +72,7 @@ def plotting_derivative():
     ax2.set_xticks([-2, -1, 1, 2])
     ax2.set_yticks([])
     fig.tight_layout()
-    fig.savefig("plotting_derivative.pdf")
+    fig.savefig(HERE / "plotting_derivative.pdf")
     plt.close(fig)
 
 
@@ -80,7 +85,7 @@ def cosine_plot():
     ax.set_xticks([-4, -3, -2, -1, 1, 2, 3, 4])
     ax.set_yticks([-4, -2, 2, 4])
     fig.tight_layout()
-    fig.savefig("cosine_plot.pdf")
+    fig.savefig(HERE / "cosine_plot.pdf")
     plt.close(fig)
 
 
@@ -88,4 +93,4 @@ if __name__ == "__main__":
     triangular_region()
     plotting_derivative()
     cosine_plot()
-    print("wrote triangular_region.pdf, plotting_derivative.pdf, cosine_plot.pdf")
+    print(f"wrote triangular_region.pdf, plotting_derivative.pdf, cosine_plot.pdf in {HERE}")

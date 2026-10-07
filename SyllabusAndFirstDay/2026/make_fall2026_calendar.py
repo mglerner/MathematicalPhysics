@@ -260,7 +260,9 @@ WHWS = [
         "complex numbers and Euler (3.1-3.5)",
      "Sec 10.11: 10.246, 10.248. Complex numbers: 3.17, 3.19, 3.47. "
      "Euler / complex ODE: 3.59, 3.65, 3.77",
-     "Sec 10.11: 10.252, 10.261, 10.263, 10.264. "
+     # 2026-10-07: 10.264 (complex roots) made optional in class; the complex half of the
+     # Laplace rule was not reached on Oct 7 and its interpretation is off the quizzes.
+     "Sec 10.11: 10.252, 10.261, 10.263, 10.264 (optional). "
      "Complex numbers: 3.49, 3.54. Euler / complex ODE: 3.92, 3.94, 3.95",
      "Sec 10.11: 10.270, 10.272, 10.274. Complex numbers: 3.45, 3.56. "
      "Euler / complex ODE: 3.85, 3.107"),

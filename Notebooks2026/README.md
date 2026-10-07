@@ -44,11 +44,12 @@ Every notebook students touch reads **in order of use**, top to bottom:
 
 Code style, for students who may be seeing Python for the first time:
 first code cell starts with `%matplotlib inline` (the hub defaults to
-ipympl, which stacks figures inside `interact`), EXCEPT a notebook that
-animates or scrubs a plot with a slider or play button: there, `%matplotlib
-widget` with ONE figure created once and its lines updated in place
-(`set_data`, `draw_idle`), never a new figure per change, which flickers
-(2026-10-07, the 2D harmonic motion worksheet); short named functions
+ipympl, which stacks figures inside `interact`). A plot under a slider
+redraws as a new figure each move and flickers a little; that is accepted
+for the sake of plain code (Michael, 2026-10-07, the 2D harmonic motion
+worksheet: "make it a super straightforward plot function"). The fix, if a
+notebook ever needs smooth animation, is `%matplotlib widget` with one
+figure created once and its lines updated in place, but it is not plain; short named functions
 rather than lambdas; time in seconds on every axis (no normalized units
 such as t/T0); one or two sliders, not five; one idea per cell; no
 try/except scaffolding. Every cell has an `id` (nbformat >= 4.5).

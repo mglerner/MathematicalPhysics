@@ -68,15 +68,15 @@ DAY_LOGISTICS = {
     date(2026, 9, 28): ["iPad with the folio keyboard (AirPlay as usual) for the Python onboarding class; test the GitHub-download-to-hub-upload step in Safari beforehand; students bring laptops"],
     # Quiz hand-backs (Michael, 2026-10-04): the redo is a single PDF on Moodle (syllabus), due
     # "one week after the hand-back" rounded to the next class day.
-    date(2026, 10, 5): ["Hand back the graded Quiz 1 papers. Say: redos (check-minus and X problems: "
+    date(2026, 10, 5): ["Hand back the graded Quiz 1 papers; redos (check-minus and X problems: "
                         "a correct solution plus the reflection) go on Moodle as one PDF, due Wed Oct 14 at the start of class "
                         "(the 'Quiz 1 redo' item). Scores unhide on Moodle at 11:00."],
     date(2026, 10, 23): ["Quiz 2: printed copies + spares; per-problem score sheet"],
-    date(2026, 10, 26): ["Hand back the graded Quiz 2 papers. Say: redos go on Moodle as one PDF, due Mon Nov 2 at the start "
+    date(2026, 10, 26): ["Hand back the graded Quiz 2 papers; redos go on Moodle as one PDF, due Mon Nov 2 at the start "
                          "of class. The 'Quiz 2 redo' Moodle item must already exist (build_add_210.py quiz2-redo, a "
                          "restore-only merge); edit its dates if this hand-back moved."],
     date(2026, 11, 20): ["Quiz 3: printed copies + spares; per-problem score sheet"],
-    date(2026, 11, 23): ["Hand back the graded Quiz 3 papers. Say: redos go on Moodle as one PDF, due Mon Nov 30 at the start "
+    date(2026, 11, 23): ["Hand back the graded Quiz 3 papers; redos go on Moodle as one PDF, due Mon Nov 30 at the start "
                          "of class (no class Nov 25/27). The 'Quiz 3 redo' Moodle item must already exist (build_add_210.py "
                          "quiz3-redo); edit its dates if this hand-back moved."],
 }
@@ -191,7 +191,8 @@ def checklist(row, all_rows, whws, pack=None):
                       f"      Warm-up: {warm}",
                       f"      Essentials: {ess}",
                       f"      Depth: {depth}",
-                      f"      Packet to review: private/Solutions/WHW{hw:02d}/WHW{hw:02d}-solutions.pdf"]
+                      f"      Packet to review: private/Solutions/WHW{hw:02d}/WHW{hw:02d}-solutions.pdf"
+                      + ("" if (SOLUTIONS / f"WHW{hw:02d}" / f"WHW{hw:02d}-solutions.pdf").exists() else " (NOT FOUND: write it first)")]
             if vis >= GATE.GATE_START:
                 lines += GATE.golive_lines(f"WHW{hw:02d}", DESCRIPTIONS.get(hw, ""), SOLUTIONS / f"WHW{hw:02d}", hw in COMPUTATIONAL)
             if hw in COMPUTATIONAL:
@@ -202,7 +203,8 @@ def checklist(row, all_rows, whws, pack=None):
             lines += [f"- [ ] WHW{hw:02d} goes live {fmt(vis)}, before the next class: finalize and "
                       f"hand-review its solutions NOW (the ideal deadline). Covers {covers}.",
                       f"      Warm-up: {warm}", f"      Essentials: {ess}", f"      Depth: {depth}",
-                      f"      Packet to review: private/Solutions/WHW{hw:02d}/WHW{hw:02d}-solutions.pdf"]
+                      f"      Packet to review: private/Solutions/WHW{hw:02d}/WHW{hw:02d}-solutions.pdf"
+                      + ("" if (SOLUTIONS / f"WHW{hw:02d}" / f"WHW{hw:02d}-solutions.pdf").exists() else " (NOT FOUND: write it first)")]
         if due == d:
             any_hw = True
             lines.append(f"- WHW{hw:02d} is DUE today 10:00 PM.")

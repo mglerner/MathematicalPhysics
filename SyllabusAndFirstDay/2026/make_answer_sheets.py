@@ -31,7 +31,8 @@ from pathlib import Path
 import numpy as np
 from PIL import Image
 
-sys.path.insert(0, str(Path.home() / "coding/courses/shared"))
+sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "shared"))
+import courses as C  # noqa: E402
 import packnotes as P  # noqa: E402
 
 SOL_DPI = 110
@@ -44,8 +45,7 @@ PAGE_CACHE = Path(tempfile.gettempdir()) / "phy210-solution-pages"
 # Exercises, so its band map is shared too rather than copied per pack.
 # Bands are MEASURED from the file's own text layer, not eyeballed --
 # it is a Word export, so every DE header has a real position.
-GARY_KEY = (Path.home() / "coding/courses/MathematicalPhysics/private"
-            / "F2026PrepPacks/_shared"
+GARY_KEY = (C.packs("210") / "_shared"
             / "Gary - PCCI solution key (27 Discovery Exercises, w page numbers).pdf")
 GARY_BANDS = GARY_KEY.with_name("gary-pcci-bands.txt")
 
@@ -55,8 +55,7 @@ GARY_BANDS = GARY_KEY.with_name("gary-pcci-bands.txt")
 # The band files are generated into _shared/ beside Gary's key; the
 # manuals they point into live in their own folder. Two paths, not one.
 FELDER_BANDS_DIR = GARY_KEY.parent
-FELDER_DIR = (Path.home() / "coding/courses/MathematicalPhysics/private"
-              / "Solutions to Felder and Felder")
+FELDER_DIR = C.private("210") / "Solutions to Felder and Felder"
 FELDER_X = (0.085, 0.925)
 
 

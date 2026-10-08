@@ -19,10 +19,11 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
 import make_fall2026_calendar as CAL          # noqa: E402
-import make_review_checklists as CHK          # noqa: E402
+import make_review_checklists as CHK          # noqa: E402  (puts shared/ on sys.path)
+import courses as C                           # noqa: E402
 
 # Prep material, not course-facing: lives with the decks in private/ (Dropbox).
-OUT = Path.home() / "coding/courses/MathematicalPhysics/private/Decks/ChapterSlides"
+OUT = C.private("210") / "Decks/ChapterSlides"
 TITLES = {   # Felder & Felder, Mathematical Methods in Engineering and Physics
     1: "Introduction to Ordinary Differential Equations",
     2: "Taylor Series and Series Convergence", 3: "Complex Numbers",

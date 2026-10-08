@@ -91,23 +91,9 @@ def fmt(d):
 
 
 def class_rows():
-    days = list(CAL.class_days())
-    # The calendar build()'s guards, repeated here because the consumers of class_rows() never run
-    # build(): an extra CONTENT row would silently drop off the end, a misdated quiz would be
-    # treated as content (too FEW rows is loud: next() raises StopIteration).
-    assert len(CAL.CONTENT) + len(CAL.QUIZZES) == len(days), (
-        f"{len(CAL.CONTENT)} content + {len(CAL.QUIZZES)} quizzes for {len(days)} class meetings")
-    assert all(d in days for d in CAL.QUIZZES), "quiz on a non-class day"
-    assert all(d in days for d in CAL.LAPTOP_DAYS), "LAPTOP_DAYS names a non-class day"
-    content = iter(CAL.CONTENT)
-    rows = []
-    for i, d in enumerate(days):
-        if d in CAL.QUIZZES:          # keyed by date since 2026-10-04 (as 317's EXAMS)
-            rows.append((i + 1, d, CAL.QUIZZES[d], "", True))
-        else:
-            topic, reading = next(content)
-            rows.append((i + 1, d, topic, reading, False))
-    return rows
+    """[(class_no, date, topic, reading, is_quiz)] from the calendar's rows() (flex days and slips applied;
+    a flex day is a content row with no reading)."""
+    return [(r["n"], r["date"], r["topic"], r["reading"], r["kind"] == "assessment") for r in CAL.rows()]
 
 
 def whw_events():

@@ -1,5 +1,7 @@
 # PHY 210 F2026 Moodle build spec
 
+> **Note 2026-10-08:** the Google Sheet schedule embed described below was the August design; since 2026-09-28 students see only the generated course map (`private/MoodleBuild/coursemap_*.py`), and the calendar xlsx is a reference copy that feeds nothing.
+
 Decisions encoded 2026-08-18: build our OWN course (do NOT restore
 Gillian's .mbz -- it stays as a reference archive); organize by TOPIC,
 not week; WHWs are native Moodle assignments (no Google Forms) so

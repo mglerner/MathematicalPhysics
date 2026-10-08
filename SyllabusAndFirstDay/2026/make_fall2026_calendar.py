@@ -545,7 +545,9 @@ def build(outpath):
     for j, w in enumerate([7, 7, 10, 34, 12, 18, 10, 14]):
         col = openpyxl.utils.get_column_letter(1 + j)
         wsw.column_dimensions[col].width = w
-    print(f"Schedule embed ranges: chunk 1 = A1:{last_col}{split_row - 1}, "
+    # The "embed ranges" were for the August Google Sheet embed, replaced by the course map on
+    # 2026-09-28 (students never see a sheet); the xlsx is a reference copy only.
+    print(f"(legacy) schedule embed ranges: chunk 1 = A1:{last_col}{split_row - 1}, "
           f"chunk 2 = A{split_row}:{last_col}{r}")
 
     # ----------------------------------------------- WHW problem lists

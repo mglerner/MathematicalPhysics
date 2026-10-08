@@ -143,17 +143,40 @@ PREDECESSOR_ASSESSMENT = {
     date(2026, 10, 23): "2026-03-11",   # S26 Quiz 2
     date(2026, 11, 20): "2026-04-10",   # S26 Quiz 3
 }
+# Flex days (2026-10-08, Michael): days with no content of their own, the budget a slip spends. 210
+# has NONE: the flex day was spent on Mountain Day (Sep 23) and S26's practice day taught new
+# content. A whole-day slip here means cutting content (shared/slip.py refuses until a flex day
+# exists). Keyed by date like QUIZZES.
+FLEX = {}
+PREDECESSOR_FLEX = {}
+# Slips: (date of the class, +1 or -1, note); see shared/calendar_rows.py. shared/slip.py appends here.
+SLIPS = [
+]
 assert len(PREDECESSOR_CONTENT) == len(CONTENT), "one predecessor day per CONTENT row"
 assert set(PREDECESSOR_ASSESSMENT) == set(QUIZZES), "one predecessor day per quiz"
+assert set(PREDECESSOR_FLEX) == set(FLEX), "one predecessor day per flex day"
+
+import sys as _sys
+from pathlib import Path as _Path
+_sys.path.insert(0, str(_Path(__file__).resolve().parents[3] / "shared"))
+from calendar_rows import make_rows, effective_pcci, flex_summary  # noqa: E402
+
+
+def rows():
+    """The term, one dict per meeting (shared/calendar_rows.py): n, date, kind, topic, reading, extra,
+    predecessor, pcci. Flex days and slips applied. THE sequence every consumer reads; CONTENT is
+    positional input only."""
+    return make_rows(class_days(), CONTENT, QUIZZES, FLEX, SLIPS,
+                     PREDECESSOR_CONTENT, PREDECESSOR_ASSESSMENT, PREDECESSOR_FLEX, _PCCI)
+
+
+term_rows = rows          # alias for build(), whose local list is also called rows
 
 
 def predecessor_days():
     """{class number (meetings held): the predecessor's day 'YYYY-MM-DD', a list when a class straddles two of
     hers (the first is the main one), or None}."""
-    out, content = {}, iter(PREDECESSOR_CONTENT)
-    for i, d in enumerate(class_days()):
-        out[i + 1] = PREDECESSOR_ASSESSMENT[d] if d in QUIZZES else next(content)
-    return out
+    return {r["n"]: r["predecessor"] for r in rows()}
 
 
 # WHW01 is due MONDAY Sep 14, not Friday Sep 11 (decided 2026-09-02).
@@ -203,7 +226,7 @@ EXTRA_DUE = {
 # private/GillianManbirS26/.../WHW problem lists (transcribed).md and
 # the 2026-08-17 inventory report. Timing calibration: Gary's students
 # reported ~8-27 min per DE (old/15F/Assigned Problems.docx).
-PCCI = {
+_PCCI = {   # the hand table; PCCI below is the effective one (a PCCI follows its topic after a slip)
     # No PCCI on day 1 (nobody has the syllabus before the first
     # class); first collection is day 2, matching Gary's practice.
     # DE 1.2.1 is deliberately unassigned: class 01 does its content
@@ -249,6 +272,7 @@ PCCI = {
     date(2026, 12, 11): "DE 11.2.1 Parts 1-2",
     date(2026, 12, 14): "DE 11.3.1 Part 1",
 }
+PCCI = effective_pcci(rows())
 
 # ------------------------------------------------------- WHW problem lists
 # 13 weekly lists, re-cut from Gillian's S26 WHW forms (transcribed
@@ -403,9 +427,7 @@ WHWS = [
 def build(outpath):
     days = list(class_days())
     n = len(days)
-    assert len(CONTENT) + len(QUIZZES) == n, (
-        f"{len(CONTENT)} content + {len(QUIZZES)} quizzes "
-        f"for {n} class meetings")
+    seq = term_rows()                  # the asserts on the row counts live in shared/calendar_rows.py
     assert all(d in days for d in QUIZZES), "quiz on a non-class day"
     assert all(d.weekday() == 4 for d in QUIZZES), "quiz day not on a Friday"
     assert all(d in days for d in PCCI), "PCCI assigned to a non-class day"
@@ -439,7 +461,6 @@ def build(outpath):
     week_no = 0
     last_week = None
     class_no = 0
-    content_i = 0
     breaks_seen = set()
     for d in days:
         iso_week = d.isocalendar()[1]
@@ -451,12 +472,10 @@ def build(outpath):
             if bd not in breaks_seen and bd < d:
                 breaks_seen.add(bd)
                 rows.append((None, None, bd, why, "", "", "", ""))
-        if d in QUIZZES:
-            topic, reading, exam = QUIZZES[d], "", QUIZZES[d]
-        else:
-            topic, reading = CONTENT[content_i]
-            exam = ""
-            content_i += 1
+        r = seq[class_no]
+        assert r["date"] == d
+        topic, reading = r["topic"], r["reading"]
+        exam = topic if r["kind"] == "assessment" else ""
         hw = "; ".join(due_on.pop(d, []))
         class_no += 1
         rows.append((week_no, class_no, d, topic, reading,

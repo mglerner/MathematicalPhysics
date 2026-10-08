@@ -148,7 +148,8 @@ assert set(PREDECESSOR_ASSESSMENT) == set(QUIZZES), "one predecessor day per qui
 
 
 def predecessor_days():
-    """{class number (meetings held): the predecessor's day 'YYYY-MM-DD' or None}."""
+    """{class number (meetings held): the predecessor's day 'YYYY-MM-DD', a list when a class straddles two of
+    hers (the first is the main one), or None}."""
     out, content = {}, iter(PREDECESSOR_CONTENT)
     for i, d in enumerate(class_days()):
         out[i + 1] = PREDECESSOR_ASSESSMENT[d] if d in QUIZZES else next(content)

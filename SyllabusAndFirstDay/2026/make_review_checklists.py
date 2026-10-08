@@ -28,17 +28,18 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
 import make_fall2026_calendar as CAL  # noqa: E402
-sys.path.insert(0, str(Path.home() / "coding/courses/shared"))
+sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "shared"))
+import courses as C                       # noqa: E402
 import coverage_gate as GATE              # noqa: E402
 import packnotes as PN                    # noqa: E402
 
 # Coverage gate (2026-10-01): a week before each set goes live, the checklist asks for
 # /coverage-check; at go-live it prints the mechanical gate (verdict on file, links exist,
 # notebook linked when the set needs a computer). See shared/coverage_gate.py.
-DESCRIPTIONS = GATE.description_blocks(Path.home() / "coding/courses/MathematicalPhysics/private/MoodleBuild/whw-descriptions.html")
-SOLUTIONS = Path.home() / "coding/courses/MathematicalPhysics/private/Solutions"
+DESCRIPTIONS = GATE.description_blocks(C.moodlebuild("210") / "whw-descriptions.html")
+SOLUTIONS = C.private("210") / "Solutions"
 
-PACKS = Path.home() / "coding/courses/MathematicalPhysics/private/F2026PrepPacks"
+PACKS = C.packs("210")
 AVAILABLE_DAYS_BEFORE = 10.5          # build_assignments.py
 FIRST_CLASS = date(2026, 9, 9)
 
@@ -81,8 +82,10 @@ DAY_LOGISTICS = {
                          "quiz3-redo); edit its dates if this hand-back moved."],
 }
 # WHWs carrying a required computational problem (decided 2026-08-28;
-# the problem text lives in private/MoodleBuild/whw-descriptions.html and
-# SyllabusAndFirstDay/2026/ComputationalProblems.md).
+# the problem text lives in private/MoodleBuild/make_whw_descriptions.py's COMP
+# table, which writes whw-descriptions.html, and in
+# SyllabusAndFirstDay/2026/ComputationalProblems.md; check_whw_descriptions.py
+# asserts COMP's keys are this set).
 COMPUTATIONAL = {2, 4, 5, 6, 8, 9, 10, 12, 13}
 
 

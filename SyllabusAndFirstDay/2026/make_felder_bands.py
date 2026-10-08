@@ -23,7 +23,10 @@ import sys
 import tempfile
 from pathlib import Path
 
-PRIV = Path.home() / "coding/courses/MathematicalPhysics/private"
+sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "shared"))
+import courses as C  # noqa: E402
+
+PRIV = C.private("210")
 # The complete set of Felder & Felder chapter solution manuals, c01-c13.
 # Three copies also sit in _shared/; this is the full set, so band from here.
 MANUALS_DIR = PRIV / "Solutions to Felder and Felder"

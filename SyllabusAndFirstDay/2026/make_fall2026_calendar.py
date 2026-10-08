@@ -119,6 +119,41 @@ CONTENT = [
      "11.3, 9.6"),
 ]
 
+# The predecessor's day for each CONTENT row, in order (Manbir's S26 meeting, as her section
+# actually delivered it; see the comments on CONTENT). ONE copy, in data: the pack page links
+# the Manbir-vs-Gillian comparison from it, plan_overview checks each pack against it, and a
+# from-scratch build reads it to find the day's files (Manbir "<M.D> Notes.pdf", Gillian
+# "PHY210-<MonDD>.pdf"). None = no S26 day (Michael's finale). Quiz days are in
+# PREDECESSOR_ASSESSMENT, keyed by OUR date like QUIZZES, so a lost meeting cannot shift them.
+# S26 Feb 9 (10.2, linear operators) was the twin of the lost Sep 23 class and has no row.
+PREDECESSOR_CONTENT = [
+    "2026-01-26", "2026-01-28", "2026-01-30", "2026-02-02", "2026-02-04", "2026-02-06",  # Ch 1
+    "2026-02-11", "2026-02-16", "2026-02-18",                                              # Python, Laplace
+    "2026-02-20", "2026-02-25",                                                            # Ch 3
+    "2026-02-27", "2026-03-02", "2026-03-04",                                              # Ch 2
+    "2026-03-06", "2026-03-09", "2026-03-13", "2026-03-23", "2026-03-25",                  # Ch 6
+    "2026-03-27", "2026-03-30", "2026-04-01", "2026-04-03", "2026-04-06",                  # Ch 5
+    "2026-04-08", "2026-04-13", "2026-04-15", "2026-04-17", "2026-04-20", "2026-04-22",    # Ch 8
+    "2026-04-24", "2026-04-27", "2026-04-29",                                              # Ch 9
+    "2026-05-01", None,                                                                    # Ch 11; finale
+]
+PREDECESSOR_ASSESSMENT = {
+    date(2026, 9, 25): "2026-02-13",    # S26 Quiz 1
+    date(2026, 10, 23): "2026-03-11",   # S26 Quiz 2
+    date(2026, 11, 20): "2026-04-10",   # S26 Quiz 3
+}
+assert len(PREDECESSOR_CONTENT) == len(CONTENT), "one predecessor day per CONTENT row"
+assert set(PREDECESSOR_ASSESSMENT) == set(QUIZZES), "one predecessor day per quiz"
+
+
+def predecessor_days():
+    """{class number (meetings held): the predecessor's day 'YYYY-MM-DD' or None}."""
+    out, content = {}, iter(PREDECESSOR_CONTENT)
+    for i, d in enumerate(class_days()):
+        out[i + 1] = PREDECESSOR_ASSESSMENT[d] if d in QUIZZES else next(content)
+    return out
+
+
 # WHW01 is due MONDAY Sep 14, not Friday Sep 11 (decided 2026-09-02).
 # Every other WHW covers the Mon+Wed of its due week. Week 1 has no Monday --
 # the semester opens on a Wednesday -- so under the normal rule WHW01 would be

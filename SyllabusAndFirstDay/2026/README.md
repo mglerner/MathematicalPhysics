@@ -19,7 +19,7 @@ professor used in Spring 2026 (source spreadsheet:
   **The script is the source of truth**: hand-edits to the xlsx get
   clobbered on regeneration, so fold them into the script (as was done
   with the 2026-08-11 grade-category edits).
-- `make_review_checklists.py` -- writes the per-day `01-review-checklist.md`
+- `make_review_checklists.py` -- writes the per-day `.build/review-checklist.md`
   into each prep pack and `REVIEW-SCHEDULE.md` (private), enumerating the
   PCCI to review BEFORE each class (in-class problems: see the pack plan)
   and the WHW tiers to review by THE DAY AFTER the assignment goes live.

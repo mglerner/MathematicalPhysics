@@ -79,7 +79,7 @@ CONTENT = [
     ("Jupyter notebook exercise: ODEs in Python", "10.2"),
     ("Heaviside, Dirac delta, and the Laplace transform", "10.10"),
     ("Using Laplace transforms to solve ODEs", "10.11"),
-    # Reading split moved 2026-09-19 (PCCI audit, playbook 6a): the Oct 7
+    # Reading split moved 2026-09-19 (PCCI audit; retired ClassPlanPlaybook 6a, now shared/PrepRules.md, "The floor, and the next PCCI"): the Oct 7
     # PCCI is DE 3.4.1, so 3.4 must not be read (or taught) before Oct 7.
     # Pack 11 teaches 3.1-3.3 on Oct 5 and pack 12 teaches 3.4-3.5 on Oct 7.
     ("Complex numbers: basic properties", "3.1-3.3"),
@@ -122,8 +122,9 @@ CONTENT = [
 # The predecessor's day for each CONTENT row, in order (Manbir's S26 meeting, as her section
 # actually delivered it; see the comments on CONTENT). ONE copy, in data: the pack page links
 # the Manbir-vs-Gillian comparison from it, plan_overview checks each pack against it, and a
-# from-scratch build reads it to find the day's files (Manbir "<M.D> Notes.pdf", Gillian
-# "PHY210-<MonDD>.pdf"). None = no S26 day (Michael's finale). Quiz days are in
+# from-scratch build reads it to find the day's files (Manbir's are named by date but not
+# uniformly: "1.26 Day 1.pdf", "2.18 notes.pdf", "4.13.pdf"; Gillian's "PHY210-March2.pdf",
+# and her week-1 decks are dated one meeting later than Manbir's; look them up by hand). None = no S26 day (Michael's finale). Quiz days are in
 # PREDECESSOR_ASSESSMENT, keyed by OUR date like QUIZZES, so a lost meeting cannot shift them.
 # S26 Feb 9 (10.2, linear operators) was the twin of the lost Sep 23 class and has no row.
 PREDECESSOR_CONTENT = [

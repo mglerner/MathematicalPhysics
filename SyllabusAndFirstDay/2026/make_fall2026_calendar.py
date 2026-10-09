@@ -81,8 +81,8 @@ CONTENT = [
     ("Complex numbers: basic properties", "3.1-3.3"),
     ("Euler's formula; complex ODEs", "3.4-3.5"),
     # Manbir's S26 meeting for each slot is in the comment (her section's actual reach).
-    ("Linear approximations", "2.1-2.2"),                                   # Feb 27
-    ("Maclaurin series", "2.3"),                                            # Mar 2
+    ("Linear approximations; the Maclaurin machine", "2.1-2.2"),           # Feb 27 (+ her Mar 2 machine: class 13 ran ahead, 2026-10-09)
+    ("Maclaurin series in Python; Taylor series; series from a series", "2.3-2.5"),   # Mar 2 + Mar 4 (laptop day; Michael 2026-10-09)
     # 2.6-2.7 (convergence) deliberately cut (decision 2026-08-17);
     # Appendix C is the pointed-to substitute.
     ("Taylor series; finding one series from another", "2.4-2.5 (convergence: App. C)"),  # Mar 4
@@ -199,7 +199,7 @@ DELIVERED = {1}
 # Days students must bring a laptop. The schedule sheet (embedded in Moodle)
 # tags the topic "[BRING LAPTOP]" and the review checklist repeats it, so one
 # list drives both (a student asked not to carry a laptop every day, 2026-09-14).
-LAPTOP_DAYS = {date(2026, 9, 28)}
+LAPTOP_DAYS = {date(2026, 9, 28), date(2026, 10, 14)}   # Oct 14: the SymPy series notebook day (Michael, 2026-10-09)
 
 # Extra (non-WHW) due dates shown in the HW Due column.
 # Non-Newtonian Scientist: mid-semester (decision 2026-08-17); Mon Oct 26
@@ -239,7 +239,7 @@ _PCCI = {   # the hand table; PCCI below is the effective one (a PCCI follows it
     # Re-keyed 2026-10-01 with the rebuild: each PCCI moved with its topic. Dropped: 6.175
     # (its eigen day merged). No PCCI on Nov 6 (polar) or Dec 9 (complex Fourier), new days.
     date(2026, 10, 9): "DE 2.2.1 Parts 1-5",
-    date(2026, 10, 14): "DE 2.3.1 Parts 1-3",
+    date(2026, 10, 14): "2.30 (a)-(e)",   # was DE 2.3.1 parts 1-3; class 13 derived sine (2026-10-09; Moodle edit by hand)
     date(2026, 10, 16): "2.209",
     date(2026, 10, 19): "6.2",
     date(2026, 10, 21): "DE 6.3.1",

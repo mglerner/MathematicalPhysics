@@ -21,9 +21,7 @@ break gets one entry per page; one listed without a band labels the page without
 import json
 import re
 import shutil
-import subprocess
 import sys
-import tempfile
 from pathlib import Path
 
 # Imported here, not per function: without Pillow the crops used to come back empty and every
@@ -32,14 +30,13 @@ import numpy as np
 from PIL import Image
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "shared"))
+import answer_sheets as AS  # noqa: E402  (trim_margins, band files, page cache, render, crop)
 import courses as C  # noqa: E402
 import packnotes as P  # noqa: E402
 
-SOL_DPI = 110
-PAD = 0.004
+SOL_DPI = AS.SOL_DPI
 # Raw page renders of Gary's key and Felder's manuals, kept across runs as 317 keeps Taylor's.
-# Only the render is cached: every crop is re-cut from it on every run.
-PAGE_CACHE = Path(tempfile.gettempdir()) / "phy210-solution-pages"
+PAGE_CACHE = AS.page_cache("phy210-solution-pages")
 
 # Gary's PCCI solution key: one shared document covering the Discovery
 # Exercises, so its band map is shared too rather than copied per pack.
@@ -59,41 +56,9 @@ FELDER_DIR = C.private("210") / "Solutions to Felder and Felder"
 FELDER_X = (0.085, 0.925)
 
 
-def solutions_map(notes):
-    """-> {(filename-substring, page): [(problem, band-or-None)]}."""
-    raw = notes.tagged_line("Solutions:")
-    out = {}
-    if not raw:
-        return out
-    for entry in raw.split(";"):
-        if "=" not in entry or "#" not in entry.split("=")[0]:
-            continue
-        key, probs = entry.split("=", 1)
-        sub, page = key.rsplit("#", 1)
-        items = []
-        for tok in probs.split(","):
-            tok = tok.strip()
-            if not tok:
-                continue
-            m = re.match(r"([\d.]+?)@([\d.]+)-([\d.]+)$", tok)
-            items.append((m.group(1), (float(m.group(2)), float(m.group(3))))
-                         if m else (tok, None))
-        out[(sub.strip().lower(), int(page.strip()))] = items
-    return out
-
-
 def gary_bands():
     """-> {"1.6.1": [(page, top, bottom), ...]} from the shared band file."""
-    out = {}
-    if not GARY_BANDS.exists():
-        return out
-    for line in GARY_BANDS.read_text().split("\n"):
-        line = line.split("#")[0].strip()
-        m = re.match(r"DE\s+([\d.]+)\s*=\s*(\d+)@([\d.]+)-([\d.]+)$", line)
-        if m:
-            out.setdefault(m.group(1), []).append(
-                (int(m.group(2)), float(m.group(3)), float(m.group(4))))
-    return out
+    return AS.read_bands([GARY_BANDS], r"DE\s+") if GARY_BANDS.exists() else {}
 
 
 def felder_bands():
@@ -101,30 +66,9 @@ def felder_bands():
     out = {}
     for f in sorted(FELDER_BANDS_DIR.glob("felder-bands-c*.txt")):
         pdf = f.name.replace("felder-bands-", "").replace(".txt", "") + "solutions.pdf"
-        for line in f.read_text().split("\n"):
-            line = line.split("#")[0].strip()
-            m = re.match(r"([\d.]+)\s*=\s*(\d+)@([\d.]+)-([\d.]+)$", line)
-            if m:
-                out.setdefault(m.group(1), []).append(
-                    (pdf, int(m.group(2)), float(m.group(3)), float(m.group(4))))
+        for q, spans in AS.read_bands([f]).items():
+            out.setdefault(q, []).extend((pdf, *span) for span in spans)
     return out
-
-
-def trim_margins(im, pad=14, edge=0.03):
-    """Cut blank margin off all four sides of a crop (Michael, 2026-10-03: the key crop had wide
-    white margins). Ink = a few dark pixels in a row or column, ignoring the outer edges where
-    crop marks and scan borders live."""
-    a = np.asarray(im.convert("L"))
-    h, w = a.shape
-    inner = a[int(edge * h):h - int(edge * h), int(edge * w):w - int(edge * w)]
-    dark = inner < 160
-    rows = np.flatnonzero(dark.sum(axis=1) >= 3)
-    cols = np.flatnonzero(dark.sum(axis=0) >= 3)
-    if not len(rows) or not len(cols):
-        return im
-    y0 = max(0, rows[0] + int(edge * h) - pad); y1 = min(h, rows[-1] + int(edge * h) + pad)
-    x0 = max(0, cols[0] + int(edge * w) - pad); x1 = min(w, cols[-1] + int(edge * w) + pad)
-    return im.crop((x0, y0, x1, y1))
 
 
 def trim_blank(im, pad=12):
@@ -159,21 +103,6 @@ def snap_to_gaps(im, top, bot, bottom_up=False):
 MANUAL_BODY_TOP = 0.155    # the solutions manual's running head and crop marks end above this
 
 
-def raw_page(pdf, page):
-    """Path to one page of `pdf` rendered at SOL_DPI, from PAGE_CACHE when it is there. The
-    key carries the PDF's mtime, so a replaced key or manual is rendered afresh."""
-    PAGE_CACHE.mkdir(exist_ok=True)
-    stem = re.sub(r"[^A-Za-z0-9]+", "-", pdf.stem).strip("-").lower()
-    out = PAGE_CACHE / f"{stem}-{int(pdf.stat().st_mtime)}-p{page}.png"
-    if not out.exists():
-        tmp = out.with_name(out.stem + "-tmp")
-        subprocess.run(["pdftoppm", "-png", "-r", str(SOL_DPI), "-singlefile",
-                        "-f", str(page), "-l", str(page), str(pdf), str(tmp)],
-                       check=True, capture_output=True)
-        tmp.with_name(tmp.name + ".png").rename(out)
-    return out
-
-
 def crop_felder(pack_dir, prob, bands):
     """Cut one Felder problem's worked solution out of its manual."""
     spans = bands.get(prob)
@@ -196,10 +125,10 @@ def crop_felder(pack_dir, prob, bands):
         dst = out_dir / f"felder-{prob.replace('.', '_')}-{i}.png"
         # cut fresh every run (no "already cropped" shortcut), so a regenerated band file or a
         # changed crop rule reaches packs built earlier
-        im = Image.open(raw_page(src_pdf, page))
+        im = Image.open(AS.raw_page(src_pdf, page, PAGE_CACHE))
         w, h = im.size
         y0, y1 = snap_to_gaps(im, top, bot, bottom_up=continued)
-        piece = trim_margins(trim_blank(im.crop((int(FELDER_X[0] * w), y0, int(FELDER_X[1] * w), y1))))
+        piece = AS.trim_margins(trim_blank(im.crop((int(FELDER_X[0] * w), y0, int(FELDER_X[1] * w), y1))))
         # a continuation that is shorter than two lines is the next problem's label (9.81's "f(x)")
         if continued and piece.size[1] < 2 * SOL_DPI * 0.25:
             dst.unlink(missing_ok=True)        # an earlier run may have kept it
@@ -224,7 +153,7 @@ def crop_gary(pack_dir, de, bands):
     got = []
     for i, (page, top, bot) in enumerate(spans, 1):
         src = out_dir / f"gary-de-{de.replace('.', '_')}-{i}.png"
-        im = Image.open(raw_page(GARY_KEY, page))      # cut fresh every run, as crop_felder
+        im = Image.open(AS.raw_page(GARY_KEY, page, PAGE_CACHE))      # cut fresh every run, as crop_felder
         w, h = im.size
         piece = im.crop((0, max(0, int(top * h)), w, min(h, int(bot * h))))
         # a continuation band can hold only the next page's blank top margin (DE 5.4.1 p3,
@@ -232,7 +161,7 @@ def crop_gary(pack_dir, de, bands):
         if not ((np.asarray(piece.convert("L")) < 160).sum(axis=1) >= 3).any():
             src.unlink(missing_ok=True)        # an earlier run may have kept it
             continue
-        trim_margins(piece).save(src)
+        AS.trim_margins(piece).save(src)
         got.append((f"answer-images/{src.name}", f"Gary's PCCI key, DE {de}"))
     # number the pieces actually kept (a dropped blank piece must not leave "page 1 of 2")
     return [(src, cap + (f" (page {k} of {len(got)})" if len(got) > 1 else ""))
@@ -244,54 +173,9 @@ def render_pages(pack_dir, smap):
     if not shutil.which("pdftoppm") or not smap:
         return []
     subs = {sub for sub, _ in smap}
-    pdfs = sorted({p for p in P.pdfs(pack_dir)
-                   if any(s in p.name.lower() for s in subs)})
-    out_dir = P.layout(pack_dir)["build"] / "answer-images"
-    pages = []
-    for pdf in pdfs:
-        # the full slug, and only this PDF's own page files: a 48-char cut gave Gary's sample PDE
-        # test and its SOLUTIONS the same stem, and a prefix glob also matches longer stems
-        stem = re.sub(r"[^A-Za-z0-9]+", "-", pdf.stem).strip("-").lower()
-        out_dir.mkdir(parents=True, exist_ok=True)
-        subprocess.run(["pdftoppm", "-png", "-r", str(SOL_DPI), str(pdf),
-                        str(out_dir / stem)], check=True, capture_output=True)
-        for png in sorted(out_dir.glob(stem + "-*.png")):
-            n = re.fullmatch(rf"{re.escape(stem)}-(\d+)\.png", png.name)
-            if n:
-                pages.append({"path": png, "src": f"answer-images/{png.name}",
-                              "file": pdf.name, "stem": stem, "page": int(n.group(1))})
-    return pages
+    return AS.render_pages(pack_dir, sorted({p for p in P.pdfs(pack_dir)
+                                             if any(s in p.name.lower() for s in subs)}))
 
-
-def crop_problems(pages, smap):
-    crops, claimed = {}, set()
-    for pg in pages:
-        items = []
-        for (sub, page), lst in smap.items():
-            if sub in pg["file"].lower() and page == pg["page"]:
-                items = lst
-                break
-        banded = [(q, b) for q, b in items if b]
-        for (qa, ba), (qb, bb) in zip(banded, banded[1:]):
-            if ba[1] + PAD > bb[0] - PAD:
-                print(f"WARNING {pg['file']} p{pg['page']}: {qa} and {qb} overlap "
-                      f"once PAD={PAD} is added; tighten a band or lower PAD")
-        im = None
-        for prob, band in items:
-            if band is None:
-                continue
-            if im is None:
-                im = Image.open(pg["path"])
-            w, h = im.size
-            y0, y1 = max(0, int((band[0] - PAD) * h)), min(h, int((band[1] + PAD) * h))
-            if y1 <= y0:
-                continue
-            name = f"{pg['stem']}-p{pg['page']}-{prob.replace('.', '_')}.png"
-            trim_margins(im.crop((0, y0, w, y1))).save(pg["path"].parent / name)
-            crops.setdefault(prob, []).append(
-                (f"answer-images/{name}", f"{pg['file']}, p{pg['page']}"))
-            claimed.add(id(pg))
-    return crops, claimed
 
 def main(only=None):
     """Write crops.json (in the pack's build folder) per pack: the PCCI's solution from Gary's key (a Discovery Exercise)
@@ -309,7 +193,7 @@ def main(only=None):
         if notes.old_format:
             continue
         pack = P.pack_of(path)
-        smap = solutions_map(notes)
+        smap = notes.solutions_map()
         de = notes.pcci_de()
         pcci_imgs = crop_gary(pack, de, bands) if de else []
         withkey += bool(pcci_imgs)
@@ -320,7 +204,7 @@ def main(only=None):
                 felder += 1
                 problems.setdefault(q, {})["worked"] = fc
         pages = render_pages(pack, smap)
-        crops, claimed = crop_problems(pages, smap)
+        crops, claimed = AS.crop_problems(pages, smap)
         cropped += len(crops)
         for q, lst in crops.items():
             problems.setdefault(q, {}).setdefault("worked", []).extend(lst)
@@ -328,8 +212,7 @@ def main(only=None):
         for pg in pages:
             if id(pg) in claimed:
                 continue
-            listed = next((", ".join(q for q, _ in lst) for (sub, page), lst in smap.items()
-                           if sub in pg["file"].lower() and page == pg["page"]), "")
+            listed = ", ".join(q for q, _ in AS.listed_on(smap, pg) or [])
             unclaimed.append({"src": pg["src"], "file": pg["file"], "page": pg["page"],
                               "note": f"on this page: {listed}" if listed else "not on the Solutions: line"})
         P.layout(pack)["build"].mkdir(exist_ok=True)

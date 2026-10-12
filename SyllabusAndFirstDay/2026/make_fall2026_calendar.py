@@ -147,6 +147,7 @@ FLEX = {}
 PREDECESSOR_FLEX = {}
 # Slips: (date of the class, +1 or -1, note); see shared/calendar_rows.py. shared/slip.py appends here.
 SLIPS = [
+    (date(2026, 10, 14), -1, "a day ahead: Michael's two-day series plan put Taylor, the SymPy notebook and the crystal on Wed Oct 14 (class 14); Friday's content was covered (decided 2026-10-12 on the assumption that Wednesday lands)"),
 ]
 assert len(PREDECESSOR_CONTENT) == len(CONTENT), "one predecessor day per CONTENT row"
 assert set(PREDECESSOR_ASSESSMENT) == set(QUIZZES), "one predecessor day per quiz"

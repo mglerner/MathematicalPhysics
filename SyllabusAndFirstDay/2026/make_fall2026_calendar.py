@@ -82,7 +82,7 @@ CONTENT = [
     ("Euler's formula; complex ODEs", "3.4-3.5"),
     # Manbir's S26 meeting for each slot is in the comment (her section's actual reach).
     ("Linear approximations; the Maclaurin machine", "2.1-2.2"),           # Feb 27 (+ her Mar 2 machine: class 13 ran ahead, 2026-10-09)
-    ("Maclaurin series in Python; Taylor series; series from a series", "2.3-2.5"),   # Mar 2 + Mar 4 (laptop day; Michael 2026-10-09)
+    ("Series day 2: back to the crystal, Taylor series, SymPy", "2.3-2.5"),   # Mar 2 p8-9 + Mar 4 (laptop day; Michael's day 2, 2026-10-12)
     # 2.6-2.7 (convergence) deliberately cut (decision 2026-08-17);
     # Appendix C is the pointed-to substitute.
     ("Taylor series; finding one series from another", "2.4-2.5 (convergence: App. C)"),  # Mar 4

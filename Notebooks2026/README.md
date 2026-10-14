@@ -30,17 +30,12 @@ nothing. To keep a particular notebook's outputs, exempt it with
 Every notebook students touch reads **in order of use**, top to bottom:
 
 1. Title + a few lines of physics context (the equations it uses).
-2. **Predict as soon as is reasonable** (Michael, 2026-10-07): two or three
-   concrete questions, then an EMPTY markdown cell reading `*(your
-   prediction here)*` with the instruction "double-click, type,
-   Shift-Enter". Usually that is a "1. Predict first (before you run
-   anything)" section at the top; in a worksheet-style notebook the room has
-   no context at the top, so the prediction goes just before each run, after
-   the equations it is about are stated. Predictions at the end never get
-   written.
-3. Numbered sections in order of use ("2. Setup", "3. ...").
-4. A "What you found" section at the end with its own empty answer
+2. Numbered sections in order of use ("1. Setup", "2. ...").
+3. A "What you found" section at the end with its own empty answer
    cell(s); homework notebooks get one empty cell per question.
+
+No prediction box is required (Michael, 2026-10-14: the predict-first rule of
+2026-09-07/10-07 "is causing more trouble than it's worth"; dropped).
 
 Code style, for students who may be seeing Python for the first time:
 first code cell starts with `%matplotlib inline` (the hub defaults to

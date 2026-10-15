@@ -242,7 +242,7 @@ _PCCI = {   # the hand table; PCCI below is the effective one (a PCCI follows it
     date(2026, 10, 9): "DE 2.2.1 Parts 1-5",
     date(2026, 10, 14): "2.30 (a)-(e)",   # was DE 2.3.1 parts 1-3; class 13 derived sine (2026-10-09; Moodle edit by hand)
     date(2026, 10, 16): "2.209",
-    date(2026, 10, 19): "6.2",
+    date(2026, 10, 19): "6.2 (a)",        # cut to (a), 2026-10-14 (Michael; Gary 18F: "a bit long"); Moodle dance
     date(2026, 10, 21): "DE 6.3.1",
     date(2026, 10, 26): "DE 6.5.1",
     date(2026, 10, 28): "DE 6.8.1 Parts 1-3",

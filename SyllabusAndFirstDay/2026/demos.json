@@ -298,6 +298,7 @@
   "id": "air-track-normal-modes",
   "name": "Two air-track gliders and three springs: normal modes and beats",
   "classes": [
+   15,
    21,
    16
   ],
@@ -338,7 +339,7 @@
   "image": null,
   "diy": "PASCO carts + track + three springs from the intro lab (CU Boulder version) if no air track.",
   "notes": "Gary's demo for this course; ask what he uses. Class 16 = optional 2-minute preview of the two modes when the three-spring system first appears. Gary Felder runs coupled-oscillator demos in this course; ask the lab manager what he uses -- likely this or coupled pendula, already set up. Class 16 introduces the same three-spring, two-mass system as the motivating example for matrices: showing the two pure modes there (2 min, no explanation) and paying it off in class 21 is an option if time allows. Check the spring arrangement against F&F 6.9 and match it (equal springs gives the clean sqrt(3)).",
-  "status": "recommended",
+  "status": "done",
   "buy": []
  },
  {

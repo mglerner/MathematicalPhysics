@@ -22,7 +22,8 @@ S26 failed to do (her calendar was empty; WHW 03+ had no due dates).
 
 ## Sections (~12 collapsed topics)
 
-0. **General / Course Information** -- syllabus PDF; the Course
+0. **General / Course Information** -- syllabus (a link to
+   `PHY210Syllabus.pdf` on GitHub, so commits update it live); the Course
    Calendar Page (see "Schedule embed" below); jupyterhub.smith.edu
    pointer;
    office-hours info; anonymous feedback via a Moodle Feedback

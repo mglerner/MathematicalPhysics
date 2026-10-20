@@ -3,7 +3,7 @@
 `MathPretest-student.pdf` is the printed pretest (one per student, day 1). The LaTeX source and the
 answer key (`MathPretest.tex` with `\answer{}`, `MathPretest-master.pdf`) live in `private/Pretest/`
 (Dropbox, never in git): the key was removed from this public repo and its history on 2026-10-20.
-Build from `private/Pretest/` with `\input{../../SyllabusAndFirstDay/macros}` resolved from there:
+Build from `private/Pretest/` (its `\input` points at `SyllabusAndFirstDay/macros.tex`):
 
     student: pdflatex -jobname=MathPretest-student "\def\STUDENTVERSION{}\input{MathPretest.tex}"
     master:  pdflatex -jobname=MathPretest-master MathPretest.tex

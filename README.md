@@ -36,7 +36,7 @@ live in `private/`, a gitignored symlink to
 
 ## Convolutions
 
-Our notebook on convolutions may be found [here](http://nbviewer.ipython.org/github/mglerner/MathematicalPhysics/blob/master/Convolutions/Convolution%20Animations.ipynb)
+Our notebook on convolutions may be found [here](http://nbviewer.ipython.org/github/mglerner/MathematicalPhysics/blob/main/Convolutions/Convolution%20Animations.ipynb)
 
 ### Resources for Independent Projects
 

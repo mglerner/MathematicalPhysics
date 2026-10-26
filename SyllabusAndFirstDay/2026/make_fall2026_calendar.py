@@ -204,9 +204,10 @@ LAPTOP_DAYS = {date(2026, 9, 28), date(2026, 10, 14)}   # Oct 14: the SymPy seri
 
 # Extra (non-WHW) due dates shown in the HW Due column.
 # Non-Newtonian Scientist: mid-semester (decision 2026-08-17); Mon Oct 26
-# is the calendar midpoint and has no competing WHW deadline.
+# is the calendar midpoint and has no competing WHW deadline. Moved to
+# Wed Oct 28 on Moodle by Michael, 2026-10-26.
 EXTRA_DUE = {
-    date(2026, 10, 26): "Non-Newtonian Scientist due",
+    date(2026, 10, 28): "Non-Newtonian Scientist due",
 }
 
 # ---------------------------------------------------------------- PCCIs

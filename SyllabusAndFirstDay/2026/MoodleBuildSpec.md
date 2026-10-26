@@ -155,7 +155,7 @@ nobody set.
 | ----------------------- | --------------------------------------------------------- | ------------ | -------------------------------------------------------------------------------------------------------------------------------- |
 | Math Pretest            | Fri Sep 18, 22:00                                         | 0 (ungraded) | Graded for completion; carries NO gradebook item so the 1000 total holds. Ships hidden until the PDF is attached.                |
 | WHW01..WHW13            | Fridays 22:00 (WHW11 -> check calendar; WHW13 Fri Dec 11) | 25 each      | description = that week's tier list + reflection questions; submission = photo of work (file) + reflection answers (online text) |
-| Non-Newtonian Scientist | Mon Oct 26, 22:00                                         | 25           | prompt adapted from shared/NonNewtonianPhysicist/                                                                                |
+| Non-Newtonian Scientist | Wed Oct 28, 22:00 (was Mon Oct 26; moved 2026-10-26)      | 25           | prompt adapted from shared/NonNewtonianPhysicist/                                                                                |
 
 One due TIME everywhere: 22:00 (Gillian's drifted; Will's drifted;
 pick one, keep it).

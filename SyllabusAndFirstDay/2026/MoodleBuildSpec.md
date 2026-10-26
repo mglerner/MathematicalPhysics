@@ -40,6 +40,12 @@ S26 failed to do (her calendar was empty; WHW 03+ had no due dates).
    2. What's not working well, and how can the instructor make
       things better?
    3. What can you, as the student, do to make the class better?
+   MADE BY HAND 2026-10-26 in both courses, in Forums and feedback under Anonymous Feedback, named
+   "Mid-semester Feedback", closes Fri Oct 30 23:59. The tooling reads its close time from the backup
+   (moodle_audit.read_backup feedbacks, live_structure feedback_close): the Course information label
+   links it while it is open (feedback_line), the course map puts a due chip on its closing day and a
+   next-due entry (moodle_coursemap.feedback_chips / feedback_deadlines), and the audit expects it in
+   section 1. Never put it in Start here: the builders treat S0 as exactly map + info.
 1. **Homework (WHW)** -- standing section, Will-style: the 13 WHW
    assignments + the WHW problem lists (paste each week's tiers into
    the assignment description; the xlsx WHW tab is the source).

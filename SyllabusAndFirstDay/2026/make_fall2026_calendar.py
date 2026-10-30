@@ -93,10 +93,12 @@ CONTENT = [
     ("Eigenvectors; the two-coupled-oscillator problem", "6.8-6.9"),        # Mar 25
     ("Setting up 1D and 2D integrals", "5.1-5.2"),                          # Mar 27
     ("Cartesian 2D integrals", "5.3-5.4"),                                  # Mar 30
-    ("Polar coordinates", "5.6"),                                           # Apr 1
+    # Merged 2026-10-30 (Michael): polar (Apr 1) and cylindrical/spherical (S26's Apr 6
+    # "practice/review" day, which taught them new) are one curvilinear-coordinates day, as Gary
+    # runs it (21S, 22S: 5.6-5.7 in one meeting). The freed slot became the FLEX day at Nov 11
+    # that the class-21 slip consumed (the springs recap ran a whole day long).
+    ("Polar, cylindrical and spherical coordinates", "5.5-5.7; App. D"),    # Apr 1 (+ Apr 6, merged into the pack)
     ("Line integrals and surface integrals", "5.8, 5.10"),                  # Apr 3
-    # S26's "practice/review" day actually taught cylindrical and spherical coordinates new.
-    ("Cylindrical and spherical coordinates", "5.5, 5.7; App. D"),          # Apr 6
     ("Vector and scalar fields; potential", "8.1-8.3"),                     # Apr 8
     ("The gradient; equipotentials", "8.4"),                                # Apr 13
     ("Potential from a field; the gradient theorem; divergence and curl (Feynman)",
@@ -129,7 +131,7 @@ PREDECESSOR_CONTENT = [
     "2026-02-20", "2026-02-25",                                                            # Ch 3
     "2026-02-27", "2026-03-02", "2026-03-04",                                              # Ch 2
     "2026-03-06", "2026-03-09", "2026-03-13", "2026-03-23", "2026-03-25",                  # Ch 6
-    "2026-03-27", "2026-03-30", "2026-04-01", "2026-04-03", "2026-04-06",                  # Ch 5
+    "2026-03-27", "2026-03-30", "2026-04-01", "2026-04-03",                                # Ch 5 (Apr 6 merged into the Apr 1 pack, 2026-10-30)
     "2026-04-08", "2026-04-13", "2026-04-15", "2026-04-17", "2026-04-20", "2026-04-22",    # Ch 8
     "2026-04-24", "2026-04-27", "2026-04-29",                                              # Ch 9
     "2026-05-01", None,                                                                    # Ch 11; finale
@@ -143,12 +145,15 @@ PREDECESSOR_ASSESSMENT = {
 # has NONE: the flex day was spent on Mountain Day (Sep 23) and S26's practice day taught new
 # content. A whole-day slip here means cutting content (shared/slip.py refuses until a flex day
 # exists). Keyed by date like QUIZZES.
-FLEX = {}
-PREDECESSOR_FLEX = {}
+# 2026-10-30: one flex day, freed by merging the two curvilinear-coordinates days (see CONTENT), dated
+# at the slot the cylindrical/spherical day held; spent the same day by the class-21 slip (SLIPS).
+FLEX = {date(2026, 11, 11): "Flex day (freed 2026-10-30 by the curvilinear-coordinates merge)"}
+PREDECESSOR_FLEX = {date(2026, 11, 11): "2026-04-06"}
 # Slips: (date of the class, +1 or -1, note); see shared/calendar_rows.py. shared/slip.py appends here.
 SLIPS = [
     (date(2026, 10, 14), -1, "a day ahead: Michael's two-day series plan put Taylor, the SymPy notebook and the crystal on Wed Oct 14 (class 14); Friday's content was covered (decided 2026-10-12 on the assumption that Wednesday lands)"),
     (date(2026, 10, 21), +1, 'ran a day long: class 17 (Wed Oct 21) became the Quiz 2 review day, so the matrix day (6.5-6.6) was taught on Mon Oct 26 as class 19; Michael 2026-10-26: a slip for now, to be clawed back over the semester'),
+    (date(2026, 10, 30), +1, 'the equal-mass spring recap took the rest of class 21 for the first eigenvalue and eigenvector; Mon Nov 2 redoes the springs spelled out, the change of basis and the carts capstone (Michael, 2026-10-30); paid for by merging the polar and cylindrical/spherical days'),
 ]
 assert len(PREDECESSOR_CONTENT) == len(CONTENT), "one predecessor day per CONTENT row"
 assert set(PREDECESSOR_ASSESSMENT) == set(QUIZZES), "one predecessor day per quiz"
@@ -240,7 +245,8 @@ _PCCI = {   # the hand table; PCCI below is the effective one (a PCCI follows it
     date(2026, 10, 5): "DE 3.2.1",
     date(2026, 10, 7): "DE 3.4.1",
     # Re-keyed 2026-10-01 with the rebuild: each PCCI moved with its topic. Dropped: 6.175
-    # (its eigen day merged). No PCCI on Nov 6 (polar) or Dec 9 (complex Fourier), new days.
+    # (its eigen day merged). No PCCI on Dec 9 (complex Fourier), a new day. Nov 6 (polar) had none
+    # until 2026-10-30, when the cylindrical/spherical day merged into it and brought DE 5.7.1.
     date(2026, 10, 9): "DE 2.2.1 Parts 1-5",
     date(2026, 10, 14): "2.30 (a)-(e)",   # was DE 2.3.1 parts 1-3; class 13 derived sine (2026-10-09; Moodle edit by hand)
     date(2026, 10, 16): "2.209",
@@ -252,7 +258,7 @@ _PCCI = {   # the hand table; PCCI below is the effective one (a PCCI follows it
     date(2026, 11, 2): "5.1",
     date(2026, 11, 4): "DE 5.4.1",
     date(2026, 11, 9): "5.163 parts a and d",
-    date(2026, 11, 11): "DE 5.7.1 Parts 1-4",
+    date(2026, 11, 6): "DE 5.7.1 Parts 1-4",    # was keyed Nov 11 (cylindrical/spherical day), merged 2026-10-30
     date(2026, 11, 13): "DE 8.2.1 Parts 5-6",
     date(2026, 11, 16): "DE 8.4.1",
     date(2026, 11, 18): "Read Feynman II Ch 3 sections 3-1 to 3-6; in one "

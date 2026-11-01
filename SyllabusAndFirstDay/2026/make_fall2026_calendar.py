@@ -165,7 +165,7 @@ def rows():
     predecessor, pcci. Flex days and slips applied. THE sequence every consumer reads; CONTENT is
     positional input only."""
     return make_rows(class_days(), CONTENT, QUIZZES, FLEX, SLIPS,
-                     PREDECESSOR_CONTENT, PREDECESSOR_ASSESSMENT, PREDECESSOR_FLEX, _PCCI)
+                     PREDECESSOR_CONTENT, PREDECESSOR_ASSESSMENT, PREDECESSOR_FLEX, _PCCI, _PCCI_CONTINUED)
 
 
 term_rows = rows          # alias for build(), whose local list is also called rows
@@ -226,6 +226,10 @@ EXTRA_DUE = {
 # private/GillianManbirS26/.../WHW problem lists (transcribed).md and
 # the 2026-08-17 inventory report. Timing calibration: Gary's students
 # reported ~8-27 min per DE (old/15F/Assigned Problems.docx).
+# PCCIs of slip-made "(continued)" days, keyed by the day's ACTUAL date: such a day has no topic row of
+# its own in _PCCI to follow. Mon Nov 2 (class 22, the springs continued): 6.164, the eigenvectors of
+# 6.163 (done in class 20) as a basis and T diagonal in it (Michael, 2026-11-01).
+_PCCI_CONTINUED = {date(2026, 11, 2): "6.164"}
 _PCCI = {   # the hand table; PCCI below is the effective one (a PCCI follows its topic after a slip)
     # No PCCI on day 1 (nobody has the syllabus before the first
     # class); first collection is day 2, matching Gary's practice.

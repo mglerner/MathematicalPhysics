@@ -1,0 +1,491 @@
+% Written 2026-11-01 for Smith PHY 210 (Mathematical Methods), from the by-hand notes in the
+% Chapter 6 instructor deck (pp. 75-87, the Nov 1 export) and Felder & Felder Section 6.9.
+% Companion to the Noether handout in the 317 repo (CalculusOfVariations/NoetherNotes): same
+% macros.tex, same shape (a credit line, a rule, then the highlights).
+\documentclass[12pt]{article}
+\input{macros}
+
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathmorphing}
+\numberwithin{equation}{section}
+
+\newcommand{\wo}{\omega_0}
+
+\begin{document}
+\title{Highlights from the three-spring problem: the same problem, solved two ways}
+\author{Michael G. Lerner}
+\date{\today}
+
+\maketitle
+
+These notes closely follow Felder and Felder, Section 6.9, ``Putting It
+Together: Revisiting the Three-Spring Problem''\cite{FelderFelder} (pp.\
+336--340), sometimes to the point of plagiarism, so I'll just give full
+credit now. The book works the problem on a matrix with eigenvalues $-4$
+and $-1$; here I've swapped in the carts we actually have on the track, and
+I've written out the steps we did on the board, including the one that
+tripped us up on Friday (converting between normal-mode amplitudes and
+positions). The ``why is the matrix diagonal?'' argument in
+\S\ref{sec:diagonal} is the one line Felder and Felder leave to you
+(``This fact comes very directly from the definition of an eigenvector.''
+p.\ 339, and Problem 6.206).
+
+\setlength{\unitlength}{1in}
+
+\begin{picture}(6,.1)
+\put(0,0) {\line(1,0){6.25}}
+\end{picture}
+
+\section{The problem}
+\label{sec:problem}
+
+\begin{center}
+\begin{tikzpicture}[scale=1]
+  \draw[thick] (0,0) -- (0,0.8);
+  \draw[thick] (7.6,0) -- (7.6,0.8);
+  \draw[thick] (-0.2,0) -- (7.8,0);
+  \draw[decorate,decoration={coil,aspect=0.5,segment length=2.2mm,amplitude=1.6mm}] (0,0.4) -- (2.0,0.4);
+  \draw[fill=gray!20] (2.0,0.1) rectangle (3.0,0.7);  \node at (2.5,0.4) {$m$};
+  \draw[decorate,decoration={coil,aspect=0.5,segment length=2.2mm,amplitude=1.6mm}] (3.0,0.4) -- (4.6,0.4);
+  \draw[fill=gray!20] (4.6,0.1) rectangle (5.6,0.7);  \node at (5.1,0.4) {$m$};
+  \draw[decorate,decoration={coil,aspect=0.5,segment length=2.2mm,amplitude=1.6mm}] (5.6,0.4) -- (7.6,0.4);
+  \node at (1.0,1.0) {$k$}; \node at (3.8,1.0) {$k$}; \node at (6.6,1.0) {$k$};
+  \node at (2.5,-0.35) {$x_1$}; \node at (5.1,-0.35) {$x_2$};
+\end{tikzpicture}
+\end{center}
+
+\noindent\textbf{Question:} Two carts on the track, three equal springs
+$k$, each cart of mass $m$. Find the solution with initial conditions
+$x_1(0) = 3$ cm, $x_2(0) = 0$, $\dot{x}_1(0) = \dot{x}_2(0) = 0$.
+Here $x_1$ and $x_2$ are each cart's displacement from its own
+equilibrium position, positive to the right.
+
+\medskip
+
+\noindent\textbf{Step 1: draw the picture, write down N2L.} Cart 1 feels
+the left spring, stretched by $x_1$, pulling it back, and the middle
+spring, stretched by $x_2 - x_1$, pulling it forward:
+
+\begin{eqnarray}
+  m\ddot{x}_1 &=& -kx_1 + k(x_2 - x_1) = -2kx_1 + kx_2 \\
+  m\ddot{x}_2 &=& -2kx_2 + kx_1
+\end{eqnarray}
+
+\noindent (The second line is the first with the labels swapped; the
+middle spring pushes the two carts in opposite directions, which is why
+the off-diagonal terms below are both positive while the diagonal ones
+are both negative.)
+
+\medskip
+
+\noindent\textbf{Step 2: turn it into a matrix equation.} Writing
+$\wo^2 \equiv k/m$,
+
+\begin{equation}
+  \label{eq:matrix}
+  \begin{pmatrix} \ddot{x}_1 \\ \ddot{x}_2 \end{pmatrix}
+  = \wo^2 \begin{pmatrix} -2 & 1 \\ 1 & -2 \end{pmatrix}
+  \begin{pmatrix} x_1 \\ x_2 \end{pmatrix},
+  \qquad \textrm{i.e.}\qquad \ddot{\vec{x}} = \mathbf{M}\vec{x}.
+\end{equation}
+
+The column is the \emph{state} of the system (where both carts are), and
+$\mathbf{M}$ is a transformation acting on it. Two things made us reach
+for a matrix: the state needs more than one number, and each derivative
+is a linear combination of those numbers.
+
+\medskip
+
+\noindent\textbf{Step 3: find the eigenvalues and eigenvectors of
+$\mathbf{M}$.} Both methods below start here, so let's get it out of the
+way. By definition $\mathbf{M}\vec{v} = \lambda\vec{v}$, so we need
+$\det(\mathbf{M} - \lambda\mathbf{I}) = 0$. We'll find $\lambda$ and
+$\vec{v}$ for $\left(\begin{smallmatrix} -2 & 1 \\ 1 & -2
+\end{smallmatrix}\right)$, knowing we can multiply by $\wo^2$ at the end:
+
+\begin{equation}
+  \begin{vmatrix} -2-\lambda & 1 \\ 1 & -2-\lambda \end{vmatrix}
+  = (-2-\lambda)^2 - 1 = \lambda^2 + 4\lambda + 3 = (\lambda+1)(\lambda+3) = 0
+  \quad\Rightarrow\quad \lambda \in \{-1, -3\}.
+\end{equation}
+
+Now find the eigenvectors: $(\mathbf{M} - \lambda\mathbf{I})\vec{v} = 0$
+says $(-2-\lambda)x_1 + x_2 = 0$ (the second row says the same thing; if
+it didn't, you'd have the wrong $\lambda$). Plug in $\lambda = -1$: $-x_1
++ x_2 = 0$, so $x_2 = x_1$, or $\vec{v}_1 = \left(\begin{smallmatrix} 1
+\\ 1 \end{smallmatrix}\right)$. Any multiple of an eigenvector is an
+eigenvector, so we could have picked $\left(\begin{smallmatrix} 2 \\ 2
+\end{smallmatrix}\right)$, etc. Plug in $\lambda = -3$: $x_1 + x_2 = 0$, so
+$\vec{v}_2 = \left(\begin{smallmatrix} 1 \\ -1 \end{smallmatrix}\right)$.
+Putting the $\wo^2$ back,
+
+\begin{equation}
+  \label{eq:eigen}
+  \boxed{\;\vec{v}_1 = \begin{pmatrix} 1 \\ 1 \end{pmatrix},\ \lambda_1 = -\wo^2;
+  \qquad
+  \vec{v}_2 = \begin{pmatrix} 1 \\ -1 \end{pmatrix},\ \lambda_2 = -3\wo^2.\;}
+\end{equation}
+
+Say ``the eigenvalue is $-\omega^2$,'' not ``the frequency is the square
+root of the absolute value of the eigenvalue.'' The minus sign is the
+physics: a negative eigenvalue means oscillation, a positive one would
+mean exponential growth.
+
+\section{The first way: plug in one eigenvector at a time}
+\label{sec:way1}
+
+This is Felder and Felder's first approach (pp.\ 337--338), and it's how
+we did it on Friday.
+
+\medskip
+
+\noindent\textbf{Each eigenvector becomes a normal mode.} The first
+eigenvector tells us that if you plug in \emph{any} state in which $x_2 =
+x_1$, the matrix will simply multiply that state by $-\wo^2$. So if we
+replace $x_2$ with $x_1$, Equation \eqref{eq:matrix} becomes
+
+\begin{equation}
+  \begin{pmatrix} \ddot{x}_1 \\ \ddot{x}_1 \end{pmatrix}
+  = \wo^2 \begin{pmatrix} -2 & 1 \\ 1 & -2 \end{pmatrix}
+  \begin{pmatrix} x_1 \\ x_1 \end{pmatrix}
+  = -\wo^2 \begin{pmatrix} x_1 \\ x_1 \end{pmatrix}
+  \quad\Rightarrow\quad \ddot{x}_1 = -\wo^2 x_1 .
+\end{equation}
+
+(In fact we have this same equation twice.) The matrix multiplication
+became a scalar multiplication. That we know how to solve, and the
+solution is the first normal mode:
+
+\begin{equation}
+  x_1(t) = A_1\cos\wo t + A_2\sin\wo t, \qquad x_2(t) = x_1(t).
+\end{equation}
+
+The other eigenvector, with $x_2 = -x_1$, gives $\ddot{x}_1 = -3\wo^2 x_1$
+and the other normal mode:
+
+\begin{equation}
+  x_1(t) = B_1\cos\sqrt{3}\,\wo t + B_2\sin\sqrt{3}\,\wo t, \qquad x_2(t) = -x_1(t).
+\end{equation}
+
+That's the $\sqrt{3}$ we pulled out of a hat back when we first met these
+carts. (Try replacing the state with something that isn't a normal mode,
+say $x_2 = 3x_1$: the two rows give you two contradictory differential
+equations. Only the eigenvectors work.)
+
+\medskip
+
+\noindent\textbf{The general solution is the sum of the two normal
+modes.} Two second-order equations, four constants. Now we apply our
+initial conditions. Since $\dot{x}_1(0) = \dot{x}_2(0) = 0$, we know that we
+discard the sine terms, and we're left with
+
+\begin{eqnarray}
+  \label{eq:sum}
+  x_1(t) &=& A_1\cos\wo t + B_1\cos\sqrt{3}\,\wo t \\
+  x_2(t) &=& A_1\cos\wo t - B_1\cos\sqrt{3}\,\wo t . \notag
+\end{eqnarray}
+
+\medskip
+
+\noindent\textbf{Let's now be a little clever.} Set $t = 0$ in
+\eqref{eq:sum}. The cosines are all $1$, and we get
+
+\begin{equation}
+  \label{eq:P}
+  \begin{pmatrix} x_1(0) \\ x_2(0) \end{pmatrix}
+  = \begin{pmatrix} A_1 + B_1 \\ A_1 - B_1 \end{pmatrix}
+  = \begin{pmatrix} 1 & 1 \\ 1 & -1 \end{pmatrix}
+  \begin{pmatrix} A_1 \\ B_1 \end{pmatrix}.
+\end{equation}
+
+That matrix converts normal-mode amplitudes into initial positions. Label
+its rows and columns: the rows are $x_1(0)$ and $x_2(0)$, the columns are
+$A_1$ and $B_1$, and apparently it's a matrix of eigenvectors. Why? The
+first column is what you get when $A_1 = 1$ and $B_1 = 0$, namely the
+first normal mode at $t = 0$, which is $\vec{v}_1$; the second column is
+$\vec{v}_2$. (The columns of any matrix are the images of the basis
+vectors.) So, the matrix that converts amplitudes to positions is the
+matrix of eigenvectors, and the matrix that converts positions to
+amplitudes is its inverse:
+
+\begin{equation}
+  \begin{pmatrix} 1 & 1 \\ 1 & -1 \end{pmatrix}^{-1}
+  = \frac{1}{ad - bc}\begin{pmatrix} d & -b \\ -c & a \end{pmatrix}
+  = \frac{1}{-2}\begin{pmatrix} -1 & -1 \\ -1 & 1 \end{pmatrix}
+  = \begin{pmatrix} 1/2 & 1/2 \\ 1/2 & -1/2 \end{pmatrix}.
+\end{equation}
+
+Applying it to our initial conditions,
+
+\begin{equation}
+  \begin{pmatrix} A_1 \\ B_1 \end{pmatrix}
+  = \begin{pmatrix} 1/2 & 1/2 \\ 1/2 & -1/2 \end{pmatrix}
+  \begin{pmatrix} 3 \\ 0 \end{pmatrix}
+  = \begin{pmatrix} 3/2 \\ 3/2 \end{pmatrix},
+\end{equation}
+
+\noindent so the solution is
+
+\begin{equation}
+  \label{eq:answer}
+  \boxed{\;x_1(t) = \tfrac{3}{2}\cos\wo t + \tfrac{3}{2}\cos\sqrt{3}\,\wo t,
+  \qquad
+  x_2(t) = \tfrac{3}{2}\cos\wo t - \tfrac{3}{2}\cos\sqrt{3}\,\wo t\;}
+\end{equation}
+
+\noindent in cm, with $\wo = \sqrt{k/m}$. Whew!
+
+Check it at $t = 0$: $x_1 = 3$, $x_2 = 0$. Good. Pulling one cart and
+holding the other at rest is half of each normal mode, so each cart
+carries both frequencies, $\wo$ and $\sqrt{3}\,\wo$. Their periods are in
+the ratio $\sqrt{3}$, whatever $k$ and $m$ are. And since two cosines
+with frequencies in an irrational ratio never line up again, the motion
+never exactly repeats. That's the ``janky'' run we saw on the track.
+
+One caution. The matrix in \eqref{eq:P} is the matrix of eigenvectors
+\emph{only at $t = 0$}. At a general $t$ the matrix between
+$(A_1, B_1)$ and $(x_1, x_2)$ is $\left(\begin{smallmatrix} \cos\wo t &
+\cos\sqrt{3}\wo t \\ \cos\wo t & -\cos\sqrt{3}\wo t \end{smallmatrix}\right)$.
+Setting $t = 0$ is what turned it into $\left(\begin{smallmatrix} 1 & 1
+\\ 1 & -1 \end{smallmatrix}\right)$.
+
+\section{The ``better'' way: the natural basis}
+\label{sec:way2}
+
+This is Felder and Felder's second approach (pp.\ 338--340). It gets the
+same answer, but it shows what ``basis'' and ``diagonalization'' mean more
+directly. Above, we plugged the eigenvectors in one at a time and watched
+what they did to the equation. Instead, let's rewrite the \emph{entire}
+equation in the basis defined by the eigenvectors.
+
+\medskip
+
+\noindent\textbf{Question:} Find the general solution to the same
+equations, the carts with equal masses $m$,
+
+\begin{equation*}
+  \begin{pmatrix} \ddot{x}_1 \\ \ddot{x}_2 \end{pmatrix}
+  = \wo^2 \begin{pmatrix} -2 & 1 \\ 1 & -2 \end{pmatrix}
+  \begin{pmatrix} x_1 \\ x_2 \end{pmatrix}.
+\end{equation*}
+
+\noindent\textbf{Answer:} The eigenvectors and eigenvalues are
+\eqref{eq:eigen}. We can write $x_1$ and $x_2$ in this basis as
+
+\begin{equation}
+  \label{eq:fg}
+  \begin{pmatrix} x_1(t) \\ x_2(t) \end{pmatrix}
+  = f(t)\begin{pmatrix} 1 \\ 1 \end{pmatrix} + g(t)\begin{pmatrix} 1 \\ -1 \end{pmatrix}.
+\end{equation}
+
+This says ``you can express the vector $(x_1, x_2)$ at any given time as a
+linear combination of these two basis vectors, with $f$ and $g$ as the
+coefficients'': $f$ is how much of the first normal mode we have, $g$ how
+much of the second. This changes in time, so $f$ and $g$ are functions of
+$t$. Instead of asking ``where is each cart?'' we are asking ``how much of
+each normal mode do we have?''
+
+Can we do that? Yes, for absolutely any functions $x_1$ and $x_2$, and
+not because $\vec{v}_1$ and $\vec{v}_2$ are eigenvectors: any two
+non-parallel vectors form a basis, so any vector is some combination of
+them. That's Section 6.4.
+
+What happens when we do that? When we express all our states in a
+different basis, the entire equation changes, including the
+transformation matrix itself. We'd like to write a corresponding equation
+to \eqref{eq:matrix} in this basis:
+
+\begin{equation}
+  \begin{pmatrix} \ddot{f} \\ \ddot{g} \end{pmatrix}
+  = \begin{pmatrix} a & b \\ c & d \end{pmatrix}
+  \begin{pmatrix} f \\ g \end{pmatrix},
+\end{equation}
+
+\noindent and we need to know what $a$, $b$, $c$, $d$ are. Two key points
+from linear algebra:
+
+\begin{enumerate}
+\item[1.] When you use the eigenvectors as a basis, the transformation is
+  represented by a diagonal matrix of the eigenvalues
+  (\S\ref{sec:diagonal} shows why).
+\item[2.] A diagonal matrix always decouples the equations.
+\end{enumerate}
+
+\noindent So in the eigenvector basis, \eqref{eq:matrix} becomes
+
+\begin{equation}
+  \label{eq:diag}
+  \begin{pmatrix} \ddot{f} \\ \ddot{g} \end{pmatrix}
+  = \begin{pmatrix} -\wo^2 & 0 \\ 0 & -3\wo^2 \end{pmatrix}
+  \begin{pmatrix} f \\ g \end{pmatrix}
+  \qquad\Rightarrow\qquad
+  \ddot{f} = -\wo^2 f, \quad \ddot{g} = -3\wo^2 g .
+\end{equation}
+
+The natural basis has done its job. Those are two separate simple
+harmonic oscillators, so
+
+\begin{equation}
+  f = A_1\cos\wo t + A_2\sin\wo t, \qquad g = B_1\cos\sqrt{3}\,\wo t + B_2\sin\sqrt{3}\,\wo t .
+\end{equation}
+
+Finally, we go back to our position basis $(x_1, x_2)$ with
+\eqref{eq:fg}, $x_1 = f + g$ and $x_2 = f - g$:
+
+\begin{equation}
+  \boxed{\;
+  \begin{aligned}
+    x_1 &= A_1\cos\wo t + A_2\sin\wo t + B_1\cos\sqrt{3}\,\wo t + B_2\sin\sqrt{3}\,\wo t \\
+    x_2 &= A_1\cos\wo t + A_2\sin\wo t - B_1\cos\sqrt{3}\,\wo t - B_2\sin\sqrt{3}\,\wo t
+  \end{aligned}\;}
+\end{equation}
+
+Four constants, as there must be. Same answer as \eqref{eq:sum} once the
+sines are gone.
+
+\medskip
+
+\noindent\textbf{The initial conditions, this way.} Solving
+\eqref{eq:fg} for the coefficients gives $f = (x_1 + x_2)/2$ and $g =
+(x_1 - x_2)/2$ (that's the inverse matrix from \S\ref{sec:way1} again,
+read as two equations). For $x_1(0) = 3$, $x_2(0) = 0$ that's $f(0) =
+g(0) = 3/2$: the same amplitudes, and the same solution
+\eqref{eq:answer}. Physically, $f$ is the midpoint of the two carts and
+$g$ is half the stretch of the middle spring, which is a nice way to see
+why the slow mode never stretches the middle spring and the fast one
+stretches it twice as much as either cart moves.
+
+\section{Why is the matrix diagonal in the eigenvector basis?}
+\label{sec:diagonal}
+
+Felder and Felder say ``This fact comes very directly from the definition
+of an eigenvector'' and leave it there (p.\ 339; it's their Problem
+6.206). Here it is. The only two facts we need are that matrix
+multiplication is linear and the definition $\mathbf{T}\vec{v}_i =
+\lambda_i\vec{v}_i$.
+
+Let $\vec{v}_1$, $\vec{v}_2$ be the eigenvectors of some transformation
+$\mathbf{T}$, with eigenvalues $\lambda_1$, $\lambda_2$. Take any vector
+and write it in the eigenvector basis:
+
+\begin{equation}
+  \vec{v} = a\vec{v}_1 + b\vec{v}_2 ,
+\end{equation}
+
+\noindent so $\vec{v}$ has coordinates $(a, b)$ in the $\vec{v}_1\vec{v}_2$
+basis. Apply $\mathbf{T}$. It acts on each piece separately (linearity),
+and by the definition of an eigenvector it does nothing to each piece
+except scale it:
+
+\begin{equation}
+  \mathbf{T}\vec{v} = \mathbf{T}(a\vec{v}_1 + b\vec{v}_2)
+  = a\,\mathbf{T}\vec{v}_1 + b\,\mathbf{T}\vec{v}_2
+  = a\lambda_1\vec{v}_1 + b\lambda_2\vec{v}_2 .
+\end{equation}
+
+Now read that in the $\vec{v}_1\vec{v}_2$ basis. The input had coordinates
+$\left(\begin{smallmatrix} a \\ b \end{smallmatrix}\right)$. The output has
+coordinates $\left(\begin{smallmatrix} \lambda_1 a \\ \lambda_2 b
+\end{smallmatrix}\right)$. The only matrix that takes
+$(a, b)$ to $(\lambda_1 a, \lambda_2 b)$ is
+
+\begin{equation}
+  \boxed{\;\mathbf{T} \textrm{ in the } \vec{v}_1\vec{v}_2 \textrm{ basis}
+  = \begin{pmatrix} \lambda_1 & 0 \\ 0 & \lambda_2 \end{pmatrix}\;}
+\end{equation}
+
+\noindent That's the whole proof. In the $\hat{\imath}\hat{\jmath}$ basis,
+$\mathbf{T}$ mixes the components (the off-diagonal entries are nonzero),
+because $\hat{\imath}$ and $\hat{\jmath}$ are not eigenvectors. In the
+eigenvector basis there is no mixing left to describe. Said another way:
+the columns of a matrix are the images of the basis vectors, and the
+image of $\vec{v}_1$ is $\lambda_1\vec{v}_1$, which in this basis is
+$(\lambda_1, 0)$.
+
+For the springs, replace $\mathbf{T}$ by $\mathbf{M}$ and $\vec{v}$ by the
+state: plug \eqref{eq:fg} into \eqref{eq:matrix} to get
+$\ddot{f}\vec{v}_1 + \ddot{g}\vec{v}_2 = f\lambda_1\vec{v}_1 +
+g\lambda_2\vec{v}_2$, and since $\vec{v}_1$ and $\vec{v}_2$ are
+independent, match coefficients: $\ddot{f} = \lambda_1 f$, $\ddot{g} =
+\lambda_2 g$. That is \eqref{eq:diag}.
+
+\section{Which way should I use?}
+\label{sec:which}
+
+For one $2\times 2$ problem by hand: it doesn't matter. The expensive part,
+finding the eigenvalues and eigenvectors (the determinant, the quadratic,
+two little linear systems), is shared, and neither method avoids it.
+After that, the first way substitutes each eigenvector in and fits the
+initial conditions with one $2\times 2$ solve; the second way gets the
+decoupled equations in one line and fits the initial conditions with the
+same $2\times 2$ solve dressed up as an inverse. The first way is a shade
+quicker (no inverse to write, and the substitution doubles as a check
+that your eigenvector is right); the second is a shade cleaner. Call it a
+wash.
+
+The second way wins once the problem is bigger or gets reused:
+
+\begin{itemize}
+\item \textbf{Many degrees of freedom.} For $N$ carts, the first way means
+  $N$ substitutions and an $N\times N$ fit; the second means one
+  diagonalization and $N$ independent one-dimensional oscillators. On a
+  computer this is the whole story: \texttt{numpy.linalg.eig} once, then
+  $\vec{x}(t) = \mathbf{P}\,\mathrm{diag}(\cos\omega_i t)\,\mathbf{P}^{-1}\vec{x}(0)$,
+  one line for any $N$.
+\item \textbf{Reuse.} New initial conditions, a driving force, or damping
+  proportional to velocity all leave the eigenvectors alone. The second way
+  only redoes the two one-dimensional problems; the first way starts over
+  from the substitution.
+\item \textbf{Understanding.} The second way is the one that says
+  \emph{why} only those two ratios work: only in the basis of the normal
+  modes does the matrix become diagonal, and no other basis decouples the
+  equations.
+\end{itemize}
+
+Felder and Felder's own framing (p.\ 340) matches this. In both
+approaches the takeaway is ``the eigenvectors of the matrix define the
+normal modes of the system.'' The first way is how you compute a given
+problem; the second is why the computation works. ``If you find the
+second approach confusing start by getting comfortable with the first
+approach \ldots\ but once you have worked with it a while come back to
+the second approach and see if you can see how it is doing the same thing
+as the first one, but in a different basis.''
+
+\section{The general procedure, and the carts with unequal masses}
+\label{sec:procedure}
+
+\begin{enumerate}
+\item[1.] Draw the picture.
+\item[2.] Write down N2L for each cart.
+\item[3.] Turn it into a matrix equation $\ddot{\vec{x}} = \mathbf{M}\vec{x}$.
+\item[4.] Find the normal modes: the eigenvectors of $\mathbf{M}$ give the
+  ratio of $x_2$ to $x_1$ in each mode, and the eigenvalues give
+  $-\omega^2$.
+\item[5.] Combine them, either way, and use the initial conditions.
+\end{enumerate}
+
+\noindent For different masses $m_1$ and $m_2$ (still three equal springs),
+step 2 gives $m_1\ddot{x}_1 = -2kx_1 + kx_2$ and $m_2\ddot{x}_2 = kx_1 -
+2kx_2$. Divide each line by its own mass and call the mass ratio $\mu =
+m_1/m_2$, so $k/m_2 = \mu\,(k/m_1)$:
+
+\begin{equation}
+  \ddot{x}_2 = \mu\frac{k}{m_1}x_1 - 2\mu\frac{k}{m_1}x_2
+  \qquad\Rightarrow\qquad
+  \mathbf{M} = \frac{k}{m_1}\begin{pmatrix} -2 & 1 \\ \mu & -2\mu \end{pmatrix}.
+\end{equation}
+
+Plug in your $\mu$ and run step 4. The eigenvectors are no longer
+$(1, \pm 1)$, the heavier cart moves more in the slow mode and less in
+the fast one, and the ratio of the two periods is
+$T_{\rm slow}/T_{\rm fast} = \sqrt{\lambda_{\rm fast}/\lambda_{\rm slow}}$,
+which needs no $k$.
+
+\begin{thebibliography}{1}
+\bibitem{FelderFelder} Gary N.\ Felder and Kenny M.\ Felder,
+  \emph{Mathematical Methods in Engineering and Physics}, Wiley, 2016.
+  Chapter 6, Sections 6.4, 6.8 and 6.9.
+\end{thebibliography}
+
+\end{document}

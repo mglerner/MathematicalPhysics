@@ -98,10 +98,11 @@ and each derivative is a linear combination of those numbers.
 
 \noindent\textbf{Step 3: find the eigenvalues and eigenvectors of
 $\mathbf{M}$.} Both methods below start here, so let's get it out of the
-way. By definition $\mathbf{M}\vec{v} = \lambda\vec{v}$, so we need
-$\det(\mathbf{M} - \lambda\mathbf{I}) = 0$. We talked extensively in class about how
-this relates to linear dependence. 
-We'll find $\lambda$ and
+way. By definition $\mathbf{M}\vec{v} = \lambda\vec{v}$, so if we plug in
+$\vec{v}$, the right-hand side will simplify greatly. Let's see it in
+action. To find $\lambda$ we need $\det(\mathbf{M} - \lambda\mathbf{I}) =
+0$. We talked extensively in class about how this relates to linear
+dependence. We'll find $\lambda$ and
 $\vec{v}$ for $\left(\begin{smallmatrix} -2 & 1 \\ 1 & -2
 \end{smallmatrix}\right)$, knowing we can multiply by $\wo^2$ at the end:
 
@@ -229,8 +230,18 @@ discard the sine terms, and we're left with
 \end{equation}
 
 \noindent is the matrix that converts normal-mode amplitudes into initial
-positions. We can tell by setting $t = 0$ in \eqref{eq:sum}. The cosines
-are all $1$, and we get
+positions. We can tell that from the column labels, and apparently it's a
+matrix of eigenvectors. Why? Well,
+
+\begin{equation}
+  \begin{aligned}
+    x_1 &= \overbrace{A_1\cos\wo t}^{\text{normal mode 1}}
+        &&+ \overbrace{B_1\cos\sqrt{3}\,\wo t}^{\text{normal mode 2}} \\
+    x_2 &= A_1\cos\wo t &&- B_1\cos\sqrt{3}\,\wo t
+  \end{aligned}
+\end{equation}
+
+\noindent Now plug in $t = 0$. The cosines are all $1$, and we get
 
 \begin{equation}
   \begin{pmatrix} x_1(0) \\ x_2(0) \end{pmatrix}
@@ -239,12 +250,8 @@ are all $1$, and we get
   \begin{pmatrix} A_1 \\ B_1 \end{pmatrix}.
 \end{equation}
 
-The labels say what goes in and what comes out: each column is an
-amplitude, each row is an initial position. And apparently it's a matrix
-of eigenvectors. Why? The first column is what you get when $A_1 = 1$ and
-$B_1 = 0$, namely the first normal mode at $t = 0$, which is $\vec{v}_1$;
-the second column is $\vec{v}_2$. (The columns of any matrix are the
-images of the basis vectors.) So, the matrix that converts amplitudes to
+\noindent Each column is one normal mode at $t = 0$, which is an
+eigenvector. Cool. So, the matrix that converts normal-mode amplitudes to
 positions is the matrix of eigenvectors, and the matrix that converts
 positions to amplitudes is its inverse, with the labels swapped:
 
@@ -255,7 +262,8 @@ positions to amplitudes is its inverse, with the labels swapped:
   = \lmat{x_1(0)}{x_2(0)}{A_1}{B_1}{1/2}{1/2}{1/2}{-1/2}.
 \end{equation}
 
-Applying it to our initial conditions,
+So, that last matrix converts initial conditions to normal-mode
+amplitudes. Applying it to ours,
 
 \begin{equation}
   \begin{pmatrix} A_1 \\ B_1 \end{pmatrix}
@@ -284,8 +292,10 @@ never exactly repeats. That's the ``janky'' run we saw on the track.
 
 One caution. The matrix in \eqref{eq:P} is the matrix of eigenvectors
 \emph{only at $t = 0$}. At a general $t$ the matrix between
-$(A_1, B_1)$ and $(x_1, x_2)$ is $\left(\begin{smallmatrix} \cos\wo t &
-\cos\sqrt{3}\wo t \\ \cos\wo t & -\cos\sqrt{3}\wo t \end{smallmatrix}\right)$.
+$(A_1, B_1)$ and $(x_1, x_2)$ is
+\begin{equation*}
+  \lmat{A_1}{B_1}{x_1(t)}{x_2(t)}{\cos\wo t}{\cos\sqrt{3}\,\wo t}{\cos\wo t}{-\cos\sqrt{3}\,\wo t}.
+\end{equation*}
 Setting $t = 0$ is what turned it into $\left(\begin{smallmatrix} 1 & 1
 \\ 1 & -1 \end{smallmatrix}\right)$.
 
@@ -317,8 +327,11 @@ equations, the carts with equal masses $m$,
   \begin{pmatrix} x_1 \\ x_2 \end{pmatrix}.
 \end{equation*}
 
-\noindent\textbf{Answer:} The eigenvectors and eigenvalues are
-\eqref{eq:eigen}. We can write $x_1$ and $x_2$ in this basis as
+\noindent\textbf{Answer:} The eigenvectors of this transformation matrix
+are $\left(\begin{smallmatrix} 1 \\ 1 \end{smallmatrix}\right)$ and
+$\left(\begin{smallmatrix} 1 \\ -1 \end{smallmatrix}\right)$, with
+corresponding eigenvalues $-\wo^2$ and $-3\wo^2$ (boxed above). So, we
+can write $x_1$ and $x_2$ in this basis as
 
 \begin{equation}
   \label{eq:fg}
@@ -354,17 +367,33 @@ from linear algebra:
 
 \begin{enumerate}
 \item[1.] When you use the eigenvectors as a basis, the transformation is
-  represented by a diagonal matrix of the eigenvalues
-  (\S\ref{sec:diagonal} shows why).
-\item[2.] A diagonal matrix always decouples the equations.
+  represented by a diagonal matrix of the eigenvalues. Let's write this
+  out! Call the eigenvectors $\vec{v}_1$, $\vec{v}_2$ with corresponding
+  eigenvalues $\lambda_1$, $\lambda_2$, and take any vector $\vec{v} =
+  a\vec{v}_1 + b\vec{v}_2$. Apply $\mathbf{T}$:
+  \begin{equation*}
+    \mathbf{T}\vec{v} = \mathbf{T}(a\vec{v}_1 + b\vec{v}_2)
+    = a\,\mathbf{T}\vec{v}_1 + b\,\mathbf{T}\vec{v}_2
+    = a\lambda_1\vec{v}_1 + b\lambda_2\vec{v}_2 .
+  \end{equation*}
+  Now read that in the $\vec{v}_1\vec{v}_2$ basis. The input coordinates
+  are $\left(\begin{smallmatrix} a \\ b \end{smallmatrix}\right)$. The
+  output is $\left(\begin{smallmatrix} \lambda_1 a \\ \lambda_2 b
+  \end{smallmatrix}\right)$. So
+  \begin{equation*}
+    \mathbf{T} = \begin{pmatrix} \lambda_1 & 0 \\ 0 & \lambda_2 \end{pmatrix}
+  \end{equation*}
+  in this basis. (\S\ref{sec:diagonal} says the same thing more slowly.)
+\item[2.] This naturally decouples our equations.
 \end{enumerate}
 
-\noindent So in the eigenvector basis, \eqref{eq:matrix} becomes
+\noindent We can immediately write it. In the eigenvector basis,
+\eqref{eq:matrix} becomes
 
 \begin{equation}
   \label{eq:diag}
   \begin{pmatrix} \ddot{f} \\ \ddot{g} \end{pmatrix}
-  = \begin{pmatrix} -\wo^2 & 0 \\ 0 & -3\wo^2 \end{pmatrix}
+  = \lmat{f}{g}{\ddot{f}}{\ddot{g}}{-\wo^2}{0}{0}{-3\wo^2}
   \begin{pmatrix} f \\ g \end{pmatrix}
   \qquad\Rightarrow\qquad
   \ddot{f} = -\wo^2 f, \quad \ddot{g} = -3\wo^2 g .
@@ -383,13 +412,13 @@ Finally, we go back to our position basis $(x_1, x_2)$ with
 \begin{equation}
   \boxed{\;
   \begin{aligned}
-    x_1 &= A_1\cos\wo t + A_2\sin\wo t + B_1\cos\sqrt{3}\,\wo t + B_2\sin\sqrt{3}\,\wo t \\
-    x_2 &= A_1\cos\wo t + A_2\sin\wo t - B_1\cos\sqrt{3}\,\wo t - B_2\sin\sqrt{3}\,\wo t
+    x_1 = f + g &= A_1\cos\wo t + A_2\sin\wo t + B_1\cos\sqrt{3}\,\wo t + B_2\sin\sqrt{3}\,\wo t \\
+    x_2 = f - g &= A_1\cos\wo t + A_2\sin\wo t - B_1\cos\sqrt{3}\,\wo t - B_2\sin\sqrt{3}\,\wo t
   \end{aligned}\;}
 \end{equation}
 
-Four constants, as there must be. Same answer as \eqref{eq:sum} once the
-sines are gone.
+So, four constants, as there must be. Same answer as \eqref{eq:sum} once
+the sines are gone.
 
 \medskip
 
@@ -408,7 +437,8 @@ stretches it twice as much as either cart moves.
 
 Felder and Felder say ``This fact comes very directly from the definition
 of an eigenvector'' and leave it there (p.\ 339; it's their Problem
-6.206). Here it is. The only two facts we need are that matrix
+6.206). We wrote it out under key point 1 in \S\ref{sec:way2}; here it
+is again, more slowly. The only two facts we need are that matrix
 multiplication is linear and the definition $\mathbf{T}\vec{v}_i =
 \lambda_i\vec{v}_i$.
 

@@ -613,16 +613,16 @@ m_1/m_2$.
 
 Here's my solution: step 2 gives $m_1\ddot{x}_1 = -2kx_1 + kx_2$ and
 $m_2\ddot{x}_2 = kx_1 - 2kx_2$. Divide each line by its own mass:
-\begin{align*}
-  \ddot{x}_1 &= -2\frac{k}{m_1}x_1 + \frac{k}{m_1}x_2 \\
-  \ddot{x}_2 &= \frac{k}{m_2}x_1 - 2\frac{k}{m_2}x_2
-\end{align*}
+\begin{alignat*}{3}
+  \ddot{x}_1 &={}& -2\frac{k}{m_1}x_1 && {}+\frac{k}{m_1}x_2 \\
+  \ddot{x}_2 &={}& \frac{k}{m_2}x_1 && {}-2\frac{k}{m_2}x_2
+\end{alignat*}
 which is already shaped like a matrix equation. Now put in $\mu$: since
 $k/m_2 = \mu\,(k/m_1)$,
-\begin{align*}
-  \ddot{x}_1 &= -2\frac{k}{m_1}x_1 + \frac{k}{m_1}x_2 \\
-  \ddot{x}_2 &= \mu\frac{k}{m_1}x_1 - 2\mu\frac{k}{m_1}x_2
-\end{align*}
+\begin{alignat*}{3}
+  \ddot{x}_1 &={}& -2\frac{k}{m_1}x_1 && {}+\frac{k}{m_1}x_2 \\
+  \ddot{x}_2 &={}& \mu\frac{k}{m_1}x_1 && {}-2\mu\frac{k}{m_1}x_2
+\end{alignat*}
 and pulling the common $k/m_1$ out front,
 \begin{equation}
   \mathbf{M} = \frac{k}{m_1}\begin{pmatrix} -2 & 1 \\ \mu & -2\mu \end{pmatrix}.

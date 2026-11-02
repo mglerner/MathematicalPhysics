@@ -259,7 +259,11 @@ _PCCI = {   # the hand table; PCCI below is the effective one (a PCCI follows it
     date(2026, 10, 26): "DE 6.5.1",
     date(2026, 10, 28): "DE 6.8.1 Parts 1-3",
     date(2026, 10, 30): "6.166",
-    date(2026, 11, 2): "5.1",
+    # Keyed Nov 2 (the 5.1 topic day), effective Wed Nov 4 after the Oct 30 slip. Was "5.1"; replaced
+    # 2026-11-02: class 22 ran out of time on the unequal-mass carts capstone (teaching log), so
+    # finishing it is Wednesday's PCCI (Michael's wording). 5.1 is dropped, not rescheduled.
+    date(2026, 11, 2): "Solve the unequal-mass carts question from Monday's class. It's on page 9 of "
+                       "the handout. If you really get stuck, you can look at page 10 for the solution.",
     date(2026, 11, 4): "DE 5.4.1",
     date(2026, 11, 9): "5.163 parts a and d",
     date(2026, 11, 6): "DE 5.7.1 Parts 1-4",    # was keyed Nov 11 (cylindrical/spherical day), merged 2026-10-30

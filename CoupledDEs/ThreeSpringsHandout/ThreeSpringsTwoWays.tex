@@ -556,7 +556,9 @@ $\{\vec{w}_1, \vec{w}_2\}$ amplitudes:
   = \frac{1}{7}\begin{pmatrix} 8 + 9 \\ -2 + 3 \end{pmatrix}
   = \begin{pmatrix} 17/7 \\ 1/7 \end{pmatrix},
 \end{equation*}
-and then
+Now, if we've done things correctly, we can take those amplitudes times
+$\{\vec{w}_1, \vec{w}_2\}$ and recover our original vector
+$\left(\begin{smallmatrix} 2 \\ 3 \end{smallmatrix}\right)$:
 \begin{equation*}
   \frac{17}{7}\begin{pmatrix} 1 \\ 1 \end{pmatrix}
   + \frac{1}{7}\begin{pmatrix} -3 \\ 4 \end{pmatrix}
@@ -642,10 +644,9 @@ right); the second is a shade cleaner. Meh. A wash.
   \texttt{numpy.linalg.eig} once, then, for carts released from rest,
   $\vec{x}(t) = \mathbf{P}\,\mathrm{diag}(\cos\omega_i t)\,\mathbf{P}^{-1}\vec{x}(0)$,
   where $\mathbf{P}$ is the matrix of eigenvectors as columns (the matrix
-  in \eqref{eq:P}) and $\omega_i = \sqrt{-\lambda_i}$: one line for any
-  $N$. (Nonzero initial velocities add a second term of the same shape,
-  with $\sin(\omega_i t)/\omega_i$ in place of $\cos\omega_i t$ and
-  $\dot{\vec{x}}(0)$ in place of $\vec{x}(0)$.)
+  in \eqref{eq:P}) and $\omega_i = \sqrt{-\lambda_i}$. (Nonzero initial velocities add a
+    second term of the same shape, with $\sin(\omega_i t)/\omega_i$ in place of $\cos\omega_i
+    t$ and $\dot{\vec{x}}(0)$ in place of $\vec{x}(0)$.)
 \item \textbf{Reuse.} A driving force, or damping that is the same on every
   cart, leaves the eigenvectors alone. The second way then just adds a
   term to each one-dimensional equation; the first way has to redo the

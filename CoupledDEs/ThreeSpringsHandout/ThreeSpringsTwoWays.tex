@@ -449,8 +449,35 @@ from linear algebra:
   = \begin{pmatrix} -\wo^2 & 0 \\ 0 & -3\wo^2 \end{pmatrix}
   \begin{pmatrix} f \\ g \end{pmatrix}
   \qquad\Rightarrow\qquad
-  \ddot{f} = -\wo^2 f, \quad \ddot{g} = -3\wo^2 g .
+  \ddot{f} = -\wo^2 f, \quad \ddot{g} = -3\wo^2 g .\footnotemark
 \end{equation}
+\footnotetext{A question from class: why isn't this matrix
+$\left(\begin{smallmatrix} 1 & 1 \\ 1 & -1 \end{smallmatrix}\right)$?
+Because that matrix is the converter, not the physics. Feed
+$\left(\begin{smallmatrix} 1 & 1 \\ 1 & -1 \end{smallmatrix}\right)$ the
+amounts of each mode, $(f, g)$, and it returns positions, $(x_1, x_2)$:
+that is \eqref{eq:fg} written as a matrix, and it is the $\mathbf{P}$ of
+\eqref{eq:P}. The matrix here takes the same input, $(f, g)$, and returns
+accelerations, $(\ddot{f}, \ddot{g})$. Two checks. Dimensions: acceleration
+per displacement must carry an $\wo^2$, and
+$\left(\begin{smallmatrix} 1 & 1 \\ 1 & -1 \end{smallmatrix}\right)$ is
+pure numbers. A pure mode: put in $f = 1$, $g = 0$; then $\vec{x} =
+\vec{v}_1$ and $\ddot{\vec{x}} = \mathbf{M}\vec{v}_1 = -\wo^2\vec{v}_1$,
+which in the $\{\vec{v}_1, \vec{v}_2\}$ basis is $(-\wo^2, 0)$, the first
+column above. If the matrix were
+$\left(\begin{smallmatrix} 1 & 1 \\ 1 & -1 \end{smallmatrix}\right)$ the
+first column would be $(1, 1)$, and a pure slow mode would accelerate into
+a mix of both modes. It doesn't, and that is the whole reason the matrix
+is diagonal. Where
+$\left(\begin{smallmatrix} 1 & 1 \\ 1 & -1 \end{smallmatrix}\right)$ does
+appear is on both sides of $\mathbf{M}$: the matrix in the new basis is
+$\mathbf{P}^{-1}\mathbf{M}\mathbf{P}$, and
+$\mathbf{M}\mathbf{P} = \wo^2
+\left(\begin{smallmatrix} -2 & 1 \\ 1 & -2 \end{smallmatrix}\right)
+\left(\begin{smallmatrix} 1 & 1 \\ 1 & -1 \end{smallmatrix}\right)
+= \wo^2 \left(\begin{smallmatrix} -1 & -3 \\ -1 & 3 \end{smallmatrix}\right)
+= \mathbf{P}\,\mathrm{diag}(-\wo^2, -3\wo^2)$, so
+$\mathbf{P}^{-1}\mathbf{M}\mathbf{P}$ is the diagonal matrix above.}
 
 The natural basis has done its job. Those are two separate simple
 harmonic oscillators, so

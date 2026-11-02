@@ -224,7 +224,6 @@ say $x_2 = 3x_1$: the two rows give you two contradictory differential
 equations. Only the eigenvectors work!}
 
 \medskip
-
 \noindent\textbf{The general solution is the sum of the two normal
 modes.} Why are we allowed to add them? Equation \eqref{eq:matrix} is
 linear, so if two motions solve it, their sum does too (superposition),
@@ -494,25 +493,25 @@ change-of-basis thoughts. The basis we're used to working with is the
 $\{\hat{\imath}, \hat{\jmath}\}$ basis: $\hat{\imath} =
 \left(\begin{smallmatrix} 1 \\ 0 \end{smallmatrix}\right)$, $\hat{\jmath} =
 \left(\begin{smallmatrix} 0 \\ 1 \end{smallmatrix}\right)$. Let's pick
-another basis to consider, say $\vec{v}_1 = \hat{\imath} + \hat{\jmath}$ and
-$\vec{v}_2 = -3\hat{\imath} + 4\hat{\jmath}$. Then what we want is some
+another basis to consider, say $\vec{u}_1 = \hat{\imath} + \hat{\jmath}$ and
+$\vec{u}_2 = -3\hat{\imath} + 4\hat{\jmath}$. Then what we want is some
 matrix
 \begin{equation*}
-  \lmat{\vec{v}_1}{\vec{v}_2}{\hat{\imath}}{\hat{\jmath}}{\phantom{-3}}{\phantom{-3}}{\phantom{-3}}{\phantom{-3}}
+  \lmat{\hat{\imath}}{\hat{\jmath}}{\vec{u}_1}{\vec{u}_2}{\phantom{-3}}{\phantom{-3}}{\phantom{-3}}{\phantom{-3}}
 \end{equation*}
 to turn a vector $\vec{v}$ written in the $\{\hat{\imath}, \hat{\jmath}\}$
-basis into one written in the $\{\vec{v}_1, \vec{v}_2\}$ basis. The easy
+basis into one written in the $\{\vec{u}_1, \vec{u}_2\}$ basis. The easy
 matrix to write down is
 \begin{equation*}
-  \lmat{\vec{v}_1}{\vec{v}_2}{\hat{\imath}}{\hat{\jmath}}{1}{-3}{1}{4}
+  \lmat{\vec{u}_1}{\vec{u}_2}{\hat{\imath}}{\hat{\jmath}}{1}{-3}{1}{4}
 \end{equation*}
-whose columns are just $\vec{v}_1$ and $\vec{v}_2$. Now look at the
-labels: this is a matrix that eats a pair of $\{\vec{v}_1, \vec{v}_2\}$
+whose columns are just $\vec{u}_1$ and $\vec{u}_2$. Now look at the
+labels: this is a matrix that eats a pair of $\{\vec{u}_1, \vec{u}_2\}$
 amplitudes and spits out $\{\hat{\imath}, \hat{\jmath}\}$ amplitudes.
 (Feed it $\left(\begin{smallmatrix} 1 \\ 0 \end{smallmatrix}\right)$,
-meaning one $\vec{v}_1$ and no $\vec{v}_2$, and out comes
+meaning one $\vec{u}_1$ and no $\vec{u}_2$, and out comes
 $\left(\begin{smallmatrix} 1 \\ 1 \end{smallmatrix}\right)$, which is
-$\vec{v}_1$ in $\hat{\imath}, \hat{\jmath}$ components.) That's the
+$\vec{u}_1$ in $\hat{\imath}, \hat{\jmath}$ components.) That's the
 opposite of what we asked for. Its inverse,
 \begin{equation*}
   \begin{pmatrix} 1 & -3 \\ 1 & 4 \end{pmatrix}^{-1}
@@ -521,7 +520,7 @@ opposite of what we asked for. Its inverse,
 does the opposite, which is the thing we wanted. Let's check:
 $\left(\begin{smallmatrix} 2 \\ 3 \end{smallmatrix}\right)$ in
 $\{\hat{\imath}, \hat{\jmath}\}$ should go to some pair of
-$\{\vec{v}_1, \vec{v}_2\}$ amplitudes:
+$\{\vec{u}_1, \vec{u}_2\}$ amplitudes:
 \begin{equation*}
   \frac{1}{7}\begin{pmatrix} 4 & 3 \\ -1 & 1 \end{pmatrix}
   \begin{pmatrix} 2 \\ 3 \end{pmatrix}
@@ -538,8 +537,8 @@ and then
 \end{equation*}
 So: the matrix whose columns are the new basis vectors is the easy one to
 write, and it converts new-basis amplitudes into old-basis components.
-Going the other way costs an inverse. That's exactly what happened with
-$\mathbf{P}$ in \S\ref{sec:way1}.
+Going the other way means finding an inverse. That's exactly what happened with
+the matrix of eigenvectors, (\ref*{eq:P}), in \S\ref{sec:way1}.
 
 \medskip
 
@@ -642,6 +641,7 @@ approach \ldots\ but once you have worked with it a while come back to
 the second approach and see if you can see how it is doing the same thing
 as the first one, but in a different basis.''
 
+\newpage
 \section{The general procedure, and the unequal-mass carts}
 \label{sec:procedure}
 

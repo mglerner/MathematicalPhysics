@@ -14,7 +14,8 @@
 \newcommand{\wo}{\omega_0}
 
 \begin{document}
-\title{Highlights from the three-spring problem: the same problem, solved two ways}
+\title{Highlights from the three-spring problem: \\
+  the same problem, solved in two ways}
 \author{Michael G. Lerner}
 \date{\today}
 
@@ -24,7 +25,7 @@ These notes closely follow Felder and Felder, \emph{Mathematical Methods
 in Engineering and Physics} (Wiley, 2016), Section 6.9, ``Putting It
 Together: Revisiting the Three-Spring Problem'' (pp.~336--340), sometimes to the point of plagiarism, so I'll just give full
 credit now. The book works the problem on a matrix with eigenvalues $-4$
-and $-1$; here I've swapped in the carts we actually have on the track.
+and $-1$; here I've swapped in the carts we used in class.
 
 \setlength{\unitlength}{1in}
 
@@ -488,7 +489,60 @@ stretches it twice as much as either cart moves.
 \section{Why is the matrix diagonal in the eigenvector basis?}
 \label{sec:diagonal}
 
-Felder and Felder say ``This fact comes very directly from the definition
+Before we dive into the eigenproblem, let's review some general
+change-of-basis thoughts. The basis we're used to working with is the
+$\{\hat{\imath}, \hat{\jmath}\}$ basis: $\hat{\imath} =
+\left(\begin{smallmatrix} 1 \\ 0 \end{smallmatrix}\right)$, $\hat{\jmath} =
+\left(\begin{smallmatrix} 0 \\ 1 \end{smallmatrix}\right)$. Let's pick
+another basis to consider, say $\vec{v}_1 = \hat{\imath} + \hat{\jmath}$ and
+$\vec{v}_2 = -3\hat{\imath} + 4\hat{\jmath}$. Then what we want is some
+matrix
+\begin{equation*}
+  \lmat{\vec{v}_1}{\vec{v}_2}{\hat{\imath}}{\hat{\jmath}}{\phantom{-3}}{\phantom{-3}}{\phantom{-3}}{\phantom{-3}}
+\end{equation*}
+to turn $\{\hat{\imath}, \hat{\jmath}\}$ into $\{\vec{v}_1, \vec{v}_2\}$.
+The easy matrix to write down is
+\begin{equation*}
+  \lmat{\vec{v}_1}{\vec{v}_2}{\hat{\imath}}{\hat{\jmath}}{1}{-3}{1}{4}
+\end{equation*}
+whose columns are just $\vec{v}_1$ and $\vec{v}_2$. But look at the
+labels: this is a matrix that eats a pair of $\{\vec{v}_1, \vec{v}_2\}$
+amplitudes and spits out $\{\hat{\imath}, \hat{\jmath}\}$ amplitudes.
+(Feed it $\left(\begin{smallmatrix} 1 \\ 0 \end{smallmatrix}\right)$,
+meaning one $\vec{v}_1$ and no $\vec{v}_2$, and out comes
+$\left(\begin{smallmatrix} 1 \\ 1 \end{smallmatrix}\right)$, which is
+$\vec{v}_1$ in $\hat{\imath}, \hat{\jmath}$ components.) That's the
+opposite of what we asked for. Its inverse,
+\begin{equation*}
+  \begin{pmatrix} 1 & -3 \\ 1 & 4 \end{pmatrix}^{-1}
+  = \frac{1}{7}\begin{pmatrix} 4 & 3 \\ -1 & 1 \end{pmatrix},
+\end{equation*}
+does the opposite, which is the thing we wanted. Let's check:
+$\left(\begin{smallmatrix} 2 \\ 3 \end{smallmatrix}\right)$ in
+$\{\hat{\imath}, \hat{\jmath}\}$ should go to some pair of
+$\{\vec{v}_1, \vec{v}_2\}$ amplitudes:
+\begin{equation*}
+  \frac{1}{7}\begin{pmatrix} 4 & 3 \\ -1 & 1 \end{pmatrix}
+  \begin{pmatrix} 2 \\ 3 \end{pmatrix}
+  = \frac{1}{7}\begin{pmatrix} 8 + 9 \\ -2 + 3 \end{pmatrix}
+  = \begin{pmatrix} 17/7 \\ 1/7 \end{pmatrix},
+\end{equation*}
+and then
+\begin{equation*}
+  \frac{17}{7}\begin{pmatrix} 1 \\ 1 \end{pmatrix}
+  + \frac{1}{7}\begin{pmatrix} -3 \\ 4 \end{pmatrix}
+  = \begin{pmatrix} (17 - 3)/7 \\ (17 + 4)/7 \end{pmatrix}
+  = \begin{pmatrix} 14/7 \\ 21/7 \end{pmatrix}
+  = \begin{pmatrix} 2 \\ 3 \end{pmatrix}. \checkmark
+\end{equation*}
+So: the matrix whose columns are the new basis vectors is the easy one to
+write, and it converts new-basis amplitudes into old-basis components.
+Going the other way costs an inverse. That's exactly what happened with
+$\mathbf{P}$ in \S\ref{sec:way1}.
+
+\medskip
+
+\noindent Now back to the eigenproblem. Felder and Felder say ``This fact comes very directly from the definition
 of an eigenvector'' and leave it there (p.\ 339; it's their Problem
 6.206). We wrote it out under key point 1 in \S\ref{sec:way2}; here it
 is again, more slowly. The only facts we need are that matrix
@@ -652,7 +706,7 @@ and pulling the common $k/m_1$ out front,
 \begin{equation}
   \mathbf{M} = \frac{k}{m_1}\begin{pmatrix} -2 & 1 \\ \mu & -2\mu \end{pmatrix}.
 \end{equation}
-Plug in your $\mu$ and run step 4.
+Plug in your $\mu$ and do step 4.
 
 You will find that the eigenvectors are no longer
 $\left(\begin{smallmatrix} 1 \\ 1 \end{smallmatrix}\right)$ and

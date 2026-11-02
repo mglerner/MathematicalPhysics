@@ -420,11 +420,11 @@ from linear algebra:
   represented by a diagonal matrix of the eigenvalues. Let's write this
   out: call the eigenvectors $\vec{v}_1$, $\vec{v}_2$ with corresponding
   eigenvalues $\lambda_1$, $\lambda_2$, and take any vector $\vec{u} =
-  \alpha\vec{v}_1 + \beta\vec{v}_2$. Apply the transformation; call it
-  $\mathbf{T}$, since this works for any matrix (ours is $\mathbf{M}$):
+  \alpha\vec{v}_1 + \beta\vec{v}_2$. Apply $\mathbf{M}$ (the argument
+  works for any matrix):
   \begin{equation*}
-    \mathbf{T}\vec{u} = \mathbf{T}(\alpha\vec{v}_1 + \beta\vec{v}_2)
-    = \alpha\,\mathbf{T}\vec{v}_1 + \beta\,\mathbf{T}\vec{v}_2
+    \mathbf{M}\vec{u} = \mathbf{M}(\alpha\vec{v}_1 + \beta\vec{v}_2)
+    = \alpha\,\mathbf{M}\vec{v}_1 + \beta\,\mathbf{M}\vec{v}_2
     = \alpha\lambda_1\vec{v}_1 + \beta\lambda_2\vec{v}_2 .
   \end{equation*}
   Now read that in the $\{\vec{v}_1, \vec{v}_2\}$ basis. The input coordinates
@@ -432,7 +432,7 @@ from linear algebra:
   output is $\left(\begin{smallmatrix} \lambda_1 \alpha \\ \lambda_2 \beta
   \end{smallmatrix}\right)$. So
   \begin{equation*}
-    \mathbf{T} = \begin{pmatrix} \lambda_1 & 0 \\ 0 & \lambda_2 \end{pmatrix}
+    \mathbf{M} = \begin{pmatrix} \lambda_1 & 0 \\ 0 & \lambda_2 \end{pmatrix}
   \end{equation*}
   in this basis: the $a$, $b$, $c$, $d$ of \eqref{eq:abcd} are $\lambda_1$,
   $0$, $0$, $\lambda_2$. (\S\ref{sec:diagonal} says the same thing more
@@ -575,24 +575,24 @@ the matrix of eigenvectors, (\ref*{eq:P}), in \S\ref{sec:way1}.
 of an eigenvector'' and leave it there (p.\ 339; it's their Problem
 6.206). We wrote it out under key point 1 in \S\ref{sec:way2}; here it
 is again, more slowly. The only facts we need are that matrix
-multiplication is linear, the definition $\mathbf{T}\vec{v}_i =
+multiplication is linear, the definition $\mathbf{M}\vec{v}_i =
 \lambda_i\vec{v}_i$, and that $\vec{v}_1$ and $\vec{v}_2$ are independent,
 so they form a basis (true here, since the eigenvalues differ).
 
-Let $\vec{v}_1$, $\vec{v}_2$ be the eigenvectors of some transformation
-$\mathbf{T}$, with eigenvalues $\lambda_1$, $\lambda_2$. Take any vector
+Let $\vec{v}_1$, $\vec{v}_2$ be the eigenvectors of $\mathbf{M}$ (any
+matrix would do), with eigenvalues $\lambda_1$, $\lambda_2$. Take any vector
 and write it in the eigenvector basis:
 \begin{equation}
   \vec{u} = \alpha\vec{v}_1 + \beta\vec{v}_2 ,
 \end{equation}
 
 \noindent so $\vec{u}$ has coordinates $(\alpha, \beta)$ in the $\{\vec{v}_1, \vec{v}_2\}$
-basis. Apply $\mathbf{T}$. It acts on each piece separately (linearity),
+basis. Apply $\mathbf{M}$. It acts on each piece separately (linearity),
 and by the definition of an eigenvector it does nothing to each piece
 except scale it:
 \begin{equation}
-  \mathbf{T}\vec{u} = \mathbf{T}(\alpha\vec{v}_1 + \beta\vec{v}_2)
-  = \alpha\,\mathbf{T}\vec{v}_1 + \beta\,\mathbf{T}\vec{v}_2
+  \mathbf{M}\vec{u} = \mathbf{M}(\alpha\vec{v}_1 + \beta\vec{v}_2)
+  = \alpha\,\mathbf{M}\vec{v}_1 + \beta\,\mathbf{M}\vec{v}_2
   = \alpha\lambda_1\vec{v}_1 + \beta\lambda_2\vec{v}_2 .
 \end{equation}
 Now read that in the $\{\vec{v}_1,\vec{v}_2\}$ basis. The input had coordinates
@@ -602,20 +602,19 @@ coordinates $\left(\begin{smallmatrix} \lambda_1 \alpha \\ \lambda_2 \beta
 $(\alpha, \beta)$ to $(\lambda_1 \alpha, \lambda_2 \beta)$ is
 
 \begin{equation}
-  \boxed{\;\mathbf{T} \textrm{ in the } \{\vec{v}_1, \vec{v}_2\} \textrm{ basis}
+  \boxed{\;\mathbf{M} \textrm{ in the } \{\vec{v}_1, \vec{v}_2\} \textrm{ basis}
   = \begin{pmatrix} \lambda_1 & 0 \\ 0 & \lambda_2 \end{pmatrix}\;}
 \end{equation}
 
 \noindent That's the whole proof. In the $\{\hat{\imath}, \hat{\jmath}\}$ basis,
-$\mathbf{T}$ mixes the components (the off-diagonal entries are nonzero),
+$\mathbf{M}$ mixes the components (the off-diagonal entries are nonzero),
 because $\hat{\imath}$ and $\hat{\jmath}$ are not eigenvectors. In the
 eigenvector basis there is no mixing left to describe. Said another way:
 the columns of a matrix are the images of the basis vectors, and the
 image of $\vec{v}_1$ is $\lambda_1\vec{v}_1$, which in this basis is
 $(\lambda_1, 0)$.
 
-For the springs, replace $\mathbf{T}$ by $\mathbf{M}$ and $\vec{u}$ by the
-state: plug \eqref{eq:fg} into \eqref{eq:matrix} to get
+For the springs, take $\vec{u}$ to be the state: plug \eqref{eq:fg} into \eqref{eq:matrix} to get
 $\ddot{f}\vec{v}_1 + \ddot{g}\vec{v}_2 = f\lambda_1\vec{v}_1 +
 g\lambda_2\vec{v}_2$, and since $\vec{v}_1$ and $\vec{v}_2$ are
 independent, match coefficients: $\ddot{f} = \lambda_1 f$, $\ddot{g} =

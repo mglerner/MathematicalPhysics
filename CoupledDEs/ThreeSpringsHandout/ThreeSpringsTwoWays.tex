@@ -468,10 +468,12 @@ column above. If the matrix were
 $\left(\begin{smallmatrix} 1 & 1 \\ 1 & -1 \end{smallmatrix}\right)$ the
 first column would be $(1, 1)$, and a pure slow mode would accelerate into
 a mix of both modes. It doesn't, and that is the whole reason the matrix
-is diagonal. Where
-$\left(\begin{smallmatrix} 1 & 1 \\ 1 & -1 \end{smallmatrix}\right)$ does
-appear is on both sides of $\mathbf{M}$: the matrix in the new basis is
-$\mathbf{P}^{-1}\mathbf{M}\mathbf{P}$, and
+is diagonal. In Felder and Felder Section 7.2, you will learn more
+generally how to convert $\mathbf{M}$ from one basis to another, and
+you'll see that
+$\left(\begin{smallmatrix} 1 & 1 \\ 1 & -1 \end{smallmatrix}\right)$
+appears on both sides of $\mathbf{M}$: the matrix in the new basis is
+$\mathbf{P}^{-1}\mathbf{M}\mathbf{P}$. You can check that here:
 $\mathbf{M}\mathbf{P} = \wo^2
 \left(\begin{smallmatrix} -2 & 1 \\ 1 & -2 \end{smallmatrix}\right)
 \left(\begin{smallmatrix} 1 & 1 \\ 1 & -1 \end{smallmatrix}\right)

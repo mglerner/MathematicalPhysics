@@ -68,7 +68,7 @@ spring, stretched by $x_2 - x_1$, pulling it forward:
 \end{align}
 
 \noindent (We get the second line by symmetry, just swapping the labels.
-Look at the signs: a cart's own displacement is resisted by both springs
+Look at the signs: a cart's own displacement is opposed by both springs
 attached to it, which is the $-2kx_1$ in cart 1's equation; moving the
 \emph{other} cart to the right stretches the middle spring, which pulls
 this cart to the right too, which is the $+kx_2$. In a moment those become
@@ -194,6 +194,7 @@ acting on it is just $\lambda_1 = -\wo^2$ times it, and we get
     & \begin{pmatrix} x_1 \\ x_1 \end{pmatrix} \\[1.5ex]
     & & = & & \mathbf{M} & \vec{v} \\[1.5ex]
     & & = & & \lambda & \vec{v} \\[1.5ex]
+    & & = & \wo^2 & (-1) & \begin{pmatrix} x_1 \\ x_1 \end{pmatrix} \\[1.5ex]
     \rightarrow & \ddot{x}_1 & = & & -\wo^2 & x_1
   \end{array}
 \end{equation}
@@ -204,8 +205,10 @@ solution is the first normal mode:
   x_1(t) = A_1\cos\wo t + A_2\sin\wo t, \qquad x_2(t) = x_1(t).
 \end{equation}
 
-Now the other eigenvector, $x_2 = -x_1$. Written out as a matrix equation
-(even though we only need the column),
+Now the other eigenvector, $x_2 = -x_1$. The same steps, with
+$\left(\begin{smallmatrix} -2 & 1 \\ 1 & -2 \end{smallmatrix}\right)
+\left(\begin{smallmatrix} x_1 \\ -x_1 \end{smallmatrix}\right) =
+(-3)\left(\begin{smallmatrix} x_1 \\ -x_1 \end{smallmatrix}\right)$:
 \begin{eqnarray}
   \begin{pmatrix} \ddot{x}_1 \\ -\ddot{x}_1 \end{pmatrix}
   = -3\wo^2 \begin{pmatrix} x_1 \\ -x_1 \end{pmatrix}

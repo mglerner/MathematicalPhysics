@@ -141,10 +141,16 @@ absolute value of the eigenvalue'' but that's an over-generalization. The minus
 sign is the physics: a negative eigenvalue means oscillation, a positive one
 would mean exponential growth.
 
+\newpage
 \section{The first way: plug in one eigenvector at a time}
 \label{sec:way1}
 
-This is Felder and Felder's first approach (pp.\ 337--338).
+\begin{equation*}
+  \boxed{\;\vec{v}_1 = \begin{pmatrix} 1 \\ 1 \end{pmatrix},\ \lambda_1 = -\wo^2;
+  \qquad
+  \vec{v}_2 = \begin{pmatrix} 1 \\ -1 \end{pmatrix},\ \lambda_2 = -3\wo^2.\;}
+\end{equation*}
+
 \medskip
 
 \noindent\textbf{Each eigenvector becomes a normal mode.} The first
@@ -177,7 +183,7 @@ acting on it is just $\lambda_1 = -\wo^2$ times it, and we get
   \end{array}
 \end{equation}
 
-(In fact we have this same equation twice.) The matrix multiplication
+(In fact we have this same equation $\ddot{x}_1 = -\wo^2 x_1$ twice.) The matrix multiplication
 became a scalar multiplication. That we know how to solve, and the
 solution is the first normal mode:
 
@@ -274,12 +280,20 @@ $(A_1, B_1)$ and $(x_1, x_2)$ is $\left(\begin{smallmatrix} \cos\wo t &
 Setting $t = 0$ is what turned it into $\left(\begin{smallmatrix} 1 & 1
 \\ 1 & -1 \end{smallmatrix}\right)$.
 
+\newpage
 \section{The ``better'' way: the natural basis}
 \label{sec:way2}
 
-This is Felder and Felder's second approach (pp.\ 338--340). It gets the
-same answer, but it shows what ``basis'' and ``diagonalization'' mean more
-directly. Above, we plugged the eigenvectors in one at a time and watched
+\begin{equation*}
+  \boxed{\;\vec{v}_1 = \begin{pmatrix} 1 \\ 1 \end{pmatrix},\ \lambda_1 = -\wo^2;
+  \qquad
+  \vec{v}_2 = \begin{pmatrix} 1 \\ -1 \end{pmatrix},\ \lambda_2 = -3\wo^2.\;}
+\end{equation*}
+
+\medskip
+
+\noindent This way gets the same answer, but it shows what ``basis'' and
+``diagonalization'' mean more directly. Above, we plugged the eigenvectors in one at a time and watched
 what they did to the equation. Instead, let's rewrite the \emph{entire}
 equation in the basis defined by the eigenvectors.
 

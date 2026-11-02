@@ -191,12 +191,16 @@ solution is the first normal mode:
   x_1(t) = A_1\cos\wo t + A_2\sin\wo t, \qquad x_2(t) = x_1(t).
 \end{equation}
 
-The other eigenvector, with $x_2 = -x_1$, gives $\ddot{x}_1 = -3\wo^2 x_1$
-and the other normal mode:
+Now the other eigenvector, $x_2 = -x_1$. Written out as a matrix equation
+(even though we only need the column),
 
-\begin{equation}
+\begin{eqnarray}
+  \begin{pmatrix} \ddot{x}_1 \\ -\ddot{x}_1 \end{pmatrix}
+  = -3\wo^2 \begin{pmatrix} x_1 \\ -x_1 \end{pmatrix}
+  &\rightarrow& \ddot{x}_1 = -3\wo^2 x_1 \notag \\
+  &\rightarrow&
   x_1(t) = B_1\cos\sqrt{3}\,\wo t + B_2\sin\sqrt{3}\,\wo t, \qquad x_2(t) = -x_1(t).
-\end{equation}
+\end{eqnarray}
 
 That's the $\sqrt{3}$ we pulled out of a hat back when we first met these
 carts. (Try replacing the state with something that isn't a normal mode,

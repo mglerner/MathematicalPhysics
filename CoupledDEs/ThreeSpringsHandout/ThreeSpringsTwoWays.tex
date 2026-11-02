@@ -202,10 +202,10 @@ Now the other eigenvector, $x_2 = -x_1$. Written out as a matrix equation
   x_1(t) = B_1\cos\sqrt{3}\,\wo t + B_2\sin\sqrt{3}\,\wo t, \qquad x_2(t) = -x_1(t).
 \end{eqnarray}
 
-That's the $\sqrt{3}$ we pulled out of a hat back when we first met these
-carts. (Try replacing the state with something that isn't a normal mode,
+Cool! That's the $\sqrt{3}$ we pulled out of a \textit{hat} back when we first met these
+carts.\footnote{Try replacing the state with something that isn't a normal mode,
 say $x_2 = 3x_1$: the two rows give you two contradictory differential
-equations. Only the eigenvectors work.)
+equations. Only the eigenvectors work!}
 
 \medskip
 
@@ -222,32 +222,37 @@ discard the sine terms, and we're left with
 
 \medskip
 
-\noindent\textbf{Let's now be a little clever.} Set $t = 0$ in
-\eqref{eq:sum}. The cosines are all $1$, and we get
-
+\noindent\textbf{Let's now be a little clever!}
 \begin{equation}
   \label{eq:P}
+  \lmat{A_1}{B_1}{x_1(0)}{x_2(0)}{1}{1}{1}{-1}
+\end{equation}
+
+\noindent is the matrix that converts normal-mode amplitudes into initial
+positions. We can tell by setting $t = 0$ in \eqref{eq:sum}. The cosines
+are all $1$, and we get
+
+\begin{equation}
   \begin{pmatrix} x_1(0) \\ x_2(0) \end{pmatrix}
   = \begin{pmatrix} A_1 + B_1 \\ A_1 - B_1 \end{pmatrix}
   = \begin{pmatrix} 1 & 1 \\ 1 & -1 \end{pmatrix}
   \begin{pmatrix} A_1 \\ B_1 \end{pmatrix}.
 \end{equation}
 
-That matrix converts normal-mode amplitudes into initial positions. Label
-its rows and columns: the rows are $x_1(0)$ and $x_2(0)$, the columns are
-$A_1$ and $B_1$, and apparently it's a matrix of eigenvectors. Why? The
-first column is what you get when $A_1 = 1$ and $B_1 = 0$, namely the
-first normal mode at $t = 0$, which is $\vec{v}_1$; the second column is
-$\vec{v}_2$. (The columns of any matrix are the images of the basis
-vectors.) So, the matrix that converts amplitudes to positions is the
-matrix of eigenvectors, and the matrix that converts positions to
-amplitudes is its inverse:
+The labels say what goes in and what comes out: each column is an
+amplitude, each row is an initial position. And apparently it's a matrix
+of eigenvectors. Why? The first column is what you get when $A_1 = 1$ and
+$B_1 = 0$, namely the first normal mode at $t = 0$, which is $\vec{v}_1$;
+the second column is $\vec{v}_2$. (The columns of any matrix are the
+images of the basis vectors.) So, the matrix that converts amplitudes to
+positions is the matrix of eigenvectors, and the matrix that converts
+positions to amplitudes is its inverse, with the labels swapped:
 
 \begin{equation}
   \begin{pmatrix} 1 & 1 \\ 1 & -1 \end{pmatrix}^{-1}
   = \frac{1}{ad - bc}\begin{pmatrix} d & -b \\ -c & a \end{pmatrix}
   = \frac{1}{-2}\begin{pmatrix} -1 & -1 \\ -1 & 1 \end{pmatrix}
-  = \begin{pmatrix} 1/2 & 1/2 \\ 1/2 & -1/2 \end{pmatrix}.
+  = \lmat{x_1(0)}{x_2(0)}{A_1}{B_1}{1/2}{1/2}{1/2}{-1/2}.
 \end{equation}
 
 Applying it to our initial conditions,

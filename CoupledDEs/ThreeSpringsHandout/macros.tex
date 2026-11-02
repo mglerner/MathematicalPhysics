@@ -172,3 +172,11 @@
 % ***********************************************************
 % ********************** END HEADER *************************
 % ***********************************************************
+
+%% Labelled matrices, Felder and Felder style (column labels above the
+%% parentheses, row labels to the left). Built on plain TeX's \bordermatrix.
+%%   \lmat{col1}{col2}{row1}{row2}{a}{b}{c}{d}   a 2x2 with labels
+%%   \lmatt{c1}{c2}{c3}{r1}{r2}{r3}{a}{b}{c}{d}{e}{f}{g}{h}{i} is one argument
+%%   too many for \newcommand, so for 3x3 and up write \bordermatrix directly:
+%%   \bordermatrix{ & c1 & c2 & c3 \cr r1 & a & b & c \cr r2 & d & e & f \cr r3 & g & h & i }
+\newcommand{\lmat}[8]{\bordermatrix{ & #1 & #2 \cr #3 & #5 & #6 \cr #4 & #7 & #8 }}

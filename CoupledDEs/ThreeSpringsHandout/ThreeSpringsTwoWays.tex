@@ -23,13 +23,7 @@ These notes closely follow Felder and Felder, Section 6.9, ``Putting It
 Together: Revisiting the Three-Spring Problem''\cite{FelderFelder} (pp.\
 336--340), sometimes to the point of plagiarism, so I'll just give full
 credit now. The book works the problem on a matrix with eigenvalues $-4$
-and $-1$; here I've swapped in the carts we actually have on the track, and
-I've written out the steps we did on the board, including the one that
-tripped us up on Friday (converting between normal-mode amplitudes and
-positions). The ``why is the matrix diagonal?'' argument in
-\S\ref{sec:diagonal} is the one line Felder and Felder leave to you
-(``This fact comes very directly from the definition of an eigenvector.''
-p.\ 339, and Problem 6.206).
+and $-1$; here I've swapped in the carts we actually have on the track.
 
 \setlength{\unitlength}{1in}
 
@@ -55,11 +49,12 @@ p.\ 339, and Problem 6.206).
 \end{tikzpicture}
 \end{center}
 
-\noindent\textbf{Question:} Two carts on the track, three equal springs
-$k$, each cart of mass $m$. Find the solution with initial conditions
+\noindent\textbf{Question:} Suppose we have two carts on a smooth track (perhaps
+an airtrack), each with mass $m$, and connected by three equal springs with
+spring constants $k$. Find the solution (i.e. $x_1(t), x_2(t)$) with initial conditions
 $x_1(0) = 3$ cm, $x_2(0) = 0$, $\dot{x}_1(0) = \dot{x}_2(0) = 0$.
 Here $x_1$ and $x_2$ are each cart's displacement from its own
-equilibrium position, positive to the right.
+equilibrium position, with positive $x$ to the right.
 
 \medskip
 
@@ -68,11 +63,14 @@ the left spring, stretched by $x_1$, pulling it back, and the middle
 spring, stretched by $x_2 - x_1$, pulling it forward:
 
 \begin{eqnarray}
-  m\ddot{x}_1 &=& -kx_1 + k(x_2 - x_1) = -2kx_1 + kx_2 \\
+  \label{eq:n2l1}
+  m\ddot{x}_1 &= -kx_1 + k(x_2 - x_1) =& -2kx_1 + kx_2 \\
+  \label{eq:n2l2}
   m\ddot{x}_2 &=& -2kx_2 + kx_1
 \end{eqnarray}
 
-\noindent (The second line is the first with the labels swapped; the
+\noindent (We get the second line by symmetry, just swapping the labels;
+conceptually the
 middle spring pushes the two carts in opposite directions, which is why
 the off-diagonal terms below are both positive while the diagonal ones
 are both negative.)
@@ -91,16 +89,19 @@ $\wo^2 \equiv k/m$,
 \end{equation}
 
 The column is the \emph{state} of the system (where both carts are), and
-$\mathbf{M}$ is a transformation acting on it. Two things made us reach
-for a matrix: the state needs more than one number, and each derivative
-is a linear combination of those numbers.
+$\mathbf{M}$ is a transformation acting on it. Intuitively, equations
+\eqref{eq:n2l1} and \eqref{eq:n2l2} just \textit{look} like a matrix. More
+formally, we note that the state we are transforming needs more than one number,
+and each derivative is a linear combination of those numbers.
 
 \medskip
 
 \noindent\textbf{Step 3: find the eigenvalues and eigenvectors of
 $\mathbf{M}$.} Both methods below start here, so let's get it out of the
 way. By definition $\mathbf{M}\vec{v} = \lambda\vec{v}$, so we need
-$\det(\mathbf{M} - \lambda\mathbf{I}) = 0$. We'll find $\lambda$ and
+$\det(\mathbf{M} - \lambda\mathbf{I}) = 0$. We talked extensively in class about how
+this relates to linear dependence. 
+We'll find $\lambda$ and
 $\vec{v}$ for $\left(\begin{smallmatrix} -2 & 1 \\ 1 & -2
 \end{smallmatrix}\right)$, knowing we can multiply by $\wo^2$ at the end:
 
@@ -111,8 +112,15 @@ $\vec{v}$ for $\left(\begin{smallmatrix} -2 & 1 \\ 1 & -2
 \end{equation}
 
 Now find the eigenvectors: $(\mathbf{M} - \lambda\mathbf{I})\vec{v} = 0$
-says $(-2-\lambda)x_1 + x_2 = 0$ (the second row says the same thing; if
-it didn't, you'd have the wrong $\lambda$). Plug in $\lambda = -1$: $-x_1
+says
+
+\begin{equation}
+  \label{eq:lambda1}
+  (-2-\lambda)x_1 + x_2 = 0
+\end{equation}
+
+\noindent(the second row says the same thing; if
+it didn't, you'd have the wrong $\lambda$). Plug $\lambda = -1$ into \eqref{eq:lambda1}: $-x_1
 + x_2 = 0$, so $x_2 = x_1$, or $\vec{v}_1 = \left(\begin{smallmatrix} 1
 \\ 1 \end{smallmatrix}\right)$. Any multiple of an eigenvector is an
 eigenvector, so we could have picked $\left(\begin{smallmatrix} 2 \\ 2
@@ -127,30 +135,42 @@ Putting the $\wo^2$ back,
   \vec{v}_2 = \begin{pmatrix} 1 \\ -1 \end{pmatrix},\ \lambda_2 = -3\wo^2.\;}
 \end{equation}
 
-Say ``the eigenvalue is $-\omega^2$,'' not ``the frequency is the square
-root of the absolute value of the eigenvalue.'' The minus sign is the
-physics: a negative eigenvalue means oscillation, a positive one would
-mean exponential growth.
+When we interpret this, we say ``the eigenvalue is $-\omega^2$.'' You might be
+tempted to over-interpret and say ``the frequency is the square root of the
+absolute value of the eigenvalue'' but that's an over-generalization. The minus
+sign is the physics: a negative eigenvalue means oscillation, a positive one
+would mean exponential growth.
 
 \section{The first way: plug in one eigenvector at a time}
 \label{sec:way1}
 
-This is Felder and Felder's first approach (pp.\ 337--338), and it's how
-we did it on Friday.
-
+This is Felder and Felder's first approach (pp.\ 337--338).
 \medskip
 
 \noindent\textbf{Each eigenvector becomes a normal mode.} The first
 eigenvector tells us that if you plug in \emph{any} state in which $x_2 =
-x_1$, the matrix will simply multiply that state by $-\wo^2$. So if we
-replace $x_2$ with $x_1$, Equation \eqref{eq:matrix} becomes
+x_1$, the matrix will simply multiply that state by $-\wo^2$. Now, let's
+plug in. That means $x_1 = x_2$, so Equation \eqref{eq:matrix} becomes
+
+\begin{equation}
+  \begin{pmatrix} \ddot{x}_1 \\ \ddot{x}_2 \end{pmatrix}
+  = \wo^2 \begin{pmatrix} -2 & 1 \\ 1 & -2 \end{pmatrix}
+  \begin{pmatrix} x_1 \\ x_2 \end{pmatrix}
+  \quad\rightarrow\quad
+  \begin{pmatrix} \ddot{x}_1 \\ \ddot{x}_1 \end{pmatrix}
+  = \wo^2 \begin{pmatrix} -2 & 1 \\ 1 & -2 \end{pmatrix}
+  \begin{pmatrix} x_1 \\ x_1 \end{pmatrix} .
+\end{equation}
+
+\noindent And now we use $\mathbf{M}\vec{v} = \lambda\vec{v}$: the column
+on the right is a multiple of the eigenvector $\vec{v}_1$, so the $2\times
+2$ matrix acting on it is just $-1$ times it (the $\lambda = -1$ we found
+before putting the $\wo^2$ back), and we get
 
 \begin{equation}
   \begin{pmatrix} \ddot{x}_1 \\ \ddot{x}_1 \end{pmatrix}
-  = \wo^2 \begin{pmatrix} -2 & 1 \\ 1 & -2 \end{pmatrix}
-  \begin{pmatrix} x_1 \\ x_1 \end{pmatrix}
-  = -\wo^2 \begin{pmatrix} x_1 \\ x_1 \end{pmatrix}
-  \quad\Rightarrow\quad \ddot{x}_1 = -\wo^2 x_1 .
+  = (-1)\,\wo^2 \begin{pmatrix} x_1 \\ x_1 \end{pmatrix}
+  \quad\rightarrow\quad \ddot{x}_1 = -\wo^2 x_1 .
 \end{equation}
 
 (In fact we have this same equation twice.) The matrix multiplication

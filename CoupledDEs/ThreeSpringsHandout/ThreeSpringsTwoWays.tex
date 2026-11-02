@@ -592,8 +592,9 @@ as the first one, but in a different basis.''
 
 Now for the capstone problem: you have the carts at the front of the room. And
 you can add masses to each of them. Your goal is to pick a set of masses, to
-predict the normal modes, and then to physically test it all out. So here's
-the general procedure, and then a trick with notation.
+predict the normal modes, and then to physically test it all out. To be clear,
+the three springs have equal spring constants $k$, but now your carts will have
+different masses. The general procedure is:
 
 \begin{enumerate}
 \item[1.] Draw the picture.
@@ -602,23 +603,36 @@ the general procedure, and then a trick with notation.
 \item[4.] Find the normal modes: the eigenvectors of $\mathbf{M}$ give the
   ratio of $x_2$ to $x_1$ in each mode, and the eigenvalues give
   $-\omega^2$.
-\item[5.] Combine them, either way, and use the initial conditions.
+\item[5.] Combine them (either way) and use the initial conditions.
 \end{enumerate}
 
-\noindent For different masses $m_1$ and $m_2$ (still three equal springs),
-step 2 gives $m_1\ddot{x}_1 = -2kx_1 + kx_2$ and $m_2\ddot{x}_2 = kx_1 -
-2kx_2$. Divide each line by its own mass and call the mass ratio $\mu =
-m_1/m_2$, so $k/m_2 = \mu\,(k/m_1)$:
+\noindent You can just jump in. If you want a small hint, here's how I dealt
+with notation: For different masses $m_1$ and $m_2$, it's convenient to just
+think about which mass is bigger and by how much. So, call the mass ratio $\mu =
+m_1/m_2$.
+
+Here's my solution: step 2 gives $m_1\ddot{x}_1 = -2kx_1 + kx_2$ and
+$m_2\ddot{x}_2 = kx_1 - 2kx_2$. Divide each line by its own mass:
+\begin{align*}
+  \ddot{x}_1 &= -2\frac{k}{m_1}x_1 + \frac{k}{m_1}x_2 \\
+  \ddot{x}_2 &= \frac{k}{m_2}x_1 - 2\frac{k}{m_2}x_2
+\end{align*}
+which is already shaped like a matrix equation. Now put in $\mu$: since
+$k/m_2 = \mu\,(k/m_1)$,
+\begin{align*}
+  \ddot{x}_1 &= -2\frac{k}{m_1}x_1 + \frac{k}{m_1}x_2 \\
+  \ddot{x}_2 &= \mu\frac{k}{m_1}x_1 - 2\mu\frac{k}{m_1}x_2
+\end{align*}
+and pulling the common $k/m_1$ out front,
 \begin{equation}
-  \ddot{x}_2 = \mu\frac{k}{m_1}x_1 - 2\mu\frac{k}{m_1}x_2
-  \qquad\Rightarrow\qquad
   \mathbf{M} = \frac{k}{m_1}\begin{pmatrix} -2 & 1 \\ \mu & -2\mu \end{pmatrix}.
 \end{equation}
-Plug in your $\mu$ and run step 4. The eigenvectors are no longer
-$(1, \pm 1)$, the heavier cart moves more in the slow mode and less in
-the fast one, and the ratio of the two periods is
-$T_{\rm slow}/T_{\rm fast} = \sqrt{\lambda_{\rm fast}/\lambda_{\rm slow}}$,
-which needs no $k$.
+Plug in your $\mu$ and run step 4.
+
+You will find that the eigenvectors are no longer
+$(1, \pm 1)$; the heavier cart moves more in the slow mode and less in
+the fast one. The ratio of the two periods should turn out to be
+$T_{\rm slow}/T_{\rm fast} = \sqrt{\lambda_{\rm fast}/\lambda_{\rm slow}}$.
 
 \medskip
 

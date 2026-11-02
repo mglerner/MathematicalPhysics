@@ -166,15 +166,16 @@ plug in. That means $x_1 = x_2$, so Equation \eqref{eq:matrix} becomes
 on the right is a multiple of the eigenvector $\vec{v}_1$, so $\mathbf{M}$
 acting on it is just $\lambda_1 = -\wo^2$ times it, and we get
 
-\begin{eqnarray}
-  \begin{pmatrix} \ddot{x}_1 \\ \ddot{x}_1 \end{pmatrix}
-  &=& \wo^2 \begin{pmatrix} -2 & 1 \\ 1 & -2 \end{pmatrix}
-  \begin{pmatrix} x_1 \\ x_1 \end{pmatrix} \notag \\
-  &=& \mathbf{M}\vec{v} \notag \\
-  &=& \lambda\vec{v}
-  = -\wo^2 \begin{pmatrix} x_1 \\ x_1 \end{pmatrix} \notag \\
-  &\rightarrow& \ddot{x}_1 = -\wo^2 x_1 .
-\end{eqnarray}
+\begin{equation}
+  \begin{array}{cccccc}
+    & \begin{pmatrix} \ddot{x}_1 \\ \ddot{x}_1 \end{pmatrix}
+    & = & \wo^2 & \begin{pmatrix} -2 & 1 \\ 1 & -2 \end{pmatrix}
+    & \begin{pmatrix} x_1 \\ x_1 \end{pmatrix} \\[1.5ex]
+    & & = & & \mathbf{M} & \vec{v} \\[1.5ex]
+    & & = & & \lambda & \vec{v} \\[1.5ex]
+    \rightarrow & \ddot{x}_1 & = & & -\wo^2 & x_1
+  \end{array}
+\end{equation}
 
 (In fact we have this same equation twice.) The matrix multiplication
 became a scalar multiplication. That we know how to solve, and the

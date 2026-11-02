@@ -8,6 +8,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{tikz}
 \usetikzlibrary{decorations.pathmorphing}
+\usepackage[colorlinks=true, linkcolor=blue, citecolor=blue]{hyperref}
 \numberwithin{equation}{section}
 
 \newcommand{\wo}{\omega_0}
@@ -377,7 +378,7 @@ each normal mode do we have?''
 Can we do that? Yes, for absolutely any functions $x_1$ and $x_2$, and
 not because $\vec{v}_1$ and $\vec{v}_2$ are eigenvectors: any two
 non-parallel vectors form a basis, so any vector is some combination of
-them. That's Section 6.4.
+them. That's Section 6.4. Though our life will certainly be better here using an eigenbasis.
 
 What happens when we do that? When we express all our states in a
 different basis, the entire equation changes, including the
@@ -396,7 +397,7 @@ from linear algebra:
 \begin{enumerate}
 \item[1.] When you use the eigenvectors as a basis, the transformation is
   represented by a diagonal matrix of the eigenvalues. Let's write this
-  out! Call the eigenvectors $\vec{v}_1$, $\vec{v}_2$ with corresponding
+  out: call the eigenvectors $\vec{v}_1$, $\vec{v}_2$ with corresponding
   eigenvalues $\lambda_1$, $\lambda_2$, and take any vector $\vec{v} =
   a\vec{v}_1 + b\vec{v}_2$. Apply $\mathbf{T}$:
   \begin{equation*}
@@ -404,7 +405,7 @@ from linear algebra:
     = a\,\mathbf{T}\vec{v}_1 + b\,\mathbf{T}\vec{v}_2
     = a\lambda_1\vec{v}_1 + b\lambda_2\vec{v}_2 .
   \end{equation*}
-  Now read that in the $\vec{v}_1\vec{v}_2$ basis. The input coordinates
+  Now read that in the $\{\vec{v}_1, \vec{v}_2\}$ basis. The input coordinates
   are $\left(\begin{smallmatrix} a \\ b \end{smallmatrix}\right)$. The
   output is $\left(\begin{smallmatrix} \lambda_1 a \\ \lambda_2 b
   \end{smallmatrix}\right)$. So
@@ -478,7 +479,7 @@ and write it in the eigenvector basis:
   \vec{v} = a\vec{v}_1 + b\vec{v}_2 ,
 \end{equation}
 
-\noindent so $\vec{v}$ has coordinates $(a, b)$ in the $\vec{v}_1\vec{v}_2$
+\noindent so $\vec{v}$ has coordinates $(a, b)$ in the $\{\vec{v}_1, \vec{v}_2\}$
 basis. Apply $\mathbf{T}$. It acts on each piece separately (linearity),
 and by the definition of an eigenvector it does nothing to each piece
 except scale it:
@@ -489,18 +490,18 @@ except scale it:
   = a\lambda_1\vec{v}_1 + b\lambda_2\vec{v}_2 .
 \end{equation}
 
-Now read that in the $\vec{v}_1\vec{v}_2$ basis. The input had coordinates
+Now read that in the $\{\vec{v}_1,\vec{v}_2\}$ basis. The input had coordinates
 $\left(\begin{smallmatrix} a \\ b \end{smallmatrix}\right)$. The output has
 coordinates $\left(\begin{smallmatrix} \lambda_1 a \\ \lambda_2 b
 \end{smallmatrix}\right)$. The only matrix that takes
 $(a, b)$ to $(\lambda_1 a, \lambda_2 b)$ is
 
 \begin{equation}
-  \boxed{\;\mathbf{T} \textrm{ in the } \vec{v}_1\vec{v}_2 \textrm{ basis}
+  \boxed{\;\mathbf{T} \textrm{ in the } \{\vec{v}_1, \vec{v}_2\} \textrm{ basis}
   = \begin{pmatrix} \lambda_1 & 0 \\ 0 & \lambda_2 \end{pmatrix}\;}
 \end{equation}
 
-\noindent That's the whole proof. In the $\hat{\imath}\hat{\jmath}$ basis,
+\noindent That's the whole proof. In the $\{\hat{\imath}, \hat{\jmath}\}$ basis,
 $\mathbf{T}$ mixes the components (the off-diagonal entries are nonzero),
 because $\hat{\imath}$ and $\hat{\jmath}$ are not eigenvectors. In the
 eigenvector basis there is no mixing left to describe. Said another way:

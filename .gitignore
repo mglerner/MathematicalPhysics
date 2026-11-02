@@ -69,3 +69,4 @@ privateEarlham
 # Emacs AUCTeX parse caches
 auto/
 *.synctex.gz
+*.out

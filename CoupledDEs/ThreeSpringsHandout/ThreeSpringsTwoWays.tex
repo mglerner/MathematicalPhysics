@@ -150,6 +150,7 @@ would mean exponential growth.
   \boxed{\;\vec{v}_1 = \begin{pmatrix} 1 \\ 1 \end{pmatrix},\ \lambda_1 = -\wo^2;
   \qquad
   \vec{v}_2 = \begin{pmatrix} 1 \\ -1 \end{pmatrix},\ \lambda_2 = -3\wo^2.\;}
+  \tag{\ref{eq:eigen}}
 \end{equation*}
 
 \medskip
@@ -313,7 +314,7 @@ but the two columns are scaled by different amounts, so the whole matrix
 is a multiple of $\left(\begin{smallmatrix} 1 & 1 \\ 1 & -1
 \end{smallmatrix}\right)$ only when the two cosines are equal: at $t = 0$,
 and at isolated later instants, never over an interval, because the
-frequencies are incommensurate. Two consequences. First, whenever either
+frequencies are incommensurate. Two consequences: first, whenever either
 cosine is zero the determinant $-2\cos\wo t\cos\sqrt{3}\,\wo t$ vanishes,
 so at those instants you cannot recover the amplitudes from the positions
 alone; that is the real content of ``only at $t = 0$,'' where the matrix
@@ -331,12 +332,14 @@ with the eigenvector matrix.}
   \boxed{\;\vec{v}_1 = \begin{pmatrix} 1 \\ 1 \end{pmatrix},\ \lambda_1 = -\wo^2;
   \qquad
   \vec{v}_2 = \begin{pmatrix} 1 \\ -1 \end{pmatrix},\ \lambda_2 = -3\wo^2.\;}
+  \tag{\ref{eq:eigen}}
 \end{equation*}
 
 \medskip
 
 \noindent This way gets the same answer, but it shows what ``basis'' and
-``diagonalization'' mean more directly. Above, we plugged the eigenvectors in one at a time and watched
+``diagonalization'' mean more directly ... and it generalizes super well, as
+we'll see. Above, we plugged the eigenvectors in one at a time and watched
 what they did to the equation. Instead, let's rewrite the \emph{entire}
 equation in the basis defined by the eigenvectors.
 

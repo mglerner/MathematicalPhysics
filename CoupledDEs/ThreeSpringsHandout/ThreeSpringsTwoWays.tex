@@ -609,30 +609,8 @@ different masses. The general procedure is:
 \noindent You can just jump in. If you want a small hint, here's how I dealt
 with notation: For different masses $m_1$ and $m_2$, it's convenient to just
 think about which mass is bigger and by how much. So, call the mass ratio $\mu =
-m_1/m_2$.
-
-Here's my solution: step 2 gives $m_1\ddot{x}_1 = -2kx_1 + kx_2$ and
-$m_2\ddot{x}_2 = kx_1 - 2kx_2$. Divide each line by its own mass:
-\begin{alignat*}{3}
-  \ddot{x}_1 &={}& -2\frac{k}{m_1}x_1 && {}+\frac{k}{m_1}x_2 \\
-  \ddot{x}_2 &={}& \frac{k}{m_2}x_1 && {}-2\frac{k}{m_2}x_2
-\end{alignat*}
-which is already shaped like a matrix equation. Now put in $\mu$: since
-$k/m_2 = \mu\,(k/m_1)$,
-\begin{alignat*}{3}
-  \ddot{x}_1 &={}& -2\frac{k}{m_1}x_1 && {}+\frac{k}{m_1}x_2 \\
-  \ddot{x}_2 &={}& \mu\frac{k}{m_1}x_1 && {}-2\mu\frac{k}{m_1}x_2
-\end{alignat*}
-and pulling the common $k/m_1$ out front,
-\begin{equation}
-  \mathbf{M} = \frac{k}{m_1}\begin{pmatrix} -2 & 1 \\ \mu & -2\mu \end{pmatrix}.
-\end{equation}
-Plug in your $\mu$ and run step 4.
-
-You will find that the eigenvectors are no longer
-$(1, \pm 1)$; the heavier cart moves more in the slow mode and less in
-the fast one. The ratio of the two periods should turn out to be
-$T_{\rm slow}/T_{\rm fast} = \sqrt{\lambda_{\rm fast}/\lambda_{\rm slow}}$.
+m_1/m_2$. Then, once you've gotten $\mathbf{M}$, you can pull out a $k/m_1$ so
+that it just looks like constants and $\mu$.
 
 \medskip
 
@@ -655,5 +633,51 @@ one cart's swing shrinks while the other's grows, and for a moment one cart
 sits nearly still while the other moves. Predict, before you touch the
 track, the sign of $x_2/x_1$ in each mode, roughly how big it is, and how
 many fast cycles fit in one slow cycle; then count, don't time.
+
+
+\newpage
+Here's my solution: step 2 gives $m_1\ddot{x}_1 = -2kx_1 + kx_2$ and
+$m_2\ddot{x}_2 = kx_1 - 2kx_2$. Divide each line by its own mass:
+\begin{alignat*}{3}
+  \ddot{x}_1 &={}& -2\frac{k}{m_1}x_1 && {}+\frac{k}{m_1}x_2 \\
+  \ddot{x}_2 &={}& \frac{k}{m_2}x_1 && {}-2\frac{k}{m_2}x_2
+\end{alignat*}
+which is already shaped like a matrix equation. Now put in $\mu$: since
+$k/m_2 = \mu\,(k/m_1)$,
+\begin{alignat*}{3}
+  \ddot{x}_1 &={}& -2\frac{k}{m_1}x_1 && {}+\frac{k}{m_1}x_2 \\
+  \ddot{x}_2 &={}& \mu\frac{k}{m_1}x_1 && {}-2\mu\frac{k}{m_1}x_2
+\end{alignat*}
+and pulling the common $k/m_1$ out front,
+\begin{equation}
+  \mathbf{M} = \frac{k}{m_1}\begin{pmatrix} -2 & 1 \\ \mu & -2\mu \end{pmatrix}.
+\end{equation}
+Plug in your $\mu$ and run step 4.
+
+You will find that the eigenvectors are no longer
+$\left(\begin{smallmatrix} 1 \\ 1 \end{smallmatrix}\right)$ and
+$\left(\begin{smallmatrix} 1 \\ -1 \end{smallmatrix}\right)$. Writing $s =
+\sqrt{\mu^2 - \mu + 1}$ for short, the eigenvectors are
+\begin{equation}
+  \label{eq:unequal}
+  \vec{v}_{\rm slow} = \begin{pmatrix} 1 \\ 1 - \mu + s \end{pmatrix}
+  \qquad\text{and}\qquad
+  \vec{v}_{\rm fast} = \begin{pmatrix} 1 \\ 1 - \mu - s \end{pmatrix},
+\end{equation}
+with corresponding eigenvalues
+\begin{equation}
+  \label{eq:unequal-lambda}
+  \lambda_{\rm slow} = \frac{k}{m_1}\bigl(-(1+\mu) + s\bigr)
+  \qquad\text{and}\qquad
+  \lambda_{\rm fast} = \frac{k}{m_1}\bigl(-(1+\mu) - s\bigr).
+\end{equation}
+(Check: $\mu = 1$ gives $s = 1$, so $\lambda = -k/m_1$ and $-3k/m_1$ with
+$x_2/x_1 = \pm 1$, as in (\ref*{eq:eigen}).) The heavier cart moves more
+in the slow mode and less in the fast one. The ratio of the two periods
+should turn out to be $T_{\rm slow}/T_{\rm fast} =
+\sqrt{\lambda_{\rm fast}/\lambda_{\rm slow}}$.
+
+\medskip
+
 
 \end{document}

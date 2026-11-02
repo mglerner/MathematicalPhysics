@@ -519,7 +519,7 @@ independent, match coefficients: $\ddot{f} = \lambda_1 f$, $\ddot{g} =
 \section{Which way should I use?}
 \label{sec:which}
 
-For one $2\times 2$ problem by hand: it doesn't matter. The expensive part,
+For one $2\times 2$ problem by hand: it doesn't matter. The time-consuming part,
 finding the eigenvalues and eigenvectors (the determinant, the quadratic,
 two little linear systems), is shared, and neither method avoids it.
 After that, the first way substitutes each eigenvector in and fits the
@@ -527,10 +527,9 @@ initial conditions with one $2\times 2$ solve; the second way gets the
 decoupled equations in one line and fits the initial conditions with the
 same $2\times 2$ solve dressed up as an inverse. The first way is a shade
 quicker (no inverse to write, and the substitution doubles as a check
-that your eigenvector is right); the second is a shade cleaner. Call it a
-wash.
+that your eigenvector is right); the second is a shade cleaner. Meh. A wash.
 
-The second way wins once the problem is bigger or gets reused:
+\textbf{However,} once the problem gets bigger (or gets reused), he second way wins:
 
 \begin{itemize}
 \item \textbf{Many degrees of freedom.} For $N$ carts, the first way means
@@ -545,7 +544,7 @@ The second way wins once the problem is bigger or gets reused:
   from the substitution.
 \item \textbf{Understanding.} The second way is the one that says
   \emph{why} only those two ratios work: only in the basis of the normal
-  modes does the matrix become diagonal, and no other basis decouples the
+  modes does the matrix become diagonal; no other basis decouples the
   equations.
 \end{itemize}
 

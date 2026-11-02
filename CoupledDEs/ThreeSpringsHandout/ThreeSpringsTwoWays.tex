@@ -272,7 +272,7 @@ amplitudes. Applying it to ours,
   = \begin{pmatrix} 3/2 \\ 3/2 \end{pmatrix},
 \end{equation}
 
-\noindent so the solution is
+\noindent and the solution is
 
 \begin{equation}
   \label{eq:answer}
@@ -281,23 +281,47 @@ amplitudes. Applying it to ours,
   x_2(t) = \tfrac{3}{2}\cos\wo t - \tfrac{3}{2}\cos\sqrt{3}\,\wo t\;}
 \end{equation}
 
-\noindent in cm, with $\wo = \sqrt{k/m}$. Whew!
+\noindent in cm, with $\wo = \sqrt{k/m}$. \textbf{Whew}!
 
 Check it at $t = 0$: $x_1 = 3$, $x_2 = 0$. Good. Pulling one cart and
 holding the other at rest is half of each normal mode, so each cart
 carries both frequencies, $\wo$ and $\sqrt{3}\,\wo$. Their periods are in
 the ratio $\sqrt{3}$, whatever $k$ and $m$ are. And since two cosines
 with frequencies in an irrational ratio never line up again, the motion
-never exactly repeats. That's the ``janky'' run we saw on the track.
+never exactly repeats. That's the ``janky''\footnote{I will defend this as a
+  technical term to my death.} run we saw on the track.
 
-One caution. The matrix in \eqref{eq:P} is the matrix of eigenvectors
+One caution: the matrix in \eqref{eq:P} is the matrix of eigenvectors
 \emph{only at $t = 0$}. At a general $t$ the matrix between
 $(A_1, B_1)$ and $(x_1, x_2)$ is
 \begin{equation*}
   \lmat{A_1}{B_1}{x_1(t)}{x_2(t)}{\cos\wo t}{\cos\sqrt{3}\,\wo t}{\cos\wo t}{-\cos\sqrt{3}\,\wo t}.
 \end{equation*}
 Setting $t = 0$ is what turned it into $\left(\begin{smallmatrix} 1 & 1
-\\ 1 & -1 \end{smallmatrix}\right)$.
+\\ 1 & -1 \end{smallmatrix}\right)$.\footnote{Is the general-$t$ matrix
+always a scalar multiple of $\left(\begin{smallmatrix} 1 & 1 \\ 1 & -1
+\end{smallmatrix}\right)$? No. It is the eigenvector matrix times a
+diagonal matrix of the two mode factors,
+\begin{equation*}
+  \begin{pmatrix} \cos\wo t & \cos\sqrt{3}\,\wo t \\ \cos\wo t & -\cos\sqrt{3}\,\wo t \end{pmatrix}
+  = \begin{pmatrix} 1 & 1 \\ 1 & -1 \end{pmatrix}
+  \begin{pmatrix} \cos\wo t & 0 \\ 0 & \cos\sqrt{3}\,\wo t \end{pmatrix}.
+\end{equation*}
+Each column is still a multiple of its eigenvector (column 1 is $\vec{v}_1$
+times $\cos\wo t$, column 2 is $\vec{v}_2$ times $\cos\sqrt{3}\,\wo t$),
+but the two columns are scaled by different amounts, so the whole matrix
+is a multiple of $\left(\begin{smallmatrix} 1 & 1 \\ 1 & -1
+\end{smallmatrix}\right)$ only when the two cosines are equal: at $t = 0$,
+and at isolated later instants, never over an interval, because the
+frequencies are incommensurate. Two consequences. First, whenever either
+cosine is zero the determinant $-2\cos\wo t\cos\sqrt{3}\,\wo t$ vanishes,
+so at those instants you cannot recover the amplitudes from the positions
+alone; that is the real content of ``only at $t = 0$,'' where the matrix
+is invertible and is exactly the eigenvector matrix. Second, the
+factorization is the whole story of the ``better'' way in
+\S\ref{sec:way2}: start in amplitude coordinates, let each mode evolve by
+its own scalar factor (the diagonal matrix), then convert to positions
+with the eigenvector matrix.}
 
 \newpage
 \section{The ``better'' way: the natural basis}

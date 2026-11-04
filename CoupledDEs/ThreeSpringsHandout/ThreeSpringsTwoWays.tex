@@ -736,19 +736,34 @@ and pulling the common $k/m_1$ out front,
 \begin{equation}
   \mathbf{M} = \frac{k}{m_1}\begin{pmatrix} -2 & 1 \\ \mu & -2\mu \end{pmatrix}.
 \end{equation}
-Plug in your $\mu$ and do step 4.
+Plug in your $\mu$ and do step 4. Here is that step spelled out. The
+$k/m_1$ out front just scales every eigenvalue, so write $\lambda =
+(k/m_1)\,\ell$ and find the eigenvalues $\ell$ of the matrix in the
+parentheses, call it $\mathbf{M}'$:
+\begin{align*}
+  0 &= \det\begin{pmatrix} -2 - \ell & 1 \\ \mu & -2\mu - \ell \end{pmatrix}
+     = (-2 - \ell)(-2\mu - \ell) - \mu
+     = \ell^2 + 2(1 + \mu)\,\ell + 4\mu - \mu, \\
+  0 &= \ell^2 + 2(1 + \mu)\,\ell + 3\mu
+  \qquad\Longrightarrow\qquad
+  \ell = -(1 + \mu) \pm \sqrt{(1 + \mu)^2 - 3\mu}
+       = -(1 + \mu) \pm \sqrt{\mu^2 - \mu + 1}.
+\end{align*}
+Call that square root $s = \sqrt{\mu^2 - \mu + 1}$ for short. For the
+eigenvectors, the top row of $(\mathbf{M}' - \ell\,\mathbf{I})\vec{v} = 0$
+says $(-2 - \ell)x_1 + x_2 = 0$, so $x_2 = (2 + \ell)\,x_1 = (1 - \mu \pm
+s)\,x_1$; take $x_1 = 1$. (The bottom row says the same thing, as it must.)
 
-You will find that the eigenvectors are no longer
+So the eigenvectors are no longer
 $\left(\begin{smallmatrix} 1 \\ 1 \end{smallmatrix}\right)$ and
-$\left(\begin{smallmatrix} 1 \\ -1 \end{smallmatrix}\right)$. Writing $s =
-\sqrt{\mu^2 - \mu + 1}$ for short, the eigenvectors are
+$\left(\begin{smallmatrix} 1 \\ -1 \end{smallmatrix}\right)$; they are
 \begin{equation}
   \label{eq:unequal}
   \vec{v}_{\rm slow} = \begin{pmatrix} 1 \\ 1 - \mu + s \end{pmatrix}
   \qquad\text{and}\qquad
   \vec{v}_{\rm fast} = \begin{pmatrix} 1 \\ 1 - \mu - s \end{pmatrix},
 \end{equation}
-with corresponding eigenvalues
+with corresponding eigenvalues $\lambda = (k/m_1)\,\ell$,
 \begin{equation}
   \label{eq:unequal-lambda}
   \lambda_{\rm slow} = \frac{k}{m_1}\bigl(-(1+\mu) + s\bigr)
